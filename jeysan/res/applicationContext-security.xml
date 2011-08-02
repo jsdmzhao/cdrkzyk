@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:s="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd"
+	default-lazy-init="true">
+
+	<description>SpringSecurity安全配置</description>
+
+	<!-- http安全配置-->
+	<s:http entry-point-ref="authenticationProcessingFilterEntryPoint" use-expressions="true">
+		<s:intercept-url pattern="/css/**" filters="none" />
+		<s:intercept-url pattern="/img/**" filters="none" />
+		<s:intercept-url pattern="/js/**" filters="none" />
+		<s:intercept-url pattern="/dwz/**" filters="none" />
+		<s:intercept-url pattern="/login.action" filters="none" />
+		<s:intercept-url pattern="/main/code.action" filters="none" />
+		<s:intercept-url pattern="/**/*.action" access="isAuthenticated()" />
+		<s:custom-filter ref="JsAuthenticationFilter" before="FORM_LOGIN_FILTER" />
+		<s:logout logout-success-url="/" />
+	</s:http>
+	<!-- 认证配置, 使用userDetailsService提供的用户信息 -->
+	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider user-service-ref="userDetailsService">
+			<s:password-encoder hash="md5">
+				<s:salt-source user-property="username"/>
+			</s:password-encoder>
+		</s:authentication-provider>
+	</s:authentication-manager>
+	<bean id="JsAuthenticationFilter" class="com.jeysan.modules.security.springsecurity.JsUsernamePasswordAuthenticationFilter">
+		<property name="filterProcessesUrl" value="/j_spring_security_check"/>
+		<property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"/>
+		<property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"/>
+		<property name="authenticationManager" ref="authenticationManager"/>
+	</bean>
+	<bean id="loginLogAuthenticationSuccessHandler" class="com.jeysan.modules.security.springsecurity.SaveDataAfterSuccessLoginHandler">
+		<property name="defaultTargetUrl" value="/"/>
+	</bean>
+	<bean id="simpleUrlAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<property name="defaultFailureUrl" value="/login.action?error=1"/>
+	</bean>
+	<bean id="authenticationProcessingFilterEntryPoint" class="org.springframework.security.web.authentication.AuthenticationProcessingFilterEntryPoint">
+		<property name="loginFormUrl" value="/login.action"/>
+	</bean>
+
+	<!-- 项目实现的用户查询服务 -->
+	<bean id="userDetailsService" class="com.jeysan.modules.security.springsecurity.UserDetailsServiceImpl" />
+</beans>
