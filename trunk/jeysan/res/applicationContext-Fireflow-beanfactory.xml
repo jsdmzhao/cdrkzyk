@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="com.jeysan.cpf.daily.wf.EmailSender" class="com.jeysan.cpf.daily.wf.EmailSender"></bean>
+	
+	<bean id="com.jeysan.cpf.daily.wf.CurrentUserAssignmentHandler" class="com.jeysan.cpf.daily.wf.CurrentUserAssignmentHandler"></bean>
+	
+	<bean id="com.jeysan.cpf.daily.wf.RoleDepartmentBasedAssignmentHandler" class="com.jeysan.cpf.daily.wf.RoleDepartmentBasedAssignmentHandler"></bean>
+	
+	<bean id="com.jeysan.cpf.daily.wf.RoleBasedAssignmentHandler" class="com.jeysan.cpf.daily.wf.RoleBasedAssignmentHandler"></bean>
+
+</beans>

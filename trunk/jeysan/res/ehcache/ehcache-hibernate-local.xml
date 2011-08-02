@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+
+	<diskStore path="java.io.tmpdir/hibernate/jeysan" />
+
+	<!-- DefaultCache setting. -->
+	<defaultCache maxElementsInMemory="10000" memoryStoreEvictionPolicy="LRU" eternal="false"
+		timeToIdleSeconds="300" timeToLiveSeconds="300" overflowToDisk="false" diskPersistent="false" />
+
+	<!-- Special objects setting. -->
+	<cache name="com.jeysan.cpf.security.entity.Org" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.User" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.Role" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.Resource" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.Dict" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.User.roleList" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.Role.resourceList" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.Dict.dictSubList" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+	<cache name="com.jeysan.cpf.security.entity.Post" maxElementsInMemory="10000"
+		memoryStoreEvictionPolicy="LRU" eternal="true" diskPersistent="false" overflowToDisk="true" maxElementsOnDisk="1000000" />
+</ehcache>
