@@ -1,0 +1,22 @@
+#Sun Jul 31 23:02:59 CST 2011
+eclipse.preferences.version=1
+encoding//WebRoot/WEB-INF/content/main/accessDenied.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/main/index.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/monitor/fixmonitor.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/security/org-input.jsp=UTF-8
+encoding//WebRoot/WEB-INF/content/security/org.jsp=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.contains.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.dict.getValue.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.dict.selector.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.map.selector.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.org.getValue.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.org.selector.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.pager.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.user.getValue.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.wf.state.getValue.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.wi.state.getValue.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.yes.no.getValue.tag=UTF-8
+encoding//WebRoot/WEB-INF/tags/js.yes.no.selector.tag=UTF-8
+encoding//res/application.properties=UTF-8
+encoding//src/com/jeysan/modules/utils/encode/MD5.java=UTF-8
+encoding/<project>=UTF-8
