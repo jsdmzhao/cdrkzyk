@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configure module="bcmas" prefix="FHP_" projectrealpath="E:\workspace\springside\jeysan">
+  <tables>
+    <table tablename="fhp_house" tableLabel="房屋" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="HOUSE_CODE" columnLabel="房屋编号" orinType="12" length="8" isNullable="true" />
+      <column columnName="HOUSE_TYPE" columnLabel="房屋类型" orinType="4" length="" isNullable="true" />
+      <column columnName="HOUSE_ATT" columnLabel="房屋属性" orinType="4" length="" isNullable="true" />
+      <column columnName="HOUSE_POLICE_NO" columnLabel="公安牌号" orinType="12" length="20" isNullable="true" />
+      <column columnName="ROOMS" columnLabel="间（套）数" orinType="-6" length="" isNullable="true" />
+      <column columnName="AREA" columnLabel="房屋面积" orinType="8" length="" isNullable="true" />
+      <column columnName="PERSON_COUNT" columnLabel="居住人数" orinType="4" length="" isNullable="true" />
+      <column columnName="POC_TYPE" columnLabel="房产证类型" orinType="4" length="" isNullable="true" />
+      <column columnName="DETAIL_ADDRESS" columnLabel="详细地址" orinType="12" length="100" isNullable="true" />
+      <column columnName="OWNER_NAME" columnLabel="业主姓名" orinType="12" length="20" isNullable="true" />
+      <column columnName="OWNER_CERT" columnLabel="业主身份证" orinType="12" length="18" isNullable="true" />
+      <column columnName="OWNER_SEX" columnLabel="业主性别" orinType="-6" length="" isNullable="true" />
+      <column columnName="OWNER_TEL" columnLabel="业主电话" orinType="12" length="20" isNullable="true" />
+      <column columnName="OWNER_ADDRESS" columnLabel="业主居住地址" orinType="12" length="100" isNullable="true" />
+      <column columnName="OWNER_COMPANY" columnLabel="业主工作单位" orinType="12" length="50" isNullable="true" />
+      <column columnName="AGENT_NAME" columnLabel="代管人姓名" orinType="12" length="20" isNullable="true" />
+      <column columnName="AGENT_CERT" columnLabel="代管人身份证" orinType="12" length="18" isNullable="true" />
+      <column columnName="AGENT_SEX" columnLabel="代管人性别" orinType="-6" length="" isNullable="true" />
+      <column columnName="AGENT_TEL" columnLabel="代管人电话" orinType="12" length="20" isNullable="true" />
+      <column columnName="AGENT_ADDRESS" columnLabel="代管人居住地址" orinType="12" length="100" isNullable="true" />
+      <column columnName="AGENT_COMPANY" columnLabel="代管人工作单位" orinType="12" length="50" isNullable="true" />
+      <column columnName="RENT_PERMIT_DATE" columnLabel="出住屋租赁许可证签证时间" orinType="91" length="" isNullable="true" />
+      <column columnName="ORDER_DATE" columnLabel="治安管理责任书签订时间" orinType="91" length="" isNullable="true" />
+      <column columnName="BCS_DATE" columnLabel="计生管理责任书签订时间" orinType="91" length="" isNullable="true" />
+      <column columnName="GIS_ID" columnLabel="对应地图ID" orinType="12" length="20" isNullable="true" />
+    </table>
+    <table tablename="fhp_person_basic" tableLabel="人员" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="PERSON_ID" columnLabel="PERSON_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="SEX" columnLabel="性别" orinType="4" length="" isNullable="false" />
+      <column columnName="AGE" columnLabel="年龄" orinType="-6" length="" isNullable="false" />
+      <column columnName="DOMICILE" columnLabel="户籍地" orinType="12" length="100" isNullable="true" />
+      <column columnName="DOMICILE_CODE" columnLabel="户籍地编码" orinType="12" length="100" isNullable="true" />
+      <column columnName="ZIP_CODE" columnLabel="户籍地邮编" orinType="12" length="10" isNullable="true" />
+      <column columnName="ADDRESS" columnLabel="现居住地" orinType="12" length="100" isNullable="true" />
+      <column columnName="ADDRESS_TYPE" columnLabel="居住地类型" orinType="4" length="" isNullable="true" />
+      <column columnName="ADDRESS_CODE" columnLabel="现居住地编码" orinType="12" length="100" isNullable="true" />
+      <column columnName="HOUSE_NUMBER" columnLabel="门牌号码" orinType="12" length="100" isNullable="true" />
+      <column columnName="NATIVE" columnLabel="民族" orinType="4" length="" isNullable="true" />
+      <column columnName="HOUSE_ID" columnLabel="houseId" orinType="-5" length="" isNullable="true" />
+      <column columnName="BIRTHDAY" columnLabel="出生日期" orinType="91" length="" isNullable="true" />
+      <column columnName="EDU" columnLabel="文化程度" orinType="4" length="" isNullable="true" />
+      <column columnName="POLITICAL_STATUS" columnLabel="政治面貌" orinType="4" length="" isNullable="true" />
+      <column columnName="HOUSEHODE_KIND" columnLabel="户口性质" orinType="4" length="" isNullable="true" />
+      <column columnName="JOB" columnLabel="职业" orinType="4" length="" isNullable="true" />
+      <column columnName="IS_SINGLE" columnLabel="是否独生" orinType="-6" length="" isNullable="true" />
+      <column columnName="COMPANY" columnLabel="工作单位" orinType="12" length="100" isNullable="true" />
+      <column columnName="PHOTO" columnLabel="照片" orinType="12" length="100" isNullable="true" />
+      <column columnName="FINGERPRINT" columnLabel="指纹" orinType="12" length="100" isNullable="true" />
+      <column columnName="TEL" columnLabel="联系电话" orinType="12" length="18" isNullable="true" />
+      <column columnName="HAVE_STATUS" columnLabel="持证情况" orinType="4" length="" isNullable="true" />
+      <column columnName="VALIDATE_STATUS" columnLabel="验证情况" orinType="4" length="" isNullable="true" />
+      <column columnName="SPOUSE_ID" columnLabel="spouseId" orinType="-5" length="" isNullable="true" />
+      <column columnName="DB_TYPE" columnLabel="dbType" orinType="1" length="1" isNullable="true" />
+      <column columnName="CANCEL_TYPE" columnLabel="注销类别" orinType="4" length="" isNullable="true" />
+      <column columnName="CANCEL_DATE" columnLabel="注销日期" orinType="91" length="" isNullable="true" />
+      <column columnName="DATEH" columnLabel="死亡（迁出）时间" orinType="91" length="" isNullable="true" />
+      <column columnName="REMARK" columnLabel="备注" orinType="12" length="100" isNullable="true" />
+      <column columnName="SETTLE_IN_PLACE" columnLabel="何地迁入(流入)" orinType="12" length="20" isNullable="true" />
+      <column columnName="SETTLE_IN_DATE" columnLabel="迁入(流入)日期" orinType="91" length="" isNullable="true" />
+      <column columnName="SETTLE_IN_CAUSE" columnLabel="迁入(流入)原因" orinType="12" length="50" isNullable="true" />
+      <column columnName="SETTLE_IN_TYPE" columnLabel="迁入(流入)类别" orinType="4" length="" isNullable="true" />
+      <column columnName="OWNER_NAME" columnLabel="户主姓名" orinType="12" length="50" isNullable="true" />
+    </table>
+    <table tablename="fhp_person_out" tableLabel="人口流出" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="PERSON_ID" columnLabel="PERSON_ID" orinType="-5" length="" isNullable="true" />
+      <column columnName="OUT_CAUSE" columnLabel="流出原因" orinType="4" length="" isNullable="true" />
+      <column columnName="OUT_ADDRESS_CODE" columnLabel="流出地编码" orinType="12" length="20" isNullable="true" />
+      <column columnName="OUT_ADDRESS" columnLabel="流出地地址" orinType="12" length="100" isNullable="true" />
+      <column columnName="OUT_DATE" columnLabel="流出日期" orinType="91" length="" isNullable="true" />
+      <column columnName="IN_ADDRESS_CODE" columnLabel="流入地编码" orinType="12" length="20" isNullable="true" />
+      <column columnName="IN_ADDRESS" columnLabel="流入地地址" orinType="12" length="100" isNullable="true" />
+      <column columnName="HAVE_STATUS" columnLabel="持证情况" orinType="4" length="" isNullable="true" />
+      <column columnName="IS_FAMILY_ALL_OUT" columnLabel="夫妻是否共同流出" orinType="-6" length="" isNullable="true" />
+      <column columnName="REMARK" columnLabel="备注" orinType="12" length="100" isNullable="true" />
+    </table>
+    <table tablename="fhp_person_in" tableLabel="人口流入" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="PERSON_ID" columnLabel="PERSON_ID" orinType="-5" length="" isNullable="true" />
+      <column columnName="IN_CAUSE" columnLabel="流入原因" orinType="4" length="" isNullable="true" />
+      <column columnName="IN_DATE" columnLabel="流入日期" orinType="91" length="" isNullable="true" />
+      <column columnName="IN_ADDRESS_CODE" columnLabel="流入地编码" orinType="12" length="20" isNullable="true" />
+      <column columnName="IN_ADDRESS" columnLabel="流入地地址" orinType="12" length="100" isNullable="true" />
+      <column columnName="HAVE_STATUS" columnLabel="持证情况" orinType="4" length="" isNullable="true" />
+      <column columnName="IS_FAMILY_ALL_IN" columnLabel="夫妻是否共同流入" orinType="-6" length="" isNullable="true" />
+      <column columnName="SPOUSE_ID" columnLabel="SPOUSE_ID" orinType="-5" length="" isNullable="true" />
+      <column columnName="SPOUSE_IN_DATE" columnLabel="配偶流入日期" orinType="91" length="" isNullable="true" />
+      <column columnName="SPOUSE_OUT_DATE" columnLabel="配偶流出日期" orinType="91" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_villager_team" tableLabel="村民小组" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="ORG_CODE" columnLabel="行政区编码" orinType="12" length="20" isNullable="true" />
+      <column columnName="TEAM_NAME" columnLabel="小组名称" orinType="12" length="50" isNullable="true" />
+      <column columnName="TEAM_INDEX" columnLabel="小组序号" orinType="4" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_person" tableLabel="人员" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="NAMEH" columnLabel="姓名" orinType="12" length="50" isNullable="false" />
+      <column columnName="CODE" columnLabel="身份证号码" orinType="12" length="20" isNullable="true" />
+      <column columnName="KIND" columnLabel="人员类别" orinType="4" length="" isNullable="true" />
+      <column columnName="PERSON_CODE" columnLabel="人员编号" orinType="12" length="30" isNullable="true" />
+      <column columnName="DOMICILE_TYPE" columnLabel="户口类别" orinType="4" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_fertile_woman" tableLabel="育龄妇女" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="PERSON_ID" columnLabel="PERSON_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="CREATE_DATE" columnLabel="建卡日期" orinType="91" length="" isNullable="true" />
+      <column columnName="TYPEH" columnLabel="妇女类别" orinType="4" length="" isNullable="true" />
+      <column columnName="CODE" columnLabel="妇女编码" orinType="12" length="18" isNullable="true" />
+      <column columnName="AREA" columnLabel="所属区域" orinType="12" length="20" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_five_period" tableLabel="五期教育" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="EDU_TYPE" columnLabel="教育类型" orinType="12" length="18" isNullable="true" />
+      <column columnName="EDU_DATE" columnLabel="教育日期" orinType="91" length="" isNullable="true" />
+      <column columnName="EDU_ADDRESS" columnLabel="教育地点" orinType="12" length="50" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_basic" tableLabel="基础信息" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="MARRY_STATUS" columnLabel="婚姻状态" orinType="4" length="" isNullable="true" />
+      <column columnName="SPOUSE_MARRY_STATUS" columnLabel="夫婚姻状态" orinType="4" length="" isNullable="true" />
+      <column columnName="FIRST_MARRY_DATE" columnLabel="初婚日期" orinType="91" length="" isNullable="true" />
+      <column columnName="MARRY_CRY_DATE" columnLabel="婚变日期" orinType="91" length="" isNullable="true" />
+      <column columnName="GET_GRZ_DATE" columnLabel="领光荣证日期" orinType="91" length="" isNullable="true" />
+      <column columnName="PLAN_CHILD2_CAUSE" columnLabel="安排二孩原因" orinType="12" length="100" isNullable="true" />
+      <column columnName="PLAN_CHILD2_DATE" columnLabel="安排二孩日期" orinType="91" length="" isNullable="true" />
+      <column columnName="PLAN_BEAR2_CAUSE" columnLabel="安排再生原因" orinType="12" length="100" isNullable="true" />
+      <column columnName="PLAN_BEAR2_DATE" columnLabel="安排再生日期" orinType="91" length="" isNullable="true" />
+      <column columnName="GET_LDZ_TYPE" columnLabel="领流动证类型" orinType="4" length="" isNullable="true" />
+      <column columnName="GET_LDZ_DATE" columnLabel="领流动证日期" orinType="91" length="" isNullable="true" />
+      <column columnName="HEALTH_STATUS" columnLabel="健康状况" orinType="4" length="" isNullable="true" />
+      <column columnName="CANCEL_TYPE" columnLabel="注销类型" orinType="4" length="" isNullable="true" />
+      <column columnName="CANCEL_DATE" columnLabel="注销日期" orinType="91" length="" isNullable="true" />
+      <column columnName="REMARK" columnLabel="备注" orinType="12" length="100" isNullable="true" />
+      <column columnName="CERT_CODE" columnLabel="计生证明号" orinType="12" length="20" isNullable="true" />
+      <column columnName="CERT_DATE" columnLabel="计生证有效期" orinType="91" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_award" tableLabel="奖励信息" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="AWARD_DATE" columnLabel="奖励日期" orinType="91" length="" isNullable="true" />
+      <column columnName="AWARD_CONTENT" columnLabel="奖励内容" orinType="12" length="100" isNullable="true" />
+      <column columnName="AGENT" columnLabel="奖励经办人" orinType="12" length="20" isNullable="true" />
+      <column columnName="TYPEH" columnLabel="奖励类别" orinType="4" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_matenal" tableLabel="孕产" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="CONCEPT_POLICY" columnLabel="怀孕政策属性" orinType="4" length="" isNullable="true" />
+      <column columnName="CONCEPT_DATE" columnLabel="怀孕日期" orinType="91" length="" isNullable="true" />
+      <column columnName="CONCEPT_CAUSE" columnLabel="怀孕原因" orinType="12" length="50" isNullable="true" />
+      <column columnName="CONCEPT_RESULT" columnLabel="怀孕结果" orinType="12" length="50" isNullable="true" />
+      <column columnName="EDD" columnLabel="预产期" orinType="91" length="" isNullable="true" />
+      <column columnName="TYPEH" columnLabel="妇女生产方式" orinType="4" length="" isNullable="true" />
+      <column columnName="HOSPITAL_ADDRESS" columnLabel="手术医院地址" orinType="12" length="50" isNullable="true" />
+      <column columnName="MATENAL_RESULT" columnLabel="孕产结果" orinType="12" length="50" isNullable="true" />
+      <column columnName="END_DATE" columnLabel="手术日期" orinType="91" length="" isNullable="true" />
+      <column columnName="HOSPITAL" columnLabel="手术医院" orinType="12" length="50" isNullable="true" />
+      <column columnName="DOCTOR" columnLabel="手术医生" orinType="12" length="20" isNullable="true" />
+      <column columnName="HOSPITAL_TYPE" columnLabel="手术医院类型" orinType="4" length="" isNullable="true" />
+      <column columnName="CHANGE_DATE" columnLabel="变化日期" orinType="91" length="" isNullable="true" />
+      <column columnName="CHANGE_CAUSE" columnLabel="变化原因" orinType="12" length="50" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_social_upbring" tableLabel="社会抚养费" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="CAUSE" columnLabel="征收原因" orinType="12" length="50" isNullable="true" />
+      <column columnName="OUT_DATE" columnLabel="政策外生育日期" orinType="91" length="" isNullable="true" />
+      <column columnName="TOTAL_MONEY" columnLabel="应交金额" orinType="8" length="" isNullable="true" />
+      <column columnName="IS_INSTALLMENT" columnLabel="是否分期" orinType="-6" length="" isNullable="true" />
+      <column columnName="END_DATE" columnLabel="缴交期限" orinType="91" length="" isNullable="true" />
+      <column columnName="LOD_CODE" columnLabel="决定书编号" orinType="12" length="50" isNullable="true" />
+      <column columnName="LOD_DATE" columnLabel="决定书日期" orinType="91" length="" isNullable="true" />
+      <column columnName="LOD_ORG" columnLabel="征收机关" orinType="12" length="50" isNullable="true" />
+      <column columnName="LOD_CHARGER" columnLabel="征收经办人" orinType="12" length="20" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_upbring_detail" tableLabel="社会抚养费缴交" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="UPBRING_ID" columnLabel="UPBRING_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="COUNT" columnLabel="缴款序号" orinType="4" length="" isNullable="true" />
+      <column columnName="MONEYH" columnLabel="本次应缴金额" orinType="8" length="" isNullable="true" />
+      <column columnName="CHARGER" columnLabel="收款人" orinType="12" length="20" isNullable="true" />
+      <column columnName="DATEH" columnLabel="交款日期" orinType="91" length="" isNullable="true" />
+      <column columnName="VOUCHER_CODE" columnLabel="收据编号" orinType="12" length="50" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_punish" tableLabel="行政处罚" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="PUNISH_DATE" columnLabel="处罚日期" orinType="91" length="" isNullable="true" />
+      <column columnName="PUNISH_CAUSE" columnLabel="处罚原因" orinType="12" length="100" isNullable="true" />
+      <column columnName="AGENT" columnLabel="处罚经办人" orinType="12" length="20" isNullable="true" />
+      <column columnName="MONEYH" columnLabel="处罚金额" orinType="8" length="" isNullable="true" />
+      <column columnName="COUNT" columnLabel="处罚次数" orinType="5" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_bear_assurance" tableLabel="计划生育保险" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="TYPEH" columnLabel="投保类型" orinType="12" length="18" isNullable="true" />
+      <column columnName="DATEH" columnLabel="投保年月" orinType="12" length="10" isNullable="true" />
+      <column columnName="MONEYH" columnLabel="投保金额" orinType="8" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_woman_contracept" tableLabel="避孕" primaryKey="id" isCreated="true" tableModule="bcmas" tablePrefix="FHP_">
+      <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="WOMAN_ID" columnLabel="WOMAN_ID" orinType="-5" length="" isNullable="false" />
+      <column columnName="METHOD" columnLabel="避孕节育措施" orinType="4" length="" isNullable="true" />
+      <column columnName="HOSPITAL_TYPE" columnLabel="手术医院类型" orinType="4" length="" isNullable="true" />
+      <column columnName="DOCTOR" columnLabel="手术医生" orinType="12" length="20" isNullable="true" />
+      <column columnName="HOSPITAL" columnLabel="手术医院" orinType="12" length="50" isNullable="true" />
+      <column columnName="OPS_DATE" columnLabel="手术日期" orinType="91" length="" isNullable="true" />
+      <column columnName="HOSPITAL_ADDRESS" columnLabel="手术医院地址" orinType="12" length="50" isNullable="true" />
+      <column columnName="NO_CAUSE" columnLabel="未避孕原因" orinType="12" length="50" isNullable="true" />
+      <column columnName="END_DATE" columnLabel="避孕终止日期" orinType="91" length="" isNullable="true" />
+      <column columnName="CHANGE_DATE" columnLabel="变化日期" orinType="91" length="" isNullable="true" />
+      <column columnName="CHANGE_CAUSE" columnLabel="变化原因" orinType="12" length="50" isNullable="true" />
+      <column columnName="DELAY_CAUSE" columnLabel="缓期原因" orinType="12" length="50" isNullable="true" />
+      <column columnName="DELAY_END_CAUSE" columnLabel="缓期终止日期" orinType="91" length="" isNullable="true" />
+      <column columnName="DELAY_COMPANY" columnLabel="缓期鉴定单位" orinType="12" length="50" isNullable="true" />
+      <column columnName="DELAY_DOCTOR" columnLabel="缓期鉴定医生" orinType="12" length="20" isNullable="true" />
+      <column columnName="DELAY_DATE" columnLabel="缓期鉴定日期" orinType="91" length="" isNullable="true" />
+      <column columnName="REG_DATE" columnLabel="登记日期" orinType="91" length="" isNullable="true" />
+    </table>
+  </tables>
+</configure>
+

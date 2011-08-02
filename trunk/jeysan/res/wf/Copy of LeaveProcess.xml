@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE fpdl:WorkflowProcess PUBLIC "-//Nieyun Chen//ProcessDefinition//CN" "FireFlow_Process_Definition_Language.dtd">
+
+<fpdl:WorkflowProcess xmlns:fpdl="http://www.fireflow.org/Fireflow_Process_Definition_Language" Id="LeaveProcess" Name="LeaveProcess" DisplayName="LeaveProcess" ResourceFile="" ResourceManager="">
+    <fpdl:DataFields>
+        <fpdl:DataField Id="LeaveProcess.LeaveCount" Name="LeaveCount" DisplayName="请假总天数" DataType="Integer" InitialValue="1">
+            <fpdl:Description>请假总天数</fpdl:Description>
+        </fpdl:DataField>
+        <fpdl:DataField Id="LeaveProcess.EditFormUrl" Name="EditFormUrl" DisplayName="编辑页面" DataType="String" InitialValue="/daily/leave!form4wf.action">
+            <fpdl:Description>编辑页面，需要加上当前任务实例的StepNumber作为参数</fpdl:Description>
+        </fpdl:DataField>
+        <fpdl:DataField Id="LeaveProcess.ViewFormUrl" Name="ViewFormUrl" DisplayName="查看页面" DataType="String" InitialValue="/daily/leave!view.action">
+            <fpdl:Description>查看页面</fpdl:Description>
+        </fpdl:DataField>
+    </fpdl:DataFields>
+    <fpdl:StartNode Id="LeaveProcess.START_NODE" Name="START_NODE" DisplayName="开始">
+        <fpdl:ExtendedAttributes>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="20"/>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="134"/>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="20"/>
+            <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="13"/>
+        </fpdl:ExtendedAttributes>
+    </fpdl:StartNode>
+    <fpdl:Tasks>
+        <fpdl:Task Id="LeaveProcess.SendEmailTask" Name="SendEmailTask" DisplayName="发送邮件通知结果" Type="TOOL" Execution="SYNCHR" Priority="1" LoopStrategy="REDO">
+            <fpdl:Application Name="EmailSender" DisplayName="邮件发送接口程序">
+                <fpdl:Description></fpdl:Description>
+                <fpdl:Handler>com.jeysan.cpf.daily.wf.EmailSender</fpdl:Handler>
+            </fpdl:Application>
+        </fpdl:Task>
+    </fpdl:Tasks>
+    <fpdl:Activities>
+        <fpdl:Activity Id="LeaveProcess.ApplyActivity" Name="ApplyActivity" DisplayName="申请" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="114"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="82"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="55"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks>
+                <fpdl:Task Id="LeaveProcess.ApplyActivity.WriteFormTask" Name="WriteFormTask" DisplayName="填写请假申请单" Type="FORM" CompletionStrategy="ANY" DefaultView="EDITFORM" Priority="1" LoopStrategy="REDO">
+                    <fpdl:Performer Name="Self" DisplayName="当前用户">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:AssignmentHandler>com.jeysan.cpf.daily.wf.CurrentUserAssignmentHandler</fpdl:AssignmentHandler>
+                    </fpdl:Performer>
+                    <fpdl:EditForm Name="LeaveForm" DisplayName="请假单">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:Uri>/daily/leave!input.action?level=0</fpdl:Uri>
+                    </fpdl:EditForm>
+                </fpdl:Task>
+            </fpdl:Tasks>
+            <fpdl:TaskRefs/>
+        </fpdl:Activity>
+        <fpdl:Activity Id="LeaveProcess.DeptManagerCheckActivity" Name="DeptManagerCheckActivity" DisplayName="部门经理审批" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="112"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="84"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="210"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks>
+                <fpdl:Task Id="LeaveProcess.DeptManagerCheckActivity.DeptManagerCheckTask" Name="DeptManagerCheckTask" DisplayName="审批请假单" Type="FORM" CompletionStrategy="ANY" DefaultView="EDITFORM" Priority="1" LoopStrategy="REDO">
+                    <fpdl:Performer Name="DeptManager" DisplayName="部门经理">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:AssignmentHandler>com.jeysan.cpf.daily.wf.RoleBasedAssignmentHandler</fpdl:AssignmentHandler>
+                    </fpdl:Performer>
+                    <fpdl:EditForm Name="CheckLeaveForm" DisplayName="请假审批表单">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:Uri>/daily/leave!form4wf.action?level=1</fpdl:Uri>
+                    </fpdl:EditForm>
+                </fpdl:Task>
+            </fpdl:Tasks>
+            <fpdl:TaskRefs/>
+        </fpdl:Activity>
+        <fpdl:Activity Id="LeaveProcess.BossCheckActivity" Name="BossCheckActivity" DisplayName="公司负责人审批" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="44"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="100"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="407"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks>
+                <fpdl:Task Id="LeaveProcess.BossCheckActivity.BossCheckTask" Name="BossCheckTask" DisplayName="审批请假单" Type="FORM" CompletionStrategy="ANY" DefaultView="EDITFORM" Priority="1" LoopStrategy="REDO">
+                    <fpdl:Performer Name="Boss" DisplayName="公司负责人">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:AssignmentHandler>com.jeysan.cpf.daily.wf.RoleBasedAssignmentHandler</fpdl:AssignmentHandler>
+                    </fpdl:Performer>
+                    <fpdl:EditForm Name="BossCheckLeaveForm" DisplayName="请假审批表单">
+                        <fpdl:Description></fpdl:Description>
+                        <fpdl:Uri>/daily/leave!form4wf.action?level=2</fpdl:Uri>
+                    </fpdl:EditForm>
+                </fpdl:Task>
+            </fpdl:Tasks>
+            <fpdl:TaskRefs/>
+        </fpdl:Activity>
+        <fpdl:Activity Id="LeaveProcess.SendMail1Activity" Name="SendMail1Activity" DisplayName="发送邮件" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="166"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="100"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="499"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks/>
+            <fpdl:TaskRefs>
+                <fpdl:TaskRef Reference="LeaveProcess.SendEmailTask"/>
+            </fpdl:TaskRefs>
+        </fpdl:Activity>
+        <fpdl:Activity Id="LeaveProcess.SendMail2Activity" Name="SendMail2Activity" DisplayName="发送邮件" CompletionStrategy="ALL">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="60"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="41"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="100"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="596"/>
+            </fpdl:ExtendedAttributes>
+            <fpdl:Tasks/>
+            <fpdl:TaskRefs>
+                <fpdl:TaskRef Reference="LeaveProcess.SendEmailTask"/>
+            </fpdl:TaskRefs>
+        </fpdl:Activity>
+    </fpdl:Activities>
+    <fpdl:Synchronizers>
+        <fpdl:Synchronizer Id="LeaveProcess.Synchronizer1" Name="Synchronizer1" DisplayName="">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="133"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="172"/>
+            </fpdl:ExtendedAttributes>
+        </fpdl:Synchronizer>
+        <fpdl:Synchronizer Id="LeaveProcess.Synchronizer2" Name="Synchronizer2" DisplayName="">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="131"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="322"/>
+            </fpdl:ExtendedAttributes>
+        </fpdl:Synchronizer>
+        <fpdl:Synchronizer Id="LeaveProcess.Synchronizer3" Name="Synchronizer3" DisplayName="">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="63"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="550"/>
+            </fpdl:ExtendedAttributes>
+        </fpdl:Synchronizer>
+    </fpdl:Synchronizers>
+    <fpdl:EndNodes>
+        <fpdl:EndNode Id="LeaveProcess.EndNode1" Name="EndNode1" DisplayName="">
+            <fpdl:ExtendedAttributes>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.height" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.y" Value="125"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.width" Value="20"/>
+                <fpdl:ExtendedAttribute Name="FIRE_FLOW.bounds.x" Value="717"/>
+            </fpdl:ExtendedAttributes>
+        </fpdl:EndNode>
+    </fpdl:EndNodes>
+    <fpdl:Transitions>
+        <fpdl:Transition Id="LeaveProcess.Transition1" From="LeaveProcess.START_NODE" To="LeaveProcess.ApplyActivity" Name="Transition1" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition2" From="LeaveProcess.ApplyActivity" To="LeaveProcess.Synchronizer1" Name="Transition2" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition3" From="LeaveProcess.Synchronizer1" To="LeaveProcess.DeptManagerCheckActivity" Name="Transition3" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition4" From="LeaveProcess.DeptManagerCheckActivity" To="LeaveProcess.Synchronizer2" Name="Transition4" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition5" From="LeaveProcess.Synchronizer2" To="LeaveProcess.BossCheckActivity" Name="Transition5" DisplayName="请假天数大于三天">
+            <fpdl:Condition>LeaveCount &gt; 3</fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition7" From="LeaveProcess.Synchronizer2" To="LeaveProcess.SendMail1Activity" Name="Transition7" DisplayName="请假天数小于三天">
+            <fpdl:Condition>LeaveCount &lt; 4</fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition8" From="LeaveProcess.SendMail1Activity" To="LeaveProcess.EndNode1" Name="Transition8" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition9" From="LeaveProcess.BossCheckActivity" To="LeaveProcess.Synchronizer3" Name="Transition9" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition10" From="LeaveProcess.SendMail2Activity" To="LeaveProcess.EndNode1" Name="Transition10" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+        <fpdl:Transition Id="LeaveProcess.Transition11" From="LeaveProcess.Synchronizer3" To="LeaveProcess.SendMail2Activity" Name="Transition11" DisplayName="">
+            <fpdl:Condition></fpdl:Condition>
+        </fpdl:Transition>
+    </fpdl:Transitions>
+</fpdl:WorkflowProcess>
