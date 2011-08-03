@@ -8,7 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><%=com.jeysan.modules.utils.Constants.Application.PLATFORM_TITLE%></title>
-<link href="${ctx4doc}/dwz/themes/css/login.css" rel="stylesheet" type="text/css" />
+<link href="${ctx4doc}/dwz2/themes/css/login.css" rel="stylesheet" type="text/css" />
 <script src="${ctx4doc}/dwz2/javascripts/jquery-1.4.4.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/jscommon2.js" type="text/javascript"></script>
 </head>
