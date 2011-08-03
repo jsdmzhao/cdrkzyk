@@ -89,16 +89,55 @@ if ($.browser.msie) {
 							<ul class="tree treeFolder">
 								<c:forEach items="${a.value}" var="c" varStatus="d">
 								<li>
-									<c:if test="${c.resourceCode=='1007'}">
-									<a>${c.resourceName}</a>
-									<ul>
-										<li><a href="${ctx}/${c.resourceValue}?type=0" target="navTab" rel="nav_${c.entityName}manage">待处理流程</a></li>
-										<li><a href="${ctx}/${c.resourceValue}?type=1" target="navTab" rel="nav_${c.entityName}manage">已处理流程</a></li>
-									</ul>
-									</c:if>
-									<c:if test="${c.resourceCode!='1007'}">
-									<a href="${ctx}/${c.resourceValue}" target="navTab" rel="nav_${c.entityName}manage">${c.resourceName}</a>
-									</c:if>
+									<c:choose>
+										<c:when test="${c.resourceCode=='1007'}">
+										<a>${c.resourceName}</a>
+										<ul>
+											<li><a href="${ctx}/${c.resourceValue}?type=0" target="navTab" rel="nav_${c.entityName}manage">待处理流程</a></li>
+											<li><a href="${ctx}/${c.resourceValue}?type=1" target="navTab" rel="nav_${c.entityName}manage">已处理流程</a></li>
+										</ul>
+										</c:when>
+										<c:when test="${c.resourceCode=='55003'}">
+										<a>${c.resourceName}</a>
+										<ul>
+											<li><a href="${ctx}/bcmas/firstchildreg.action" target="navTab" rel="nav_firstchildregmanage">一孩登记</a></li>
+											<li><a href="${ctx}/bcmas/birth2apply.action" target="navTab" rel="nav_birth2applymanage">再生育申请</a></li>
+											<li><a href="${ctx}/bcmas/birth2check.action" target="navTab" rel="nav_birth2checkmanage">再生育审批</a></li>
+											<li><a href="${ctx}/bcmas/getiud.action" target="navTab" rel="nav_getiudmanage">取环管理</a></li>
+										</ul>
+										</c:when>
+										<c:when test="${c.resourceCode=='55004'}">
+										<a>${c.resourceName}</a>
+										<ul>
+											<li><a href="${ctx}/bcmas/doublecheck.action" target="navTab" rel="nav_doublecheckmanage">确定双查轮次</a></li>
+											<li><a href="${ctx}/bcmas/confirmdcobj.action?type=0" target="navTab" rel="nav_confirmdcobjmanage_1">确定双查对象</a></li>
+											<li><a href="${ctx}/bcmas/confirmdcobj.action?type=1" target="navTab" rel="nav_confirmdcobjmanage_2">登记检查结果</a></li>
+											<li><a href="${ctx}/bcmas/lostreg.action" target="navTab" rel="nav_lostregmanage">漏查登记</a></li>
+											<li><a href="${ctx}/bcmas/doublecheckstat.action" target="navTab" rel="nav_doublecheckstatmanage">双查汇总</a></li>
+										</ul>
+										</c:when>
+										<c:when test="${c.resourceCode=='55006'}">
+										<a>${c.resourceName}</a>
+										<ul>
+											<li><a href="${ctx}/bcmas/marrycert.action" target="navTab" rel="nav_marrycertmanage">婚育证明</a></li>
+											<li><a href="${ctx}/bcmas/toccert.action" target="navTab" rel="nav_toccertmanage">独生子女光荣证</a></li>
+											<li><a href="${ctx}/bcmas/bcscert.action" target="navTab" rel="nav_bcscertmanage">计划生育服务证</a></li>
+											<li><a href="${ctx}/bcmas/bcscertcheck.action" target="navTab" rel="nav_bcscertcheckmanage">计划生育服务证查验</a></li>
+										</ul>
+										</c:when>
+										<c:when test="${c.resourceCode=='55007'}">
+										<a>${c.resourceName}</a>
+										<ul>
+											<li><a href="${ctx}/pmas/personbasic.action?type=0" target="navTab" rel="nav_cancelmanage_0">超龄注销</a></li>
+											<li><a href="${ctx}/pmas/personbasic.action?type=1" target="navTab" rel="nav_cancelmanage_1">死亡注销</a></li>
+											<li><a href="${ctx}/pmas/personbasic.action?type=2" target="navTab" rel="nav_cancelmanage_2">迁出注销</a></li>
+											<li><a href="${ctx}/pmas/personbasic.action?type=3" target="navTab" rel="nav_cancelmanage_3">恢复注销</a></li>
+										</ul>
+										</c:when>
+										<c:otherwise>
+											<a href="${ctx}/${c.resourceValue}" target="navTab" rel="nav_${c.entityName}manage">${c.resourceName}</a>
+										</c:otherwise>
+									</c:choose>
 								</li>
 								</c:forEach>
 							</ul>
