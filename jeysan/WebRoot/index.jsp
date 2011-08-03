@@ -1,1 +1,1 @@
-<% response.sendRedirect("main/index.action"); %>
+<% response.sendRedirect("main/index.action"); %>  
