@@ -39,18 +39,18 @@ public class PersonBasicAction extends CrudActionSupport<PersonBasic> {
 		try {
 			if(id!=null){
 				personBasicManager.deletePersonBasic(id);
-				logger.debug("删除了人员："+id);
+				logger.debug("删除了基础信息："+id);
 			}else {
 				personBasicManager.deletePersonBasics(ids);
-				logger.debug("删除了很多人员："+ids.toString());
+				logger.debug("删除了很多基础信息："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除人员成功");
+			result4Json.setMessage("删除基础信息成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"人员已经被关联,请先解除关联,删除失败":"删除人员失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"基础信息已经被关联,请先解除关联,删除失败":"删除基础信息失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -91,10 +91,10 @@ public class PersonBasicAction extends CrudActionSupport<PersonBasic> {
 			personBasicManager.savePersonBasic(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存人员成功");
+				result4Json.setMessage("保存基础信息成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改人员成功");
+				result4Json.setMessage("修改基础信息成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -103,7 +103,7 @@ public class PersonBasicAction extends CrudActionSupport<PersonBasic> {
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存人员失败");
+				result4Json.setMessage("保存基础信息失败");
 			}
 			
 		}
