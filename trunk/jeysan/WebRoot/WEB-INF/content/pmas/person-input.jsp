@@ -27,6 +27,34 @@
 					<label>户口类别：</label>
 					<input name="domicileType" class="digits" type="text" size="30" value="${domicileType}"/>
 					</p>
+																													<p>
+					<label>注销类别：</label>
+					<input name="cancelType" class="digits" type="text" size="30" value="${cancelType}"/>
+					</p>
+																													<p>
+					<label>注销日期：</label>
+					<input name="cancelDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${cancelDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					</p>
+																													<p>
+					<label>死亡（迁出）时间：</label>
+					<input name="dateh" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${dateh}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					</p>
+																													<p>
+					<label>何地迁入(流入)：</label>
+					<input name="settleInPlace"    type="text" size="30" value="${settleInPlace}" />
+					</p>
+																													<p>
+					<label>迁入(流入)日期：</label>
+					<input name="settleInDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${settleInDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					</p>
+																													<p>
+					<label>迁入(流入)原因：</label>
+					<input name="settleInCause"    type="text" size="30" value="${settleInCause}" />
+					</p>
+																													<p>
+					<label>迁入(流入)类别：</label>
+					<input name="settleInType" class="digits" type="text" size="30" value="${settleInType}"/>
+					</p>
 																	</div>
 			<div class="formBar">
 				<ul>

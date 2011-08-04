@@ -24,8 +24,16 @@
 					<input name="domicileCode" readonly="readonly" type="text" size="30" value="${domicileCode}"/>
 					</p>
 																														<p>
+					<label>户籍地门牌号码：</label>
+					<input name="domicileHouseNo" readonly="readonly" type="text" size="30" value="${domicileHouseNo}"/>
+					</p>
+																														<p>
+					<label>户籍地房号：</label>
+					<input name="domicileRoomNo" readonly="readonly" type="text" size="30" value="${domicileRoomNo}"/>
+					</p>
+																														<p>
 					<label>户籍地邮编：</label>
-					<input name="zipCode" readonly="readonly" type="text" size="30" value="${zipCode}"/>
+					<input name="domicileZipCode" readonly="readonly" type="text" size="30" value="${domicileZipCode}"/>
 					</p>
 																														<p>
 					<label>现居住地：</label>
@@ -40,8 +48,16 @@
 					<input name="addressCode" readonly="readonly" type="text" size="30" value="${addressCode}"/>
 					</p>
 																														<p>
-					<label>门牌号码：</label>
-					<input name="houseNumber" readonly="readonly" type="text" size="30" value="${houseNumber}"/>
+					<label>现居住地门牌号码：</label>
+					<input name="houseNo" readonly="readonly" type="text" size="30" value="${houseNo}"/>
+					</p>
+																														<p>
+					<label>现居住地房号：</label>
+					<input name="roomNo" readonly="readonly" type="text" size="30" value="${roomNo}"/>
+					</p>
+																														<p>
+					<label>户籍地邮编：</label>
+					<input name="zipCode" readonly="readonly" type="text" size="30" value="${zipCode}"/>
 					</p>
 																														<p>
 					<label>民族：</label>
@@ -108,40 +124,36 @@
 					<input name="dbType" readonly="readonly" type="text" size="30" value="${dbType}"/>
 					</p>
 																														<p>
-					<label>注销类别：</label>
-					<input name="cancelType" readonly="readonly" type="text" size="30" value="${cancelType}"/>
-					</p>
-																														<p>
-					<label>注销日期：</label>
-					<input name="cancelDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${cancelDate}" pattern="yyyy-MM-dd"/>"/>
-					</p>
-																														<p>
-					<label>死亡（迁出）时间：</label>
-					<input name="dateh" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${dateh}" pattern="yyyy-MM-dd"/>"/>
-					</p>
-																														<p>
 					<label>备注：</label>
 					<input name="remark" readonly="readonly" type="text" size="30" value="${remark}"/>
 					</p>
 																														<p>
-					<label>何地迁入(流入)：</label>
-					<input name="settleInPlace" readonly="readonly" type="text" size="30" value="${settleInPlace}"/>
-					</p>
-																														<p>
-					<label>迁入(流入)日期：</label>
-					<input name="settleInDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${settleInDate}" pattern="yyyy-MM-dd"/>"/>
-					</p>
-																														<p>
-					<label>迁入(流入)原因：</label>
-					<input name="settleInCause" readonly="readonly" type="text" size="30" value="${settleInCause}"/>
-					</p>
-																														<p>
-					<label>迁入(流入)类别：</label>
-					<input name="settleInType" readonly="readonly" type="text" size="30" value="${settleInType}"/>
-					</p>
-																														<p>
 					<label>户主姓名：</label>
 					<input name="ownerName" readonly="readonly" type="text" size="30" value="${ownerName}"/>
+					</p>
+																														<p>
+					<label>与户主关系：</label>
+					<input name="relation" readonly="readonly" type="text" size="30" value="${relation}"/>
+					</p>
+																														<p>
+					<label>婚姻状况：</label>
+					<input name="marryStatus" readonly="readonly" type="text" size="30" value="${marryStatus}"/>
+					</p>
+																														<p>
+					<label>初婚日期：</label>
+					<input name="firstMarryDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${firstMarryDate}" pattern="yyyy-MM-dd"/>"/>
+					</p>
+																														<p>
+					<label>国籍：</label>
+					<input name="nationality" readonly="readonly" type="text" size="30" value="${nationality}"/>
+					</p>
+																														<p>
+					<label>村民小组：</label>
+					<input name="villagerTeamId" readonly="readonly" type="text" size="30" value="${villagerTeamId}"/>
+					</p>
+																														<p>
+					<label>户编码：</label>
+					<input name="houseHoldCode" readonly="readonly" type="text" size="30" value="${houseHoldCode}"/>
 					</p>
 																		</div>
 			<div class="formBar">
