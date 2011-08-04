@@ -42,10 +42,10 @@
 					<th width="30" align="center"><input type="checkbox" class="checkboxCtrl" group="ids" /></th>
 					<th width="30" align="center">序号</th>
 																																			<th width="80" orderField="houseCode" class="orderFlag">房屋编号</th>
-																														<th width="80" orderField="houseType" class="orderFlag">房屋类型</th>
-																														<th width="80" orderField="houseAtt" class="orderFlag">房屋属性</th>
-																														<th width="80" orderField="housePoliceNo" class="orderFlag">公安牌号</th>
-																														<th width="80" orderField="rooms" class="orderFlag">间（套）数</th>
+																														<th width="80">房屋类型</th>
+																														<th width="120">房屋属性</th>
+																														<th width="80">业主姓名</th>
+																														<th width="120">业主身份证</th>
 																														<th width="80" orderField="area" class="orderFlag">房屋面积</th>
 																																																																																																																																																																																																																																																																																																																																																																																																																<th width="80" align="center">操作</th>
 				</tr>
@@ -56,10 +56,10 @@
 					<td height="25"><input type="checkbox" name="ids" value="${a.id}" /></td>
 					<td>${b.index+1}</td>
 																																								<td>${a.houseCode}</td>
-																																								<td>${a.houseType}</td>
-																																								<td>${a.houseAtt}</td>
-																																								<td>${a.housePoliceNo}</td>
-																																								<td>${a.rooms}</td>
+																																								<td><tags:js.dict.getValue value="${a.houseType}" /></td>
+																																								<td><tags:js.dict.getValue value="${a.houseAtt}" /></td>
+																																								<td>${a.ownerName}</td>
+																																								<td>${a.ownerCert}</td>
 																																								<td>${a.area}</td>
 																																																																																																																																																																																																																																																																																																																																																																																																																					<td>
 						<div style="width: 75px;">
