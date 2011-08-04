@@ -40,6 +40,34 @@ public class Person extends IdEntity {
 	 * 户口类别
 	 */
 	private Integer domicileType;
+				/**
+	 * 注销类别
+	 */
+	private Integer cancelType;
+				/**
+	 * 注销日期
+	 */
+	private java.util.Date cancelDate;
+				/**
+	 * 死亡（迁出）时间
+	 */
+	private java.util.Date dateh;
+				/**
+	 * 何地迁入(流入)
+	 */
+	private String settleInPlace;
+				/**
+	 * 迁入(流入)日期
+	 */
+	private java.util.Date settleInDate;
+				/**
+	 * 迁入(流入)原因
+	 */
+	private String settleInCause;
+				/**
+	 * 迁入(流入)类别
+	 */
+	private Integer settleInType;
 			
 						@Column(name="NAMEH")
 	public String getNameh() {
@@ -75,6 +103,55 @@ public class Person extends IdEntity {
 	}
 	public void setDomicileType(Integer domicileType) {
 		this.domicileType = domicileType;
+	}
+				@Column(name="CANCEL_TYPE")
+	public Integer getCancelType() {
+		return cancelType;
+	}
+	public void setCancelType(Integer cancelType) {
+		this.cancelType = cancelType;
+	}
+				@Column(name="CANCEL_DATE")
+	public java.util.Date getCancelDate() {
+		return cancelDate;
+	}
+	public void setCancelDate(java.util.Date cancelDate) {
+		this.cancelDate = cancelDate;
+	}
+				@Column(name="DATEH")
+	public java.util.Date getDateh() {
+		return dateh;
+	}
+	public void setDateh(java.util.Date dateh) {
+		this.dateh = dateh;
+	}
+				@Column(name="SETTLE_IN_PLACE")
+	public String getSettleInPlace() {
+		return settleInPlace;
+	}
+	public void setSettleInPlace(String settleInPlace) {
+		this.settleInPlace = settleInPlace;
+	}
+				@Column(name="SETTLE_IN_DATE")
+	public java.util.Date getSettleInDate() {
+		return settleInDate;
+	}
+	public void setSettleInDate(java.util.Date settleInDate) {
+		this.settleInDate = settleInDate;
+	}
+				@Column(name="SETTLE_IN_CAUSE")
+	public String getSettleInCause() {
+		return settleInCause;
+	}
+	public void setSettleInCause(String settleInCause) {
+		this.settleInCause = settleInCause;
+	}
+				@Column(name="SETTLE_IN_TYPE")
+	public Integer getSettleInType() {
+		return settleInType;
+	}
+	public void setSettleInType(Integer settleInType) {
+		this.settleInType = settleInType;
 	}
 			
 	@Override
