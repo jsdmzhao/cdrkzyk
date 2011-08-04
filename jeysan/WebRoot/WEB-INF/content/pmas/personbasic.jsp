@@ -29,7 +29,7 @@
 	<div class="pageContent">
 		<div class="panelBar">
 			<ul class="toolBar">
-				<li><a class="add" href="${ctx}/pmas/personbasic!input.action" target="navTab" rel="personBasic-input" title="添加人员"><span>添加</span></a></li>
+				<li><a class="add" href="${ctx}/pmas/personbasic!input.action" target="navTab" rel="personBasic-input" title="添加基础信息"><span>添加</span></a></li>
 				<li><a class="delete" href="${ctx}/pmas/personbasic!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_personbasicmanage" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 				<li class="line">line</li>
 				<li><a class="icon" href="javascript:void(0);"><span>打印</span></a></li>
@@ -46,8 +46,8 @@
 																														<th width="80" orderField="age" class="orderFlag">年龄</th>
 																														<th width="80" orderField="domicile" class="orderFlag">户籍地</th>
 																														<th width="80" orderField="domicileCode" class="orderFlag">户籍地编码</th>
-																														<th width="80" orderField="zipCode" class="orderFlag">户籍地邮编</th>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																								<th width="80" align="center">操作</th>
+																														<th width="80" orderField="domicileHouseNo" class="orderFlag">户籍地门牌号码</th>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																				<th width="80" align="center">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,11 +60,11 @@
 																																								<td>${a.age}</td>
 																																								<td>${a.domicile}</td>
 																																								<td>${a.domicileCode}</td>
-																																								<td>${a.zipCode}</td>
-																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																													<td>
+																																								<td>${a.domicileHouseNo}</td>
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																									<td>
 						<div style="width: 75px;">
-							<a class="btnView" href="${ctx}/pmas/personbasic!view.action?id=${a.id}" target="navTab" title="查看人员信息" rel="personBasic-view"></a>
-							<a class="btnEdit" href="${ctx}/pmas/personbasic!input.action?id=${a.id}" target="navTab" title="修改人员信息" rel="personBasic-update"></a>
+							<a class="btnView" href="${ctx}/pmas/personbasic!view.action?id=${a.id}" target="navTab" title="查看基础信息信息" rel="personBasic-view"></a>
+							<a class="btnEdit" href="${ctx}/pmas/personbasic!input.action?id=${a.id}" target="navTab" title="修改基础信息信息" rel="personBasic-update"></a>
 							<a class="btnDel" href="${ctx}/pmas/personbasic!delete.action?id=${a.id}&result4Json.navTabId=nav_personbasicmanage" target="ajaxTodo" title="确定要删除吗？"></a>
 						</div>
 					</td>

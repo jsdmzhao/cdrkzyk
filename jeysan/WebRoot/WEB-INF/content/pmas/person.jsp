@@ -42,11 +42,12 @@
 					<th width="30" align="center"><input type="checkbox" class="checkboxCtrl" group="ids" /></th>
 					<th width="30" align="center">序号</th>
 																																			<th width="80" orderField="nameh" class="orderFlag">姓名</th>
-																														<th width="120" orderField="code" class="orderFlag">身份证号码</th>
+																														<th width="80" orderField="code" class="orderFlag">身份证号码</th>
 																														<th width="80" orderField="kind" class="orderFlag">人员类别</th>
 																														<th width="80" orderField="personCode" class="orderFlag">人员编号</th>
 																														<th width="80" orderField="domicileType" class="orderFlag">户口类别</th>
-																				<th width="100" align="center">操作</th>
+																														<th width="80" orderField="cancelType" class="orderFlag">注销类别</th>
+																																																																																																																																												<th width="80" align="center">操作</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,12 +60,12 @@
 																																								<td>${a.kind}</td>
 																																								<td>${a.personCode}</td>
 																																								<td>${a.domicileType}</td>
-																									<td>
-						<div style="width: 100px;">
+																																								<td>${a.cancelType}</td>
+																																																																																																																																																	<td>
+						<div style="width: 75px;">
 							<a class="btnView" href="${ctx}/pmas/person!view.action?id=${a.id}" target="navTab" title="查看人员信息" rel="person-view"></a>
 							<a class="btnEdit" href="${ctx}/pmas/person!input.action?id=${a.id}" target="navTab" title="修改人员信息" rel="person-update"></a>
 							<a class="btnDel" href="${ctx}/pmas/person!delete.action?id=${a.id}&result4Json.navTabId=nav_personmanage" target="ajaxTodo" title="确定要删除吗？"></a>
-							<a class="btnInfo" href="${ctx}/pmas/personbasic.action?id=${a.id}" target="navTab" title="人员详细信息" rel="nav_personbasicmanage"></a>
 						</div>
 					</td>
 				</tr>
