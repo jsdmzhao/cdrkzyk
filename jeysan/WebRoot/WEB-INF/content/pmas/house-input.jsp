@@ -9,15 +9,17 @@
 			<div class="pageFormContent" layoutH="56">
 																												<p>
 					<label>房屋编号：</label>
-					<input name="houseCode"    type="text" size="30" value="${houseCode}" />
+					<input name="houseCode" class="required number" minlength="8" maxlength="8" type="text" size="30" value="${houseCode}" />
 					</p>
+<div class="divider"></div>
+
 																													<p>
 					<label>房屋类型：</label>
-					<input name="houseType" class="digits" type="text" size="30" value="${houseType}"/>
+					<tags:js.dict.selector name="houseType" class1="required"  value="${houseType}" dictCode="JS1038"/>
 					</p>
 																													<p>
 					<label>房屋属性：</label>
-					<input name="houseAtt" class="digits" type="text" size="30" value="${houseAtt}"/>
+					<tags:js.dict.selector name="houseAtt" class1="required" value="${houseAtt}" dictCode="JS1039"/>
 					</p>
 																													<p>
 					<label>公安牌号：</label>
@@ -43,17 +45,19 @@
 					<label>详细地址：</label>
 					<input name="detailAddress"    type="text" size="30" value="${detailAddress}" />
 					</p>
+
+<div class="divider"></div>
 																													<p>
 					<label>业主姓名：</label>
-					<input name="ownerName"    type="text" size="30" value="${ownerName}" />
+					<input name="ownerName"  class="required"  type="text" size="30" value="${ownerName}" />
 					</p>
 																													<p>
 					<label>业主身份证：</label>
-					<input name="ownerCert"    type="text" size="30" value="${ownerCert}" />
+					<input name="ownerCert" class="required"    type="text" size="30" value="${ownerCert}" />
 					</p>
 																													<p>
 					<label>业主性别：</label>
-					<input name="ownerSex" class="digits" type="text" size="30" value="${ownerSex}"/>
+					<tags:js.dict.selector name="ownerSex" class1="required"  value="${ownerSex}" dictCode="JS010"/>
 					</p>
 																													<p>
 					<label>业主电话：</label>
@@ -67,6 +71,8 @@
 					<label>业主工作单位：</label>
 					<input name="ownerCompany"    type="text" size="30" value="${ownerCompany}" />
 					</p>
+
+<div class="divider"></div>
 																													<p>
 					<label>代管人姓名：</label>
 					<input name="agentName"    type="text" size="30" value="${agentName}" />
@@ -77,7 +83,7 @@
 					</p>
 																													<p>
 					<label>代管人性别：</label>
-					<input name="agentSex" class="digits" type="text" size="30" value="${agentSex}"/>
+					<tags:js.dict.selector name="agentSex"  value="${agentSex}" dictCode="JS010"/>
 					</p>
 																													<p>
 					<label>代管人电话：</label>
@@ -91,18 +97,22 @@
 					<label>代管人工作单位：</label>
 					<input name="agentCompany"    type="text" size="30" value="${agentCompany}" />
 					</p>
+
+<div class="divider"></div>
 																													<p>
-					<label>出住屋租赁许可证签证时间：</label>
+					<label>租赁许可证签证时间：</label>
 					<input name="rentPermitDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${rentPermitDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
 																													<p>
-					<label>治安管理责任书签订时间：</label>
+					<label>治安责任书签订时间：</label>
 					<input name="orderDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${orderDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
 																													<p>
-					<label>计生管理责任书签订时间：</label>
+					<label>计生责任书签订时间：</label>
 					<input name="bcsDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${bcsDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
+
+<div class="divider"></div>
 																													<p>
 					<label>对应地图ID：</label>
 					<input name="gisId"    type="text" size="30" value="${gisId}" />
