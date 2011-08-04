@@ -41,9 +41,17 @@ public class PersonBasic extends IdEntity {
 	 */
 	private String domicileCode;
 				/**
+	 * 户籍地门牌号码
+	 */
+	private String domicileHouseNo;
+				/**
+	 * 户籍地房号
+	 */
+	private String domicileRoomNo;
+				/**
 	 * 户籍地邮编
 	 */
-	private String zipCode;
+	private String domicileZipCode;
 				/**
 	 * 现居住地
 	 */
@@ -57,9 +65,17 @@ public class PersonBasic extends IdEntity {
 	 */
 	private String addressCode;
 				/**
-	 * 门牌号码
+	 * 现居住地门牌号码
 	 */
-	private String houseNumber;
+	private String houseNo;
+				/**
+	 * 现居住地房号
+	 */
+	private String roomNo;
+				/**
+	 * 户籍地邮编
+	 */
+	private String zipCode;
 				/**
 	 * 民族
 	 */
@@ -125,41 +141,37 @@ public class PersonBasic extends IdEntity {
 	 */
 	private String dbType;
 				/**
-	 * 注销类别
-	 */
-	private Integer cancelType;
-				/**
-	 * 注销日期
-	 */
-	private java.util.Date cancelDate;
-				/**
-	 * 死亡（迁出）时间
-	 */
-	private java.util.Date dateh;
-				/**
 	 * 备注
 	 */
 	private String remark;
 				/**
-	 * 何地迁入(流入)
-	 */
-	private String settleInPlace;
-				/**
-	 * 迁入(流入)日期
-	 */
-	private java.util.Date settleInDate;
-				/**
-	 * 迁入(流入)原因
-	 */
-	private String settleInCause;
-				/**
-	 * 迁入(流入)类别
-	 */
-	private Integer settleInType;
-				/**
 	 * 户主姓名
 	 */
 	private String ownerName;
+				/**
+	 * 与户主关系
+	 */
+	private Integer relation;
+				/**
+	 * 婚姻状况
+	 */
+	private Integer marryStatus;
+				/**
+	 * 初婚日期
+	 */
+	private java.util.Date firstMarryDate;
+				/**
+	 * 国籍
+	 */
+	private Integer nationality;
+				/**
+	 * 村民小组
+	 */
+	private Long villagerTeamId;
+				/**
+	 * 户编码
+	 */
+	private String houseHoldCode;
 			
 						@Column(name="PERSON_ID")
 	public Long getPersonId() {
@@ -196,12 +208,26 @@ public class PersonBasic extends IdEntity {
 	public void setDomicileCode(String domicileCode) {
 		this.domicileCode = domicileCode;
 	}
-				@Column(name="ZIP_CODE")
-	public String getZipCode() {
-		return zipCode;
+				@Column(name="DOMICILE_HOUSE_NO")
+	public String getDomicileHouseNo() {
+		return domicileHouseNo;
 	}
-	public void setZipCode(String zipCode) {
-		this.zipCode = zipCode;
+	public void setDomicileHouseNo(String domicileHouseNo) {
+		this.domicileHouseNo = domicileHouseNo;
+	}
+				@Column(name="DOMICILE_ROOM_NO")
+	public String getDomicileRoomNo() {
+		return domicileRoomNo;
+	}
+	public void setDomicileRoomNo(String domicileRoomNo) {
+		this.domicileRoomNo = domicileRoomNo;
+	}
+				@Column(name="DOMICILE_ZIP_CODE")
+	public String getDomicileZipCode() {
+		return domicileZipCode;
+	}
+	public void setDomicileZipCode(String domicileZipCode) {
+		this.domicileZipCode = domicileZipCode;
 	}
 				@Column(name="ADDRESS")
 	public String getAddress() {
@@ -224,12 +250,26 @@ public class PersonBasic extends IdEntity {
 	public void setAddressCode(String addressCode) {
 		this.addressCode = addressCode;
 	}
-				@Column(name="HOUSE_NUMBER")
-	public String getHouseNumber() {
-		return houseNumber;
+				@Column(name="HOUSE_NO")
+	public String getHouseNo() {
+		return houseNo;
 	}
-	public void setHouseNumber(String houseNumber) {
-		this.houseNumber = houseNumber;
+	public void setHouseNo(String houseNo) {
+		this.houseNo = houseNo;
+	}
+				@Column(name="ROOM_NO")
+	public String getRoomNo() {
+		return roomNo;
+	}
+	public void setRoomNo(String roomNo) {
+		this.roomNo = roomNo;
+	}
+				@Column(name="ZIP_CODE")
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 				@Column(name="NATIVE")
 	public Integer getNative() {
@@ -343,27 +383,6 @@ public class PersonBasic extends IdEntity {
 	public void setDbType(String dbType) {
 		this.dbType = dbType;
 	}
-				@Column(name="CANCEL_TYPE")
-	public Integer getCancelType() {
-		return cancelType;
-	}
-	public void setCancelType(Integer cancelType) {
-		this.cancelType = cancelType;
-	}
-				@Column(name="CANCEL_DATE")
-	public java.util.Date getCancelDate() {
-		return cancelDate;
-	}
-	public void setCancelDate(java.util.Date cancelDate) {
-		this.cancelDate = cancelDate;
-	}
-				@Column(name="DATEH")
-	public java.util.Date getDateh() {
-		return dateh;
-	}
-	public void setDateh(java.util.Date dateh) {
-		this.dateh = dateh;
-	}
 				@Column(name="REMARK")
 	public String getRemark() {
 		return remark;
@@ -371,40 +390,54 @@ public class PersonBasic extends IdEntity {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-				@Column(name="SETTLE_IN_PLACE")
-	public String getSettleInPlace() {
-		return settleInPlace;
-	}
-	public void setSettleInPlace(String settleInPlace) {
-		this.settleInPlace = settleInPlace;
-	}
-				@Column(name="SETTLE_IN_DATE")
-	public java.util.Date getSettleInDate() {
-		return settleInDate;
-	}
-	public void setSettleInDate(java.util.Date settleInDate) {
-		this.settleInDate = settleInDate;
-	}
-				@Column(name="SETTLE_IN_CAUSE")
-	public String getSettleInCause() {
-		return settleInCause;
-	}
-	public void setSettleInCause(String settleInCause) {
-		this.settleInCause = settleInCause;
-	}
-				@Column(name="SETTLE_IN_TYPE")
-	public Integer getSettleInType() {
-		return settleInType;
-	}
-	public void setSettleInType(Integer settleInType) {
-		this.settleInType = settleInType;
-	}
 				@Column(name="OWNER_NAME")
 	public String getOwnerName() {
 		return ownerName;
 	}
 	public void setOwnerName(String ownerName) {
 		this.ownerName = ownerName;
+	}
+				@Column(name="RELATION")
+	public Integer getRelation() {
+		return relation;
+	}
+	public void setRelation(Integer relation) {
+		this.relation = relation;
+	}
+				@Column(name="MARRY_STATUS")
+	public Integer getMarryStatus() {
+		return marryStatus;
+	}
+	public void setMarryStatus(Integer marryStatus) {
+		this.marryStatus = marryStatus;
+	}
+				@Column(name="FIRST_MARRY_DATE")
+	public java.util.Date getFirstMarryDate() {
+		return firstMarryDate;
+	}
+	public void setFirstMarryDate(java.util.Date firstMarryDate) {
+		this.firstMarryDate = firstMarryDate;
+	}
+				@Column(name="NATIONALITY")
+	public Integer getNationality() {
+		return nationality;
+	}
+	public void setNationality(Integer nationality) {
+		this.nationality = nationality;
+	}
+				@Column(name="VILLAGER_TEAM_ID")
+	public Long getVillagerTeamId() {
+		return villagerTeamId;
+	}
+	public void setVillagerTeamId(Long villagerTeamId) {
+		this.villagerTeamId = villagerTeamId;
+	}
+				@Column(name="HOUSE_HOLD_CODE")
+	public String getHouseHoldCode() {
+		return houseHoldCode;
+	}
+	public void setHouseHoldCode(String houseHoldCode) {
+		this.houseHoldCode = houseHoldCode;
 	}
 			
 	@Override
