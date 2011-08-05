@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.pmas.entity.Person;
+import com.jeysan.cpf.pmas.service.PersonBasicManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +31,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 	private String ids;
 	private Person entity;
 	private PersonManager personManager;
+	private PersonBasicManager personBasicManager;
 	private Page<Person> page = new Page<Person>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -89,6 +91,8 @@ public class PersonAction extends CrudActionSupport<Person> {
 			result4Json = new Result4Json();
 		try{
 			personManager.savePerson(entity);
+			entity.getPersonBasic().setPerson(entity);
+			personBasicManager.savePersonBasic(entity.getPersonBasic());
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存人员成功");
@@ -117,6 +121,10 @@ public class PersonAction extends CrudActionSupport<Person> {
 	@Autowired
 	public void setPersonManager(PersonManager personManager) {
 		this.personManager = personManager;
+	}
+	@Autowired
+	public void setPersonBasicManager(PersonBasicManager personBasicManager) {
+		this.personBasicManager = personBasicManager;
 	}
 	public Page<Person> getPage() {
 		return page;
