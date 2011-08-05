@@ -155,6 +155,26 @@
 					<label>户编码：</label>
 					<input name="houseHoldCode" readonly="readonly" type="text" size="30" value="${houseHoldCode}"/>
 					</p>
+
+<p>
+					<label>父亲姓名：</label>
+					<input name="father"  readonly="readonly"   type="text" size="30" value="${father}" />
+					</p>
+
+<p>
+					<label>父亲身份证：</label>
+					<input name="fatherCode"  readonly="readonly"   type="text" size="30" value="${fatherCode}" />
+					</p>
+
+<p>
+					<label>母亲姓名：</label>
+					<input name="mother"   readonly="readonly"  type="text" size="30" value="${mother}" />
+					</p>
+
+<p>
+					<label>母亲身份证：</label>
+					<input name="motherCode"   readonly="readonly"  type="text" size="30" value="${motherCode}" />
+					</p>
 																		</div>
 			<div class="formBar">
 				<ul>
