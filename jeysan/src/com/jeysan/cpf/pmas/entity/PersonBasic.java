@@ -192,7 +192,7 @@ public class PersonBasic extends IdEntity {
 		this.person = person;
 	}
 
-	@Column(name = "DOMICILE",nullable = true)
+	@Column(name = "DOMICILE")
 	public String getDomicile() {
 		return domicile;
 	}
@@ -201,7 +201,7 @@ public class PersonBasic extends IdEntity {
 		this.domicile = domicile;
 	}
 
-	@Column(name = "DOMICILE_CODE",nullable = true)
+	@Column(name = "DOMICILE_CODE")
 	public String getDomicileCode() {
 		return domicileCode;
 	}
@@ -210,7 +210,7 @@ public class PersonBasic extends IdEntity {
 		this.domicileCode = domicileCode;
 	}
 
-	@Column(name = "DOMICILE_HOUSE_NO",nullable = true)
+	@Column(name = "DOMICILE_HOUSE_NO")
 	public String getDomicileHouseNo() {
 		return domicileHouseNo;
 	}
@@ -219,7 +219,7 @@ public class PersonBasic extends IdEntity {
 		this.domicileHouseNo = domicileHouseNo;
 	}
 
-	@Column(name = "DOMICILE_ROOM_NO",nullable = true)
+	@Column(name = "DOMICILE_ROOM_NO")
 	public String getDomicileRoomNo() {
 		return domicileRoomNo;
 	}
@@ -228,7 +228,7 @@ public class PersonBasic extends IdEntity {
 		this.domicileRoomNo = domicileRoomNo;
 	}
 
-	@Column(name = "DOMICILE_ZIP_CODE",nullable = true)
+	@Column(name = "DOMICILE_ZIP_CODE")
 	public String getDomicileZipCode() {
 		return domicileZipCode;
 	}
@@ -237,7 +237,7 @@ public class PersonBasic extends IdEntity {
 		this.domicileZipCode = domicileZipCode;
 	}
 
-	@Column(name = "ADDRESS",nullable = true)
+	@Column(name = "ADDRESS")
 	public String getAddress() {
 		return address;
 	}
@@ -246,7 +246,7 @@ public class PersonBasic extends IdEntity {
 		this.address = address;
 	}
 
-	@Column(name = "ADDRESS_TYPE",nullable = true)
+	@Column(name = "ADDRESS_TYPE")
 	public Integer getAddressType() {
 		return addressType;
 	}
@@ -255,7 +255,7 @@ public class PersonBasic extends IdEntity {
 		this.addressType = addressType;
 	}
 
-	@Column(name = "ADDRESS_CODE",nullable = true)
+	@Column(name = "ADDRESS_CODE")
 	public String getAddressCode() {
 		return addressCode;
 	}
@@ -264,7 +264,7 @@ public class PersonBasic extends IdEntity {
 		this.addressCode = addressCode;
 	}
 
-	@Column(name = "HOUSE_NO",nullable = true)
+	@Column(name = "HOUSE_NO")
 	public String getHouseNo() {
 		return houseNo;
 	}
@@ -273,7 +273,7 @@ public class PersonBasic extends IdEntity {
 		this.houseNo = houseNo;
 	}
 
-	@Column(name = "ROOM_NO",nullable = true)
+	@Column(name = "ROOM_NO")
 	public String getRoomNo() {
 		return roomNo;
 	}
@@ -282,7 +282,7 @@ public class PersonBasic extends IdEntity {
 		this.roomNo = roomNo;
 	}
 
-	@Column(name = "ZIP_CODE",nullable = true)
+	@Column(name = "ZIP_CODE")
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -291,7 +291,7 @@ public class PersonBasic extends IdEntity {
 		this.zipCode = zipCode;
 	}
 
-	@Column(name = "NATIVE",nullable = true)
+	@Column(name = "NATIVE")
 	public Integer getNative() {
 		return native_;
 	}
@@ -300,7 +300,7 @@ public class PersonBasic extends IdEntity {
 		this.native_ = native_;
 	}
 
-	@Column(name = "HOUSE_ID",nullable = true)
+	@Column(name = "HOUSE_ID")
 	public Long getHouseId() {
 		return houseId;
 	}
@@ -309,7 +309,7 @@ public class PersonBasic extends IdEntity {
 		this.houseId = houseId;
 	}
 
-	@Column(name = "BIRTHDAY",nullable = true)
+	@Column(name = "BIRTHDAY")
 	public java.util.Date getBirthday() {
 		return birthday;
 	}
@@ -318,7 +318,7 @@ public class PersonBasic extends IdEntity {
 		this.birthday = birthday;
 	}
 
-	@Column(name = "EDU",nullable = true)
+	@Column(name = "EDU")
 	public Integer getEdu() {
 		return edu;
 	}
@@ -327,7 +327,7 @@ public class PersonBasic extends IdEntity {
 		this.edu = edu;
 	}
 
-	@Column(name = "POLITICAL_STATUS",nullable = true)
+	@Column(name = "POLITICAL_STATUS")
 	public Integer getPoliticalStatus() {
 		return politicalStatus;
 	}
@@ -336,7 +336,7 @@ public class PersonBasic extends IdEntity {
 		this.politicalStatus = politicalStatus;
 	}
 
-	@Column(name = "HOUSEHODE_KIND",nullable = true)
+	@Column(name = "HOUSEHODE_KIND")
 	public Integer getHousehodeKind() {
 		return househodeKind;
 	}
@@ -345,7 +345,7 @@ public class PersonBasic extends IdEntity {
 		this.househodeKind = househodeKind;
 	}
 
-	@Column(name = "JOB",nullable = true)
+	@Column(name = "JOB")
 	public Integer getJob() {
 		return job;
 	}
@@ -354,7 +354,7 @@ public class PersonBasic extends IdEntity {
 		this.job = job;
 	}
 
-	@Column(name = "IS_SINGLE",nullable = true)
+	@Column(name = "IS_SINGLE")
 	public Integer getIsSingle() {
 		return isSingle;
 	}
@@ -363,7 +363,7 @@ public class PersonBasic extends IdEntity {
 		this.isSingle = isSingle;
 	}
 
-	@Column(name = "COMPANY",nullable = true)
+	@Column(name = "COMPANY")
 	public String getCompany() {
 		return company;
 	}
@@ -372,7 +372,7 @@ public class PersonBasic extends IdEntity {
 		this.company = company;
 	}
 
-	@Column(name = "PHOTO",nullable = true)
+	@Column(name = "PHOTO")
 	public String getPhoto() {
 		return photo;
 	}
@@ -381,7 +381,7 @@ public class PersonBasic extends IdEntity {
 		this.photo = photo;
 	}
 
-	@Column(name = "FINGERPRINT",nullable = true)
+	@Column(name = "FINGERPRINT")
 	public String getFingerprint() {
 		return fingerprint;
 	}
@@ -390,7 +390,7 @@ public class PersonBasic extends IdEntity {
 		this.fingerprint = fingerprint;
 	}
 
-	@Column(name = "TEL",nullable = true)
+	@Column(name = "TEL")
 	public String getTel() {
 		return tel;
 	}
@@ -399,7 +399,7 @@ public class PersonBasic extends IdEntity {
 		this.tel = tel;
 	}
 
-	@Column(name = "HAVE_STATUS",nullable = true)
+	@Column(name = "HAVE_STATUS")
 	public Integer getHaveStatus() {
 		return haveStatus;
 	}
@@ -408,7 +408,7 @@ public class PersonBasic extends IdEntity {
 		this.haveStatus = haveStatus;
 	}
 
-	@Column(name = "VALIDATE_STATUS",nullable = true)
+	@Column(name = "VALIDATE_STATUS")
 	public Integer getValidateStatus() {
 		return validateStatus;
 	}
@@ -417,7 +417,7 @@ public class PersonBasic extends IdEntity {
 		this.validateStatus = validateStatus;
 	}
 
-	@Column(name = "SPOUSE_ID",nullable = true)
+	@Column(name = "SPOUSE_ID")
 	public Long getSpouseId() {
 		return spouseId;
 	}
@@ -426,7 +426,7 @@ public class PersonBasic extends IdEntity {
 		this.spouseId = spouseId;
 	}
 
-	@Column(name = "DB_TYPE",nullable = true)
+	@Column(name = "DB_TYPE")
 	public String getDbType() {
 		return dbType;
 	}
@@ -435,7 +435,7 @@ public class PersonBasic extends IdEntity {
 		this.dbType = dbType;
 	}
 
-	@Column(name = "REMARK",nullable = true)
+	@Column(name = "REMARK")
 	public String getRemark() {
 		return remark;
 	}
@@ -444,7 +444,7 @@ public class PersonBasic extends IdEntity {
 		this.remark = remark;
 	}
 
-	@Column(name = "OWNER_NAME",nullable = true)
+	@Column(name = "OWNER_NAME")
 	public String getOwnerName() {
 		return ownerName;
 	}
@@ -453,7 +453,7 @@ public class PersonBasic extends IdEntity {
 		this.ownerName = ownerName;
 	}
 
-	@Column(name = "RELATION",nullable = true)
+	@Column(name = "RELATION")
 	public Integer getRelation() {
 		return relation;
 	}
@@ -462,7 +462,7 @@ public class PersonBasic extends IdEntity {
 		this.relation = relation;
 	}
 
-	@Column(name = "MARRY_STATUS",nullable = true)
+	@Column(name = "MARRY_STATUS")
 	public Integer getMarryStatus() {
 		return marryStatus;
 	}
@@ -471,7 +471,7 @@ public class PersonBasic extends IdEntity {
 		this.marryStatus = marryStatus;
 	}
 
-	@Column(name = "FIRST_MARRY_DATE",nullable = true)
+	@Column(name = "FIRST_MARRY_DATE")
 	public java.util.Date getFirstMarryDate() {
 		return firstMarryDate;
 	}
@@ -480,7 +480,7 @@ public class PersonBasic extends IdEntity {
 		this.firstMarryDate = firstMarryDate;
 	}
 
-	@Column(name = "NATIONALITY",nullable = true)
+	@Column(name = "NATIONALITY")
 	public Integer getNationality() {
 		return nationality;
 	}
@@ -489,7 +489,7 @@ public class PersonBasic extends IdEntity {
 		this.nationality = nationality;
 	}
 
-	@Column(name = "VILLAGER_TEAM_ID",nullable = true)
+	@Column(name = "VILLAGER_TEAM_ID")
 	public Long getVillagerTeamId() {
 		return villagerTeamId;
 	}
@@ -498,7 +498,7 @@ public class PersonBasic extends IdEntity {
 		this.villagerTeamId = villagerTeamId;
 	}
 
-	@Column(name = "HOUSE_HOLD_CODE",nullable = true)
+	@Column(name = "HOUSE_HOLD_CODE")
 	public String getHouseHoldCode() {
 		return houseHoldCode;
 	}
@@ -507,7 +507,7 @@ public class PersonBasic extends IdEntity {
 		this.houseHoldCode = houseHoldCode;
 	}
 
-	@Column(name = "FATHER",nullable = true)
+	@Column(name = "FATHER")
 	public String getFather() {
 		return father;
 	}
@@ -516,7 +516,7 @@ public class PersonBasic extends IdEntity {
 		this.father = father;
 	}
 
-	@Column(name = "FATHER_CODE",nullable = true)
+	@Column(name = "FATHER_CODE")
 	public String getFatherCode() {
 		return fatherCode;
 	}
@@ -525,7 +525,7 @@ public class PersonBasic extends IdEntity {
 		this.fatherCode = fatherCode;
 	}
 
-	@Column(name = "MOTHER",nullable = true)
+	@Column(name = "MOTHER")
 	public String getMother() {
 		return mother;
 	}
@@ -534,7 +534,7 @@ public class PersonBasic extends IdEntity {
 		this.mother = mother;
 	}
 
-	@Column(name = "MOTHER_CODE",nullable = true)
+	@Column(name = "MOTHER_CODE")
 	public String getMotherCode() {
 		return motherCode;
 	}
