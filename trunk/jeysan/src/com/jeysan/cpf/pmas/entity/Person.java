@@ -3,7 +3,6 @@
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -81,7 +80,7 @@ public class Person extends IdEntity {
 	 */
 	private Integer settleInType;
 	
-	private PersonBasic personBasic;
+	public PersonBasic personBasic = new PersonBasic();
 
 	@Column(name = "NAMEH")
 	public String getNameh() {
