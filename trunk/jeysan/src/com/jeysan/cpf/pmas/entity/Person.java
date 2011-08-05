@@ -83,7 +83,7 @@ public class Person extends IdEntity {
 	
 	private PersonBasic personBasic;
 
-	@Column(name = "NAMEH",nullable = false)
+	@Column(name = "NAMEH")
 	public String getNameh() {
 		return nameh;
 	}
@@ -91,7 +91,7 @@ public class Person extends IdEntity {
 	public void setNameh(String nameh) {
 		this.nameh = nameh;
 	}
-	@Column(name = "SEX",nullable = false)
+	@Column(name = "SEX")
 	public Integer getSex() {
 		return sex;
 	}
@@ -100,7 +100,7 @@ public class Person extends IdEntity {
 		this.sex = sex;
 	}
 
-	@Column(name = "AGE",nullable = false)
+	@Column(name = "AGE")
 	public Integer getAge() {
 		return age;
 	}
@@ -108,7 +108,7 @@ public class Person extends IdEntity {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-	@Column(name = "CODE",nullable = false)
+	@Column(name = "CODE")
 	public String getCode() {
 		return code;
 	}
@@ -117,7 +117,7 @@ public class Person extends IdEntity {
 		this.code = code;
 	}
 
-	@Column(name = "KIND",nullable = false)
+	@Column(name = "KIND")
 	public Integer getKind() {
 		return kind;
 	}
@@ -126,7 +126,7 @@ public class Person extends IdEntity {
 		this.kind = kind;
 	}
 
-	@Column(name = "PERSON_CODE",nullable = false)
+	@Column(name = "PERSON_CODE")
 	public String getPersonCode() {
 		return personCode;
 	}
@@ -135,7 +135,7 @@ public class Person extends IdEntity {
 		this.personCode = personCode;
 	}
 
-	@Column(name = "DOMICILE_TYPE",nullable = true)
+	@Column(name = "DOMICILE_TYPE")
 	public Integer getDomicileType() {
 		return domicileType;
 	}
@@ -144,7 +144,7 @@ public class Person extends IdEntity {
 		this.domicileType = domicileType;
 	}
 
-	@Column(name = "CANCEL_TYPE",nullable = true)
+	@Column(name = "CANCEL_TYPE")
 	public Integer getCancelType() {
 		return cancelType;
 	}
@@ -153,7 +153,7 @@ public class Person extends IdEntity {
 		this.cancelType = cancelType;
 	}
 
-	@Column(name = "CANCEL_DATE",nullable = true)
+	@Column(name = "CANCEL_DATE")
 	public java.util.Date getCancelDate() {
 		return cancelDate;
 	}
@@ -162,7 +162,7 @@ public class Person extends IdEntity {
 		this.cancelDate = cancelDate;
 	}
 
-	@Column(name = "DATEH",nullable = true)
+	@Column(name = "DATEH")
 	public java.util.Date getDateh() {
 		return dateh;
 	}
@@ -171,7 +171,7 @@ public class Person extends IdEntity {
 		this.dateh = dateh;
 	}
 
-	@Column(name = "SETTLE_IN_PLACE",nullable = true)
+	@Column(name = "SETTLE_IN_PLACE")
 	public String getSettleInPlace() {
 		return settleInPlace;
 	}
@@ -180,7 +180,7 @@ public class Person extends IdEntity {
 		this.settleInPlace = settleInPlace;
 	}
 
-	@Column(name = "SETTLE_IN_DATE",nullable = true)
+	@Column(name = "SETTLE_IN_DATE")
 	public java.util.Date getSettleInDate() {
 		return settleInDate;
 	}
@@ -189,7 +189,7 @@ public class Person extends IdEntity {
 		this.settleInDate = settleInDate;
 	}
 
-	@Column(name = "SETTLE_IN_CAUSE",nullable = true)
+	@Column(name = "SETTLE_IN_CAUSE")
 	public String getSettleInCause() {
 		return settleInCause;
 	}
@@ -198,7 +198,7 @@ public class Person extends IdEntity {
 		this.settleInCause = settleInCause;
 	}
 
-	@Column(name = "SETTLE_IN_TYPE",nullable = true)
+	@Column(name = "SETTLE_IN_TYPE")
 	public Integer getSettleInType() {
 		return settleInType;
 	}
@@ -208,7 +208,7 @@ public class Person extends IdEntity {
 	}
 	
 	
-	@Column(name = "CERT_TYPE",nullable = true)
+	@Column(name = "CERT_TYPE")
 	public String getCertType() {
 		return certType;
 	}
