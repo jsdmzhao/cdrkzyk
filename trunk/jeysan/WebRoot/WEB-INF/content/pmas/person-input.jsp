@@ -17,7 +17,7 @@
 					</p>
 					<p>
 					<label>证件号码：</label>
-					<input name="code"  class="required"   type="text" size="30" value="${code}" />
+					<input name="code"   type="text" size="30" value="${code}" />
 					</p>
 					<p>
 					<label>证件类型：</label>
