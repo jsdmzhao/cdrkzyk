@@ -1,8 +1,10 @@
 ﻿package com.jeysan.cpf.pmas.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.h2.util.StringUtils;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,7 +33,6 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 	private Long id;
 	private String ids;
 	private PersonOut entity;
-	private Person person;
 	private PersonOutManager personOutManager;
 	private PersonManager personManager;
 	private Page<PersonOut> page = new Page<PersonOut>(DEFAULT_PAGE_SIZE);
@@ -112,6 +113,38 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
 				result4Json.setMessage("保存人口流出失败");
+			}
+			
+		}
+		Struts2Utils.renderJson(result4Json);
+		return NONE;
+	}
+	public String cancel() throws Exception {
+		String personId = Struts2Utils.getParameter("personId");
+		String type = Struts2Utils.getParameter("type");
+		if(result4Json == null)
+			result4Json = new Result4Json();
+		try{
+			Person person = personManager.getPerson(Long.parseLong(personId));
+			result4Json.setStatusCode("200");
+			result4Json.setAction(Result4Json.UPDATE);
+			if(StringUtils.equals(type, "0")){
+				person.setCancelType(154);
+				person.setCancelDate(new Date());
+				result4Json.setMessage("注销成功");
+			}else if(StringUtils.equals(type, "1")){
+				person.setCancelType(673);
+				person.setCancelDate(new Date());
+				result4Json.setMessage("恢复注销成功");
+			}
+			personManager.savePerson(person);
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result4Json.setStatusCode("300");
+			if(e instanceof ObjectNotFoundException){
+				result4Json.setMessage("信息已被删除，请重新添加");
+			}else{
+				result4Json.setMessage("操作失败");
 			}
 			
 		}
