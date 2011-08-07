@@ -1,7 +1,9 @@
 ﻿package com.jeysan.cpf.pmas.web;
 
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -16,6 +18,7 @@ import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
+import com.jeysan.modules.utils.date.DateUtil;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -24,7 +27,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
-@Results( { @Result(name = "list4lookup", location = "person4lookup.jsp", type = "dispatcher")})
+@Results( { @Result(name = "person4lookup", location = "person4lookup.jsp", type = "dispatcher"), 
+	@Result(name = "person-cancel", location = "person-cancel.jsp", type = "dispatcher")})
 public class PersonAction extends CrudActionSupport<Person> {
 	/**
 	 * 
@@ -82,7 +86,12 @@ public class PersonAction extends CrudActionSupport<Person> {
 	}
 	public String list4lookup() throws Exception {
 		list();
-		return "list4lookup";
+		return "person4lookup";
+	}
+	public String precancel() throws Exception {
+		prepareModel();
+		Struts2Utils.getRequest().setAttribute("person", entity);
+		return "person-cancel";
 	}
 	@Override
 	protected void prepareModel() throws Exception {
@@ -115,6 +124,43 @@ public class PersonAction extends CrudActionSupport<Person> {
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
 				result4Json.setMessage("保存人员失败");
+			}
+			
+		}
+		Struts2Utils.renderJson(result4Json);
+		return NONE;
+	}
+	public String cancel() throws Exception {
+		String id = Struts2Utils.getParameter("id");
+		String type = Struts2Utils.getParameter("type");
+		String cancelType = Struts2Utils.getParameter("cancelType");
+		String dateh = Struts2Utils.getParameter("dateh");
+		if(result4Json == null)
+			result4Json = new Result4Json();
+		try{
+			Person person = personManager.getPerson(Long.parseLong(id));
+			if(StringUtils.isEmpty(cancelType))
+				cancelType = "673";
+			person.setCancelType(Integer.parseInt(cancelType));
+			person.setCancelDate(new Date());
+			if(StringUtils.isNotEmpty(dateh))
+				person.setDateh(DateUtil.createUtilDate(dateh));
+			personManager.savePerson(person);
+			
+			result4Json.setStatusCode("200");
+			result4Json.setAction(Result4Json.UPDATE);
+			if(StringUtils.equals(type, "0")){
+				result4Json.setMessage("注销成功");
+			}else if(StringUtils.equals(type, "1")){
+				result4Json.setMessage("恢复注销成功");
+			}
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result4Json.setStatusCode("300");
+			if(e instanceof ObjectNotFoundException){
+				result4Json.setMessage("信息已被删除，请重新添加");
+			}else{
+				result4Json.setMessage("操作失败");
 			}
 			
 		}

@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.pmas.entity.PersonIn;
 import com.jeysan.cpf.pmas.service.PersonInManager;
+import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +31,7 @@ public class PersonInAction extends CrudActionSupport<PersonIn> {
 	private String ids;
 	private PersonIn entity;
 	private PersonInManager personInManager;
+	private PersonManager personManager;
 	private Page<PersonIn> page = new Page<PersonIn>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -88,6 +90,8 @@ public class PersonInAction extends CrudActionSupport<PersonIn> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			Long personId = Long.parseLong(Struts2Utils.getParameter("master.dwz_personLookup.personId"));
+			entity.setPerson(personManager.getPerson(personId));
 			personInManager.savePersonIn(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -117,6 +121,10 @@ public class PersonInAction extends CrudActionSupport<PersonIn> {
 	@Autowired
 	public void setPersonInManager(PersonInManager personInManager) {
 		this.personInManager = personInManager;
+	}
+	@Autowired
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
 	}
 	public Page<PersonIn> getPage() {
 		return page;
