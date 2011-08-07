@@ -43,14 +43,14 @@ public class Birth2ApplyManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteBirth2Apply(Integer id){
+	public void deleteBirth2Apply(Long id){
 		birth2ApplyDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteBirth2Applys(Integer id){
+	public void deleteBirth2Applys(Long id){
 		birth2ApplyDao.batchExecute("delete Birth2Apply where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class Birth2ApplyManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteBirth2Applys(Integer.parseInt(id));
+				deleteBirth2Applys(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class Birth2ApplyManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Birth2Apply getBirth2Apply(Integer id){
+	public Birth2Apply getBirth2Apply(Long id){
 		return birth2ApplyDao.get(id);
 	}
 	/**

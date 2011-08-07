@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class FirstChildRegDao extends HibernateDao<FirstChildReg, Integer> {
+public class FirstChildRegDao extends HibernateDao<FirstChildReg, Long> {
 
 }

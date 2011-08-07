@@ -43,14 +43,14 @@ public class Birth2CheckManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteBirth2Check(Integer id){
+	public void deleteBirth2Check(Long id){
 		birth2CheckDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteBirth2Checks(Integer id){
+	public void deleteBirth2Checks(Long id){
 		birth2CheckDao.batchExecute("delete Birth2Check where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class Birth2CheckManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteBirth2Checks(Integer.parseInt(id));
+				deleteBirth2Checks(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class Birth2CheckManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Birth2Check getBirth2Check(Integer id){
+	public Birth2Check getBirth2Check(Long id){
 		return birth2CheckDao.get(id);
 	}
 	/**

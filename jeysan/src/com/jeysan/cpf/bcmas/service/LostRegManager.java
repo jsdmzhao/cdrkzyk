@@ -43,14 +43,14 @@ public class LostRegManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteLostReg(Integer id){
+	public void deleteLostReg(Long id){
 		lostRegDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteLostRegs(Integer id){
+	public void deleteLostRegs(Long id){
 		lostRegDao.batchExecute("delete LostReg where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class LostRegManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteLostRegs(Integer.parseInt(id));
+				deleteLostRegs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class LostRegManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public LostReg getLostReg(Integer id){
+	public LostReg getLostReg(Long id){
 		return lostRegDao.get(id);
 	}
 	/**

@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class ConfirmDcObjDao extends HibernateDao<ConfirmDcObj, Integer> {
+public class ConfirmDcObjDao extends HibernateDao<ConfirmDcObj, Long> {
 
 }

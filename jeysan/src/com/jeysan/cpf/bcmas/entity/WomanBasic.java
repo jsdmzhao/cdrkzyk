@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.jeysan.modules.orm.hibernate.IdEntity;
+import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
@@ -19,7 +19,7 @@ import com.jeysan.modules.orm.hibernate.IdEntity;
 @Entity
 @Table(name = "fhp_woman_basic")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class WomanBasic extends IdEntity {
+public class WomanBasic extends IdExtEntity {
 						/**
 	 * WOMAN_ID
 	 */

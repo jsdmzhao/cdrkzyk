@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class WomanAwardDao extends HibernateDao<WomanAward, Integer> {
+public class WomanAwardDao extends HibernateDao<WomanAward, Long> {
 
 }

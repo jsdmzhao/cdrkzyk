@@ -43,14 +43,14 @@ public class WomanSocialUpbringManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanSocialUpbring(Integer id){
+	public void deleteWomanSocialUpbring(Long id){
 		womanSocialUpbringDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanSocialUpbrings(Integer id){
+	public void deleteWomanSocialUpbrings(Long id){
 		womanSocialUpbringDao.batchExecute("delete WomanSocialUpbring where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanSocialUpbringManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanSocialUpbrings(Integer.parseInt(id));
+				deleteWomanSocialUpbrings(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanSocialUpbringManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanSocialUpbring getWomanSocialUpbring(Integer id){
+	public WomanSocialUpbring getWomanSocialUpbring(Long id){
 		return womanSocialUpbringDao.get(id);
 	}
 	/**

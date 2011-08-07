@@ -10,7 +10,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.jeysan.modules.orm.hibernate.IdEntity;
+import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
@@ -19,7 +19,7 @@ import com.jeysan.modules.orm.hibernate.IdEntity;
 @Entity
 @Table(name = "fhp_lost_reg")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class LostReg extends IdEntity {
+public class LostReg extends IdExtEntity {
 						/**
 	 * 轮次ID
 	 */

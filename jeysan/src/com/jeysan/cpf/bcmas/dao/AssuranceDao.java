@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class AssuranceDao extends HibernateDao<Assurance, Integer> {
+public class AssuranceDao extends HibernateDao<Assurance, Long> {
 
 }

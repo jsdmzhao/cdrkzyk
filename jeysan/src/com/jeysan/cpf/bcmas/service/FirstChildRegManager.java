@@ -43,14 +43,14 @@ public class FirstChildRegManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteFirstChildReg(Integer id){
+	public void deleteFirstChildReg(Long id){
 		firstChildRegDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteFirstChildRegs(Integer id){
+	public void deleteFirstChildRegs(Long id){
 		firstChildRegDao.batchExecute("delete FirstChildReg where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class FirstChildRegManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteFirstChildRegs(Integer.parseInt(id));
+				deleteFirstChildRegs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class FirstChildRegManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public FirstChildReg getFirstChildReg(Integer id){
+	public FirstChildReg getFirstChildReg(Long id){
 		return firstChildRegDao.get(id);
 	}
 	/**

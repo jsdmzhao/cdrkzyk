@@ -43,14 +43,14 @@ public class AssuranceManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteAssurance(Integer id){
+	public void deleteAssurance(Long id){
 		assuranceDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteAssurances(Integer id){
+	public void deleteAssurances(Long id){
 		assuranceDao.batchExecute("delete Assurance where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class AssuranceManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteAssurances(Integer.parseInt(id));
+				deleteAssurances(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class AssuranceManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Assurance getAssurance(Integer id){
+	public Assurance getAssurance(Long id){
 		return assuranceDao.get(id);
 	}
 	/**

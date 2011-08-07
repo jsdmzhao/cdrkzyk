@@ -26,7 +26,7 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private FirstChildReg entity;
 	private FirstChildRegManager firstChildRegManager;
@@ -121,7 +121,7 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 	public Page<FirstChildReg> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

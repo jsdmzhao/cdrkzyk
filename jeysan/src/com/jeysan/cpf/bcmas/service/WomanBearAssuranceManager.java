@@ -43,14 +43,14 @@ public class WomanBearAssuranceManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanBearAssurance(Integer id){
+	public void deleteWomanBearAssurance(Long id){
 		womanBearAssuranceDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanBearAssurances(Integer id){
+	public void deleteWomanBearAssurances(Long id){
 		womanBearAssuranceDao.batchExecute("delete WomanBearAssurance where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanBearAssuranceManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanBearAssurances(Integer.parseInt(id));
+				deleteWomanBearAssurances(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanBearAssuranceManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanBearAssurance getWomanBearAssurance(Integer id){
+	public WomanBearAssurance getWomanBearAssurance(Long id){
 		return womanBearAssuranceDao.get(id);
 	}
 	/**

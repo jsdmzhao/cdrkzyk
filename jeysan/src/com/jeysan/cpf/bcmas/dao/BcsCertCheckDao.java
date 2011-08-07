@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class BcsCertCheckDao extends HibernateDao<BcsCertCheck, Integer> {
+public class BcsCertCheckDao extends HibernateDao<BcsCertCheck, Long> {
 
 }

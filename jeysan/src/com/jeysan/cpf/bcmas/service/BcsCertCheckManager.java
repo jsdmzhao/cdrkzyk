@@ -43,14 +43,14 @@ public class BcsCertCheckManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteBcsCertCheck(Integer id){
+	public void deleteBcsCertCheck(Long id){
 		bcsCertCheckDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteBcsCertChecks(Integer id){
+	public void deleteBcsCertChecks(Long id){
 		bcsCertCheckDao.batchExecute("delete BcsCertCheck where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class BcsCertCheckManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteBcsCertChecks(Integer.parseInt(id));
+				deleteBcsCertChecks(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class BcsCertCheckManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public BcsCertCheck getBcsCertCheck(Integer id){
+	public BcsCertCheck getBcsCertCheck(Long id){
 		return bcsCertCheckDao.get(id);
 	}
 	/**

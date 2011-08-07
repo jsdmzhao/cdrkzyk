@@ -43,14 +43,14 @@ public class FertileWomanManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteFertileWoman(Integer id){
+	public void deleteFertileWoman(Long id){
 		fertileWomanDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteFertileWomans(Integer id){
+	public void deleteFertileWomans(Long id){
 		fertileWomanDao.batchExecute("delete FertileWoman where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class FertileWomanManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteFertileWomans(Integer.parseInt(id));
+				deleteFertileWomans(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class FertileWomanManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public FertileWoman getFertileWoman(Integer id){
+	public FertileWoman getFertileWoman(Long id){
 		return fertileWomanDao.get(id);
 	}
 	/**

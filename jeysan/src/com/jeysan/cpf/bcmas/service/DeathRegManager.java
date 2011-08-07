@@ -43,14 +43,14 @@ public class DeathRegManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteDeathReg(Integer id){
+	public void deleteDeathReg(Long id){
 		deathRegDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteDeathRegs(Integer id){
+	public void deleteDeathRegs(Long id){
 		deathRegDao.batchExecute("delete DeathReg where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class DeathRegManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteDeathRegs(Integer.parseInt(id));
+				deleteDeathRegs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class DeathRegManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public DeathReg getDeathReg(Integer id){
+	public DeathReg getDeathReg(Long id){
 		return deathRegDao.get(id);
 	}
 	/**

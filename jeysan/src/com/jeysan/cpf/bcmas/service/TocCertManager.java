@@ -43,14 +43,14 @@ public class TocCertManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteTocCert(Integer id){
+	public void deleteTocCert(Long id){
 		tocCertDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteTocCerts(Integer id){
+	public void deleteTocCerts(Long id){
 		tocCertDao.batchExecute("delete TocCert where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class TocCertManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteTocCerts(Integer.parseInt(id));
+				deleteTocCerts(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class TocCertManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public TocCert getTocCert(Integer id){
+	public TocCert getTocCert(Long id){
 		return tocCertDao.get(id);
 	}
 	/**

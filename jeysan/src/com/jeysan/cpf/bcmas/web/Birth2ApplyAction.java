@@ -26,7 +26,7 @@ public class Birth2ApplyAction extends CrudActionSupport<Birth2Apply> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private Birth2Apply entity;
 	private Birth2ApplyManager birth2ApplyManager;
@@ -121,7 +121,7 @@ public class Birth2ApplyAction extends CrudActionSupport<Birth2Apply> {
 	public Page<Birth2Apply> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

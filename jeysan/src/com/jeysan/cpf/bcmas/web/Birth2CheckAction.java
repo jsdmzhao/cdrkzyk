@@ -26,7 +26,7 @@ public class Birth2CheckAction extends CrudActionSupport<Birth2Check> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private Birth2Check entity;
 	private Birth2CheckManager birth2CheckManager;
@@ -121,7 +121,7 @@ public class Birth2CheckAction extends CrudActionSupport<Birth2Check> {
 	public Page<Birth2Check> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

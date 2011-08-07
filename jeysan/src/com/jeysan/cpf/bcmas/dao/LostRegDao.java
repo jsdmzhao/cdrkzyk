@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class LostRegDao extends HibernateDao<LostReg, Integer> {
+public class LostRegDao extends HibernateDao<LostReg, Long> {
 
 }

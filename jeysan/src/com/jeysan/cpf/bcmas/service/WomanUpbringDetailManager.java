@@ -43,14 +43,14 @@ public class WomanUpbringDetailManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanUpbringDetail(Integer id){
+	public void deleteWomanUpbringDetail(Long id){
 		womanUpbringDetailDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanUpbringDetails(Integer id){
+	public void deleteWomanUpbringDetails(Long id){
 		womanUpbringDetailDao.batchExecute("delete WomanUpbringDetail where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanUpbringDetailManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanUpbringDetails(Integer.parseInt(id));
+				deleteWomanUpbringDetails(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanUpbringDetailManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanUpbringDetail getWomanUpbringDetail(Integer id){
+	public WomanUpbringDetail getWomanUpbringDetail(Long id){
 		return womanUpbringDetailDao.get(id);
 	}
 	/**
