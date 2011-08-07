@@ -43,14 +43,14 @@ public class MonitorWorkloadManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteMonitorWorkload(Integer id){
+	public void deleteMonitorWorkload(Long id){
 		monitorWorkloadDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteMonitorWorkloads(Integer id){
+	public void deleteMonitorWorkloads(Long id){
 		monitorWorkloadDao.batchExecute("delete MonitorWorkload where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class MonitorWorkloadManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteMonitorWorkloads(Integer.parseInt(id));
+				deleteMonitorWorkloads(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class MonitorWorkloadManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public MonitorWorkload getMonitorWorkload(Integer id){
+	public MonitorWorkload getMonitorWorkload(Long id){
 		return monitorWorkloadDao.get(id);
 	}
 	/**

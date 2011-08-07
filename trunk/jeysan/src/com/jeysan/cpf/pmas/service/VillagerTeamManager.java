@@ -43,14 +43,14 @@ public class VillagerTeamManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteVillagerTeam(Integer id){
+	public void deleteVillagerTeam(Long id){
 		villagerTeamDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteVillagerTeams(Integer id){
+	public void deleteVillagerTeams(Long id){
 		villagerTeamDao.batchExecute("delete VillagerTeam where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class VillagerTeamManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteVillagerTeams(Integer.parseInt(id));
+				deleteVillagerTeams(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class VillagerTeamManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public VillagerTeam getVillagerTeam(Integer id){
+	public VillagerTeam getVillagerTeam(Long id){
 		return villagerTeamDao.get(id);
 	}
 	/**

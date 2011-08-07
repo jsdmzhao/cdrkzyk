@@ -43,14 +43,14 @@ public class HouseManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteHouse(Integer id){
+	public void deleteHouse(Long id){
 		houseDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteHouses(Integer id){
+	public void deleteHouses(Long id){
 		houseDao.batchExecute("delete House where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class HouseManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteHouses(Integer.parseInt(id));
+				deleteHouses(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class HouseManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public House getHouse(Integer id){
+	public House getHouse(Long id){
 		return houseDao.get(id);
 	}
 	/**

@@ -43,14 +43,14 @@ public class MonitorSwitchManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteMonitorSwitch(Integer id){
+	public void deleteMonitorSwitch(Long id){
 		monitorSwitchDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteMonitorSwitchs(Integer id){
+	public void deleteMonitorSwitchs(Long id){
 		monitorSwitchDao.batchExecute("delete MonitorSwitch where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class MonitorSwitchManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteMonitorSwitchs(Integer.parseInt(id));
+				deleteMonitorSwitchs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class MonitorSwitchManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public MonitorSwitch getMonitorSwitch(Integer id){
+	public MonitorSwitch getMonitorSwitch(Long id){
 		return monitorSwitchDao.get(id);
 	}
 	/**

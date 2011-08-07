@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class MonitorSwitchDao extends HibernateDao<MonitorSwitch, Integer> {
+public class MonitorSwitchDao extends HibernateDao<MonitorSwitch, Long> {
 
 }

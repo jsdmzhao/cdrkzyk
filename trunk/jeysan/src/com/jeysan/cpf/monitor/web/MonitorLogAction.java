@@ -26,7 +26,7 @@ public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private MonitorLog entity;
 	private MonitorLogManager monitorLogManager;
@@ -121,7 +121,7 @@ public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
 	public Page<MonitorLog> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

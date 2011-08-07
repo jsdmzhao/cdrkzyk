@@ -43,14 +43,14 @@ public class WomanChildrenManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanChildren(Integer id){
+	public void deleteWomanChildren(Long id){
 		womanChildrenDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanChildrens(Integer id){
+	public void deleteWomanChildrens(Long id){
 		womanChildrenDao.batchExecute("delete WomanChildren where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanChildrenManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanChildrens(Integer.parseInt(id));
+				deleteWomanChildrens(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanChildrenManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanChildren getWomanChildren(Integer id){
+	public WomanChildren getWomanChildren(Long id){
 		return womanChildrenDao.get(id);
 	}
 	/**

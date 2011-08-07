@@ -26,7 +26,7 @@ public class HouseAction extends CrudActionSupport<House> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private House entity;
 	private HouseManager houseManager;
@@ -121,7 +121,7 @@ public class HouseAction extends CrudActionSupport<House> {
 	public Page<House> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

@@ -43,14 +43,14 @@ public class SpouseManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteSpouse(Integer id){
+	public void deleteSpouse(Long id){
 		spouseDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteSpouses(Integer id){
+	public void deleteSpouses(Long id){
 		spouseDao.batchExecute("delete Spouse where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class SpouseManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteSpouses(Integer.parseInt(id));
+				deleteSpouses(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class SpouseManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public Spouse getSpouse(Integer id){
+	public Spouse getSpouse(Long id){
 		return spouseDao.get(id);
 	}
 	/**
