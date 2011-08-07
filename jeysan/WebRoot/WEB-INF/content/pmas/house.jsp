@@ -1,7 +1,10 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/pmas/house.action">
-	<input type="hidden" name="filter_EQI_id" value="${param['filter_EQI_id']}" />
+	<input type="hidden" name="filter_EQS_houseCode" value="${param['filter_EQS_houseCode']}" />
+	<input type="hidden" name="filter_EQI_houseType" value="${param['filter_EQI_houseType']}" />
+	<input type="hidden" name="filter_EQI_houseAtt" value="${param['filter_EQI_houseAtt']}" />
+	<input type="hidden" name="filter_LIKES_ownerName" value="${param['filter_LIKES_ownerName']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -10,17 +13,22 @@
 			<table class="searchContent">
 				<tr>
 					<td>
-						主键：<input type="text" name="filter_EQI_id" value="${param['filter_EQI_id']}"/>
+						房屋编号：<input type="text" name="filter_EQS_houseCode" value="${param['filter_EQS_houseCode']}"/>
 					</td>
 					<td>
-						建档日期：<input type="text" class="date" readonly="true" />
+						房屋类型：<tags:js.dict.selector noRender="true" name="filter_EQI_houseType" value="${param['filter_EQI_houseType']}" dictCode="JS1038"/>
+					</td>
+					<td>
+						房屋属性：<tags:js.dict.selector noRender="true" name="filter_EQI_houseAtt" value="${param['filter_EQI_houseAtt']}" dictCode="JS1039"/>
+					</td>
+					<td>
+						业主姓名：<input type="text" name="filter_LIKES_ownerName" value="${param['filter_LIKES_ownerName']}"/>
 					</td>
 				</tr>
 			</table>
 			<div class="subBar">
 				<ul>
 					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-					<li><a class="button" href="demo_page6.html" target="dialog" rel="dlg_page1" title="查询框"><span>高级检索</span></a></li>
 				</ul>
 			</div>
 		</div>
