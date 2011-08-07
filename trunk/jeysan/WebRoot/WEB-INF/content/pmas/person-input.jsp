@@ -6,6 +6,7 @@
 			<input type="hidden" name="id" value="${id}"/><!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId" value="nav_personmanage"/>
+			<c:if test="${not empty id}"><input type="hidden" name="cancelType" value="672"/></c:if>
 			<div class="pageFormContent" layoutH="56">
 					<p>
 					<label>姓名：</label>
