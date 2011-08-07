@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.jeysan.modules.orm.hibernate.IdEntity;
+import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
@@ -19,7 +19,7 @@ import com.jeysan.modules.orm.hibernate.IdEntity;
 @Entity
 @Table(name = "fhp_person_basic")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class PersonBasic extends IdEntity {
+public class PersonBasic extends IdExtEntity {
 	/**
 	 * PERSON_ID
 	 */

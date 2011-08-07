@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class VillagerTeamDao extends HibernateDao<VillagerTeam, Integer> {
+public class VillagerTeamDao extends HibernateDao<VillagerTeam, Long> {
 
 }

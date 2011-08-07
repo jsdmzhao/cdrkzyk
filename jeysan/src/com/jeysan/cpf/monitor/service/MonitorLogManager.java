@@ -43,14 +43,14 @@ public class MonitorLogManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteMonitorLog(Integer id){
+	public void deleteMonitorLog(Long id){
 		monitorLogDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteMonitorLogs(Integer id){
+	public void deleteMonitorLogs(Long id){
 		monitorLogDao.batchExecute("delete MonitorLog where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class MonitorLogManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteMonitorLogs(Integer.parseInt(id));
+				deleteMonitorLogs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class MonitorLogManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public MonitorLog getMonitorLog(Integer id){
+	public MonitorLog getMonitorLog(Long id){
 		return monitorLogDao.get(id);
 	}
 	/**

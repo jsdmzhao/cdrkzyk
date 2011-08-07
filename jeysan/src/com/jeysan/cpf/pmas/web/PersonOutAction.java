@@ -7,7 +7,9 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.PersonOut;
+import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.PersonOutManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -26,10 +28,12 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private PersonOut entity;
+	private Person person;
 	private PersonOutManager personOutManager;
+	private PersonManager personManager;
 	private Page<PersonOut> page = new Page<PersonOut>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -81,6 +85,8 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 			entity = new PersonOut();
 		}else{
 			entity = personOutManager.getPersonOut(id);
+			/*person = personManager.getPerson(entity.getPersonId());
+			Struts2Utils.getRequest().setAttribute("person", person);*/
 		}
 	}
 	@Override
@@ -88,6 +94,8 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			Long personId = Long.parseLong(Struts2Utils.getParameter("master.dwz_personLookup.personId"));
+			entity.setPerson(personManager.getPerson(personId));
 			personOutManager.savePersonOut(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -118,10 +126,14 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 	public void setPersonOutManager(PersonOutManager personOutManager) {
 		this.personOutManager = personOutManager;
 	}
+	@Autowired
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
+	}
 	public Page<PersonOut> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

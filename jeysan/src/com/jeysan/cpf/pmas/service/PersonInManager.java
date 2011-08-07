@@ -43,14 +43,14 @@ public class PersonInManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deletePersonIn(Integer id){
+	public void deletePersonIn(Long id){
 		personInDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deletePersonIns(Integer id){
+	public void deletePersonIns(Long id){
 		personInDao.batchExecute("delete PersonIn where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class PersonInManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deletePersonIns(Integer.parseInt(id));
+				deletePersonIns(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class PersonInManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public PersonIn getPersonIn(Integer id){
+	public PersonIn getPersonIn(Long id){
 		return personInDao.get(id);
 	}
 	/**

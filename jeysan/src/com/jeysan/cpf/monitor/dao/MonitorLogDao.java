@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class MonitorLogDao extends HibernateDao<MonitorLog, Integer> {
+public class MonitorLogDao extends HibernateDao<MonitorLog, Long> {
 
 }

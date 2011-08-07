@@ -1,15 +1,23 @@
 ﻿package com.jeysan.cpf.pmas.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import com.jeysan.modules.orm.hibernate.IdEntity;
+import com.google.common.collect.Lists;
+import com.jeysan.cpf.security.entity.Org;
+import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
@@ -18,7 +26,7 @@ import com.jeysan.modules.orm.hibernate.IdEntity;
 @Entity
 @Table(name = "fhp_person")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Person extends IdEntity {
+public class Person extends IdExtEntity {
 	/**
 	 * 姓名
 	 */
@@ -34,7 +42,7 @@ public class Person extends IdEntity {
 	/**
 	 * 证件类型
 	 */
-	private String certType;
+	private Integer certType;
 	/**
 	 * 证件号码
 	 */
@@ -81,6 +89,11 @@ public class Person extends IdEntity {
 	private Integer settleInType;
 	
 	public PersonBasic personBasic = new PersonBasic();
+	
+	/**
+	 * 子女
+	 */
+	private List<WomanChildren> womanChildrenLst = Lists.newArrayList();
 
 	@Column(name = "NAMEH")
 	public String getNameh() {
@@ -208,11 +221,11 @@ public class Person extends IdEntity {
 	
 	
 	@Column(name = "CERT_TYPE")
-	public String getCertType() {
+	public Integer getCertType() {
 		return certType;
 	}
 
-	public void setCertType(String certType) {
+	public void setCertType(Integer certType) {
 		this.certType = certType;
 	}
 
@@ -223,6 +236,18 @@ public class Person extends IdEntity {
 
 	public void setPersonBasic(PersonBasic personBasic) {
 		this.personBasic = personBasic;
+	}
+	
+	
+	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+    @JoinColumn(name="PERSON_ID")
+    @OrderBy("childIndex")
+	public List<WomanChildren> getWomanChildrenLst() {
+		return womanChildrenLst;
+	}
+
+	public void setWomanChildrenLst(List<WomanChildren> womanChildrenLst) {
+		this.womanChildrenLst = womanChildrenLst;
 	}
 
 	@Override

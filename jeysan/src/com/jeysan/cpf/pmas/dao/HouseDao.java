@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class HouseDao extends HibernateDao<House, Integer> {
+public class HouseDao extends HibernateDao<House, Long> {
 
 }

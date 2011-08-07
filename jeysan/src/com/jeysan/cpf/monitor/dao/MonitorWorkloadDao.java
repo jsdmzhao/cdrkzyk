@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class MonitorWorkloadDao extends HibernateDao<MonitorWorkload, Integer> {
+public class MonitorWorkloadDao extends HibernateDao<MonitorWorkload, Long> {
 
 }

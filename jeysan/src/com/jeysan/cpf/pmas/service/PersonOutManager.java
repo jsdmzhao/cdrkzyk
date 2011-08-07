@@ -43,14 +43,14 @@ public class PersonOutManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deletePersonOut(Integer id){
+	public void deletePersonOut(Long id){
 		personOutDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deletePersonOuts(Integer id){
+	public void deletePersonOuts(Long id){
 		personOutDao.batchExecute("delete PersonOut where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class PersonOutManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deletePersonOuts(Integer.parseInt(id));
+				deletePersonOuts(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class PersonOutManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public PersonOut getPersonOut(Integer id){
+	public PersonOut getPersonOut(Long id){
 		return personOutDao.get(id);
 	}
 	/**

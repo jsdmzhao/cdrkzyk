@@ -3,6 +3,8 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,12 +24,13 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
+@Results( { @Result(name = "list4lookup", location = "person4lookup.jsp", type = "dispatcher")})
 public class PersonAction extends CrudActionSupport<Person> {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private Person entity;
 	private PersonManager personManager;
@@ -76,6 +79,10 @@ public class PersonAction extends CrudActionSupport<Person> {
 		}
 		page = personManager.searchPerson(page, filters);
 		return SUCCESS;
+	}
+	public String list4lookup() throws Exception {
+		list();
+		return "list4lookup";
 	}
 	@Override
 	protected void prepareModel() throws Exception {
@@ -129,7 +136,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 	public Page<Person> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {
