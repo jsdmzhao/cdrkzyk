@@ -26,7 +26,7 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private WomanBearAssurance entity;
 	private WomanBearAssuranceManager womanBearAssuranceManager;
@@ -121,7 +121,7 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 	public Page<WomanBearAssurance> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

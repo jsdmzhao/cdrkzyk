@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class MarryCertDao extends HibernateDao<MarryCert, Integer> {
+public class MarryCertDao extends HibernateDao<MarryCert, Long> {
 
 }

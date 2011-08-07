@@ -43,14 +43,14 @@ public class ConfirmDcObjManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteConfirmDcObj(Integer id){
+	public void deleteConfirmDcObj(Long id){
 		confirmDcObjDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteConfirmDcObjs(Integer id){
+	public void deleteConfirmDcObjs(Long id){
 		confirmDcObjDao.batchExecute("delete ConfirmDcObj where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class ConfirmDcObjManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteConfirmDcObjs(Integer.parseInt(id));
+				deleteConfirmDcObjs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class ConfirmDcObjManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public ConfirmDcObj getConfirmDcObj(Integer id){
+	public ConfirmDcObj getConfirmDcObj(Long id){
 		return confirmDcObjDao.get(id);
 	}
 	/**

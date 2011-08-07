@@ -26,7 +26,7 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private WomanSocialUpbring entity;
 	private WomanSocialUpbringManager womanSocialUpbringManager;
@@ -121,7 +121,7 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 	public Page<WomanSocialUpbring> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class DeathRegDao extends HibernateDao<DeathReg, Integer> {
+public class DeathRegDao extends HibernateDao<DeathReg, Long> {
 
 }

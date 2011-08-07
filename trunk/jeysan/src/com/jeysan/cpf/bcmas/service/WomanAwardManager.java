@@ -43,14 +43,14 @@ public class WomanAwardManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanAward(Integer id){
+	public void deleteWomanAward(Long id){
 		womanAwardDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanAwards(Integer id){
+	public void deleteWomanAwards(Long id){
 		womanAwardDao.batchExecute("delete WomanAward where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanAwardManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanAwards(Integer.parseInt(id));
+				deleteWomanAwards(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanAwardManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanAward getWomanAward(Integer id){
+	public WomanAward getWomanAward(Long id){
 		return womanAwardDao.get(id);
 	}
 	/**

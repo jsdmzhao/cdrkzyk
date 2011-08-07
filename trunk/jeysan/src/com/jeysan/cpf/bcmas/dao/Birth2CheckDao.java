@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class Birth2CheckDao extends HibernateDao<Birth2Check, Integer> {
+public class Birth2CheckDao extends HibernateDao<Birth2Check, Long> {
 
 }

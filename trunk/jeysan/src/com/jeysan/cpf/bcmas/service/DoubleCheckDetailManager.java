@@ -43,14 +43,14 @@ public class DoubleCheckDetailManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteDoubleCheckDetail(Integer id){
+	public void deleteDoubleCheckDetail(Long id){
 		doubleCheckDetailDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteDoubleCheckDetails(Integer id){
+	public void deleteDoubleCheckDetails(Long id){
 		doubleCheckDetailDao.batchExecute("delete DoubleCheckDetail where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class DoubleCheckDetailManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteDoubleCheckDetails(Integer.parseInt(id));
+				deleteDoubleCheckDetails(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class DoubleCheckDetailManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public DoubleCheckDetail getDoubleCheckDetail(Integer id){
+	public DoubleCheckDetail getDoubleCheckDetail(Long id){
 		return doubleCheckDetailDao.get(id);
 	}
 	/**

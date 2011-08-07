@@ -43,14 +43,14 @@ public class WomanBasicManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanBasic(Integer id){
+	public void deleteWomanBasic(Long id){
 		womanBasicDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanBasics(Integer id){
+	public void deleteWomanBasics(Long id){
 		womanBasicDao.batchExecute("delete WomanBasic where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanBasicManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanBasics(Integer.parseInt(id));
+				deleteWomanBasics(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanBasicManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanBasic getWomanBasic(Integer id){
+	public WomanBasic getWomanBasic(Long id){
 		return womanBasicDao.get(id);
 	}
 	/**

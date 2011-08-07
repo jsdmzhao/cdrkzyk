@@ -43,14 +43,14 @@ public class GetIudManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteGetIud(Integer id){
+	public void deleteGetIud(Long id){
 		getIudDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteGetIuds(Integer id){
+	public void deleteGetIuds(Long id){
 		getIudDao.batchExecute("delete GetIud where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class GetIudManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteGetIuds(Integer.parseInt(id));
+				deleteGetIuds(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class GetIudManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public GetIud getGetIud(Integer id){
+	public GetIud getGetIud(Long id){
 		return getIudDao.get(id);
 	}
 	/**

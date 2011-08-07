@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class DoubleCheckDetailDao extends HibernateDao<DoubleCheckDetail, Integer> {
+public class DoubleCheckDetailDao extends HibernateDao<DoubleCheckDetail, Long> {
 
 }

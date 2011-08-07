@@ -43,14 +43,14 @@ public class BcsCertManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteBcsCert(Integer id){
+	public void deleteBcsCert(Long id){
 		bcsCertDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteBcsCerts(Integer id){
+	public void deleteBcsCerts(Long id){
 		bcsCertDao.batchExecute("delete BcsCert where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class BcsCertManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteBcsCerts(Integer.parseInt(id));
+				deleteBcsCerts(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class BcsCertManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public BcsCert getBcsCert(Integer id){
+	public BcsCert getBcsCert(Long id){
 		return bcsCertDao.get(id);
 	}
 	/**

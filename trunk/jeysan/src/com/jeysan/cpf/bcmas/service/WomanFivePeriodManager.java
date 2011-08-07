@@ -43,14 +43,14 @@ public class WomanFivePeriodManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanFivePeriod(Integer id){
+	public void deleteWomanFivePeriod(Long id){
 		womanFivePeriodDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanFivePeriods(Integer id){
+	public void deleteWomanFivePeriods(Long id){
 		womanFivePeriodDao.batchExecute("delete WomanFivePeriod where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanFivePeriodManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanFivePeriods(Integer.parseInt(id));
+				deleteWomanFivePeriods(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanFivePeriodManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanFivePeriod getWomanFivePeriod(Integer id){
+	public WomanFivePeriod getWomanFivePeriod(Long id){
 		return womanFivePeriodDao.get(id);
 	}
 	/**

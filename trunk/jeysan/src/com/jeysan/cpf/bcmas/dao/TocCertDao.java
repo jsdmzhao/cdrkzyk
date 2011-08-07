@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class TocCertDao extends HibernateDao<TocCert, Integer> {
+public class TocCertDao extends HibernateDao<TocCert, Long> {
 
 }

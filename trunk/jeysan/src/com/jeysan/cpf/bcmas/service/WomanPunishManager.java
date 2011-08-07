@@ -43,14 +43,14 @@ public class WomanPunishManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanPunish(Integer id){
+	public void deleteWomanPunish(Long id){
 		womanPunishDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanPunishs(Integer id){
+	public void deleteWomanPunishs(Long id){
 		womanPunishDao.batchExecute("delete WomanPunish where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanPunishManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanPunishs(Integer.parseInt(id));
+				deleteWomanPunishs(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanPunishManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanPunish getWomanPunish(Integer id){
+	public WomanPunish getWomanPunish(Long id){
 		return womanPunishDao.get(id);
 	}
 	/**

@@ -43,14 +43,14 @@ public class WomanContraceptManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteWomanContracept(Integer id){
+	public void deleteWomanContracept(Long id){
 		womanContraceptDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteWomanContracepts(Integer id){
+	public void deleteWomanContracepts(Long id){
 		womanContraceptDao.batchExecute("delete WomanContracept where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class WomanContraceptManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanContracepts(Integer.parseInt(id));
+				deleteWomanContracepts(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class WomanContraceptManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public WomanContracept getWomanContracept(Integer id){
+	public WomanContracept getWomanContracept(Long id){
 		return womanContraceptDao.get(id);
 	}
 	/**

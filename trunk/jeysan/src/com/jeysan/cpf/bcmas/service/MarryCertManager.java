@@ -43,14 +43,14 @@ public class MarryCertManager {
 	 * 删除
 	 * @param id
 	 */
-	public void deleteMarryCert(Integer id){
+	public void deleteMarryCert(Long id){
 		marryCertDao.delete(id);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
-	public void deleteMarryCerts(Integer id){
+	public void deleteMarryCerts(Long id){
 		marryCertDao.batchExecute("delete MarryCert where id = ? ", id);
 	}
 	/**
@@ -61,7 +61,7 @@ public class MarryCertManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteMarryCerts(Integer.parseInt(id));
+				deleteMarryCerts(Long.parseLong(id));
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class MarryCertManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public MarryCert getMarryCert(Integer id){
+	public MarryCert getMarryCert(Long id){
 		return marryCertDao.get(id);
 	}
 	/**

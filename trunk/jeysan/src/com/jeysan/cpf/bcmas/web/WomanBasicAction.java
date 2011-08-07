@@ -26,7 +26,7 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
-	private Integer id;
+	private Long id;
 	private String ids;
 	private WomanBasic entity;
 	private WomanBasicManager womanBasicManager;
@@ -121,7 +121,7 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 	public Page<WomanBasic> getPage() {
 		return page;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public void setIds(String ids) {

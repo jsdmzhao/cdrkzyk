@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class GetIudDao extends HibernateDao<GetIud, Integer> {
+public class GetIudDao extends HibernateDao<GetIud, Long> {
 
 }
