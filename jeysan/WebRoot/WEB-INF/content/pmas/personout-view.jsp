@@ -10,7 +10,7 @@
 					</div>
 					<p>
 					<label>姓名：</label>
-					<input name="master.dwz_personLookup.nameh" class="required"  type="text" size="30" value="${person.nameh}" readonly="readonly" />
+					<input name="master.dwz_personLookup.nameh" type="text" size="30" value="${person.nameh}" readonly="readonly" />
 					</p>
 					<p>
 					<label>性别：</label>
@@ -42,7 +42,7 @@
 					</p>
 					<p>
 					<label>子女数：</label>
-					<input name="master.dwz_personLookup.childrenCount"  type="text" size="30" value="${childrenCount}" readonly="readonly"/>
+					<input name="master.dwz_personLookup.childrenCount"  type="text" size="30" value="${fn:length(person.womanChildrenLst)}" readonly="readonly"/>
 					</p>
 
 					<div style="float: left; width: 98%;">
@@ -88,6 +88,17 @@
 																														<p>
 					<label>备注：</label>
 					<input name="remark" readonly="readonly" type="text" size="30" value="${remark}"/>
+					</p>
+<div class="divider"></div>
+
+
+																														<p>
+					<label>人员状态：</label>
+					<input name="person.cancelType" readonly="readonly" type="text" size="30" value="<tags:js.dict.getValue value="${person.cancelType}"/>"/>
+					</p>
+																														<p>
+					<label>修改时间：</label>
+					<input name="person.cancelDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${person.cancelDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																		</div>
 			<div class="formBar">

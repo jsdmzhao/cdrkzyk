@@ -70,10 +70,13 @@
 																														<th width="80" orderField="sex" class="orderFlag">性别</th>
 																														<th width="80" orderField="certType" class="orderFlag">证件类型</th>
 																														<th width="120" orderField="code" class="orderFlag">证件号码</th>
-																														<th width="80" orderField="personCode" class="orderFlag">人员编号</th>
+																														<th width="120" orderField="personCode" class="orderFlag">人员编号</th>
+																														<th width="80" orderField="cancelType" class="orderFlag">状态</th>
 																														<th width="80" orderField="domicileType" class="orderFlag">户口类别</th>
 																														<th width="80" orderField="domicileType" class="orderFlag">人员类别</th>
 																																																																																																																																												<th width="80" align="center">操作</th>
+<th width="25" align="center">注销</th>
+<th width="50" align="center">恢复注销</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -86,6 +89,7 @@
 																																								<td><tags:js.dict.getValue value="${a.certType}"></tags:js.dict.getValue></td>
 																																								<td>${a.code}</td>
 																																								<td>${a.personCode}</td>
+																																								<td><tags:js.dict.getValue value="${a.cancelType}"></tags:js.dict.getValue></td>
 																																								<td><tags:js.dict.getValue value="${a.domicileType}"></tags:js.dict.getValue></td>
 																																								<td><tags:js.dict.getValue value="${a.kind}"></tags:js.dict.getValue></td>
 																																																																																																																																																	<td>
@@ -93,6 +97,20 @@
 							<a class="btnView" href="${ctx}/pmas/person!view.action?id=${a.id}" target="navTab" title="查看人员信息" rel="person-view"></a>
 							<a class="btnEdit" href="${ctx}/pmas/person!input.action?id=${a.id}" target="navTab" title="修改人员信息" rel="person-update"></a>
 							<a class="btnDel" href="${ctx}/pmas/person!delete.action?id=${a.id}&result4Json.navTabId=nav_personmanage" target="ajaxTodo" title="确定要删除吗？"></a>
+						</div>
+					</td>
+					<td>
+						<div style="width: 25px;">
+<c:if test="${a.cancelType==672||a.cancelType==673}">
+							<a class="btnDel" href="${ctx}/pmas/person!precancel.action?id=${a.id}&type=0" target="navTab" title="人员注销" rel="person-update"></a>
+</c:if>
+						</div>
+					</td>
+					<td>
+						<div style="width: 25px;">
+<c:if test="${a.cancelType!=672&&a.cancelType!=673}">
+							<a class="btnSelect" href="${ctx}/pmas/person!cancel.action?id=${a.id}&type=1&result4Json.navTabId=nav_personmanage" target="ajaxTodo" title="确定要恢复注销吗？"></a>
+</c:if>
 						</div>
 					</td>
 				</tr>

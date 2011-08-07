@@ -79,7 +79,7 @@
 																																								<td><tags:js.dict.getValue value="${a.kind}"></tags:js.dict.getValue></td>
 																																																																																																																																																	<td>
 						<div style="width: 30px;">
-							<a class="btnSelect" href="javascript:$.bringBack({personId:'${a.id}', nameh:'${a.nameh}', sex:'<tags:js.dict.getValue value="${a.sex}"/>', certType:'<tags:js.dict.getValue value="${a.certType}"/>', code:'${a.code}', birthday:'<fmt:formatDate value="${a.personBasic.birthday}" pattern="yyyy-MM-dd"/>', age:'${a.age}', marryStatus:'<tags:js.dict.getValue value="${a.personBasic.marryStatus}"/>'})" title="确定带回">选择</a>
+							<a class="btnSelect" href="javascript:$.bringBack({personId:'${a.id}', nameh:'${a.nameh}', sex:'<tags:js.dict.getValue value="${a.sex}"/>', certType:'<tags:js.dict.getValue value="${a.certType}"/>', code:'${a.code}', birthday:'<fmt:formatDate value="${a.personBasic.birthday}" pattern="yyyy-MM-dd"/>', age:'${a.age}', marryStatus:'<tags:js.dict.getValue value="${a.personBasic.marryStatus}"/>',childrenCount:'${fn:length(a.womanChildrenLst)}'})" title="确定带回">选择</a>
 						</div>
 					</td>
 				</tr>

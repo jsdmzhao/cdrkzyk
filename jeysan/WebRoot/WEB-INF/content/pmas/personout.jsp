@@ -54,9 +54,11 @@
 																														<th width="80" orderField="outCause" class="orderFlag">流出原因</th>
 																														<th width="80" orderField="outType" class="orderFlag">流出类型</th>
 																														<th width="80" orderField="outAddressCode" class="orderFlag">流出地编码</th>
-																														<th width="80">流出地地址</th>
 																														<th width="80" orderField="outDate" class="orderFlag">流出日期</th>
+																														<th width="80">状态</th>
 																																																																																																				<th width="80" align="center">操作</th>
+<th width="25" align="center">注销</th>
+<th width="50" align="center">恢复注销</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -69,13 +71,27 @@
 																																								<td><tags:js.dict.getValue value="${a.outCause}"/></td>
 																																								<td><tags:js.dict.getValue value="${a.outType}"/></td>
 																																								<td>${a.outAddressCode}</td>
-																																								<td>${a.outAddress}</td>
 																																								<td><fmt:formatDate value="${a.outDate}" pattern="yyyy-MM-dd"/></td>
+																																								<td><tags:js.dict.getValue value="${a.person.cancelType}"/></td>
 																																																																																																									<td>
 						<div style="width: 75px;">
 							<a class="btnView" href="${ctx}/pmas/personout!view.action?id=${a.id}" target="navTab" title="查看人口流出信息" rel="personOut-view"></a>
 							<a class="btnEdit" href="${ctx}/pmas/personout!input.action?id=${a.id}" target="navTab" title="修改人口流出信息" rel="personOut-update"></a>
 							<a class="btnDel" href="${ctx}/pmas/personout!delete.action?id=${a.id}&result4Json.navTabId=nav_personoutmanage" target="ajaxTodo" title="确定要删除吗？"></a>
+						</div>
+					</td>
+					<td>
+						<div style="width: 25px;">
+<c:if test="${a.person.cancelType==672||a.person.cancelType==673}">
+							<a class="btnDel" href="${ctx}/pmas/personout!cancel.action?personId=${a.person.id}&type=0&result4Json.navTabId=nav_personoutmanage" target="ajaxTodo" title="确定要注销吗？"></a>
+</c:if>
+						</div>
+					</td>
+					<td>
+						<div style="width: 25px;">
+<c:if test="${a.person.cancelType==154}">
+							<a class="btnSelect" href="${ctx}/pmas/personout!cancel.action?personId=${a.person.id}&type=1&result4Json.navTabId=nav_personoutmanage" target="ajaxTodo" title="确定要恢复注销吗？"></a>
+</c:if>
 						</div>
 					</td>
 				</tr>
