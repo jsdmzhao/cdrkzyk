@@ -16,12 +16,12 @@
 					<tags:js.dict.selector name="sex" class1="required"  value="${sex}" dictCode="JS010"/>
 					</p>
 					<p>
-					<label>证件号码：</label>
-					<input name="code"   type="text" size="30" value="${code}" />
-					</p>
-					<p>
 					<label>证件类型：</label>
 					<tags:js.dict.selector name="certType" class1="required"  value="${certType}" dictCode="JS1043"/>
+					</p>
+					<p>
+					<label>证件号码：</label>
+					<input name="code"   type="text" size="30" value="${code}" />
 					</p>
 					<p>
 					<label>户口类别：</label>

@@ -22,8 +22,41 @@
 <script src="${ctx4doc}/dwz2/xheditor/xheditor-zh-cn.min.js" type="text/javascript"></script>
 <script src="${ctx4doc}/dwz2/uploadify/scripts/swfobject.js" type="text/javascript"></script>
 <script src="${ctx4doc}/dwz2/uploadify/scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
-
+<!-- 
 <script src="${ctx4doc}/dwz2/bin/dwz.min.js" type="text/javascript"></script>
+-->
+
+<script src="${ctx4doc}/dwz2/javascripts/dwz.core.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.util.date.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.validate.method.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.regional.zh.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.barDrag.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.drag.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.tree.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.accordion.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.ui.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.theme.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.switchEnv.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.alertMsg.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.contextmenu.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.navTab.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.tab.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.resize.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.jDialog.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.dialogDrag.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.cssTable.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.stable.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.taskBar.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.ajax.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.pagination.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.database.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.datepicker.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.effects.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.panel.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.checkbox.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.history.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.combox.js" type="text/javascript"></script>
+
 <script src="${ctx4doc}/dwz2/javascripts/dwz.regional.zh.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/jscommon2.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/plugin.js" type="text/javascript"></script>

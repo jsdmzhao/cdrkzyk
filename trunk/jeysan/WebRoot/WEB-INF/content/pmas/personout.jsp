@@ -1,7 +1,10 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/pmas/personout.action">
-	<input type="hidden" name="filter_EQI_id" value="${param['filter_EQI_id']}" />
+	<input type="hidden" name="filter_LIKES_person.nameh" value="${param['filter_LIKES_person.nameh']}" />
+	<input type="hidden" name="filter_EQI_person.sex" value="${param['filter_EQI_person.sex']}" />
+	<input type="hidden" name="filter_EQI_outCause" value="${param['filter_EQI_outCause']}" />
+	<input type="hidden" name="filter_EQD_outDate" value="${param['filter_EQD_outDate']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -10,17 +13,22 @@
 			<table class="searchContent">
 				<tr>
 					<td>
-						主键：<input type="text" name="filter_EQI_id" value="${param['filter_EQI_id']}"/>
+						姓名：<input type="text" name="filter_LIKES_person.nameh" value="${param['filter_LIKES_person.nameh']}"/>
 					</td>
 					<td>
-						建档日期：<input type="text" class="date" readonly="true" />
+						性别：<tags:js.dict.selector noRender="true" name="filter_EQI_person.sex" value="${param['filter_EQI_person.sex']}" dictCode="JS010"/>
+					</td>
+					<td>
+						流出原因：<tags:js.dict.selector noRender="true" name="filter_EQI_outCause" value="${param['filter_EQI_outCause']}" dictCode="JS1042"/>
+					</td>
+					<td>
+						流出日期：<input name="filter_EQD_outDate" type="text" class="date" readonly="true" value="${param['filter_EQD_outDate']}"/>
 					</td>
 				</tr>
 			</table>
 			<div class="subBar">
 				<ul>
 					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-					<li><a class="button" href="demo_page6.html" target="dialog" rel="dlg_page1" title="查询框"><span>高级检索</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -41,12 +49,13 @@
 				<tr>
 					<th width="30" align="center"><input type="checkbox" class="checkboxCtrl" group="ids" /></th>
 					<th width="30" align="center">序号</th>
-																																			<th width="80" orderField="personId" class="orderFlag">PERSON_ID</th>
+																																			<th width="80" orderField="person.nameh" class="orderFlag">姓名</th>
+																														<th width="80" orderField="person.sex" class="orderFlag">性别</th>
 																														<th width="80" orderField="outCause" class="orderFlag">流出原因</th>
+																														<th width="80" orderField="outType" class="orderFlag">流出类型</th>
 																														<th width="80" orderField="outAddressCode" class="orderFlag">流出地编码</th>
-																														<th width="80" orderField="outAddress" class="orderFlag">流出地地址</th>
+																														<th width="80">流出地地址</th>
 																														<th width="80" orderField="outDate" class="orderFlag">流出日期</th>
-																														<th width="80" orderField="inAddressCode" class="orderFlag">流入地编码</th>
 																																																																																																				<th width="80" align="center">操作</th>
 				</tr>
 			</thead>
@@ -55,12 +64,13 @@
 				<tr target="sid_xxx" rel="${a.id}">
 					<td height="25"><input type="checkbox" name="ids" value="${a.id}" /></td>
 					<td>${b.index+1}</td>
-																																								<td>${a.personId}</td>
-																																								<td>${a.outCause}</td>
+																																								<td>${a.person.nameh}</td>
+																																								<td><tags:js.dict.getValue value="${a.person.sex}"/></td>
+																																								<td><tags:js.dict.getValue value="${a.outCause}"/></td>
+																																								<td><tags:js.dict.getValue value="${a.outType}"/></td>
 																																								<td>${a.outAddressCode}</td>
 																																								<td>${a.outAddress}</td>
 																																								<td><fmt:formatDate value="${a.outDate}" pattern="yyyy-MM-dd"/></td>
-																																								<td>${a.inAddressCode}</td>
 																																																																																																									<td>
 						<div style="width: 75px;">
 							<a class="btnView" href="${ctx}/pmas/personout!view.action?id=${a.id}" target="navTab" title="查看人口流出信息" rel="personOut-view"></a>
