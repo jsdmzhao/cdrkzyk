@@ -3,6 +3,8 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,6 +23,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
+@Results( { @Result(name = "house4lookup", location = "house4lookup.jsp", type = "dispatcher")})
 public class HouseAction extends CrudActionSupport<House> {
 	/**
 	 * 
@@ -54,6 +57,10 @@ public class HouseAction extends CrudActionSupport<House> {
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	public String list4lookup() throws Exception {
+		list();
+		return "house4lookup";
 	}
 	@Override
 	public String input() throws Exception {

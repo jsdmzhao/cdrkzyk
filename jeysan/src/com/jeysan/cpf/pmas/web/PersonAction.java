@@ -11,9 +11,15 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.pmas.entity.Person;
+import com.jeysan.cpf.pmas.entity.PersonOut;
+import com.jeysan.cpf.pmas.service.HouseManager;
 import com.jeysan.cpf.pmas.service.PersonBasicManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
+import com.jeysan.cpf.pmas.service.PersonOutManager;
+import com.jeysan.cpf.pmas.service.VillagerTeamManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -38,7 +44,11 @@ public class PersonAction extends CrudActionSupport<Person> {
 	private String ids;
 	private Person entity;
 	private PersonManager personManager;
+	private HouseManager houseManager;
 	private PersonBasicManager personBasicManager;
+	private PersonOutManager personOutManager;
+	private VillagerTeamManager villagerTeamManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<Person> page = new Page<Person>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -99,6 +109,12 @@ public class PersonAction extends CrudActionSupport<Person> {
 			entity = new Person();
 		}else{
 			entity = personManager.getPerson(id);
+			Long tmp = entity.getPersonBasic().getVillagerTeamId();
+			if(tmp != null)
+				Struts2Utils.getRequest().setAttribute("villagerteam", villagerTeamManager.getVillagerTeam(tmp));
+			tmp = entity.getPersonBasic().getHouseId();
+			if(tmp != null)
+				Struts2Utils.getRequest().setAttribute("house", houseManager.getHouse(tmp));
 		}
 	}
 	@Override
@@ -106,9 +122,30 @@ public class PersonAction extends CrudActionSupport<Person> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			if(id == null)
+				entity.setCancelType(672);
+			String houseId = Struts2Utils.getParameter("master.dwz_houseLookup.houseId");
+			if(StringUtils.isNotEmpty(houseId))
+				entity.getPersonBasic().setHouseId(Long.parseLong(houseId));
 			personManager.savePerson(entity);
 			entity.getPersonBasic().setPerson(entity);
 			personBasicManager.savePersonBasic(entity.getPersonBasic());
+			//同步到育妇表..................
+			if(entity.getKind()==668){//育龄妇女
+				FertileWoman fertileWoman = fertileWomanManager.getFertileWomanByPersonId(entity.getId());
+				if(fertileWoman == null)
+					fertileWoman = new FertileWoman();
+				if(fertileWoman.getCreateDate() == null)
+					fertileWoman.setCreateDate(new Date());
+				fertileWoman.setTypeh(entity.getDomicileType());
+				fertileWoman.setCode(entity.getPersonCode());
+				fertileWoman.setPerson(entity);
+				//entity.setFertileWoman(fertileWoman);
+				fertileWomanManager.saveFertileWoman(fertileWoman);
+			}else if(entity.getKind()==669){//非育龄妇女
+				fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
+			}
+			
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存人员成功");
@@ -147,6 +184,13 @@ public class PersonAction extends CrudActionSupport<Person> {
 				person.setDateh(DateUtil.createUtilDate(dateh));
 			personManager.savePerson(person);
 			
+			if(StringUtils.equals(cancelType, "154")){
+				PersonOut personOut = new PersonOut();
+				personOut.setPerson(person);
+				personOut.setOutDate(person.getDateh());
+				personOutManager.savePersonOut(personOut);
+			}
+			
 			result4Json.setStatusCode("200");
 			result4Json.setAction(Result4Json.UPDATE);
 			if(StringUtils.equals(type, "0")){
@@ -178,6 +222,22 @@ public class PersonAction extends CrudActionSupport<Person> {
 	@Autowired
 	public void setPersonBasicManager(PersonBasicManager personBasicManager) {
 		this.personBasicManager = personBasicManager;
+	}
+	@Autowired
+	public void setPersonOutManager(PersonOutManager personOutManager) {
+		this.personOutManager = personOutManager;
+	}
+	@Autowired
+	public void setVillagerTeamManager(VillagerTeamManager villagerTeamManager) {
+		this.villagerTeamManager = villagerTeamManager;
+	}
+	@Autowired
+	public void setHouseManager(HouseManager houseManager) {
+		this.houseManager = houseManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<Person> getPage() {
 		return page;

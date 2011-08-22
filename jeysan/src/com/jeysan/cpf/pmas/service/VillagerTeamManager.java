@@ -84,7 +84,10 @@ public class VillagerTeamManager {
 	public Page<VillagerTeam> searchVillagerTeam(final Page<VillagerTeam> page,final List<PropertyFilter> filter){
 		return villagerTeamDao.findPage(page, filter);
 	}
-	
+	@Transactional(readOnly = true)
+	public List<VillagerTeam> searchVillagerTeam(String orgCode){
+		return villagerTeamDao.find("from VillagerTeam where orgCode = ? order by teamIndex", orgCode);
+	}
 	@Autowired
 	public void setVillagerTeamDao(VillagerTeamDao villagerTeamDao) {
 		this.villagerTeamDao = villagerTeamDao;
