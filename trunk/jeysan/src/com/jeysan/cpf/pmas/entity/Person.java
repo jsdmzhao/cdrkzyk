@@ -16,7 +16,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.google.common.collect.Lists;
-import com.jeysan.cpf.security.entity.Org;
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
@@ -88,7 +88,9 @@ public class Person extends IdExtEntity {
 	 */
 	private Integer settleInType;
 	
-	public PersonBasic personBasic = new PersonBasic();
+	private PersonBasic personBasic = new PersonBasic();
+	
+	//private FertileWoman fertileWoman = new FertileWoman();
 	
 	/**
 	 * 子女
@@ -229,7 +231,7 @@ public class Person extends IdExtEntity {
 		this.certType = certType;
 	}
 
-	@OneToOne(mappedBy = "person" ,cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(mappedBy = "person" ,cascade = { CascadeType.PERSIST, CascadeType.MERGE , CascadeType.REMOVE })
 	public PersonBasic getPersonBasic() {
 		return personBasic;
 	}
@@ -239,6 +241,15 @@ public class Person extends IdExtEntity {
 	}
 	
 	
+	/*@OneToOne(mappedBy = "person" ,cascade = { CascadeType.PERSIST, CascadeType.MERGE , CascadeType.REMOVE })
+	public FertileWoman getFertileWoman() {
+		return fertileWoman;
+	}
+
+	public void setFertileWoman(FertileWoman fertileWoman) {
+		this.fertileWoman = fertileWoman;
+	}*/
+
 	@OneToMany(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
     @JoinColumn(name="PERSON_ID")
     @OrderBy("childIndex")

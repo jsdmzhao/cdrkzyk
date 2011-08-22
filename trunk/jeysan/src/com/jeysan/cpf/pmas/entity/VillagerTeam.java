@@ -20,44 +20,63 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @Table(name = "fhp_villager_team")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class VillagerTeam extends IdExtEntity {
-						/**
+	/**
 	 * 行政区编码
 	 */
 	private String orgCode;
-				/**
+	/**
+	 * 行政区名称
+	 */
+	private String orgName;
+	/**
 	 * 小组名称
 	 */
 	private String teamName;
-				/**
+	/**
 	 * 小组序号
 	 */
 	private Integer teamIndex;
-			
-						@Column(name="ORG_CODE")
+
+	@Column(name = "ORG_CODE")
 	public String getOrgCode() {
 		return orgCode;
 	}
+
 	public void setOrgCode(String orgCode) {
 		this.orgCode = orgCode;
 	}
-				@Column(name="TEAM_NAME")
+
+	@Column(name = "TEAM_NAME")
 	public String getTeamName() {
 		return teamName;
 	}
+
 	public void setTeamName(String teamName) {
 		this.teamName = teamName;
 	}
-				@Column(name="TEAM_INDEX")
+
+	@Column(name = "TEAM_INDEX")
 	public Integer getTeamIndex() {
 		return teamIndex;
 	}
+
 	public void setTeamIndex(Integer teamIndex) {
 		this.teamIndex = teamIndex;
 	}
-			
+	
+	
+	@Column(name = "ORG_NAME")
+	public String getOrgName() {
+		return orgName;
+	}
+
+	public void setOrgName(String orgName) {
+		this.orgName = orgName;
+	}
+
 	@Override
 	public String toString() {
-		//return ToStringBuilder.reflectionToString(this);
+		// return ToStringBuilder.reflectionToString(this);
 		return null;
 	}
 }

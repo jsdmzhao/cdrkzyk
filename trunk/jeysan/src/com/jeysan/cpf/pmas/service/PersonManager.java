@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jeysan.cpf.bcmas.dao.FertileWomanDao;
 import com.jeysan.cpf.pmas.dao.PersonDao;
 import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.modules.orm.Page;
@@ -24,6 +25,7 @@ public class PersonManager {
 	private static Logger logger = LoggerFactory.getLogger(PersonManager.class);
 	
 	private PersonDao personDao;
+	private FertileWomanDao fertileWomanDao;
 	/**
 	 * 增加
 	 * @param entity
@@ -44,6 +46,7 @@ public class PersonManager {
 	 * @param id
 	 */
 	public void deletePerson(Long id){
+		//fertileWomanDao.delete(fertileWomanDao.findUniqueBy("person.id", id));
 		personDao.delete(id);
 	}
 	/**
@@ -51,6 +54,7 @@ public class PersonManager {
 	 * @param ids
 	 */
 	public void deletePersons(Long id){
+		//fertileWomanDao.batchExecute("delete FertileWoman where person.id = ? ", id);
 		personDao.batchExecute("delete Person where id = ? ", id);
 	}
 	/**
@@ -88,6 +92,11 @@ public class PersonManager {
 	@Autowired
 	public void setPersonDao(PersonDao personDao) {
 		this.personDao = personDao;
+	}
+	
+	@Autowired
+	public void setFertileWomanDao(FertileWomanDao fertileWomanDao) {
+		this.fertileWomanDao = fertileWomanDao;
 	}
 	
 	

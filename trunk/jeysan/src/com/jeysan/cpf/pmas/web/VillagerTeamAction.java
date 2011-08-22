@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.district.entity.DistrictCity;
 import com.jeysan.cpf.pmas.entity.VillagerTeam;
 import com.jeysan.cpf.pmas.service.VillagerTeamManager;
 import com.jeysan.modules.action.CrudActionSupport;
@@ -53,6 +55,16 @@ public class VillagerTeamAction extends CrudActionSupport<VillagerTeam> {
 			result4Json.setMessage(e instanceof DataIntegrityViolationException?"村民小组已经被关联,请先解除关联,删除失败":"删除村民小组失败");
 		}
 		Struts2Utils.renderJson(result4Json);
+		return NONE;
+	}
+	public String findByCode() throws Exception {
+		String orgCode = Struts2Utils.getParameter("orgCode");
+		if(StringUtils.isNotEmpty(orgCode)){
+			List<VillagerTeam> vtList = villagerTeamManager.searchVillagerTeam(orgCode);
+			if(vtList!=null&&vtList.size()>0){
+				Struts2Utils.renderJson(vtList);
+			}
+		}
 		return NONE;
 	}
 	@Override
