@@ -8,6 +8,7 @@
 	<input type="hidden" name="filter_EQI_certType" value="${param['filter_EQI_certType']}" />
 	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_EQI_kind" value="${param['filter_EQI_kind']}" />
+	<input type="hidden" name="filter_EQI_cancelType" value="${param['filter_EQI_cancelType']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -26,7 +27,7 @@
 						人员类别：<tags:js.dict.selector noRender="true" name="filter_EQI_kind" value="${param['filter_EQI_kind']}" dictCode="JS1050"/>
 					</td>
 					<td>
-						人员编号：<input type="text" name="filter_EQS_personCode" value="${param['filter_EQS_personCode']}"/>
+						人员编号：&nbsp;&nbsp;<input type="text" name="filter_EQS_personCode" value="${param['filter_EQS_personCode']}"/>
 					</td>
 				</tr>
 				<tr>
@@ -39,7 +40,9 @@
 					<td>
 						户口类别：<tags:js.dict.selector noRender="true" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" dictCode="JS1048"/>
 					</td>
-					<td></td>
+					<td>
+						人员状态：<tags:js.dict.selector noRender="true" name="filter_EQI_cancelType" value="${param['filter_EQI_cancelType']}" dictCode="JS1010"/>
+					</td>
 				</tr>
 			</table>
 
@@ -58,25 +61,26 @@
 				<li><a class="delete" href="${ctx}/pmas/person!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_personmanage" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 				<li class="line">line</li>
 				<li><a class="icon" href="javascript:void(0);"><span>打印</span></a></li>
-				<li><a class="icon" href="javascript:void(0);"><span>导出EXCEL</span></a></li>
+				<li><a class="icon" href="doc/dwz-team.xls" target="dwzExport" targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span></a></li>
 			</ul>
 		</div>
-		<table class="table" width="100%" layouth="138">
+		<table class="table" width="100%" layouth="163">
 			<thead>
 				<tr>
 					<th width="30" align="center"><input type="checkbox" class="checkboxCtrl" group="ids" /></th>
 					<th width="30" align="center">序号</th>
-																																			<th width="80" orderField="nameh" class="orderFlag">姓名</th>
+																																			<th width="60" orderField="nameh" class="orderFlag">姓名</th>
 																														<th width="80" orderField="sex" class="orderFlag">性别</th>
 																														<th width="80" orderField="certType" class="orderFlag">证件类型</th>
 																														<th width="120" orderField="code" class="orderFlag">证件号码</th>
 																														<th width="120" orderField="personCode" class="orderFlag">人员编号</th>
 																														<th width="80" orderField="cancelType" class="orderFlag">状态</th>
 																														<th width="80" orderField="domicileType" class="orderFlag">户口类别</th>
-																														<th width="80" orderField="domicileType" class="orderFlag">人员类别</th>
+																														<th width="80" orderField="kind" class="orderFlag">人员类别</th>
 																																																																																																																																												<th width="80" align="center">操作</th>
-<th width="25" align="center">注销</th>
-<th width="50" align="center">恢复注销</th>
+<th width="55" align="center">配偶</th>
+<th width="55" align="center">子女</th>
+<th width="70" align="center">恢复与注销</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -100,14 +104,22 @@
 						</div>
 					</td>
 					<td>
-						<div style="width: 25px;">
-<c:if test="${a.cancelType==672||a.cancelType==673}">
-							<a class="btnDel" href="${ctx}/pmas/person!precancel.action?id=${a.id}&type=0" target="navTab" title="人员注销" rel="person-update"></a>
-</c:if>
+						<div style="width: 50px;">
+							<a class="btnView" href="${ctx}/pmas/spouse!view.action?id=${a.id}" target="navTab" title="查看配偶信息" rel="nav_spousemanage"></a>
+							<a class="btnEdit" href="${ctx}/pmas/spouse!input.action?id=${a.id}" target="navTab" title="管理配偶信息" rel="nav_spousemanage"></a>
+						</div>
+					</td>
+					<td>
+						<div style="width: 50px;">
+							<a class="btnView" href="${ctx}/pmas/womanchildren!view.action?id=${a.id}" target="navTab" title="查看子女信息" rel="nav_womanchildrenmanage"></a>
+							<a class="btnEdit" href="${ctx}/pmas/womanchildren.action?id=${a.id}" target="navTab" title="管理子女信息" rel="nav_womanchildrenmanage"></a>
 						</div>
 					</td>
 					<td>
 						<div style="width: 25px;">
+<c:if test="${a.cancelType==672||a.cancelType==673}">
+							<a class="btnDel" href="${ctx}/pmas/person!precancel.action?id=${a.id}&type=0" target="navTab" title="人员注销" rel="person-update"></a>
+</c:if>
 <c:if test="${a.cancelType!=672&&a.cancelType!=673}">
 							<a class="btnSelect" href="${ctx}/pmas/person!cancel.action?id=${a.id}&type=1&result4Json.navTabId=nav_personmanage" target="ajaxTodo" title="确定要恢复注销吗？"></a>
 </c:if>

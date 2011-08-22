@@ -3,7 +3,11 @@
 <div class="page">
 		<form class="pageForm">
 			<div class="pageFormContent" layoutH="56">
-																													<p>
+					<p style="width:98%">
+					<label>行政区名称：</label>
+					<input name="orgName" readonly="readonly" type="text" size="100" value="${orgName}"/>
+					</p>
+					<p>
 					<label>行政区编码：</label>
 					<input name="orgCode" readonly="readonly" type="text" size="30" value="${orgCode}"/>
 					</p>

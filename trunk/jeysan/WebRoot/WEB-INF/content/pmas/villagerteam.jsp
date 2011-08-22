@@ -1,7 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/pmas/villagerteam.action">
-	<input type="hidden" name="filter_EQI_id" value="${param['filter_EQI_id']}" />
+	<input type="hidden" name="filter_EQS_orgCode" value="${param['filter_EQS_orgCode']}" />
+	<input type="hidden" name="filter_LIKES_orgName" value="${param['filter_LIKES_orgName']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -10,17 +11,16 @@
 			<table class="searchContent">
 				<tr>
 					<td>
-						主键：<input type="text" name="filter_EQI_id" value="${param['filter_EQI_id']}"/>
+						行政区编码：<input type="text" name="filter_EQS_orgCode" value="${param['filter_EQS_orgCode']}"/>
 					</td>
 					<td>
-						建档日期：<input type="text" class="date" readonly="true" />
+						行政区名称：<input type="text" name="filter_LIKES_orgName" value="${param['filter_LIKES_orgName']}"/>
 					</td>
 				</tr>
 			</table>
 			<div class="subBar">
 				<ul>
 					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-					<li><a class="button" href="demo_page6.html" target="dialog" rel="dlg_page1" title="查询框"><span>高级检索</span></a></li>
 				</ul>
 			</div>
 		</div>
@@ -41,7 +41,8 @@
 				<tr>
 					<th width="30" align="center"><input type="checkbox" class="checkboxCtrl" group="ids" /></th>
 					<th width="30" align="center">序号</th>
-																																			<th width="80" orderField="orgCode" class="orderFlag">行政区编码</th>
+																																			<th width="120" orderField="orgCode" class="orderFlag">行政区编码</th>
+<th width="400" orderField="orgName" class="orderFlag">行政区名称</th>
 																														<th width="80" orderField="teamName" class="orderFlag">小组名称</th>
 																														<th width="80" orderField="teamIndex" class="orderFlag">小组序号</th>
 																				<th width="80" align="center">操作</th>
@@ -53,6 +54,7 @@
 					<td height="25"><input type="checkbox" name="ids" value="${a.id}" /></td>
 					<td>${b.index+1}</td>
 																																								<td>${a.orgCode}</td>
+																																								<td>${a.orgName}</td>
 																																								<td>${a.teamName}</td>
 																																								<td>${a.teamIndex}</td>
 																									<td>

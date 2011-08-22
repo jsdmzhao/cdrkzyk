@@ -95,12 +95,12 @@
 					</p>
 <div class="divider"></div>
 					<p>
-					<label>现居住地：</label>
-					<input name="personBasic.address"    type="text" size="30" value="${personBasic.address}" readonly="readonly" />
-					</p>
-					<p>
 					<label>居住地类型：</label>
 					<input name="personBasic.addressType" type="text" size="30" value="${personBasic.addressType}" readonly="readonly" />
+					</p>
+					<p style="width:98%">
+					<label>现居住地：</label>
+					<input name="personBasic.address"    type="text" size="100" value="${personBasic.address}" readonly="readonly" />
 					</p>
 					<p>
 					<label>现居住地编码：</label>
@@ -120,7 +120,7 @@
 					</p>
 					<p>
 					<label>村民小组：</label>
-					<input name="personBasic.villagerTeamId" type="text" size="30" value="${personBasic.villagerTeamId}" readonly="readonly" />
+					<input name="personBasic.villagerTeamId" type="text" size="30" value="${villagerteam.teamName}" readonly="readonly" />
 					</p>
 					<p>
 					<label>户编码：</label>
@@ -136,14 +136,14 @@
 					</p>
 					<p>
 					<label>房屋编码：</label>
-					<input name="personBasic.houseId" class="digits" type="text" size="30" value="${personBasic.houseId}"/>
+					<input name="house.houseCode" class="digits" type="text" size="30" value="${house.houseCode}"/>
 					</p>
 <div class="divider"></div>
-					<p>
+					<p style="width:98%">
 					<label>户籍地：</label>
-					<input name="personBasic.domicile"    type="text" size="30" value="${personBasic.domicile}" readonly="readonly" />
+					<input name="personBasic.domicile"    type="text" size="100" value="${personBasic.domicile}" readonly="readonly" />
 					</p>
-					<p>
+					<p style="width:98%">
 					<label>户籍地编码：</label>
 					<input name="personBasic.domicileCode"    type="text" size="30" value="${personBasic.domicileCode}" readonly="readonly" />
 					</p>

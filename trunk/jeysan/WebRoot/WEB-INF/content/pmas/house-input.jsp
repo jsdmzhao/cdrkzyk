@@ -39,11 +39,11 @@
 					</p>
 																													<p>
 					<label>房产证类型：</label>
-					<input name="pocType" class="digits" type="text" size="30" value="${pocType}"/>
+					<tags:js.dict.selector name="pocType"  value="${pocType}" dictCode="JS1052"/>
 					</p>
-																													<p>
+																													<p style="width:89%">
 					<label>详细地址：</label>
-					<input name="detailAddress"    type="text" size="30" value="${detailAddress}" />
+					<input name="detailAddress"    type="text" size="100" value="${detailAddress}" />
 					</p>
 
 <div class="divider"></div>
@@ -63,9 +63,9 @@
 					<label>业主电话：</label>
 					<input name="ownerTel"    type="text" size="30" value="${ownerTel}" />
 					</p>
-																													<p>
+																													<p style="width:89%">
 					<label>业主居住地址：</label>
-					<input name="ownerAddress"    type="text" size="30" value="${ownerAddress}" />
+					<input name="ownerAddress"    type="text" size="100" value="${ownerAddress}" />
 					</p>
 																													<p>
 					<label>业主工作单位：</label>
