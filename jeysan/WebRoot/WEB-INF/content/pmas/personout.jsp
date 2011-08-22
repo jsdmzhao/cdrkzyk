@@ -53,7 +53,7 @@
 																														<th width="80" orderField="person.sex" class="orderFlag">性别</th>
 																														<th width="80" orderField="outCause" class="orderFlag">流出原因</th>
 																														<th width="80" orderField="outType" class="orderFlag">流出类型</th>
-																														<th width="80" orderField="outAddressCode" class="orderFlag">流出地编码</th>
+																														<th width="120" orderField="outAddressCode" class="orderFlag">流出地编码</th>
 																														<th width="80" orderField="outDate" class="orderFlag">流出日期</th>
 																														<th width="80">状态</th>
 																																																																																																				<th width="80" align="center">操作</th>

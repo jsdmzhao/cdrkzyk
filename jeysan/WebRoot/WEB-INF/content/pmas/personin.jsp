@@ -54,7 +54,7 @@
 																														<th width="80" orderField="inCause" class="orderFlag">流入原因</th>
 																														<th width="80" orderField="inType" class="orderFlag">流入类型</th>
 																														<th width="80" orderField="inDate" class="orderFlag">流入日期</th>
-																														<th width="80" orderField="inAddressCode" class="orderFlag">流入地编码</th>
+																														<th width="120" orderField="inAddressCode" class="orderFlag">流入地编码</th>
 																																																																																																				<th width="80" align="center">操作</th>
 				</tr>
 			</thead>

@@ -68,13 +68,18 @@
 					<label>流入日期：</label>
 					<input name="inDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${inDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
-																													<p>
-					<label>流入地编码：</label>
-					<input name="inAddressCode"    type="text" size="30" value="${inAddressCode}" />
-					</p>
-																													<p>
+					<p style="width:98%">
 					<label>流入地地址：</label>
-					<input name="inAddress"    type="text" size="30" value="${inAddress}" />
+					<tags:js.district.selector onChange="setAddress"/>
+					</p>
+
+					<p style="width:98%">
+					<label>流入地地址：</label>
+					<input id="inAddress" name="inAddress" type="text" size="100" value="${inAddress}"/>
+					</p>
+																														<p>
+					<label>流入地编码：</label>
+					<input id="inAddressCode" name="inAddressCode" readonly="readonly" type="text" size="30" value="${inAddressCode}"/>
 					</p>
 																													<p>
 					<label>持证情况：</label>
@@ -104,3 +109,9 @@
 		</form>
 	</div>
 </div>
+<script>
+function setAddress(obj,address_){
+	$('#inAddressCode').val(obj.value.split('_')[1]);
+	$('#inAddress').val(address_);
+}
+</script>

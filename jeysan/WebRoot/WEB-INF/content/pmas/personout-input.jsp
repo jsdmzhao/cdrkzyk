@@ -64,25 +64,33 @@
 					<label>流出类型：</label>
 					<tags:js.dict.selector name="outType" class1="required"  value="${outType}" dictCode="JS1047"/>
 					</p>
-																													<p>
-					<label>流出地编码：</label>
-					<input name="outAddressCode" class="required" type="text" size="30" value="${outAddressCode}" />
+					<p style="width:98%">
+					<label>流出地地址：</label>
+					<tags:js.district.selector onChange="setAddress"/>
+					</p>
+					<p style="width:98%">
+					<label>流出地地址：</label>
+					<input id="outAddress" name="outAddress" class="required" type="text" size="100" value="${outAddress}" />
 					</p>
 																													<p>
-					<label>流出地地址：</label>
-					<input name="outAddress" class="required" type="text" size="30" value="${outAddress}" />
+					<label>流出地编码：</label>
+					<input id="outAddressCode" readonly="readonly" name="outAddressCode" class="required" type="text" size="30" value="${outAddressCode}" />
 					</p>
 																													<p>
 					<label>流出日期：</label>
 					<input name="outDate" class="date required" type="text" readonly="readonly" size="30" value="<fmt:formatDate value="${outDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
-																													<p>
-					<label>流入地编码：</label>
-					<input name="inAddressCode"    type="text" size="30" value="${inAddressCode}" />
+					<p style="width:98%">
+					<label>流入地地址：</label>
+					<tags:js.district.selector onChange="setAddress2"/>
+					</p>
+					<p style="width:98%">
+					<label>流入地地址：</label>
+					<input id="inAddress" name="inAddress"    type="text" size="100" value="${inAddress}" />
 					</p>
 																													<p>
-					<label>流入地地址：</label>
-					<input name="inAddress"    type="text" size="30" value="${inAddress}" />
+					<label>流入地编码：</label>
+					<input id="inAddressCode" readonly="readonly" name="inAddressCode"    type="text" size="30" value="${inAddressCode}" />
 					</p>
 																													<p>
 					<label>持证情况：</label>
@@ -108,3 +116,13 @@
 		</form>
 	</div>
 </div>
+<script>
+function setAddress(obj,address_){
+	$('#outAddressCode').val(obj.value.split('_')[1]);
+	$('#outAddress').val(address_);
+}
+function setAddress2(obj,address_){
+	$('#inAddressCode').val(obj.value.split('_')[1]);
+	$('#inAddress').val(address_);
+}
+</script>

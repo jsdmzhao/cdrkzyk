@@ -1,7 +1,6 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
-<%
-request.setAttribute("filter",java.util.Arrays.asList(672,673)); %>
+<%request.setAttribute("filter",java.util.Arrays.asList(672,673)); %>
 <div class="page">
 	<div class="pageContent">
 		<form method="post" action="${ctx}/pmas/person!cancel.action" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone4Update);">

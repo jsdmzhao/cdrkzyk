@@ -2,18 +2,19 @@
 <%@ include file="/common/taglibs.jsp"%>
 <div class="page">
 	<div class="pageContent">
-		<form id="form4" method="post"
-			action="${ctx}/bcmas/womanupbringdetail!saveDetails.action"
-			class="pageForm"
-			 onsubmit="return validateSubs(this);">
+		<form method="post"
+			action="${ctx}/bcmas/womanupbringdetail!save.action"
+			class="pageForm required-validate"
+			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${id}" />
 			<input type="hidden" name="upbringId" value="${upbring.id}" />
 			<input type="hidden" name="factMoneyOld" value="${factMoney}" />
 			<input type="hidden" name="upbring.fertileWoman.id"
 				value="${upbring.fertileWoman.id}" />
-			<!-- <input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
+			<!-- 
+			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId"
-				value="womanUpbringDetail-update" />
+				value="nav_womanupbringdetailmanage" />
 			<div class="pageFormContent" layoutH="56">
 
 				<p>
@@ -117,24 +118,10 @@
 				</p>
 
 				<div class="divider"></div>
-
-				<div class="panelBar">
-					<ul class="toolBar">
-						<li>
-							<a class="add" href="javascript:" onclick="operateRow('add')"><span>增加一行缴费记录</span>
-							</a>
-						</li>
-						<li>
-							<a class="delete" href="javascript:"
-								onclick="operateRow('delete')"><span>减少一行缴费记录</span> </a>
-						</li>
-					</ul>
-				</div>
-
-				<table class="list" width="98%">
+				<table class="list" style="width: 100%">
 					<thead>
 						<tr>
-							<th width="10%" style="text-align: center">
+							<th width="15%">
 								缴款序号
 							</th>
 							<th width="20%">
@@ -152,66 +139,65 @@
 							<th width="10%">
 								收据编号
 							</th>
+							<th width="10%" style="text-align: center">
+								操作
+							</th>
 						</tr>
 					</thead>
-					<tbody id="tr_list">
+					<tbody>
 						<c:forEach var="a" items="${upbring.detailList}" varStatus="b">
-							<tr target="rowIndex" rel="${b.index+1}">
+							<tr>
 								<td style="text-align: center">
-									<span>${b.index+1}</span>
-									<input type="hidden" name="detailId" value="${a.id}" />
+									<input name="counth_${b.index}" class="digits" type="text"
+										size="15" value="${a.counth}" />
 								</td>
 								<td>
-									<input type="text" name="moneyh_${b.index+1}"
-										class="required number" size="15" value="${a.moneyh}" />
+									<input name="moneyh_${b.index}" class="number" type="text"
+										size="15" value="${a.moneyh}" />
 								</td>
 								<td>
-									<input type="text" name="factMoney_${b.index+1}"
-										class="required number" size="15" value="${a.factMoney}" />
+									<input name="factMoney_${b.index}" class="number" type="text"
+										size="15" value="${a.factMoney}" />
 								</td>
 								<td>
-									<input type="text" name="charger_${b.index+1}" size="15"
+									<input name="charger_${b.index}" type="text" size="15"
 										value="${a.charger}" />
 								</td>
 								<td>
-									<input type="text" name="dateh_${b.index+1}" class="date"
-										size="15" value="<fmt:formatDate value="${a.dateh}" pattern="yyyy-MM-dd"/>" />
-									<a class="inputDateButton" href="javascript:;">选择</a>
+									<input name="dateh_${b.index}" class="date "
+										readonly="readonly" type="text" size="15"
+										value="<fmt:formatDate value="${a.dateh}" pattern="yyyy-MM-dd"/>" />
+									<a class="inputDateButton" href="javascript:void(0)">选择</a>
 								</td>
 								<td>
-									<input type="text" name="voucherCode_${b.index+1}" size="15"
+									<input name="voucherCode_${b.index}" type="text" size="15"
 										value="${a.voucherCode}" />
+								</td>
+								<td style="text-align: center">
+									<div style="width: 25px;">
+										<a class="btnDel" href="javascript:"
+											onclick="javascript:$(this).parents('tr:first').remove();"
+											title="删除行"></a>
+									</div>
 								</td>
 							</tr>
 						</c:forEach>
 						<c:if test="${fn:length(upbring.detailList)==0}">
-							<tr target="rowIndex" rel="1">
+							<tr>
 								<td style="text-align: center">
-									<span>1</span>
-									<input type="hidden" name="detailId" value="-1" />
+									1
 								</td>
-								<td>
-									<input type="text" name="moneyh_1" class="required number"
-										size="15" />
-								</td>
-								<td>
-									<input type="text" name="factMoney_1" class="required number"
-										size="15" />
-								</td>
-								<td>
-									<input type="text" name="charger_1" size="15" />
-								</td>
-								<td>
-									<input type="text" name="dateh_1" class="date" size="15" />
-									<a class="inputDateButton" href="javascript:;">选择</a>
-								</td>
-								<td>
-									<input type="text" name="voucherCode_1" size="15" />
-								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						</c:if>
 					</tbody>
 				</table>
+
 			</div>
 			<div class="formBar">
 				<ul>
@@ -227,15 +213,6 @@
 					<li>
 						<div class="button">
 							<div class="buttonContent">
-								<button type="Button" onclick="navTab.reload()">
-									重置
-								</button>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="button">
-							<div class="buttonContent">
 								<button type="Button" onclick="navTab.closeCurrentTab()">
 									取消
 								</button>
@@ -244,9 +221,6 @@
 					</li>
 				</ul>
 			</div>
-
-
-
 		</form>
 	</div>
 </div>

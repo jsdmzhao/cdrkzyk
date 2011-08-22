@@ -8,6 +8,7 @@
 	<input type="hidden" name="filter_EQI_certType" value="${param['filter_EQI_certType']}" />
 	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_EQI_kind" value="${param['filter_EQI_kind']}" />
+	<input type="hidden" name="filter_EQI_cancelType" value="${param['filter_EQI_cancelType']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -26,7 +27,7 @@
 						人员类别：<tags:js.dict.selector noRender="true" name="filter_EQI_kind" value="${param['filter_EQI_kind']}" dictCode="JS1050"/>
 					</td>
 					<td>
-						人员编号：<input type="text" name="filter_EQS_personCode" value="${param['filter_EQS_personCode']}"/>
+						人员编号：&nbsp;&nbsp;<input type="text" name="filter_EQS_personCode" value="${param['filter_EQS_personCode']}"/>
 					</td>
 				</tr>
 				<tr>
@@ -38,8 +39,9 @@
 					</td>
 					<td>
 						户口类别：<tags:js.dict.selector noRender="true" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" dictCode="JS1048"/>
+					</td><td>
+						人员状态：<tags:js.dict.selector noRender="true" name="filter_EQI_cancelType" value="${param['filter_EQI_cancelType']}" dictCode="JS1010"/>
 					</td>
-					<td></td>
 				</tr>
 			</table>
 

@@ -62,13 +62,13 @@
 					<label>流入日期：</label>
 					<input name="inDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${inDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
+					<p style="width:98%">
+					<label>流入地地址：</label>
+					<input name="inAddress" readonly="readonly" type="text" size="100" value="${inAddress}"/>
+					</p>
 																														<p>
 					<label>流入地编码：</label>
 					<input name="inAddressCode" readonly="readonly" type="text" size="30" value="${inAddressCode}"/>
-					</p>
-																														<p>
-					<label>流入地地址：</label>
-					<input name="inAddress" readonly="readonly" type="text" size="30" value="${inAddress}"/>
 					</p>
 																														<p>
 					<label>持证情况：</label>

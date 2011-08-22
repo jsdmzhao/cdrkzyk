@@ -9,7 +9,7 @@
 					</p>
 																														<p>
 					<label>缴款序号：</label>
-					<input name="count" readonly="readonly" type="text" size="30" value="${count}"/>
+					<input name="count" readonly="readonly" type="text" size="30" value="${counth}"/>
 					</p>
 																														<p>
 					<label>本次应缴金额：</label>

@@ -57,25 +57,26 @@
 																														<p>
 					<label>流出类型：</label>
 					<input name="outType" readonly="readonly" type="text" size="30" value="<tags:js.dict.getValue value="${outType}"/>"/>
-					</p>																									<p>
+					</p>
+					<p style="width:98%">
+					<label>流出地地址：</label>
+					<input name="outAddress" readonly="readonly" type="text" size="100" value="${outAddress}"/>
+					</p>																									
+					<p>
 					<label>流出地编码：</label>
 					<input name="outAddressCode" readonly="readonly" type="text" size="30" value="${outAddressCode}"/>
-					</p>
-																														<p>
-					<label>流出地地址：</label>
-					<input name="outAddress" readonly="readonly" type="text" size="30" value="${outAddress}"/>
 					</p>
 																														<p>
 					<label>流出日期：</label>
 					<input name="outDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${outDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
+					<p style="width:98%">
+					<label>流入地地址：</label>
+					<input name="inAddress" readonly="readonly" type="text" size="100" value="${inAddress}"/>
+					</p>
 																														<p>
 					<label>流入地编码：</label>
 					<input name="inAddressCode" readonly="readonly" type="text" size="30" value="${inAddressCode}"/>
-					</p>
-																														<p>
-					<label>流入地地址：</label>
-					<input name="inAddress" readonly="readonly" type="text" size="30" value="${inAddress}"/>
 					</p>
 																														<p>
 					<label>持证情况：</label>
