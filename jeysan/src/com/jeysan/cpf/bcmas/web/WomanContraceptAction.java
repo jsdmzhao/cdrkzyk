@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.WomanContracept;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanContraceptManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +32,7 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 	private String ids;
 	private WomanContracept entity;
 	private WomanContraceptManager womanContraceptManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<WomanContracept> page = new Page<WomanContracept>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -72,6 +75,7 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanContraceptManager.searchWomanContracept(page, filters);
 		return SUCCESS;
 	}
@@ -79,6 +83,9 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanContracept();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = womanContraceptManager.getWomanContracept(id);
 		}
@@ -88,6 +95,9 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			String methodh = Struts2Utils.getParameter("methodh");
+			if(StringUtils.isNotEmpty(methodh))
+				entity.setMethod(Integer.parseInt(methodh));
 			womanContraceptManager.saveWomanContracept(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -117,6 +127,10 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 	@Autowired
 	public void setWomanContraceptManager(WomanContraceptManager womanContraceptManager) {
 		this.womanContraceptManager = womanContraceptManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<WomanContracept> getPage() {
 		return page;

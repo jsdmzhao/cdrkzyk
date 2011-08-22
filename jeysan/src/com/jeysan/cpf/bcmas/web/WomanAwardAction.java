@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.WomanAward;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanAwardManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +32,7 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 	private String ids;
 	private WomanAward entity;
 	private WomanAwardManager womanAwardManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<WomanAward> page = new Page<WomanAward>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -72,6 +75,7 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanAwardManager.searchWomanAward(page, filters);
 		return SUCCESS;
 	}
@@ -79,6 +83,9 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanAward();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = womanAwardManager.getWomanAward(id);
 		}
@@ -117,6 +124,10 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 	@Autowired
 	public void setWomanAwardManager(WomanAwardManager womanAwardManager) {
 		this.womanAwardManager = womanAwardManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<WomanAward> getPage() {
 		return page;

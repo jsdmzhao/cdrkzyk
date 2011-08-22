@@ -47,6 +47,13 @@ public class FertileWomanManager {
 		fertileWomanDao.delete(id);
 	}
 	/**
+	 * 删除
+	 * @param id
+	 */
+	public void deleteFertileWomanByPersonId(Long id){
+		fertileWomanDao.batchExecute("delete FertileWoman where person.id = ? ", id);
+	}
+	/**
 	 * 批量删除
 	 * @param ids
 	 */
@@ -73,6 +80,18 @@ public class FertileWomanManager {
 	@Transactional(readOnly = true)
 	public FertileWoman getFertileWoman(Long id){
 		return fertileWomanDao.get(id);
+	}
+	/**
+	 * 外键查找
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public FertileWoman getFertileWomanByPersonId(Long id){
+		List<FertileWoman> lst = fertileWomanDao.findBy("person.id", id);
+		if(lst != null && lst.size() > 0)
+			return lst.get(0);
+		return null;
 	}
 	/**
 	 * 分页查找

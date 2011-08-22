@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.WomanSocialUpbring;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanSocialUpbringManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +32,7 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 	private String ids;
 	private WomanSocialUpbring entity;
 	private WomanSocialUpbringManager womanSocialUpbringManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<WomanSocialUpbring> page = new Page<WomanSocialUpbring>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -72,6 +75,7 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanSocialUpbringManager.searchWomanSocialUpbring(page, filters);
 		return SUCCESS;
 	}
@@ -79,6 +83,9 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanSocialUpbring();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = womanSocialUpbringManager.getWomanSocialUpbring(id);
 		}
@@ -117,6 +124,10 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 	@Autowired
 	public void setWomanSocialUpbringManager(WomanSocialUpbringManager womanSocialUpbringManager) {
 		this.womanSocialUpbringManager = womanSocialUpbringManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<WomanSocialUpbring> getPage() {
 		return page;

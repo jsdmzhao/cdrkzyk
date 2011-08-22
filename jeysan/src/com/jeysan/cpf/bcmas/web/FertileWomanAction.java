@@ -5,12 +5,14 @@ import java.util.List;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
+import org.h2.util.StringUtils;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
+import com.jeysan.cpf.bcmas.service.WomanBasicManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -33,6 +35,7 @@ public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 	private String ids;
 	private FertileWoman entity;
 	private FertileWomanManager fertileWomanManager;
+	private WomanBasicManager womanBasicManager;
 	private Page<FertileWoman> page = new Page<FertileWoman>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -75,6 +78,14 @@ public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		PropertyFilter pf = null;
+		String type = Struts2Utils.getParameter("type");
+		if(StringUtils.equals(type, "fix")){
+			pf = new PropertyFilter("EQI_typeh","663");
+		}else if(StringUtils.equals(type, "flow")){
+			pf = new PropertyFilter("EQI_typeh","664");
+		}
+		filters.add(pf);
 		page = fertileWomanManager.searchFertileWoman(page, filters);
 		return SUCCESS;
 	}
@@ -98,6 +109,8 @@ public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 			result4Json = new Result4Json();
 		try{
 			fertileWomanManager.saveFertileWoman(entity);
+			entity.getWomanBasic().setFertileWoman(entity);
+			womanBasicManager.saveWomanBasic(entity.getWomanBasic());
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存育龄妇女成功");
@@ -126,6 +139,10 @@ public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 	@Autowired
 	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
 		this.fertileWomanManager = fertileWomanManager;
+	}
+	@Autowired
+	public void setWomanBasicManager(WomanBasicManager womanBasicManager) {
+		this.womanBasicManager = womanBasicManager;
 	}
 	public Page<FertileWoman> getPage() {
 		return page;

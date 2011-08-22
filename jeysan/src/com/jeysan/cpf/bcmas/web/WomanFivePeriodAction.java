@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.WomanFivePeriod;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanFivePeriodManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +32,7 @@ public class WomanFivePeriodAction extends CrudActionSupport<WomanFivePeriod> {
 	private String ids;
 	private WomanFivePeriod entity;
 	private WomanFivePeriodManager womanFivePeriodManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<WomanFivePeriod> page = new Page<WomanFivePeriod>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -72,6 +75,7 @@ public class WomanFivePeriodAction extends CrudActionSupport<WomanFivePeriod> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanFivePeriodManager.searchWomanFivePeriod(page, filters);
 		return SUCCESS;
 	}
@@ -79,6 +83,9 @@ public class WomanFivePeriodAction extends CrudActionSupport<WomanFivePeriod> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanFivePeriod();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = womanFivePeriodManager.getWomanFivePeriod(id);
 		}
@@ -117,6 +124,10 @@ public class WomanFivePeriodAction extends CrudActionSupport<WomanFivePeriod> {
 	@Autowired
 	public void setWomanFivePeriodManager(WomanFivePeriodManager womanFivePeriodManager) {
 		this.womanFivePeriodManager = womanFivePeriodManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<WomanFivePeriod> getPage() {
 		return page;
