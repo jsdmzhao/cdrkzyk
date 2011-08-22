@@ -266,7 +266,7 @@ function validateSubs(form){//alert("2211:::"+JSON.stringify($(form).serializeAr
 			//alert(error);
 		}
 	});//alert($($('table.list').get(0)).html());
-	return validateCallback(form);
+	return validateCallback(form,navTabAjaxDone4Update);
 }
 function AddToFavorite() {
 	if (document.all) {

@@ -105,9 +105,69 @@
 				cache: false
 			});
 		},
-		loadUrl: function(url,data,callback){
+		loadUrl: function(url,data,callback,options){
 			$(this).ajaxUrl({url:encodeURL4JS(url), data:data, callback:callback});
 		}
 	});
 
 })(jQuery);
+/**
+ * 将action的行为置于js容器里面，作为函数回调的判断
+ * @param json
+ * @return
+ */
+function navTabAjaxDone4Update(json){
+	var targetNavTab = navTab._getTab(json.navTabId);
+	if(targetNavTab && targetNavTab!=null)
+		targetNavTab.data("action",json.action);
+	navTabAjaxDone(json);
+}
+/**
+ * 重新编码URL，因为URL链接参数中可能带中文
+ * @param url
+ * @return
+ */
+function encodeURL4JS(url){
+	if(url.indexOf('?')==-1)
+		return url;
+	var obj = $.query.load(url);
+	$.each(obj.keys, function(key, value) {
+	     obj.set(key,encodeURI(encodeURI(value)));
+	});
+	return url.substr(0,url.indexOf('?')) + obj.toString();
+}
+/**
+ * 处理navTab多面板，重新载入当前面板
+ * @param {Object} form
+ */
+function navTabSearch4dwz(form, navTabId){
+	var jGroups = $("> .tabsContent > *", navTab);
+	//alert(33);alert(jGroups.eq(0));
+	var $form = $(form);alert($form);
+	if (form[DWZ.pageInfo.pageNum]) form[DWZ.pageInfo.pageNum].value = 1;
+	//navTab.reload($form.attr('action'), {data: $form.serializeArray(), navTabId:navTabId});
+	//alert($form.attr('action'));
+	alert($form.serializeArray());
+	jGroup = jGroups.eq(0);
+	jGroup.loadUrl($form.attr('action'), {data: $form.serializeArray(), navTabId:navTabId},function(){
+		jGroup.find("[layoutH]").layoutH();
+	});
+	return false;
+}
+/**
+ * 处理navTab中的分页和排序
+ * @param args {pageNum:"n", numPerPage:"n", orderField:"xxx"}
+ */
+function navTabPageBreak4dwz(args){
+	args = args || {};
+	var form = _getPagerForm(navTab.getCurrentPanel(), args);
+	var $form = $(form);
+	var params = $form.serializeArray();
+	if (args.targetType) params[params.length] = args.targetType;
+	//if (form) navTab.reload($(form).attr("action"), {data: params, callback: args.callback});
+	var jGroups = $("> .tabsContent > *", navTab);
+	jGroup = jGroups.eq(0);
+	jGroup.loadUrl($form.attr('action'), {data: params, callback: args.callback},function(){
+		jGroup.find("[layoutH]").layoutH();
+	});
+}
