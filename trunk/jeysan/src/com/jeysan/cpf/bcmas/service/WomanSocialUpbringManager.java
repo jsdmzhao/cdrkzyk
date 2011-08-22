@@ -47,7 +47,7 @@ public class WomanSocialUpbringManager {
 		womanSocialUpbringDao.delete(id);
 	}
 	/**
-	 * 批量删除
+	 * 用于无关联实体的批量删除
 	 * @param ids
 	 */
 	public void deleteWomanSocialUpbrings(Long id){
@@ -61,7 +61,7 @@ public class WomanSocialUpbringManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteWomanSocialUpbrings(Long.parseLong(id));
+				deleteWomanSocialUpbring(Long.parseLong(id));
 			}
 		}
 	}

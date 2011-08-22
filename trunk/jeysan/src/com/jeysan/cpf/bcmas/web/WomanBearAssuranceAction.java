@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.WomanBearAssurance;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanBearAssuranceManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +32,7 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 	private String ids;
 	private WomanBearAssurance entity;
 	private WomanBearAssuranceManager womanBearAssuranceManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<WomanBearAssurance> page = new Page<WomanBearAssurance>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -72,6 +75,7 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanBearAssuranceManager.searchWomanBearAssurance(page, filters);
 		return SUCCESS;
 	}
@@ -79,6 +83,9 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanBearAssurance();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = womanBearAssuranceManager.getWomanBearAssurance(id);
 		}
@@ -117,6 +124,10 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 	@Autowired
 	public void setWomanBearAssuranceManager(WomanBearAssuranceManager womanBearAssuranceManager) {
 		this.womanBearAssuranceManager = womanBearAssuranceManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<WomanBearAssurance> getPage() {
 		return page;

@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.WomanPunish;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanPunishManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +32,7 @@ public class WomanPunishAction extends CrudActionSupport<WomanPunish> {
 	private String ids;
 	private WomanPunish entity;
 	private WomanPunishManager womanPunishManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<WomanPunish> page = new Page<WomanPunish>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -72,6 +75,7 @@ public class WomanPunishAction extends CrudActionSupport<WomanPunish> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanPunishManager.searchWomanPunish(page, filters);
 		return SUCCESS;
 	}
@@ -79,6 +83,9 @@ public class WomanPunishAction extends CrudActionSupport<WomanPunish> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanPunish();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = womanPunishManager.getWomanPunish(id);
 		}
@@ -117,6 +124,10 @@ public class WomanPunishAction extends CrudActionSupport<WomanPunish> {
 	@Autowired
 	public void setWomanPunishManager(WomanPunishManager womanPunishManager) {
 		this.womanPunishManager = womanPunishManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<WomanPunish> getPage() {
 		return page;

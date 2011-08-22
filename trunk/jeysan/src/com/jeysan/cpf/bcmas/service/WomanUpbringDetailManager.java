@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.jeysan.cpf.bcmas.dao.WomanUpbringDetailDao;
 import com.jeysan.cpf.bcmas.entity.WomanUpbringDetail;
 import com.jeysan.modules.orm.Page;
@@ -90,5 +91,20 @@ public class WomanUpbringDetailManager {
 		this.womanUpbringDetailDao = womanUpbringDetailDao;
 	}
 	
+	public void saveWomanUpbringDetail(List<WomanUpbringDetail> newEntites,List<WomanUpbringDetail> oldEntites){
+		List<Long> newIds = Lists.newArrayList();
+		for(WomanUpbringDetail newSub:newEntites){
+			if(newSub.getId()!=null)
+				newIds.add(newSub.getId());
+		}
+		for(WomanUpbringDetail oldSub : oldEntites){
+			if(!newIds.contains(oldSub.getId())){
+				oldSub.setUpbring(null);
+				womanUpbringDetailDao.delete(oldSub);
+			}
+		}
+		for(WomanUpbringDetail entity : newEntites)
+			womanUpbringDetailDao.save(entity);
+	}
 	
 }

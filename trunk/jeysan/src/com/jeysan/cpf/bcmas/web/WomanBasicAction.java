@@ -72,6 +72,7 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		page.setPageSize(-1);
 		page = womanBasicManager.searchWomanBasic(page, filters);
 		return SUCCESS;
 	}
