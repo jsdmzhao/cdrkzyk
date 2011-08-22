@@ -7,57 +7,57 @@
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
 <title><%=com.jeysan.modules.utils.Constants.Application.PLATFORM_TITLE%></title>
 
-<link href="${ctx4doc}/dwz3/themes/default/style.css" rel="stylesheet" type="text/css" />
-<link href="${ctx4doc}/dwz3/themes/css/core.css" rel="stylesheet" type="text/css" />
-<link href="${ctx4doc}/dwz3/uploadify/css/uploadify.css" rel="stylesheet" type="text/css" />
+<link href="${ctx4doc}/dwz2/themes/default/style.css" rel="stylesheet" type="text/css" />
+<link href="${ctx4doc}/dwz2/themes/css/core.css" rel="stylesheet" type="text/css" />
+<link href="${ctx4doc}/dwz2/uploadify/css/uploadify.css" rel="stylesheet" type="text/css" />
 <!--[if IE]>
-<link href="${ctx4doc}/dwz3/themes/css/ieHack.css" rel="stylesheet" type="text/css" />
+<link href="${ctx4doc}/dwz2/themes/css/ieHack.css" rel="stylesheet" type="text/css" />
 <![endif]-->
 
-<script src="${ctx4doc}/dwz3/js/speedup.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/jquery-1.4.4.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/jquery.cookie.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/jquery.validate.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/jquery.bgiframe.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/xheditor/xheditor-1.1.8-zh-cn.min.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/uploadify/scripts/swfobject.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/uploadify/scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/speedup.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/jquery-1.4.4.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/jquery.cookie.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/jquery.validate.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/jquery.bgiframe.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/xheditor/xheditor-zh-cn.min.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/uploadify/scripts/swfobject.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/uploadify/scripts/jquery.uploadify.v2.1.0.js" type="text/javascript"></script>
 <!-- 
-<script src="${ctx4doc}/dwz3/bin/dwz.min.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/bin/dwz.min.js" type="text/javascript"></script>
 -->
 
-<script src="${ctx4doc}/dwz3/js/dwz.core.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.util.date.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.validate.method.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.regional.zh.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.barDrag.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.drag.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.tree.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.accordion.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.ui.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.theme.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.switchEnv.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.alertMsg.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.contextmenu.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.navTab.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.tab.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.resize.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.dialog.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.dialogDrag.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.cssTable.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.stable.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.taskBar.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.ajax.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.pagination.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.database.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.datepicker.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.effects.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.panel.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.checkbox.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.history.js" type="text/javascript"></script>
-<script src="${ctx4doc}/dwz3/js/dwz.combox.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.core.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.util.date.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.validate.method.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.regional.zh.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.barDrag.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.drag.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.tree.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.accordion.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.ui.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.theme.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.switchEnv.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.alertMsg.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.contextmenu.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.navTab.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.tab.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.resize.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.jDialog.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.dialogDrag.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.cssTable.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.stable.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.taskBar.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.ajax.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.pagination.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.database.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.datepicker.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.effects.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.panel.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.checkbox.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.history.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.combox.js" type="text/javascript"></script>
 
-<script src="${ctx4doc}/dwz3/js/dwz.regional.zh.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz2/javascripts/dwz.regional.zh.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/jscommon2.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/plugin.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/query.js" type="text/javascript"></script>
@@ -65,18 +65,19 @@
 <script src="${ctx4doc}/js/json2.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(function(){
-	DWZ.init("${ctx4doc}/dwz3/dwz.frag.xml", {
-		loginUrl:"${ctx}/main/login_dialog.action", loginTitle:"登录",
-		statusCode:{ok:200, error:300, timeout:301},
-		pageInfo:{pageNum:"pageNum", numPerPage:"numPerPage", orderField:"orderField", orderDirection:"orderDirection"},
+	DWZ.init("${ctx4doc}/dwz2/dwz.frag.xml", {
+		loginUrl:"${ctx}/j_spring_security_logout",
 		debug:false,
 		callback:function(){
 			initEnv();
-			$("#themeList").theme({themeBase:"${ctx4doc}/dwz3/themes"});
+			$("#themeList").theme({themeBase:"${ctx4doc}/dwz2/themes"});
 		}
 	});
 });
-
+//清理浏览器内存,只对IE起效,FF不需要
+if ($.browser.msie) {
+	window.setInterval("CollectGarbage();", 10000);
+}
 </script>
 </head>
 
@@ -246,6 +247,33 @@ $(function(){
 	</div>
 
 	<div id="footer">Copyright &copy; 2011 <a href="http://www.jeysan.com" target="navTab" rel="jeysan">三杰软件</a></div>
+
+<!--拖动效果-->
+	<div class="resizable"></div>
+<!--阴影-->
+	<div class="shadow" style="width:508px; top:148px; left:296px;">
+		<div class="shadow_h">
+			<div class="shadow_h_l"></div>
+			<div class="shadow_h_r"></div>
+			<div class="shadow_h_c"></div>
+		</div>
+		<div class="shadow_c">
+			<div class="shadow_c_l" style="height:296px;"></div>
+			<div class="shadow_c_r" style="height:296px;"></div>
+			<div class="shadow_c_c" style="height:296px;"></div>
+		</div>
+		<div class="shadow_f">
+			<div class="shadow_f_l"></div>
+			<div class="shadow_f_r"></div>
+			<div class="shadow_f_c"></div>
+		</div>
+	</div>
+	<!--遮盖屏幕-->
+	<div id="alertBackground" class="alertBackground"></div>
+	<div id="dialogBackground" class="dialogBackground"></div>
+
+	<div id='background' class='background'></div>
+	<div id='progressBar' class='progressBar'>数据加载中，请稍等...</div>
 
 <script type="text/javascript">
   var _gaq = _gaq || [];
