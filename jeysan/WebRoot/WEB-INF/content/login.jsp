@@ -8,12 +8,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><%=com.jeysan.modules.utils.Constants.Application.PLATFORM_TITLE%></title>
-<link href="${ctx4doc}/dwz2/themes/css/login.css" rel="stylesheet" type="text/css" />
-<script src="${ctx4doc}/dwz2/javascripts/jquery-1.4.4.js" type="text/javascript"></script>
+<link href="${ctx4doc}/dwz3/themes/css/login.css" rel="stylesheet" type="text/css" />
+<script src="${ctx4doc}/dwz3/js/jquery-1.4.4.js" type="text/javascript"></script>
+<script src="${ctx4doc}/dwz3/js/jquery.cookie.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/jscommon2.js" type="text/javascript"></script>
 </head>
 
-<body onload="document.getElementById('j_username').focus()">
+<body onload="initFocus()">
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
@@ -39,15 +40,15 @@
 				<form action="${ctx}/j_spring_security_check" method="post">
 					<p>
 						<label>机构码：</label>
-						<input type="text" name="j_orgcode" class="login_input"  <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_ORGCODE}"</c:if>/>
+						<input type="text" id="j_orgcode" name="j_orgcode" class="login_input"  <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_ORGCODE}"</c:if>/>
 					</p>
 					<p>
 						<label>用户名：</label>
-						<input type="text" name="j_username" size="20" class="login_input" <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if>/>
+						<input type="text" id="j_username" name="j_username" size="20" class="login_input" <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if>/>
 					</p>
 					<p>
 						<label>密&nbsp;&nbsp;&nbsp;码：</label>
-						<input type="password" name="j_password" size="20" class="login_input"/>
+						<input type="password" id="j_password" name="j_password" size="20" class="login_input"/>
 					</p>
 					<p>
 						<label>验证码：</label>
