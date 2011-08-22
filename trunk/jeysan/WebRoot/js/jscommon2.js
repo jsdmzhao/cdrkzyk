@@ -1,31 +1,143 @@
 /**
- * 将action的行为置于js容器里面，作为函数回调的判断
- * @param json
+ * table表格class为list增加/减少一行tr,通用方法。
+ * 如果table表格class为table，此方法要重写
+ * @param type
  * @return
  */
-function navTabAjaxDone4Update(json){
-	var targetNavTab = navTab._getTab(json.navTabId);
-	if(targetNavTab && targetNavTab!=null)
-		targetNavTab.data("action",json.action);
-	navTabAjaxDone(json);
+function operateRow(type){//alert($("tr[target='subDictId']").html());
+	var $box = navTab.getCurrentPanel();
+	var length = $('#tr_list>tr',$box).length;
+	if(type=='add'){
+		var $tr = $($('#tr_list>tr',$box).get(0)).clone();
+		resetTrContent($tr,length,true)
+		$('#tr_list',$box).append($tr);
+		$('table.list',$box).initUI().cssTable();
+	}else if(type=='delete'){
+		if(length<=1) return;
+		var hasRemoved = false;
+		if ($('#rowIndex',$box).size() != 0){
+			var index = $('#rowIndex',$box).val();//var index = $('#rowIndex')[0].value;
+			if(index!=null&&index!=-1){
+				$('#tr_list>tr',$box).eq(index-1).remove();
+				$('#rowIndex',$box).val(-1);
+				hasRemoved = true;
+				$('table.list',$box).initUI().cssTable();
+				calculateNames($box);
+			}
+		}
+		if(!hasRemoved) $('#tr_list>tr',$box).eq(length-1).remove();
+	}
 }
 /**
- * 重新编码URL，因为URL链接参数中可能带中文
- * @param url
+ * 重新计算隐藏域的名称之前，
+ * 清空tr的背景样式，因为在方法cssTable里面只做了操作：
+ * if (index % 2 == 1) $tr.addClass("trbg");
+ * 所以做删除tr操作时需要清空样式
  * @return
  */
-function encodeURL4JS(url){
-	if(url.indexOf('?')==-1)
-		return url;
-	var obj = $.query.load(url);
-	$.each(obj.keys, function(key, value) {
-	     obj.set(key,encodeURI(encodeURI(value)));
+function calculateNames($box){
+	$('#tr_list>tr',$box).each(function(index){
+		var $tr = $(this);
+		if (index % 2 == 0) $tr.removeClass("trbg");
+		resetTrContent($tr,index,false)
 	});
-	return url.substr(0,url.indexOf('?')) + obj.toString();
 }
+/**
+ * 重新计算隐藏域的名称
+ * @param $tr
+ * @param index
+ * @param isNeededClear 是否需要做清空内容的操作
+ * @return
+ */
+function resetTrContent($tr,index,isNeededClear){
+	$tr.attr('rel',index+1);
+	$('td',$tr).each(function(i){
+		var $td = $(this);
+		if(i==0){
+			$(':first-child',$td).text(index+1);
+			if(isNeededClear) $(':last-child',$td).val(-1);
+		}else{
+			var $firstchild = $(':first-child',$td);
+			if(isNeededClear) $firstchild.val('');
+			var name = $firstchild.attr('name');
+			if(name.indexOf('_')!=-1)
+				name = name.split('_')[0];
+			$firstchild.attr('name',name+'_'+(index+1));
+		}
+	});
+}
+/**
+ * datagrid包含有输入框的通用验证方法,去掉了错误提示
+ * @param value
+ * @return
+ */
+function validateSubs(form){//alert("2211:::"+JSON.stringify($(form).serializeArray()));
+	$(form).validate({
+		focusInvalid: false,
+		focusCleanup: true,
+		errorElement: "span",
+		ignore:".ignore",
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				var message = DWZ.msg("validateFormError",[errors]);
+				alertMsg.error(message);
+			}
+		},
+		errorPlacement:function(error,element) {
+			//alert(error);
+		}
+	});//alert($($('table.list').get(0)).html());
+	return validateCallback(form,navTabAjaxDone4Update);
+}
+function AddToFavorite() {
+	if (document.all) {
+		window.external.addFavorite(document.URL, document.title);
+	} else if (window.sidebar) {
+		window.sidebar.addPanel(document.title, document.URL, "");
+	} else {
+        alert("加入收藏失败，请尝试使用Ctrl+D进行添加");
+	}
+}
+
+//设为首页   
+function setHomepage() {
+	if (document.all) {
+		document.body.style.behavior = 'url(#default#homepage)';
+		document.body.setHomePage(document.URL);
+	} else if (window.sidebar) {
+		if (window.netscape) {
+			try {
+				netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+			} catch (e) {
+				alert("该操作被浏览器拒绝，如果想启用该功能，请在地址栏内输入 about:config,然后将项 signed.applets.codebase_principal_support 值该为true");
+				return;
+			}
+		}
+		var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
+		prefs.setCharPref('browser.startup.homepage', document.URL);
+	}
+}
+
 /**
  *下面都为页面辅助方法,零散的,不可通用------------------------------------------------------------------ 
+ *
  */
+/**
+ * 首页定位焦点用
+ */
+function initFocus(){
+	var j_orgcode = $.cookie('j_orgcode');
+	var j_username = $.cookie('j_username');
+	$('#j_orgcode').val(j_orgcode);
+	$('#j_username').val(j_username);
+	if(j_orgcode==null||j_orgcode==''){
+		$('#j_orgcode').focus();
+	}else if(j_username==null||j_username==''){
+		$('#j_username').focus();
+	}else
+		$('#j_password').focus();
+}
 /**
  * 代码生成器模块：判断列是否被修改
  */
@@ -84,122 +196,4 @@ function saveTemplate(flag){
 	}else
 		validateCallback($('#form2')[0]);
 }
-/**
- * table表格class为list增加/减少一行tr,通用方法。
- * 如果table表格class为table，此方法要重写
- * @param type
- * @return
- */
-function operateRow(type){//alert($("tr[target='subDictId']").html());
-	var length = $('#tr_list>tr').length;
-	if(type=='add'){
-		var $tr = $($('#tr_list>tr').get(0)).clone();
-		resetTrContent($tr,length,true)
-		$('#tr_list').append($tr);
-		$('table.list').cssTable();
-	}else if(type=='delete'){
-		if(length<=1) return;
-		var hasRemoved = false;
-		if ($('#rowIndex').size() != 0){
-			var index = $('#rowIndex').val();//var index = $('#rowIndex')[0].value;
-			if(index!=null&&index!=-1){
-				$('#tr_list>tr').eq(index-1).remove();
-				$('#rowIndex').val(-1);
-				hasRemoved = true;
-				$('table.list').cssTable();
-				calculateNames();
-			}
-		}
-		if(!hasRemoved) $('#tr_list>tr').eq(length-1).remove();
-	}
-}
-/**
- * 重新计算隐藏域的名称之前，
- * 清空tr的背景样式，因为在方法cssTable里面只做了操作：
- * if (index % 2 == 1) $tr.addClass("trbg");
- * 所以做删除tr操作时需要清空样式
- * @return
- */
-function calculateNames(){
-	$('#tr_list>tr').each(function(index){
-		var $tr = $(this);
-		if (index % 2 == 0) $tr.removeClass("trbg");
-		resetTrContent($tr,index,false)
-	});
-}
-/**
- * 重新计算隐藏域的名称
- * @param $tr
- * @param index
- * @param isNeededClear 是否需要做清空内容的操作
- * @return
- */
-function resetTrContent($tr,index,isNeededClear){
-	$tr.attr('rel',index+1);
-	$('td',$tr).each(function(i){
-		var $td = $(this);
-		if(i==0){
-			$(':first-child',$td).text(index+1);
-			if(isNeededClear) $(':last-child',$td).val(-1);
-		}else{
-			var $firstchild = $(':first-child',$td);
-			if(isNeededClear) $firstchild.val('');
-			var name = $firstchild.attr('name');
-			if(name.indexOf('_')!=-1)
-				name = name.split('_')[0];
-			$firstchild.attr('name',name+'_'+(index+1));
-		}
-	});
-}
-/**
- * datagrid包含有输入框的通用验证方法,去掉了错误提示
- * @param value
- * @return
- */
-function validateSubs(form){//alert("2211:::"+JSON.stringify($(form).serializeArray()));
-	$(form).validate({
-		focusInvalid: false,
-		focusCleanup: true,
-		errorElement: "span",
-		ignore:".ignore",
-		invalidHandler: function(form, validator) {
-			var errors = validator.numberOfInvalids();
-			if (errors) {
-				var message = DWZ.msg("validateFormError",[errors]);
-				alertMsg.error(message);
-			}
-		},
-		errorPlacement:function(error,element) {
-			//alert(error);
-		}
-	});//alert($($('table.list').get(0)).html());
-	return validateCallback(form);
-}
-function AddToFavorite() {
-	if (document.all) {
-		window.external.addFavorite(document.URL, document.title);
-	} else if (window.sidebar) {
-		window.sidebar.addPanel(document.title, document.URL, "");
-	} else {
-        alert("加入收藏失败，请尝试使用Ctrl+D进行添加");
-	}
-}
 
-//设为首页   
-function setHomepage() {
-	if (document.all) {
-		document.body.style.behavior = 'url(#default#homepage)';
-		document.body.setHomePage(document.URL);
-	} else if (window.sidebar) {
-		if (window.netscape) {
-			try {
-				netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
-			} catch (e) {
-				alert("该操作被浏览器拒绝，如果想启用该功能，请在地址栏内输入 about:config,然后将项 signed.applets.codebase_principal_support 值该为true");
-				return;
-			}
-		}
-		var prefs = Components.classes['@mozilla.org/preferences-service;1'].getService(Components.interfaces.nsIPrefBranch);
-		prefs.setCharPref('browser.startup.homepage', document.URL);
-	}
-}
