@@ -3,11 +3,16 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.pmas.entity.WomanChildren;
+import com.jeysan.cpf.pmas.service.PersonManager;
+import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.cpf.pmas.service.WomanChildrenManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -21,6 +26,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
+@Results( { @Result(name = "multiplysubs", location = "womanchildren-subs.jsp", type = "dispatcher"),
+	@Result(name = "simplesub", location = "womanchildren-view-sub.jsp", type = "dispatcher")})
 public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 	/**
 	 * 
@@ -30,6 +37,8 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 	private String ids;
 	private WomanChildren entity;
 	private WomanChildrenManager womanChildrenManager;
+	private PersonManager personManager;
+	private SpouseManager spouseManager;
 	private Page<WomanChildren> page = new Page<WomanChildren>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -63,8 +72,18 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 	public String view() throws Exception {
 		return VIEW;
 	}
+	public String multiplysubs() throws Exception {
+		prepareModel();
+		String personId = Struts2Utils.getParameter("personId");
+		if(StringUtils.isNotEmpty(personId)){
+			Long personIdL = Long.parseLong(personId);
+			Struts2Utils.getRequest().setAttribute("spouse",spouseManager.getSpouseByPersonId(personIdL));
+		}
+		return "multiplysubs";
+	}
 	@Override
 	public String list() throws Exception {
+		prepareModel();
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
@@ -75,12 +94,23 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 		page = womanChildrenManager.searchWomanChildren(page, filters);
 		return SUCCESS;
 	}
+	public String simplesub() throws Exception {
+		prepareModel();
+		Struts2Utils.getRequest().setAttribute("entity",entity);
+		return "simplesub";
+	}
 	@Override
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanChildren();
 		}else{
 			entity = womanChildrenManager.getWomanChildren(id);
+		}
+		String personId = Struts2Utils.getParameter("personId");
+		if(StringUtils.isNotEmpty(personId)){
+			Long personIdL = Long.parseLong(personId);
+			Struts2Utils.getRequest().setAttribute("person",personManager.getPerson(personIdL));
+			Struts2Utils.getRequest().setAttribute("spouse",spouseManager.getSpouseByPersonId(personIdL));
 		}
 	}
 	@Override
@@ -117,6 +147,14 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 	@Autowired
 	public void setWomanChildrenManager(WomanChildrenManager womanChildrenManager) {
 		this.womanChildrenManager = womanChildrenManager;
+	}
+	@Autowired
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
+	}
+	@Autowired
+	public void setSpouseManager(SpouseManager spouseManager) {
+		this.spouseManager = spouseManager;
 	}
 	public Page<WomanChildren> getPage() {
 		return page;

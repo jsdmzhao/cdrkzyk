@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.Spouse;
+import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -30,6 +33,7 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 	private String ids;
 	private Spouse entity;
 	private SpouseManager spouseManager;
+	private PersonManager personManager;
 	private Page<Spouse> page = new Page<Spouse>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -78,7 +82,15 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 	@Override
 	protected void prepareModel() throws Exception {
 		if(id == null){
-			entity = new Spouse();
+			String personId = Struts2Utils.getParameter("personId");
+			if(StringUtils.isNotEmpty(personId)){
+				Long personIdL = Long.parseLong(personId);
+				entity = spouseManager.getSpouseByPersonId(personIdL);
+				if(entity == null)
+					Struts2Utils.getRequest().setAttribute("person",personManager.getPerson(personIdL));
+			}
+			if(entity == null)
+				entity = new Spouse();
 		}else{
 			entity = spouseManager.getSpouse(id);
 		}
@@ -88,6 +100,10 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			String personId = Struts2Utils.getParameter("personId");
+			Person person = new Person();
+			person.setId(Long.parseLong(personId));
+			entity.setPerson(person);
 			spouseManager.saveSpouse(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -117,6 +133,10 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 	@Autowired
 	public void setSpouseManager(SpouseManager spouseManager) {
 		this.spouseManager = spouseManager;
+	}
+	@Autowired
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
 	}
 	public Page<Spouse> getPage() {
 		return page;

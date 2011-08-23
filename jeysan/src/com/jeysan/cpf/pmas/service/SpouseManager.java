@@ -71,6 +71,15 @@ public class SpouseManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
+	public Spouse getSpouseByPersonId(Long id){
+		return spouseDao.findUniqueBy("person.id", id);
+	}
+	/**
+	 * 外键查找
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
 	public Spouse getSpouse(Long id){
 		return spouseDao.get(id);
 	}
