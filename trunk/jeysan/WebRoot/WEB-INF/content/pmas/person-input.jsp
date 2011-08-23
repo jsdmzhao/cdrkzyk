@@ -49,15 +49,15 @@
 					</p>
 					<p>
 					<label>出生日期：</label>
-					<input name="personBasic.birthday" class="date required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.birthday}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="personBasic.birthday" class="date required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.birthday}" pattern="yyyy-MM-dd"/>" onpropertychange="setage(this.value)"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
 					<p>
 					<label>年龄：</label>
-					<input name="age" readonly="readonly" type="text" size="30" value="${age}"/>
+					<input id="age" name="age" class="required" readonly="readonly" type="text" size="30" value="${age}"/>
 					</p>
 					<p>
 					<label>婚姻状况：</label>
-					<tags:js.dict.selector name="personBasic.marryStatus" value="${personBasic.marryStatus}" dictCode="JS1015"/>
+					<tags:js.dict.selector name="personBasic.marryStatus" value="${personBasic.marryStatus}" dictCode="JS1015" class1="required"/>
 					</p>
 					<p>
 					<label>初婚日期：</label>
@@ -259,5 +259,14 @@ function setAddress(obj,address_,type){
 function setAddress2(obj,address_){
 	$('#personBasic_domicileCode').val(obj.value.split('_')[1]);
 	$('#personBasic_domicile').val(address_);
+}
+var yearNow = new Date().getYear();
+function setage(birth){
+	if(birth==null||birth==''){
+		$('#age').val('');
+	}else{
+		var year_ = birth.substr(0,birth.indexOf('-'));
+		$('#age').val(yearNow-year_);
+	}
 }
 </script>
