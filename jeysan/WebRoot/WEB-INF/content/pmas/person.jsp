@@ -105,14 +105,14 @@
 					</td>
 					<td>
 						<div style="width: 50px;">
-							<a class="btnView" href="${ctx}/pmas/spouse!view.action?id=${a.id}" target="navTab" title="查看配偶信息" rel="nav_spousemanage"></a>
-							<a class="btnEdit" href="${ctx}/pmas/spouse!input.action?id=${a.id}" target="navTab" title="管理配偶信息" rel="nav_spousemanage"></a>
+							<a class="btnView" href="${ctx}/pmas/spouse!view.action?personId=${a.id}" target="navTab" title="查看配偶信息" rel="spouse-view"></a>
+							<a class="btnEdit" href="${ctx}/pmas/spouse!input.action?personId=${a.id}" target="navTab" title="管理配偶信息" rel="spouse-update"></a>
 						</div>
 					</td>
 					<td>
 						<div style="width: 50px;">
-							<a class="btnView" href="${ctx}/pmas/womanchildren!view.action?id=${a.id}" target="navTab" title="查看子女信息" rel="nav_womanchildrenmanage"></a>
-							<a class="btnEdit" href="${ctx}/pmas/womanchildren.action?id=${a.id}" target="navTab" title="管理子女信息" rel="nav_womanchildrenmanage"></a>
+							<a class="btnView" href="${ctx}/pmas/womanchildren!view.action?personId=${a.id}" target="navTab" title="查看子女信息" rel="womanchildren-view"></a>
+							<a class="btnEdit" href="${ctx}/pmas/womanchildren.action?filter_EQL_person.id=${a.id}&personId=${a.id}&from=person" target="navTab" title="管理子女信息" rel="nav_womanchildrenmanage"></a>
 						</div>
 					</td>
 					<td>
