@@ -13,7 +13,7 @@
 					<li><a href="${ctx}/bcmas/womanbearassurance.action?filter_EQL_fertileWoman.id=${param.id}" class="j-ajax"><span>计划生育保险</span></a></li>
 					<li><a href="${ctx}/bcmas/womanmatenal.action?filter_EQL_fertileWoman.id=${param.id}" class="j-ajax"><span>孕产信息</span></a></li>
 					<li><a href="${ctx}/bcmas/womancontracept.action?filter_EQL_fertileWoman.id=${param.id}" class="j-ajax"><span>避孕节育</span></a></li>
-					<li><a href="${ctx}/pmas/womanchildren.action?filter_EQL_fertileWoman.id=${param.id}" class="j-ajax"><span>子女信息</span></a></li>
+					<li><a href="${ctx}/pmas/womanchildren.action?filter_EQL_person.id=${param.id}&personId=${param.id}&from=fertile" class="j-ajax"><span>子女信息</span></a></li>
 					<li><a href="${ctx}/bcmas/womanaward.action?filter_EQL_fertileWoman.id=${param.id}" class="j-ajax"><span>优待奖励</span></a></li>
 				</ul>
 			</div>
