@@ -139,6 +139,9 @@ public class PersonAction extends CrudActionSupport<Person> {
 					fertileWoman.setCreateDate(new Date());
 				fertileWoman.setTypeh(entity.getDomicileType());
 				fertileWoman.setCode(entity.getPersonCode());
+				fertileWoman.setNameh(entity.getNameh());
+				fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.NO);
+				fertileWoman.setBirth2Type(com.jeysan.cpf.util.Constants.Birth2Type.NO);
 				fertileWoman.setPerson(entity);
 				//entity.setFertileWoman(fertileWoman);
 				fertileWomanManager.saveFertileWoman(fertileWoman);
