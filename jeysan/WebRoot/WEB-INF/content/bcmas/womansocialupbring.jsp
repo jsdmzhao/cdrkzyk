@@ -32,7 +32,7 @@
 				<tr target="sid_xxx" rel="${a.id}">
 					<td height="25"><input type="checkbox" name="ids" value="${a.id}" /></td>
 					<td>${b.index+1}</td>
-																																								<td>${a.fertileWoman.person.nameh}</td>
+																																								<td>${a.fertileWoman.nameh}</td>
 																																								<td>${a.fertileWoman.code}</td>
 																																								<td>${a.cause}</td>
 																																								<td>${a.totalMoney}</td>

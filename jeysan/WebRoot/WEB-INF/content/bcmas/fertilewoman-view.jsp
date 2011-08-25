@@ -8,7 +8,7 @@
 					姓名：
 				</label>
 				<input name="personId" readonly="readonly" type="text" size="30"
-					value="${person.nameh}" />
+					value="${nameh}" />
 			</p>
 			<p>
 				<label>

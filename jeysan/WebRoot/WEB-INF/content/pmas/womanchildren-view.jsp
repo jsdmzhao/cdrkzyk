@@ -110,7 +110,7 @@
 									<label>
 										身份证号码：
 									</label>
-									<input readonly="readonly type=" text"  ize="30"
+									<input readonly="readonly" type="text"  ize="30"
 										value="${spouse.code}" />
 								</p>
 

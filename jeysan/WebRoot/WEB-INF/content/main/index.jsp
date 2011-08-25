@@ -135,7 +135,13 @@ $(function(){
 											<li><a href="${ctx}/bcmas/firstchildreg.action" target="navTab" rel="nav_firstchildregmanage">一孩登记</a></li>
 											<li><a href="${ctx}/bcmas/birth2apply.action" target="navTab" rel="nav_birth2applymanage">再生育申请</a></li>
 											<li><a href="${ctx}/bcmas/birth2check.action" target="navTab" rel="nav_birth2checkmanage">再生育审批</a></li>
-											<li><a href="${ctx}/bcmas/getiud.action" target="navTab" rel="nav_getiudmanage">取环管理</a></li>
+											<li>
+											<a>取环管理</a>
+											<ul>
+												<li><a href="${ctx}/bcmas/getiud!list2.action" target="navTab" rel="nav_getiudmanage2">取环名单</a></li>
+												<li><a href="${ctx}/bcmas/getiud.action" target="navTab" rel="nav_getiudmanage">结果登记</a></li>
+											</ul>
+											</li>
 										</ul>
 										</c:when>
 										<c:when test="${c.resourceCode=='55004'}">
