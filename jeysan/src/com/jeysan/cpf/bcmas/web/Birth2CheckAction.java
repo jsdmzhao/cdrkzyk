@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.Birth2Apply;
 import com.jeysan.cpf.bcmas.entity.Birth2Check;
+import com.jeysan.cpf.bcmas.service.Birth2ApplyManager;
 import com.jeysan.cpf.bcmas.service.Birth2CheckManager;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -21,16 +25,18 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class Birth2CheckAction extends CrudActionSupport<Birth2Check> {
+public class Birth2CheckAction extends CrudActionSupport<Birth2Apply> {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
 	private String ids;
-	private Birth2Check entity;
+	private Birth2Apply entity;
 	private Birth2CheckManager birth2CheckManager;
-	private Page<Birth2Check> page = new Page<Birth2Check>(DEFAULT_PAGE_SIZE);
+	private Birth2ApplyManager birth2ApplyManager;
+	//private Page<Birth2Check> page = new Page<Birth2Check>(DEFAULT_PAGE_SIZE);
+	private Page<Birth2Apply> page = new Page<Birth2Apply>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
 	public String delete() throws Exception {
@@ -72,15 +78,16 @@ public class Birth2CheckAction extends CrudActionSupport<Birth2Check> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = birth2CheckManager.searchBirth2Check(page, filters);
+		//page = birth2CheckManager.searchBirth2Check(page, filters);
+		page = birth2ApplyManager.searchBirth2Apply(page, filters);
 		return SUCCESS;
 	}
 	@Override
 	protected void prepareModel() throws Exception {
 		if(id == null){
-			entity = new Birth2Check();
+			entity = new Birth2Apply();
 		}else{
-			entity = birth2CheckManager.getBirth2Check(id);
+			entity = birth2ApplyManager.getBirth2Apply(id);
 		}
 	}
 	@Override
@@ -88,7 +95,11 @@ public class Birth2CheckAction extends CrudActionSupport<Birth2Check> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			birth2CheckManager.saveBirth2Check(entity);
+			entity.setCheckType(com.jeysan.cpf.util.Constants.CheckType.YES);
+			birth2ApplyManager.saveBirth2Apply(entity);
+			
+			entity.getBirth2Check().setBirth2Apply(entity);
+			birth2CheckManager.saveBirth2Check(entity.getBirth2Check());
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存再生育审批成功");
@@ -111,14 +122,18 @@ public class Birth2CheckAction extends CrudActionSupport<Birth2Check> {
 		return NONE;
 	}
 	@Override
-	public Birth2Check getModel() {
+	public Birth2Apply getModel() {
 		return entity;
 	}
 	@Autowired
 	public void setBirth2CheckManager(Birth2CheckManager birth2CheckManager) {
 		this.birth2CheckManager = birth2CheckManager;
 	}
-	public Page<Birth2Check> getPage() {
+	@Autowired
+	public void setBirth2ApplyManager(Birth2ApplyManager birth2ApplyManager) {
+		this.birth2ApplyManager = birth2ApplyManager;
+	}
+	public Page<Birth2Apply> getPage() {
 		return page;
 	}
 	public void setId(Long id) {

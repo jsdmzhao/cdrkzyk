@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.ConfirmDcObj;
 import com.jeysan.cpf.bcmas.service.ConfirmDcObjManager;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +32,7 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 	private String ids;
 	private ConfirmDcObj entity;
 	private ConfirmDcObjManager confirmDcObjManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<ConfirmDcObj> page = new Page<ConfirmDcObj>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -79,6 +82,9 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new ConfirmDcObj();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = confirmDcObjManager.getConfirmDcObj(id);
 		}
@@ -117,6 +123,10 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 	@Autowired
 	public void setConfirmDcObjManager(ConfirmDcObjManager confirmDcObjManager) {
 		this.confirmDcObjManager = confirmDcObjManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<ConfirmDcObj> getPage() {
 		return page;

@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.entity.FirstChildReg;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.FirstChildRegManager;
+import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +34,8 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 	private String ids;
 	private FirstChildReg entity;
 	private FirstChildRegManager firstChildRegManager;
+	private FertileWomanManager fertileWomanManager;
+	private SpouseManager spouseManager;
 	private Page<FirstChildReg> page = new Page<FirstChildReg>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -57,6 +63,7 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 	}
 	@Override
 	public String input() throws Exception {
+		
 		return INPUT;
 	}
 	@Override
@@ -79,8 +86,15 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new FirstChildReg();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = firstChildRegManager.getFirstChildReg(id);
+			if(entity != null){
+				Long personId = entity.getFertileWoman().getPerson().getId();
+				Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(personId));
+			}
 		}
 	}
 	@Override
@@ -88,8 +102,17 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			firstChildRegManager.saveFirstChildReg(entity);
-			result4Json.setStatusCode("200");
+			String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId)){
+				FertileWoman fertileWoman = fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId));
+				entity.setFertileWoman(fertileWoman);
+				firstChildRegManager.saveFirstChildReg(entity);
+				
+				fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.YES);
+				fertileWomanManager.saveFertileWoman(fertileWoman);
+				
+				result4Json.setStatusCode("200");
+			}
 			if(id == null){
 				result4Json.setMessage("保存一孩登记成功");
 				result4Json.setAction(Result4Json.SAVE);
@@ -117,6 +140,14 @@ public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
 	@Autowired
 	public void setFirstChildRegManager(FirstChildRegManager firstChildRegManager) {
 		this.firstChildRegManager = firstChildRegManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
+	}
+	@Autowired
+	public void setSpouseManager(SpouseManager spouseManager) {
+		this.spouseManager = spouseManager;
 	}
 	public Page<FirstChildReg> getPage() {
 		return page;

@@ -25,7 +25,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-@Results( { @Result(name = "detail", location = "fertilewomandetail.jsp", type = "dispatcher")})
+@Results( { @Result(name = "detail", location = "fertilewomandetail.jsp", type = "dispatcher"),
+	@Result(name = "fertileWoman4lookup", location = "fertilewoman4lookup.jsp", type = "dispatcher")})
 public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 	/**
 	 * 
@@ -86,8 +87,15 @@ public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 			pf = new PropertyFilter("EQI_typeh","664");
 		}
 		filters.add(pf);
+		
+		String registerType = Struts2Utils.getParameter("registerType");
+		
 		page = fertileWomanManager.searchFertileWoman(page, filters);
 		return SUCCESS;
+	}
+	public String list4lookup() throws Exception {
+		list();
+		return "fertileWoman4lookup";
 	}
 	public String fix() throws Exception {
 		return "detail";

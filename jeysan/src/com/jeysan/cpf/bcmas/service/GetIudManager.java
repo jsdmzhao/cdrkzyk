@@ -75,6 +75,15 @@ public class GetIudManager {
 		return getIudDao.get(id);
 	}
 	/**
+	 * 外键查找
+	 * @param id
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public GetIud getGetIudByWomanId(Long id){
+		return getIudDao.findUniqueBy("fertileWoman.id",id);
+	}
+	/**
 	 * 分页查找
 	 * @param page
 	 * @param filter
