@@ -12,6 +12,7 @@ import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.Spouse;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.SpouseManager;
+import com.jeysan.cpf.security.service.DictSubManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -34,6 +35,7 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 	private Spouse entity;
 	private SpouseManager spouseManager;
 	private PersonManager personManager;
+	private DictSubManager dictSubManager;
 	private Page<Spouse> page = new Page<Spouse>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -126,6 +128,20 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
+	public String findByPersonId() throws Exception {
+		String personId = Struts2Utils.getParameter("personId");
+		if(StringUtils.isNotEmpty(personId)){
+			Spouse spouse = spouseManager.getSpouseByPersonId(Long.parseLong(personId));
+			if(spouse!=null&&spouse.getDomicileType()!=null)
+				spouse.setDomicileTypeLabel(dictSubManager.getDictSub(spouse.getDomicileType()).getSubName());
+			if(spouse==null)
+				spouse = new Spouse();
+			
+			Struts2Utils.renderJson(spouse);
+			
+		}
+		return NONE;
+	}
 	@Override
 	public Spouse getModel() {
 		return entity;
@@ -137,6 +153,10 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 	@Autowired
 	public void setPersonManager(PersonManager personManager) {
 		this.personManager = personManager;
+	}
+	@Autowired
+	public void setDictSubManager(DictSubManager dictSubManager) {
+		this.dictSubManager = dictSubManager;
 	}
 	public Page<Spouse> getPage() {
 		return page;

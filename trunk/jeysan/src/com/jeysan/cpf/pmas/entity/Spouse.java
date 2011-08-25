@@ -6,12 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.jeysan.modules.orm.hibernate.IdExtEntity;
+import com.jeysan.modules.utils.date.DateUtil;
 
 /**
  * @author 黄静
@@ -20,6 +24,7 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @Entity
 @Table(name = "fhp_spouse")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonIgnoreProperties(value={"hibernateLazyInitializer"}) 
 public class Spouse extends IdExtEntity {
 	/**
 	 * 配偶ID
@@ -129,9 +134,12 @@ public class Spouse extends IdExtEntity {
 	 * 备注
 	 */
 	private String remark;
-
+	
+	private String domicileTypeLabel;
+	
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="PERSON_ID")
+	@JsonIgnore
 	public Person getPerson() {
 		return person;
 	}
@@ -372,6 +380,24 @@ public class Spouse extends IdExtEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	
+	@Transient
+	public String getDomicileTypeLabel() {
+		return domicileTypeLabel;
+	}
+
+	public void setDomicileTypeLabel(String domicileTypeLabel) {
+		this.domicileTypeLabel = domicileTypeLabel;
+	}
+	
+	
+	@Transient
+	public String getBirthdayLabel() {
+		if(birthday != null)
+			return DateUtil.convertDateToString(this.birthday,"yyyy-MM-dd");
+		return null;
 	}
 
 	@Override
