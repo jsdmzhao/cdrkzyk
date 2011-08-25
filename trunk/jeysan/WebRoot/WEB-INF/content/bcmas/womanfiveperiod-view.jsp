@@ -3,20 +3,20 @@
 <div class="page">
 	<form class="pageForm">
 		<div class="pageFormContent" layoutH="56">
-				<p>
-					<label>
-						姓名：
-					</label>
-					<input name="womanId" readonly="readonly" type="text"
-						size="30" value="${fertileWoman.person.nameh}" />
-				</p>
-				<p>
-					<label>
-						妇女编码：
-					</label>
-					<input name="womanId" readonly="readonly"  type="text"
-						size="30" value="${fertileWoman.code}" />
-				</p>
+			<p>
+				<label>
+					姓名：
+				</label>
+				<input name="womanId" readonly="readonly" type="text" size="30"
+					value="${fertileWoman.nameh}" />
+			</p>
+			<p>
+				<label>
+					妇女编码：
+				</label>
+				<input name="womanId" readonly="readonly" type="text" size="30"
+					value="${fertileWoman.code}" />
+			</p>
 			<p>
 				<label>
 					教育类型：

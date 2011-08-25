@@ -17,7 +17,7 @@
 						姓名：
 					</label>
 					<input name="womanId" readonly="readonly" type="text"
-						size="30" value="${fertileWoman.person.nameh}" />
+						size="30" value="${fertileWoman.nameh}" />
 				</p>
 				<p>
 					<label>
