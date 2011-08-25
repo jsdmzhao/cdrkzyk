@@ -1,0 +1,1 @@
+alter table fhp_villager_team add COLUMN org_name VARCHAR(100) null;
