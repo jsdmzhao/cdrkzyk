@@ -27,6 +27,10 @@ public class FertileWoman extends IdExtEntity {
 	 */
 	private Person person;
 	/**
+	 * 姓名
+	 */
+	private String nameh;
+	/**
 	 * 建卡日期
 	 */
 	private java.util.Date createDate;
@@ -34,6 +38,14 @@ public class FertileWoman extends IdExtEntity {
 	 * 妇女类别
 	 */
 	private Integer typeh;
+	/**
+	 * 一孩登记状态
+	 */
+	private Integer registerType;
+	/**
+	 * 再生育申请状态
+	 */
+	private Integer birth2Type;
 	/**
 	 * 妇女编码
 	 */
@@ -54,7 +66,15 @@ public class FertileWoman extends IdExtEntity {
 	public void setPerson(Person person) {
 		this.person = person;
 	}
+	
+	@Column(name = "NAMEH")
+	public String getNameh() {
+		return nameh;
+	}
 
+	public void setNameh(String nameh) {
+		this.nameh = nameh;
+	}
 	@Column(name = "CREATE_DATE")
 	public java.util.Date getCreateDate() {
 		return createDate;
@@ -99,6 +119,26 @@ public class FertileWoman extends IdExtEntity {
 
 	public void setWomanBasic(WomanBasic womanBasic) {
 		this.womanBasic = womanBasic;
+	}
+	
+	
+	@Column(name = "REGISTER_TYPE")
+	public Integer getRegisterType() {
+		return registerType;
+	}
+
+	public void setRegisterType(Integer registerType) {
+		this.registerType = registerType;
+	}
+	
+	
+	@Column(name = "BIRTH2_TYPE")
+	public Integer getBirth2Type() {
+		return birth2Type;
+	}
+
+	public void setBirth2Type(Integer birth2Type) {
+		this.birth2Type = birth2Type;
 	}
 
 	@Override

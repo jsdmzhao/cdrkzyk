@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.DoubleCheck;
 import com.jeysan.cpf.bcmas.service.DoubleCheckManager;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +32,7 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 	private String ids;
 	private DoubleCheck entity;
 	private DoubleCheckManager doubleCheckManager;
+	private FertileWomanManager fertileWomanManager;
 	private Page<DoubleCheck> page = new Page<DoubleCheck>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -79,6 +82,9 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new DoubleCheck();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = doubleCheckManager.getDoubleCheck(id);
 		}
@@ -117,6 +123,10 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 	@Autowired
 	public void setDoubleCheckManager(DoubleCheckManager doubleCheckManager) {
 		this.doubleCheckManager = doubleCheckManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
 	}
 	public Page<DoubleCheck> getPage() {
 		return page;

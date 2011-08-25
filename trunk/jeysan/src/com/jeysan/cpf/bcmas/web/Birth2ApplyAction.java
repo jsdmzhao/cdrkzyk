@@ -4,11 +4,15 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.Birth2Apply;
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.service.Birth2ApplyManager;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
+import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +34,8 @@ public class Birth2ApplyAction extends CrudActionSupport<Birth2Apply> {
 	private String ids;
 	private Birth2Apply entity;
 	private Birth2ApplyManager birth2ApplyManager;
+	private FertileWomanManager fertileWomanManager;
+	private SpouseManager spouseManager;
 	private Page<Birth2Apply> page = new Page<Birth2Apply>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -79,17 +85,48 @@ public class Birth2ApplyAction extends CrudActionSupport<Birth2Apply> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new Birth2Apply();
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId))
+				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
 		}else{
 			entity = birth2ApplyManager.getBirth2Apply(id);
+			if(entity != null){
+				Long personId = entity.getFertileWoman().getPerson().getId();
+				Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(personId));
+			}
 		}
+	}
+	public String findByWomanId() throws Exception {
+		String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+		if(StringUtils.isNotEmpty(fertileWomanId)){
+			Birth2Apply birth2Apply = birth2ApplyManager.getBirth2ApplyByWomanId(Long.parseLong(fertileWomanId));
+			if(birth2Apply==null)
+				birth2Apply = new Birth2Apply();
+			
+			Struts2Utils.renderJson(birth2Apply);
+			
+		}
+		return NONE;
 	}
 	@Override
 	public String save() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			birth2ApplyManager.saveBirth2Apply(entity);
-			result4Json.setStatusCode("200");
+			String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
+			if(StringUtils.isNotEmpty(fertileWomanId)){
+				FertileWoman fertileWoman = fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId));
+				entity.setFertileWoman(fertileWoman);
+				if(entity.getCheckType() == null)
+					entity.setCheckType(com.jeysan.cpf.util.Constants.CheckType.NO);
+				birth2ApplyManager.saveBirth2Apply(entity);
+				
+				fertileWoman.setBirth2Type(com.jeysan.cpf.util.Constants.Birth2Type.YES);
+				fertileWomanManager.saveFertileWoman(fertileWoman);
+				
+				result4Json.setStatusCode("200");
+			}
+			
 			if(id == null){
 				result4Json.setMessage("保存再生育申请成功");
 				result4Json.setAction(Result4Json.SAVE);
@@ -117,6 +154,14 @@ public class Birth2ApplyAction extends CrudActionSupport<Birth2Apply> {
 	@Autowired
 	public void setBirth2ApplyManager(Birth2ApplyManager birth2ApplyManager) {
 		this.birth2ApplyManager = birth2ApplyManager;
+	}
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
+	}
+	@Autowired
+	public void setSpouseManager(SpouseManager spouseManager) {
+		this.spouseManager = spouseManager;
 	}
 	public Page<Birth2Apply> getPage() {
 		return page;

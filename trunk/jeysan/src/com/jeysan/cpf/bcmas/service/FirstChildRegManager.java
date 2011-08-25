@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.jeysan.cpf.bcmas.dao.FertileWomanDao;
 import com.jeysan.cpf.bcmas.dao.FirstChildRegDao;
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.entity.FirstChildReg;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -24,6 +26,7 @@ public class FirstChildRegManager {
 	private static Logger logger = LoggerFactory.getLogger(FirstChildRegManager.class);
 	
 	private FirstChildRegDao firstChildRegDao;
+	private FertileWomanDao fertileWomanDao;
 	/**
 	 * 增加
 	 * @param entity
@@ -44,13 +47,21 @@ public class FirstChildRegManager {
 	 * @param id
 	 */
 	public void deleteFirstChildReg(Long id){
-		firstChildRegDao.delete(id);
+		FirstChildReg entity = this.getFirstChildReg(id);
+		FertileWoman  fertileWoman = entity.getFertileWoman();
+		fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.NO);
+		fertileWomanDao.save(fertileWoman);
+		firstChildRegDao.delete(entity);
 	}
 	/**
 	 * 批量删除
 	 * @param ids
 	 */
 	public void deleteFirstChildRegs(Long id){
+		FirstChildReg entity = this.getFirstChildReg(id);
+		FertileWoman  fertileWoman = entity.getFertileWoman();
+		fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.NO);
+		fertileWomanDao.save(fertileWoman);
 		firstChildRegDao.batchExecute("delete FirstChildReg where id = ? ", id);
 	}
 	/**
@@ -90,5 +101,9 @@ public class FirstChildRegManager {
 		this.firstChildRegDao = firstChildRegDao;
 	}
 	
+	@Autowired
+	public void setFertileWomanDao(FertileWomanDao fertileWomanDao) {
+		this.fertileWomanDao = fertileWomanDao;
+	}
 	
 }
