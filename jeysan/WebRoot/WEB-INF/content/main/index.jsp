@@ -61,6 +61,7 @@
 <script src="${ctx4doc}/js/jscommon2.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/plugin.js" type="text/javascript"></script>
 <script src="${ctx4doc}/js/query.js" type="text/javascript"></script>
+<script src="${ctx4doc}/js/my97/WdatePicker.js" type="text/javascript"></script>
 
 <script src="${ctx4doc}/js/json2.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -147,9 +148,10 @@ $(function(){
 										<c:when test="${c.resourceCode=='55004'}">
 										<a>${c.resourceName}</a>
 										<ul>
-											<li><a href="${ctx}/bcmas/doublecheck.action" target="navTab" rel="nav_doublecheckmanage">确定双查轮次</a></li>
-											<li><a href="${ctx}/bcmas/confirmdcobj.action?type=0" target="navTab" rel="nav_confirmdcobjmanage_1">确定双查对象</a></li>
-											<li><a href="${ctx}/bcmas/confirmdcobj.action?type=1" target="navTab" rel="nav_confirmdcobjmanage_2">登记检查结果</a></li>
+											<li><a href="${ctx}/bcmas/doublecheckdetail!input.action" target="navTab" rel="nav_doublecheckmanage2">确定整体双查轮次</a></li>
+											<li><a href="${ctx}/bcmas/doublecheck.action" target="navTab" rel="nav_doublecheckmanage">确定个人双查轮次</a></li>
+											<li><a href="${ctx}/bcmas/confirmdcobj.action?type=0" target="navTab" rel="nav_confirmdcobjmanage">确定双查对象</a></li>
+											<li><a href="${ctx}/bcmas/confirmdcobj.action?type=1" target="navTab" rel="nav_confirmdcobjmanage2">登记检查结果</a></li>
 											<li><a href="${ctx}/bcmas/lostreg.action" target="navTab" rel="nav_lostregmanage">漏查登记</a></li>
 											<li><a href="${ctx}/bcmas/doublecheckstat.action" target="navTab" rel="nav_doublecheckstatmanage">双查汇总</a></li>
 										</ul>
