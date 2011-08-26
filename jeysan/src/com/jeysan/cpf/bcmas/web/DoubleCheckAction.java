@@ -2,14 +2,14 @@
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.jeysan.cpf.bcmas.entity.DoubleCheck;
+import com.jeysan.cpf.bcmas.entity.FertileWomanDcView;
 import com.jeysan.cpf.bcmas.service.DoubleCheckManager;
+import com.jeysan.cpf.bcmas.service.FertileWomanDcViewManager;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -23,17 +23,18 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
+public class DoubleCheckAction extends CrudActionSupport<FertileWomanDcView> {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
 	private String ids;
-	private DoubleCheck entity;
+	private FertileWomanDcView entity;
 	private DoubleCheckManager doubleCheckManager;
 	private FertileWomanManager fertileWomanManager;
-	private Page<DoubleCheck> page = new Page<DoubleCheck>(DEFAULT_PAGE_SIZE);
+	private FertileWomanDcViewManager fertileWomanDcViewManager;
+	private Page<FertileWomanDcView> page = new Page<FertileWomanDcView>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
 	public String delete() throws Exception {
@@ -75,18 +76,15 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = doubleCheckManager.searchDoubleCheck(page, filters);
+		page = fertileWomanDcViewManager.searchFertileWomanView(page, filters);
 		return SUCCESS;
 	}
 	@Override
 	protected void prepareModel() throws Exception {
 		if(id == null){
-			entity = new DoubleCheck();
-			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
-			if(StringUtils.isNotEmpty(fertileWomanId))
-				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
+			entity = new FertileWomanDcView();
 		}else{
-			entity = doubleCheckManager.getDoubleCheck(id);
+			entity = fertileWomanDcViewManager.getFertileWomanDcView(id);
 		}
 	}
 	@Override
@@ -94,7 +92,7 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			doubleCheckManager.saveDoubleCheck(entity);
+			//doubleCheckManager.saveDoubleCheck(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存双查轮次成功");
@@ -117,7 +115,7 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 		return NONE;
 	}
 	@Override
-	public DoubleCheck getModel() {
+	public FertileWomanDcView getModel() {
 		return entity;
 	}
 	@Autowired
@@ -128,7 +126,12 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
 		this.fertileWomanManager = fertileWomanManager;
 	}
-	public Page<DoubleCheck> getPage() {
+	@Autowired
+	public void setFertileWomanDcViewManager(
+			FertileWomanDcViewManager fertileWomanDcViewManager) {
+		this.fertileWomanDcViewManager = fertileWomanDcViewManager;
+	}
+	public Page<FertileWomanDcView> getPage() {
 		return page;
 	}
 	public void setId(Long id) {
