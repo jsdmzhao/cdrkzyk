@@ -126,8 +126,8 @@
 			<tbody>
 				<c:forEach var="a" items="${page.result}" varStatus="b">
 					<tr target="sid_xxx" rel="${a.id}">
-						<td height="25">
-							<input type="checkbox" id="checkbox_${b.index}" name="ids" value="${a.id}_${a.giTypeh2}" />
+						<td height="25"><c:if test="${a.recordType!=719}">
+							<input type="checkbox" id="checkbox_${b.index}" name="ids" value="${a.id}_${a.giTypeh2}" /></c:if>
 						</td>
 						<td>
 							${b.index+1}
@@ -153,15 +153,15 @@
 						<td>
 							<tags:js.dict.getValue value="${a.giTypeh}" />
 						</td>
-						<td>
-							<tags:js.dict.selector value="${a.giTypeh2}" noRender="true" name="typeh_${b.index}"
-								dictCode="JS1012" onChange="setValue(${b.index},${a.id},this.value)"/>
+						<td><c:if test="${a.recordType!=719}">
+							<tags:js.dict.selector readOnly="${a.recordType==719}" value="${a.giTypeh2}" noRender="true" name="typeh_${b.index}"
+								dictCode="JS1012" onChange="setValue(${b.index},${a.id},this.value)"/></c:if>
 						</td>
 						<td>
-							<div style="width: 25px;">
+							<div style="width: 25px;"><c:if test="${a.recordType!=719}">
 								<a class="btnEdit"
 									href="${ctx}/bcmas/getiud!confirm.action?id=${a.id}&typeh={selector_typeh_${b.index}}&result4Json.navTabId=nav_getiudmanage2&hxhxhxhxhxhx"
-									target="ajaxTodo" title="确定名单吗？"></a>
+									target="ajaxTodo" title="确定名单吗？"></a></c:if>
 							</div>
 						</td>
 					</tr>
