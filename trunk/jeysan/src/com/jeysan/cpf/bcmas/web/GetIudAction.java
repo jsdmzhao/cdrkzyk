@@ -168,6 +168,7 @@ public class GetIudAction extends CrudActionSupport<GetIud> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			entity.setRecordType(Constants.RECORD_TYPE.HAS_REGISTER);
 			getIudManager.saveGetIud(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){

@@ -1,13 +1,18 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.DoubleCheck2;
 import com.jeysan.cpf.bcmas.entity.DoubleCheckDetail;
+import com.jeysan.cpf.bcmas.service.DoubleCheck2Manager;
 import com.jeysan.cpf.bcmas.service.DoubleCheckDetailManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -21,14 +26,15 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class DoubleCheckDetailAction extends CrudActionSupport<DoubleCheckDetail> {
+public class DoubleCheckDetailAction extends CrudActionSupport<DoubleCheck2> {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
 	private String ids;
-	private DoubleCheckDetail entity;
+	private DoubleCheck2 entity;
+	private DoubleCheck2Manager doubleCheck2Manager;
 	private DoubleCheckDetailManager doubleCheckDetailManager;
 	private Page<DoubleCheckDetail> page = new Page<DoubleCheckDetail>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
@@ -77,24 +83,42 @@ public class DoubleCheckDetailAction extends CrudActionSupport<DoubleCheckDetail
 	}
 	@Override
 	protected void prepareModel() throws Exception {
-		if(id == null){
-			entity = new DoubleCheckDetail();
-		}else{
-			entity = doubleCheckDetailManager.getDoubleCheckDetail(id);
-		}
+		String year_ = Struts2Utils.getParameter("year");
+		Integer year = null;
+		if(StringUtils.isEmpty(year_)){
+			Calendar ca = Calendar.getInstance();
+			ca.setTime(new Date());
+			year = ca.get(Calendar.YEAR);
+		}else
+			year = Integer.parseInt(year_);
+		Struts2Utils.getRequest().setAttribute("year", year);
+		entity = doubleCheck2Manager.getDoubleCheck2ByYear(year);
+		if(entity == null)
+			entity = new DoubleCheck2();
 	}
 	@Override
 	public String save() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			doubleCheckDetailManager.saveDoubleCheckDetail(entity);
+			doubleCheck2Manager.saveDoubleCheck2(entity);
+			String[] detail_starts = Struts2Utils.getParameterValues("detail_start");
+			String[] detail_ends = Struts2Utils.getParameterValues("detail_end");
+			DoubleCheckDetail dcd = null;
+			for(int i = 0; i<detail_starts.length; i++){
+				dcd = new DoubleCheckDetail();
+				dcd.setDoubleCheck2(entity);
+				dcd.setStart(detail_starts[i]);
+				dcd.setEnd(detail_ends[i]);
+				dcd.setSeq(i+1);
+				doubleCheckDetailManager.saveDoubleCheckDetail(dcd);
+			}
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存双查轮次详情成功");
+				result4Json.setMessage("保存整体双查轮次成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改双查轮次详情成功");
+				result4Json.setMessage("修改整体双查轮次成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -103,7 +127,7 @@ public class DoubleCheckDetailAction extends CrudActionSupport<DoubleCheckDetail
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存双查轮次详情失败");
+				result4Json.setMessage("保存整体双查轮次失败");
 			}
 			
 		}
@@ -111,12 +135,16 @@ public class DoubleCheckDetailAction extends CrudActionSupport<DoubleCheckDetail
 		return NONE;
 	}
 	@Override
-	public DoubleCheckDetail getModel() {
+	public DoubleCheck2 getModel() {
 		return entity;
 	}
 	@Autowired
 	public void setDoubleCheckDetailManager(DoubleCheckDetailManager doubleCheckDetailManager) {
 		this.doubleCheckDetailManager = doubleCheckDetailManager;
+	}
+	@Autowired
+	public void setDoubleCheck2Manager(DoubleCheck2Manager doubleCheck2Manager) {
+		this.doubleCheck2Manager = doubleCheck2Manager;
 	}
 	public Page<DoubleCheckDetail> getPage() {
 		return page;

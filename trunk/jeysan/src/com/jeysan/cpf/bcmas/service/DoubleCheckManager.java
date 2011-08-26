@@ -1,6 +1,7 @@
 ﻿package com.jeysan.cpf.bcmas.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.tool.hbm2x.StringUtils;
 import org.slf4j.Logger;
@@ -83,6 +84,13 @@ public class DoubleCheckManager {
 	@Transactional(readOnly = true)
 	public Page<DoubleCheck> searchDoubleCheck(final Page<DoubleCheck> page,final List<PropertyFilter> filter){
 		return doubleCheckDao.findPage(page, filter);
+	}
+	
+	@Transactional(readOnly = true)
+	public <T> Page searchDoubleCheckByHql(final Page page,final Map<String,T> values){
+		StringBuilder hql = new StringBuilder();
+		hql.append("select fw DoubleCheck as dc left join dc.fertileWoman as fw");
+		return doubleCheckDao.findPage(page, hql.toString(), values);
 	}
 	
 	@Autowired

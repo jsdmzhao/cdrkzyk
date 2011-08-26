@@ -13,7 +13,7 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
- * 
+ * 个人双查轮次
  */
 @Entity
 @Table(name = "fhp_double_check")
@@ -28,10 +28,6 @@ public class DoubleCheck extends IdExtEntity {
 	 */
 	private String start;
 	/**
-	 * 年度
-	 */
-	private Integer year;
-	/**
 	 * WOMAN_ID
 	 */
 	private FertileWoman fertileWoman;
@@ -43,6 +39,21 @@ public class DoubleCheck extends IdExtEntity {
 	 * 查环查孕类型原因
 	 */
 	private String cause;
+	/**
+	 * 轮次ID
+	 */
+	private DoubleCheckDetail detail;
+	
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name = "DETAIL_ID")
+	public DoubleCheckDetail getDetail() {
+		return detail;
+	}
+
+	public void setDetail(DoubleCheckDetail detail) {
+		this.detail = detail;
+	}
 
 	@Column(name = "COUNT")
 	public Integer getCount() {
@@ -62,14 +73,6 @@ public class DoubleCheck extends IdExtEntity {
 		this.start = start;
 	}
 
-	@Column(name = "YEAR")
-	public Integer getYear() {
-		return year;
-	}
-
-	public void setYear(Integer year) {
-		this.year = year;
-	}
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "WOMAN_ID")
