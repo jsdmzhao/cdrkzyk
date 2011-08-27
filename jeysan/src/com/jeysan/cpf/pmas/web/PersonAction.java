@@ -13,6 +13,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
+import com.jeysan.cpf.bcmas.service.WomanBasicManager;
 import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.PersonOut;
 import com.jeysan.cpf.pmas.service.HouseManager;
@@ -49,6 +50,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 	private PersonOutManager personOutManager;
 	private VillagerTeamManager villagerTeamManager;
 	private FertileWomanManager fertileWomanManager;
+	private WomanBasicManager womanBasicManager;
 	private Page<Person> page = new Page<Person>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -145,6 +147,11 @@ public class PersonAction extends CrudActionSupport<Person> {
 				fertileWoman.setPerson(entity);
 				//entity.setFertileWoman(fertileWoman);
 				fertileWomanManager.saveFertileWoman(fertileWoman);
+				if(entity.getPersonBasic().getMarryStatus() != null){
+					fertileWoman.getWomanBasic().setMarryStatus(entity.getPersonBasic().getMarryStatus());
+					fertileWoman.getWomanBasic().setFertileWoman(fertileWoman);
+					womanBasicManager.saveWomanBasic(fertileWoman.getWomanBasic());
+				}
 			}else if(entity.getKind()==669){//非育龄妇女
 				fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
 			}
@@ -241,6 +248,10 @@ public class PersonAction extends CrudActionSupport<Person> {
 	@Autowired
 	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
 		this.fertileWomanManager = fertileWomanManager;
+	}
+	@Autowired
+	public void setWomanBasicManager(WomanBasicManager womanBasicManager) {
+		this.womanBasicManager = womanBasicManager;
 	}
 	public Page<Person> getPage() {
 		return page;
