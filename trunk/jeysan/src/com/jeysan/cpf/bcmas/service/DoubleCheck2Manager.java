@@ -94,6 +94,11 @@ public class DoubleCheck2Manager {
 		return doubleCheck2Dao.findPage(page, filter);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<DoubleCheck2> getAllDoubleCheck(){
+		return doubleCheck2Dao.getAll("year",false);
+	}
+	
 	@Autowired
 	public void setDoubleCheck2Dao(DoubleCheck2Dao doubleCheck2Dao) {
 		this.doubleCheck2Dao = doubleCheck2Dao;

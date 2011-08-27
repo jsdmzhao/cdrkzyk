@@ -1,13 +1,14 @@
 package com.jeysan.cpf.bcmas.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
@@ -15,8 +16,8 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
  */
 @Entity
 @Table(name = "fhp_fertile_woman_dc_view")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class FertileWomanDcView extends IdExtEntity {
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
+public class FertileWomanDcView implements Serializable {
 	/**
 	 * 姓名
 	 */
@@ -44,17 +45,13 @@ public class FertileWomanDcView extends IdExtEntity {
 	private Integer spouseMarryStatus;
 	
 	/**
-	 * 每年双查次数
-	 */
-	private Integer count;
-	/**
 	 * 轮次起始年月
 	 */
 	private String start;
 	/**
-	 * DETAIL_ID
+	 * DC_ID
 	 */
-	private Long detailId;
+	private Long dcId;
 	/**
 	 * 查环查孕类型
 	 */
@@ -92,10 +89,6 @@ public class FertileWomanDcView extends IdExtEntity {
 	 */
 	private String houseNo;
 	/**
-	 * 配偶姓名
-	 */
-	private String spNameh;
-	/**
 	 * 男孩数
 	 */
 	private Integer boyCount;
@@ -115,7 +108,30 @@ public class FertileWomanDcView extends IdExtEntity {
 	 * 手术日期
 	 */
 	private java.util.Date opsDate;
+	/**
+	 * 年份
+	 */
+	private Integer year;
 	
+	private String id;
+	
+	private String id_;
+	@Id
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	@Column(name = "ID_")
+	public String getId_() {
+		return id_;
+	}
+
+	public void setId_(String id_) {
+		this.id_ = id_;
+	}
 	
 	@Column(name = "NAMEH")
 	public String getNameh() {
@@ -170,14 +186,6 @@ public class FertileWomanDcView extends IdExtEntity {
 	public void setSpouseMarryStatus(Integer spouseMarryStatus) {
 		this.spouseMarryStatus = spouseMarryStatus;
 	}
-	@Column(name = "COUNT")
-	public Integer getCount() {
-		return count;
-	}
-
-	public void setCount(Integer count) {
-		this.count = count;
-	}
 
 	@Column(name = "START")
 	public String getStart() {
@@ -207,13 +215,13 @@ public class FertileWomanDcView extends IdExtEntity {
 	}
 	
 	
-	@Column(name = "DETAIL_ID")
-	public Long getDetailId() {
-		return detailId;
+	@Column(name = "DC_ID")
+	public Long getDcId() {
+		return dcId;
 	}
 
-	public void setDetailId(Long detailId) {
-		this.detailId = detailId;
+	public void setDcId(Long dcId) {
+		this.dcId = dcId;
 	}
 	
 	
@@ -277,16 +285,6 @@ public class FertileWomanDcView extends IdExtEntity {
 	}
 	
 	
-	@Column(name = "sp_nameh")
-	public String getSpNameh() {
-		return spNameh;
-	}
-
-
-	public void setSpNameh(String spNameh) {
-		this.spNameh = spNameh;
-	}
-	
 	@Column(name = "boy_count")
 	public Integer getBoyCount() {
 		return boyCount;
@@ -328,6 +326,16 @@ public class FertileWomanDcView extends IdExtEntity {
 
 	public void setNoCause(String noCause) {
 		this.noCause = noCause;
+	}
+	
+	
+	@Column(name = "YEAR")
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
 	}
 
 	@Override

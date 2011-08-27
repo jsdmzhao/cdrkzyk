@@ -30,8 +30,12 @@ public class FertileWomanDcViewManager {
 	 * @return
 	 */
 	@Transactional(readOnly = true)
-	public FertileWomanDcView getFertileWomanDcView(Long id){
+	public FertileWomanDcView getFertileWomanDcView(String id){
 		return fertileWomanDcViewDao.get(id);
+	}
+	@Transactional(readOnly = true)
+	public FertileWomanDcView getFertileWomanDcView(Long dcId,Long womanId){
+		return fertileWomanDcViewDao.findUnique("from FertileWomanDcView where id_ = ? and dcId = ? ", womanId,dcId);
 	}
 	/**
 	 * 分页查找

@@ -22,7 +22,7 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
  */
 @Entity
 @Table(name = "fhp_fertile_woman_view")
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class FertileWomanView extends IdExtEntity {
 	/**
 	 * 姓名
