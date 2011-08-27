@@ -19,8 +19,8 @@
 		value="${param['filter_EQI_marryStatus']}" />
 	<input type="hidden" name="filter_EQS_area"
 		value="${param['filter_EQS_area']}" />
-	<input type="hidden" name="filter_EQL_detailId"
-		value="${param['filter_EQL_detailId']}" />
+	<input type="hidden" name="filter_EQL_dcId"
+		value="${param['filter_EQL_dcId']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -47,7 +47,12 @@
 						</td>
 						<td>
 							轮次：
-							<input type="text" name="filter_EQL_detailId" value="${param['filter_EQL_detailId']}" />
+<select style="width:100px" name="filter_EQL_dcId">
+	<option value="">请选择</option>
+	<c:forEach var="a" items="${dcs}">
+	<option value="${a.id}" <c:if test="${a.id==param.filter_EQL_dcId}">selected="selected"</c:if>>${a.year}</option>
+	</c:forEach>
+</select>
 						</td>
 					</tr>
 					<tr>
@@ -94,13 +99,13 @@
 			<ul class="toolBar">
 				<li>
 					<a class="edit"
-						href="${ctx}/bcmas/doublecheck!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_doublecheckmanage"
+						href="${ctx}/bcmas/doublecheck!delete.action?ids={sid_xxx}&type=0&result4Json.navTabId=nav_doublecheckmanage"
 						target="ajaxTodo" title="确定所选不查吗?"><span>所选不查</span>
 					</a>
 				</li>
 				<li>
 					<a class="edit"
-						href="${ctx}/bcmas/doublecheck!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_doublecheckmanage"
+						href="${ctx}/bcmas/doublecheck!delete.action?ids={sid_xxx}&type=1&result4Json.navTabId=nav_doublecheckmanage"
 						target="ajaxTodo" title="确定所选免查吗?"><span>所选免查</span>
 					</a>
 				</li>
@@ -117,7 +122,7 @@
 				</li>
 			</ul>
 		</div>
-		<table class="table" width="100%" layouth="138">
+		<table class="table" width="100%" layouth="164">
 			<thead>
 				<tr>
 					<th width="30" align="center">
@@ -146,6 +151,9 @@
 					</th>
 					<th width="80" orderField="dcTypeh" class="orderFlag">
 						查环查孕类型
+					</th>
+					<th width="120" orderField="dcId" class="orderFlag">
+						轮次~起始
 					</th>
 					<th width="80" align="center">
 						操作
@@ -181,6 +189,9 @@
 						</td>
 						<td>
 							<tags:js.dict.getValue value="${a.dcTypeh}"></tags:js.dict.getValue>
+						</td>
+						<td>
+							[${a.year}]~${a.start}
 						</td>
 						<td>
 							<div style="width: 50px;">
