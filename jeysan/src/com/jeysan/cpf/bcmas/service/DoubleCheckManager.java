@@ -31,6 +31,7 @@ public class DoubleCheckManager {
 	 */
 	public void saveDoubleCheck(DoubleCheck entity){
 		doubleCheckDao.save(entity);
+		//doubleCheckDao.flush();
 	}
 	/**
 	 * 增加Collection
@@ -74,6 +75,16 @@ public class DoubleCheckManager {
 	@Transactional(readOnly = true)
 	public DoubleCheck getDoubleCheck(Long id){
 		return doubleCheckDao.get(id);
+	}
+	/**
+	 * 通过批次id和妇女id查找
+	 * @param dcId
+	 * @param womanId
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public DoubleCheck getDoubleCheckByFID(Long dcId,Long womanId){
+		return doubleCheckDao.findUnique("from DoubleCheck where fertileWoman.id = ? and dc2.id = ? ", womanId,dcId);
 	}
 	/**
 	 * 分页查找

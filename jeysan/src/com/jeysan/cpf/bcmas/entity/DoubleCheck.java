@@ -20,10 +20,6 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class DoubleCheck extends IdExtEntity {
 	/**
-	 * 每年双查次数
-	 */
-	private Integer count;
-	/**
 	 * 轮次起始年月
 	 */
 	private String start;
@@ -40,28 +36,19 @@ public class DoubleCheck extends IdExtEntity {
 	 */
 	private String cause;
 	/**
-	 * 轮次ID
+	 * 批次ID
 	 */
-	private DoubleCheckDetail detail;
+	private DoubleCheck2 dc2;
 	
 	
 	@ManyToOne(optional=false)
-	@JoinColumn(name = "DETAIL_ID")
-	public DoubleCheckDetail getDetail() {
-		return detail;
+	@JoinColumn(name = "DC_ID")
+	public DoubleCheck2 getDc2() {
+		return dc2;
 	}
 
-	public void setDetail(DoubleCheckDetail detail) {
-		this.detail = detail;
-	}
-
-	@Column(name = "COUNT")
-	public Integer getCount() {
-		return count;
-	}
-
-	public void setCount(Integer count) {
-		this.count = count;
+	public void setDc2(DoubleCheck2 dc2) {
+		this.dc2 = dc2;
 	}
 
 	@Column(name = "START")

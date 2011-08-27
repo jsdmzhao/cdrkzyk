@@ -88,7 +88,7 @@ public class FertileWomanAction extends CrudActionSupport<FertileWoman> {
 		}
 		filters.add(pf);
 		
-		String registerType = Struts2Utils.getParameter("registerType");
+		//String registerType = Struts2Utils.getParameter("registerType");
 		
 		page = fertileWomanManager.searchFertileWoman(page, filters);
 		return SUCCESS;
