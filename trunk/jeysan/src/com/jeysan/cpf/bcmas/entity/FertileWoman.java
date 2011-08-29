@@ -47,6 +47,10 @@ public class FertileWoman extends IdExtEntity {
 	 */
 	private Integer birth2Type;
 	/**
+	 * 保险状态
+	 */
+	private Integer assStatus;
+	/**
 	 * 妇女编码
 	 */
 	private String code;
@@ -139,6 +143,16 @@ public class FertileWoman extends IdExtEntity {
 
 	public void setBirth2Type(Integer birth2Type) {
 		this.birth2Type = birth2Type;
+	}
+	
+	
+	@Column(name = "ASS_STATUS")
+	public Integer getAssStatus() {
+		return assStatus;
+	}
+
+	public void setAssStatus(Integer assStatus) {
+		this.assStatus = assStatus;
 	}
 
 	@Override
