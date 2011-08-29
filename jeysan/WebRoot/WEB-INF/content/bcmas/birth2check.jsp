@@ -93,7 +93,7 @@
 					<th width="30" align="center">
 						序号
 					</th>
-					<th width="80" orderField=fertileWoman.nameh class="orderFlag">
+					<th width="80" orderField="fertileWoman.nameh" class="orderFlag">
 						姓名
 					</th>
 					<th width="80" orderField="fertileWoman.code" class="orderFlag">
