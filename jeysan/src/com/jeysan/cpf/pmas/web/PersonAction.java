@@ -11,7 +11,9 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.DeathReg;
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
+import com.jeysan.cpf.bcmas.service.DeathRegManager;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanBasicManager;
 import com.jeysan.cpf.pmas.entity.Person;
@@ -21,6 +23,7 @@ import com.jeysan.cpf.pmas.service.PersonBasicManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.PersonOutManager;
 import com.jeysan.cpf.pmas.service.VillagerTeamManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -51,6 +54,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 	private VillagerTeamManager villagerTeamManager;
 	private FertileWomanManager fertileWomanManager;
 	private WomanBasicManager womanBasicManager;
+	private DeathRegManager deathRegManager;
 	private Page<Person> page = new Page<Person>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -125,7 +129,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 			result4Json = new Result4Json();
 		try{
 			if(id == null)
-				entity.setCancelType(672);
+				entity.setCancelType(Constants.CANCEL_TYPE.NORMAL);
 			String houseId = Struts2Utils.getParameter("master.dwz_houseLookup.houseId");
 			if(StringUtils.isNotEmpty(houseId))
 				entity.getPersonBasic().setHouseId(Long.parseLong(houseId));
@@ -133,7 +137,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 			entity.getPersonBasic().setPerson(entity);
 			personBasicManager.savePersonBasic(entity.getPersonBasic());
 			//同步到育妇表..................
-			if(entity.getKind()==668){//育龄妇女
+			if(entity.getKind()==Constants.FW_KIND.FW){//育龄妇女
 				FertileWoman fertileWoman = fertileWomanManager.getFertileWomanByPersonId(entity.getId());
 				if(fertileWoman == null)
 					fertileWoman = new FertileWoman();
@@ -144,6 +148,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 				fertileWoman.setNameh(entity.getNameh());
 				fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.NO);
 				fertileWoman.setBirth2Type(com.jeysan.cpf.util.Constants.Birth2Type.NO);
+				fertileWoman.setAssStatus(com.jeysan.cpf.util.Constants.ASS_STATUS.NO_ASS);
 				fertileWoman.setPerson(entity);
 				//entity.setFertileWoman(fertileWoman);
 				fertileWomanManager.saveFertileWoman(fertileWoman);
@@ -152,7 +157,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 					fertileWoman.getWomanBasic().setFertileWoman(fertileWoman);
 					womanBasicManager.saveWomanBasic(fertileWoman.getWomanBasic());
 				}
-			}else if(entity.getKind()==669){//非育龄妇女
+			}else if(entity.getKind()==Constants.FW_KIND.NOT_FW){//非育龄妇女
 				fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
 			}
 			
@@ -187,18 +192,23 @@ public class PersonAction extends CrudActionSupport<Person> {
 		try{
 			Person person = personManager.getPerson(Long.parseLong(id));
 			if(StringUtils.isEmpty(cancelType))
-				cancelType = "673";
+				cancelType = Constants.CANCEL_TYPE.RENEW + "";
 			person.setCancelType(Integer.parseInt(cancelType));
 			person.setCancelDate(new Date());
 			if(StringUtils.isNotEmpty(dateh))
 				person.setDateh(DateUtil.createUtilDate(dateh));
 			personManager.savePerson(person);
 			
-			if(StringUtils.equals(cancelType, "154")){
+			if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.PERSON_OUT+"")){
 				PersonOut personOut = new PersonOut();
 				personOut.setPerson(person);
 				personOut.setOutDate(person.getDateh());
 				personOutManager.savePersonOut(personOut);
+			}else if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.DEATH+"")){
+				DeathReg deathReg = new DeathReg();
+				deathReg.setPerson(person);
+				deathReg.setDateh(person.getDateh());
+				deathRegManager.saveDeathReg(deathReg);
 			}
 			
 			result4Json.setStatusCode("200");
@@ -252,6 +262,10 @@ public class PersonAction extends CrudActionSupport<Person> {
 	@Autowired
 	public void setWomanBasicManager(WomanBasicManager womanBasicManager) {
 		this.womanBasicManager = womanBasicManager;
+	}
+	@Autowired
+	public void setDeathRegManager(DeathRegManager deathRegManager) {
+		this.deathRegManager = deathRegManager;
 	}
 	public Page<Person> getPage() {
 		return page;
