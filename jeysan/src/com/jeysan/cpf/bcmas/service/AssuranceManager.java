@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.bcmas.dao.AssuranceDao;
 import com.jeysan.cpf.bcmas.entity.Assurance;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 
@@ -44,7 +45,8 @@ public class AssuranceManager {
 	 * @param id
 	 */
 	public void deleteAssurance(Long id){
-		assuranceDao.delete(id);
+		assuranceDao.batchExecute("delete Assurance where fertileWoman.id = ?", id);
+		assuranceDao.batchExecute("update FertileWoman set assStatus = ? where id = ?", Constants.ASS_STATUS.NO_ASS,id);
 	}
 	/**
 	 * 批量删除
@@ -61,7 +63,7 @@ public class AssuranceManager {
 		String[] ids_array = StringUtils.split(ids,",");
 		if(ids_array!=null&&ids_array.length>0){
 			for(String id : ids_array){
-				deleteAssurances(Long.parseLong(id));
+				deleteAssurance(Long.parseLong(id));
 			}
 		}
 	}
@@ -73,6 +75,10 @@ public class AssuranceManager {
 	@Transactional(readOnly = true)
 	public Assurance getAssurance(Long id){
 		return assuranceDao.get(id);
+	}
+	@Transactional(readOnly = true)
+	public Assurance getAssuranceByWomanId(Long womanId){
+		return assuranceDao.findUnique("from Assurance where fertileWoman.id = ? ", womanId );
 	}
 	/**
 	 * 分页查找

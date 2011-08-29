@@ -2,13 +2,19 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.AssStatusView;
 import com.jeysan.cpf.bcmas.entity.Assurance;
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
+import com.jeysan.cpf.bcmas.service.AssStatusViewManager;
 import com.jeysan.cpf.bcmas.service.AssuranceManager;
+import com.jeysan.cpf.bcmas.service.FertileWomanManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -27,19 +33,22 @@ public class AssuranceAction extends CrudActionSupport<Assurance> {
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
+	private Long fertileWomanId;
 	private String ids;
 	private Assurance entity;
 	private AssuranceManager assuranceManager;
-	private Page<Assurance> page = new Page<Assurance>(DEFAULT_PAGE_SIZE);
+	private AssStatusViewManager assStatusViewManager;
+	private FertileWomanManager fertileWomanManager;
+	private Page<AssStatusView> page = new Page<AssStatusView>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
 	public String delete() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
-			if(id!=null){
-				assuranceManager.deleteAssurance(id);
-				logger.debug("删除了保险保障："+id);
+			if(fertileWomanId!=null){
+				assuranceManager.deleteAssurance(fertileWomanId);
+				logger.debug("删除了保险保障："+fertileWomanId);
 			}else {
 				assuranceManager.deleteAssurances(ids);
 				logger.debug("删除了很多保险保障："+ids.toString());
@@ -72,31 +81,45 @@ public class AssuranceAction extends CrudActionSupport<Assurance> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = assuranceManager.searchAssurance(page, filters);
+		page = assStatusViewManager.searchAssStatusView(page, filters);
 		return SUCCESS;
 	}
 	@Override
 	protected void prepareModel() throws Exception {
-		if(id == null){
+		if(fertileWomanId == null){
 			entity = new Assurance();
 		}else{
+			entity = assuranceManager.getAssuranceByWomanId(fertileWomanId);
+			Struts2Utils.getRequest().setAttribute("ass",assStatusViewManager.getAssStatusView(fertileWomanId));
+		}
+		if(entity == null && id!=null){
 			entity = assuranceManager.getAssurance(id);
 		}
+		if(entity == null)
+			entity = new Assurance();
 	}
 	@Override
 	public String save() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			assuranceManager.saveAssurance(entity);
-			result4Json.setStatusCode("200");
-			if(id == null){
-				result4Json.setMessage("保存保险保障成功");
-				result4Json.setAction(Result4Json.SAVE);
-			}else{
-				result4Json.setMessage("修改保险保障成功");
-				result4Json.setAction(Result4Json.UPDATE);
+			String type = Struts2Utils.getParameter("type");
+			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
+			FertileWoman fw = fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId));
+			if(StringUtils.equals(type, "0")){
+				fw.setAssStatus(Constants.ASS_STATUS.YET_ASS);
+				entity.setAssStatus(Constants.ASS_STATUS.YET_ASS);
+				result4Json.setMessage("登记保险保障成功");
+			}else if(StringUtils.equals(type, "1")){
+				fw.setAssStatus(Constants.ASS_STATUS.CANCEL);
+				entity.setAssStatus(Constants.ASS_STATUS.CANCEL);
+				result4Json.setMessage("取消保险保障成功");
 			}
+			entity.setFertileWoman(fw);
+			assuranceManager.saveAssurance(entity);
+			fertileWomanManager.saveFertileWoman(fw);
+			result4Json.setStatusCode("200");
+			result4Json.setAction(Result4Json.UPDATE);
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -118,11 +141,22 @@ public class AssuranceAction extends CrudActionSupport<Assurance> {
 	public void setAssuranceManager(AssuranceManager assuranceManager) {
 		this.assuranceManager = assuranceManager;
 	}
-	public Page<Assurance> getPage() {
+	@Autowired
+	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
+		this.fertileWomanManager = fertileWomanManager;
+	}
+	@Autowired
+	public void setAssStatusViewManager(AssStatusViewManager assStatusViewManager) {
+		this.assStatusViewManager = assStatusViewManager;
+	}
+	public Page<AssStatusView> getPage() {
 		return page;
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	public void setFertileWomanId(Long fertileWomanId) {
+		this.fertileWomanId = fertileWomanId;
 	}
 	public void setIds(String ids) {
 		this.ids = ids;
