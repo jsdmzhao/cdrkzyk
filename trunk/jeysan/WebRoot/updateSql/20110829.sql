@@ -1,0 +1,1 @@
+alter table FHP_FERTILE_WOMAN add COLUMN ASS_STATUS int null;
