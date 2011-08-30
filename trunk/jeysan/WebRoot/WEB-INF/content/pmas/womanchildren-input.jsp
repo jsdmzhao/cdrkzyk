@@ -103,6 +103,19 @@
 				</p>
 				<p>
 					<label>
+						民族：
+					</label>
+					<tags:js.dict.selector name="native" value="${native}" dictCode="JS1044"/>
+				</p>
+				<p>
+					<label>
+						照片：
+					</label>
+					<input name="photo" type="text" size="30"
+						value="${photo}" />
+				</p>
+				<p>
+					<label>
 						政策内外：
 					</label>
 					<tags:js.dict.selector name="policy" class1="required"  value="${policy}" dictCode="JS1037"/>
