@@ -6,7 +6,7 @@
 			<div class="pageFormContent" layoutH="56">
 				<div style="float:left; display:block; margin:10px;padding:10px; overflow:auto; width:90%; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fhpanalyse_sub"><span>年度实有流动人口基本情况统计表</span></a>
+						<a class="button" href="javascript:void(0)" onclick="print('${ctx }','/decision/fhpanalyse!stat_yffp.action','打印测试')"><span>年度实有流动人口基本情况统计表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
