@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -20,6 +23,7 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @Entity
 @Table(name = "fhp_woman_children")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@JsonIgnoreProperties(value={"hibernateLazyInitializer"}) 
 public class WomanChildren extends IdExtEntity {
 	/**
 	 * 人员ID
@@ -33,10 +37,14 @@ public class WomanChildren extends IdExtEntity {
 	 * 性别
 	 */
 	private Integer sex;
+	
+	private String sexLabel;
 	/**
 	 * 出生日期
 	 */
 	private java.util.Date birthday;
+	
+	private String birthdayLabel;
 	/**
 	 * 出生地点
 	 */
@@ -89,9 +97,20 @@ public class WomanChildren extends IdExtEntity {
 	 * 收养证号
 	 */
 	private String adoptCept;
+	/**
+	 * 民族
+	 */
+	private Integer native_;
+	
+	private String nativeLabel;
+	/**
+	 * 照片
+	 */
+	private String photo;
 
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="PERSON_ID")
+	@JsonIgnore
 	public Person getPerson() {
 		return person;
 	}
@@ -242,6 +261,50 @@ public class WomanChildren extends IdExtEntity {
 
 	public void setAdoptCept(String adoptCept) {
 		this.adoptCept = adoptCept;
+	}
+	
+	
+	@Column(name = "NATIVE")
+	public Integer getNative() {
+		return native_;
+	}
+
+	public void setNative(Integer native_) {
+		this.native_ = native_;
+	}
+	@Column(name = "PHOTO")
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+	
+	
+	@Transient
+	public String getSexLabel() {
+		return sexLabel;
+	}
+
+	public void setSexLabel(String sexLabel) {
+		this.sexLabel = sexLabel;
+	}
+	@Transient
+	public String getBirthdayLabel() {
+		return birthdayLabel;
+	}
+
+	public void setBirthdayLabel(String birthdayLabel) {
+		this.birthdayLabel = birthdayLabel;
+	}
+	@Transient
+	public String getNativeLabel() {
+		return nativeLabel;
+	}
+
+	public void setNativeLabel(String nativeLabel) {
+		this.nativeLabel = nativeLabel;
 	}
 
 	@Override

@@ -10,14 +10,17 @@ import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.pmas.entity.Spouse;
 import com.jeysan.cpf.pmas.entity.WomanChildren;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.cpf.pmas.service.WomanChildrenManager;
+import com.jeysan.cpf.security.service.DictSubManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
+import com.jeysan.modules.utils.date.DateUtil;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -39,6 +42,7 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 	private WomanChildrenManager womanChildrenManager;
 	private PersonManager personManager;
 	private SpouseManager spouseManager;
+	private DictSubManager dictSubManager;
 	private Page<WomanChildren> page = new Page<WomanChildren>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -99,6 +103,24 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 		Struts2Utils.getRequest().setAttribute("entity",entity);
 		return "simplesub";
 	}
+	public String simplesub4ajax() throws Exception {
+		String personId = Struts2Utils.getParameter("personId");
+		if(StringUtils.isNotEmpty(personId)){
+			WomanChildren children = womanChildrenManager.getWomanChildrenByPersonId(Long.parseLong(personId));
+			if(children!=null){
+				if(children.getSex() != null)
+					children.setSexLabel(dictSubManager.getDictSub(children.getSex()).getSubName());
+				if(children.getNative() != null)
+					children.setNativeLabel(dictSubManager.getDictSub(children.getNative()).getSubName());
+				if(children.getBirthday() != null)
+					children.setBirthdayLabel(DateUtil.convertDateToString(children.getBirthday(),"yyyy-MM-dd"));
+			}else
+				children = new WomanChildren();
+			
+			Struts2Utils.renderJson(children);
+		}
+		return NONE;
+	}
 	@Override
 	protected void prepareModel() throws Exception {
 		if(id == null){
@@ -155,6 +177,10 @@ public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
 	@Autowired
 	public void setSpouseManager(SpouseManager spouseManager) {
 		this.spouseManager = spouseManager;
+	}
+	@Autowired
+	public void setDictSubManager(DictSubManager dictSubManager) {
+		this.dictSubManager = dictSubManager;
 	}
 	public Page<WomanChildren> getPage() {
 		return page;
