@@ -51,6 +51,8 @@ public class BcsCertManager {
 	 * @param ids
 	 */
 	public void deleteBcsCerts(Long id){
+		bcsCertDao.batchExecute("delete BcsCertCheck where certId = ? ", id);
+		bcsCertDao.batchExecute("delete BcsCertChange where certId = ? ", id);
 		bcsCertDao.batchExecute("delete BcsCert where id = ? ", id);
 	}
 	/**
