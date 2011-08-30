@@ -16,7 +16,7 @@
 				<label>
 					姓名：
 				</label>
-				<input name="master.dwz_personLookup.nameh" readonly="readonly" type="text" size="30"
+				<input class="required" name="master.dwz_personLookup.nameh" readonly="readonly" type="text" size="30"
 					value="${person.nameh}" />
 				<a class="btnLook" href="${ctx}/pmas/person!list4lookup.action" lookupGroup="master" lookupName="personLookup">查找人员</a>
 			</p>
