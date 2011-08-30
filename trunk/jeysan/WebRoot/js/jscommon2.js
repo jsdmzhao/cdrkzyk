@@ -224,7 +224,6 @@ function saveTemplate(flag){
  */
 function JS_print(action,title){
 	var ctx = action.substring(0,action.indexOf('/',1));
-	alert(ctx);
 	showWindowRaw(ctx + '/print/print!print.action?url='+ action+'&print=print&title='+title,800,600);
 }
 /**
