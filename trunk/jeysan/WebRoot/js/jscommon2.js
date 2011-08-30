@@ -118,6 +118,26 @@ function setHomepage() {
 		prefs.setCharPref('browser.startup.homepage', document.URL);
 	}
 }
+/**
+ * 通用的方法，指定年月往后推移几周后的年月
+ * 比如getNextYM('2011-10',3)='2012-01'
+ */
+function getNextYM(ym,len){
+	var yms = ym.split('-');
+	var now_y = parseInt(yms[0],10);
+	var now_m = parseInt(yms[1],10);
+	if(len >= 12){
+		now_y += Math.floor(len/12);
+		now_m += len%12;
+	}else{
+		now_m += len;
+	}
+	if(now_m > 12){
+		now_y++;
+		now_m -= 12;
+	}
+	return now_y + '-' + (now_m>9?(''+now_m):('0'+now_m));
+}
 
 /**
  *下面都为页面辅助方法,零散的,不可通用------------------------------------------------------------------ 
@@ -197,11 +217,3 @@ function saveTemplate(flag){
 		validateCallback($('#form2')[0]);
 }
 
-//打印
-function print(ctx,action,title){
-	showWindowRaw(ctx + '/print/print!print.action?url='+ ctx + action+'&print=print&title='+title,800,600);
-}
-//弹出窗口
-function showWindowRaw(strurl, width, height) {
-    window.open(strurl, 'report_select', 'toolbar=no,location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=' + width + ',height=' + height);
-}
