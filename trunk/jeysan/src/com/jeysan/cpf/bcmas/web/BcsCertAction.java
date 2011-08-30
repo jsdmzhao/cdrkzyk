@@ -4,15 +4,21 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.BcsCert;
+import com.jeysan.cpf.bcmas.entity.BcsCertChange;
+import com.jeysan.cpf.bcmas.entity.FertileWoman;
+import com.jeysan.cpf.bcmas.service.BcsCertChangeManager;
 import com.jeysan.cpf.bcmas.service.BcsCertManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
+import com.jeysan.modules.utils.date.DateUtil;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -30,6 +36,7 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 	private String ids;
 	private BcsCert entity;
 	private BcsCertManager bcsCertManager;
+	private BcsCertChangeManager bcsCertChangeManager;
 	private Page<BcsCert> page = new Page<BcsCert>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -38,7 +45,7 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				bcsCertManager.deleteBcsCert(id);
+				bcsCertManager.deleteBcsCerts(id);
 				logger.debug("删除了计划生育服务证："+id);
 			}else {
 				bcsCertManager.deleteBcsCerts(ids);
@@ -81,29 +88,77 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 			entity = new BcsCert();
 		}else{
 			entity = bcsCertManager.getBcsCert(id);
+			Struts2Utils.getRequest().setAttribute("change", bcsCertChangeManager.getBcsCertChangeByCertId(id));
 		}
+	}
+	/**
+	 * 变更或者废止
+	 * @return
+	 * @throws Exception
+	 */
+	public String change() throws Exception {
+		String type = Struts2Utils.getParameter("type");
+		if(StringUtils.isNotEmpty(type)){
+			BcsCertChange change = new BcsCertChange();
+			change.setTypeh(Integer.parseInt(type));
+			change.setCertId(entity.getId());
+			change.setAgent(Struts2Utils.getParameter("change.agent"));
+			String cause = Struts2Utils.getParameter("change.cause");
+			if(StringUtils.isNotEmpty(cause))
+				change.setCause(Integer.parseInt(cause));
+			String dateh = Struts2Utils.getParameter("change.dateh");
+			if(StringUtils.isNotEmpty(dateh))
+				change.setDateh(DateUtil.createUtilDate(dateh));
+			bcsCertChangeManager.saveBcsCertChange(change);
+		}
+		return NONE;
 	}
 	@Override
 	public String save() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			bcsCertManager.saveBcsCert(entity);
-			result4Json.setStatusCode("200");
-			if(id == null){
-				result4Json.setMessage("保存计划生育服务证成功");
-				result4Json.setAction(Result4Json.SAVE);
+			String type = Struts2Utils.getParameter("type");
+			if(StringUtils.isNotEmpty(type)){
+				BcsCertChange change = bcsCertChangeManager.getBcsCertChangeByCertId(id);
+				if(change == null)
+					change = new BcsCertChange();
+				change.setTypeh(Integer.parseInt(type));
+				change.setCertId(entity.getId());
+				change.setAgent(Struts2Utils.getParameter("change.agent"));
+				String cause = Struts2Utils.getParameter("change.cause");
+				if(StringUtils.isNotEmpty(cause))
+					change.setCause(Integer.parseInt(cause));
+				String dateh = Struts2Utils.getParameter("change.dateh");
+				if(StringUtils.isNotEmpty(dateh))
+					change.setDateh(DateUtil.createUtilDate(dateh));
+				bcsCertChangeManager.saveBcsCertChange(change);
+				if(StringUtils.equals(type, "0"))
+					entity.setCertType(Constants.CERT_TYPE.CHANGED);
+				else if(StringUtils.equals(type, "1"))
+					entity.setCertType(Constants.CERT_TYPE.CANCEL);
+				bcsCertManager.saveBcsCert(entity);
 			}else{
-				result4Json.setMessage("修改计划生育服务证成功");
-				result4Json.setAction(Result4Json.UPDATE);
+				String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
+				if(StringUtils.isNotEmpty(fertileWomanId)){
+					FertileWoman fertileWoman = new FertileWoman();
+					fertileWoman.setId(Long.parseLong(fertileWomanId));
+					entity.setFertileWoman(fertileWoman);
+				}
+				entity.setCertType(Constants.CERT_TYPE.NORMAL);
+				bcsCertManager.saveBcsCert(entity);
 			}
+			result4Json.setStatusCode("200");
+			result4Json.setMessage("操作成功");
+			result4Json.setAction(Result4Json.UPDATE);
+			
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存计划生育服务证失败");
+				result4Json.setMessage("操作失败");
 			}
 			
 		}
@@ -117,6 +172,10 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 	@Autowired
 	public void setBcsCertManager(BcsCertManager bcsCertManager) {
 		this.bcsCertManager = bcsCertManager;
+	}
+	@Autowired
+	public void setBcsCertChangeManager(BcsCertChangeManager bcsCertChangeManager) {
+		this.bcsCertChangeManager = bcsCertChangeManager;
 	}
 	public Page<BcsCert> getPage() {
 		return page;

@@ -1,14 +1,18 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.MarryCert;
 import com.jeysan.cpf.bcmas.service.MarryCertManager;
+import com.jeysan.cpf.pmas.entity.Person;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -88,6 +92,15 @@ public class MarryCertAction extends CrudActionSupport<MarryCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			
+			if(id == null){
+				String personId = Struts2Utils.getParameter("master.dwz_personLookup.personId");
+				if(StringUtils.isNotEmpty(personId)){
+					Person person = new Person();
+					person.setId(Long.parseLong(personId));
+					entity.setPerson(person);
+				}
+			}
 			marryCertManager.saveMarryCert(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){

@@ -1,14 +1,19 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.DeathReg;
 import com.jeysan.cpf.bcmas.service.DeathRegManager;
+import com.jeysan.cpf.pmas.entity.Person;
+import com.jeysan.cpf.pmas.service.PersonManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +35,7 @@ public class DeathRegAction extends CrudActionSupport<DeathReg> {
 	private String ids;
 	private DeathReg entity;
 	private DeathRegManager deathRegManager;
+	private PersonManager personManager;
 	private Page<DeathReg> page = new Page<DeathReg>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -88,6 +94,15 @@ public class DeathRegAction extends CrudActionSupport<DeathReg> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			Person person = null;
+			if(id == null){
+				String personId = Struts2Utils.getParameter("master.dwz_personLookup.personId");
+				person = personManager.getPerson(Long.parseLong(personId));
+				person.setCancelType(Constants.CANCEL_TYPE.DEATH);
+				person.setCancelDate(new Date());
+				personManager.savePerson(person);
+				entity.setPerson(person);
+			}
 			deathRegManager.saveDeathReg(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -117,6 +132,10 @@ public class DeathRegAction extends CrudActionSupport<DeathReg> {
 	@Autowired
 	public void setDeathRegManager(DeathRegManager deathRegManager) {
 		this.deathRegManager = deathRegManager;
+	}
+	@Autowired
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
 	}
 	public Page<DeathReg> getPage() {
 		return page;

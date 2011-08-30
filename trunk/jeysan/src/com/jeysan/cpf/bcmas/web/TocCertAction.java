@@ -3,12 +3,17 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.h2.util.StringUtils;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.TocCert;
 import com.jeysan.cpf.bcmas.service.TocCertManager;
+import com.jeysan.cpf.pmas.entity.Person;
+import com.jeysan.cpf.pmas.entity.WomanChildren;
+import com.jeysan.cpf.pmas.service.SpouseManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +35,7 @@ public class TocCertAction extends CrudActionSupport<TocCert> {
 	private String ids;
 	private TocCert entity;
 	private TocCertManager tocCertManager;
+	private SpouseManager spouseManager;
 	private Page<TocCert> page = new Page<TocCert>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -81,6 +87,8 @@ public class TocCertAction extends CrudActionSupport<TocCert> {
 			entity = new TocCert();
 		}else{
 			entity = tocCertManager.getTocCert(id);
+			if(entity.getPerson() != null)
+				Struts2Utils.getRequest().setAttribute("spouse",spouseManager.getSpouseByPersonId(entity.getPerson().getId()));
 		}
 	}
 	@Override
@@ -88,6 +96,19 @@ public class TocCertAction extends CrudActionSupport<TocCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			Long personId = Long.parseLong(Struts2Utils.getParameter("master.dwz_personLookup.personId"));
+			Person person = new Person();
+			person.setId(personId);
+			entity.setPerson(person);
+			Long childrenId = Long.parseLong(Struts2Utils.getParameter("childrenId"));
+			WomanChildren children = new WomanChildren();
+			children.setId(childrenId);
+			entity.setChildren(children);
+			String type = Struts2Utils.getParameter("type");
+			if(StringUtils.equals(type, "0"))
+				entity.setIsCancel(Constants.CERT_STATUS.NORMAL);
+			else if(StringUtils.equals(type, "1"))
+				entity.setIsCancel(Constants.CERT_STATUS.CANCEL);
 			tocCertManager.saveTocCert(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -117,6 +138,10 @@ public class TocCertAction extends CrudActionSupport<TocCert> {
 	@Autowired
 	public void setTocCertManager(TocCertManager tocCertManager) {
 		this.tocCertManager = tocCertManager;
+	}
+	@Autowired
+	public void setSpouseManager(SpouseManager spouseManager) {
+		this.spouseManager = spouseManager;
 	}
 	public Page<TocCert> getPage() {
 		return page;
