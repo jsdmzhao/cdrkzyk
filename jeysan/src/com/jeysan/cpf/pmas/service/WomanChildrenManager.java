@@ -74,6 +74,10 @@ public class WomanChildrenManager {
 	public WomanChildren getWomanChildren(Long id){
 		return womanChildrenDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public WomanChildren getWomanChildrenByPersonId(Long personId){
+		return womanChildrenDao.findUniqueBy("person.id", personId);
+	}
 	/**
 	 * 分页查找
 	 * @param page
