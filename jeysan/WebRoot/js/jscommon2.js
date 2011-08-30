@@ -204,3 +204,4 @@ function print(ctx,action,title){
 //弹出窗口
 function showWindowRaw(strurl, width, height) {
     window.open(strurl, 'report_select', 'toolbar=no,location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=' + width + ',height=' + height);
+}
