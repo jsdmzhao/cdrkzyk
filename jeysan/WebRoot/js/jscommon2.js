@@ -217,3 +217,22 @@ function saveTemplate(flag){
 		validateCallback($('#form2')[0]);
 }
 
+/**
+ * 打印
+ * @param {} action
+ * @param {} title
+ */
+function JS_print(action,title){
+	var ctx = action.substring(0,action.indexOf('/',1));
+	alert(ctx);
+	showWindowRaw(ctx + '/print/print!print.action?url='+ action+'&print=print&title='+title,800,600);
+}
+/**
+ * 弹出窗口
+ * @param {} strurl
+ * @param {} width
+ * @param {} height
+ */
+function showWindowRaw(strurl, width, height) {
+    window.open(strurl, 'report_select', 'toolbar=no,location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=' + width + ',height=' + height);
+}
