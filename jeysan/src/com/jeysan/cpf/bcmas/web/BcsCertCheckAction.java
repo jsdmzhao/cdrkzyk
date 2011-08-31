@@ -3,12 +3,17 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.bcmas.entity.BcsCert;
 import com.jeysan.cpf.bcmas.entity.BcsCertCheck;
 import com.jeysan.cpf.bcmas.service.BcsCertCheckManager;
+import com.jeysan.cpf.bcmas.service.BcsCertManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -21,6 +26,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
+@Results( {@Result(name = "list4view", location = "bcscertcheck4view.jsp", type = "dispatcher")})
 public class BcsCertCheckAction extends CrudActionSupport<BcsCertCheck> {
 	/**
 	 * 
@@ -29,6 +35,7 @@ public class BcsCertCheckAction extends CrudActionSupport<BcsCertCheck> {
 	private Long id;
 	private String ids;
 	private BcsCertCheck entity;
+	private BcsCertManager bcsCertManager;
 	private BcsCertCheckManager bcsCertCheckManager;
 	private Page<BcsCertCheck> page = new Page<BcsCertCheck>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
@@ -63,6 +70,14 @@ public class BcsCertCheckAction extends CrudActionSupport<BcsCertCheck> {
 	public String view() throws Exception {
 		return VIEW;
 	}
+	public String list4view() throws Exception {
+		list();
+		//Struts2Utils.getRequest().setAttribute("page",page);
+		String filter_EQL_certId = Struts2Utils.getParameter("filter_EQL_bcs.id");
+		if(StringUtils.isNotEmpty(filter_EQL_certId))
+			Struts2Utils.getRequest().setAttribute("bcs", bcsCertManager.getBcsCert(Long.parseLong(filter_EQL_certId)));
+		return "list4view";
+	}
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
@@ -88,6 +103,12 @@ public class BcsCertCheckAction extends CrudActionSupport<BcsCertCheck> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			String bcsId = Struts2Utils.getParameter("master.dwz_bcsLookup.bcsId");
+			if(StringUtils.isNotEmpty(bcsId)){
+				BcsCert bcs = new BcsCert();
+				bcs.setId(Long.parseLong(bcsId));
+				entity.setBcs(bcs);
+			}
 			bcsCertCheckManager.saveBcsCertCheck(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -117,6 +138,10 @@ public class BcsCertCheckAction extends CrudActionSupport<BcsCertCheck> {
 	@Autowired
 	public void setBcsCertCheckManager(BcsCertCheckManager bcsCertCheckManager) {
 		this.bcsCertCheckManager = bcsCertCheckManager;
+	}
+	@Autowired
+	public void setBcsCertManager(BcsCertManager bcsCertManager) {
+		this.bcsCertManager = bcsCertManager;
 	}
 	public Page<BcsCertCheck> getPage() {
 		return page;
