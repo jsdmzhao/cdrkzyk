@@ -3,6 +3,8 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +12,10 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.BcsCert;
 import com.jeysan.cpf.bcmas.entity.BcsCertChange;
+import com.jeysan.cpf.bcmas.entity.BcsCertCheck;
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.service.BcsCertChangeManager;
+import com.jeysan.cpf.bcmas.service.BcsCertCheckManager;
 import com.jeysan.cpf.bcmas.service.BcsCertManager;
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
@@ -27,6 +31,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
+@Results( {@Result(name = "list4view", location = "bcscertcheck4view.jsp", type = "dispatcher"),
+	@Result(name = "bcs4lookup", location = "bcscert4lookup.jsp", type = "dispatcher")})
 public class BcsCertAction extends CrudActionSupport<BcsCert> {
 	/**
 	 * 
@@ -37,6 +43,7 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 	private BcsCert entity;
 	private BcsCertManager bcsCertManager;
 	private BcsCertChangeManager bcsCertChangeManager;
+	private BcsCertCheckManager bcsCertCheckManager;
 	private Page<BcsCert> page = new Page<BcsCert>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -69,6 +76,10 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 	@Override
 	public String view() throws Exception {
 		return VIEW;
+	}
+	public String list4lookup() throws Exception {
+		list();
+		return "bcs4lookup";
 	}
 	@Override
 	public String list() throws Exception {
@@ -120,24 +131,35 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 		try{
 			String type = Struts2Utils.getParameter("type");
 			if(StringUtils.isNotEmpty(type)){
-				BcsCertChange change = bcsCertChangeManager.getBcsCertChangeByCertId(id);
-				if(change == null)
-					change = new BcsCertChange();
-				change.setTypeh(Integer.parseInt(type));
-				change.setCertId(entity.getId());
-				change.setAgent(Struts2Utils.getParameter("change.agent"));
-				String cause = Struts2Utils.getParameter("change.cause");
-				if(StringUtils.isNotEmpty(cause))
-					change.setCause(Integer.parseInt(cause));
-				String dateh = Struts2Utils.getParameter("change.dateh");
-				if(StringUtils.isNotEmpty(dateh))
-					change.setDateh(DateUtil.createUtilDate(dateh));
-				bcsCertChangeManager.saveBcsCertChange(change);
-				if(StringUtils.equals(type, "0"))
-					entity.setCertType(Constants.CERT_TYPE.CHANGED);
-				else if(StringUtils.equals(type, "1"))
-					entity.setCertType(Constants.CERT_TYPE.CANCEL);
-				bcsCertManager.saveBcsCert(entity);
+				if(StringUtils.equals(type, "2")){//查验
+					BcsCertCheck check = new BcsCertCheck();
+					check.setBcs(entity);
+					check.setContent(Struts2Utils.getParameter("check.content"));
+					check.setAgent(Struts2Utils.getParameter("check.agent"));
+					String dateh = Struts2Utils.getParameter("check.dateh");
+					if(StringUtils.isNotEmpty(dateh))
+						check.setDateh(DateUtil.createUtilDate(dateh));
+					bcsCertCheckManager.saveBcsCertCheck(check);
+				}else{//换证 0 废止1
+					BcsCertChange change = bcsCertChangeManager.getBcsCertChangeByCertId(id);
+					if(change == null)
+						change = new BcsCertChange();
+					change.setTypeh(Integer.parseInt(type));
+					change.setCertId(entity.getId());
+					change.setAgent(Struts2Utils.getParameter("change.agent"));
+					String cause = Struts2Utils.getParameter("change.cause");
+					if(StringUtils.isNotEmpty(cause))
+						change.setCause(Integer.parseInt(cause));
+					String dateh = Struts2Utils.getParameter("change.dateh");
+					if(StringUtils.isNotEmpty(dateh))
+						change.setDateh(DateUtil.createUtilDate(dateh));
+					bcsCertChangeManager.saveBcsCertChange(change);
+					if(StringUtils.equals(type, "0"))
+						entity.setCertType(Constants.CERT_TYPE.CHANGED);
+					else if(StringUtils.equals(type, "1"))
+						entity.setCertType(Constants.CERT_TYPE.CANCEL);
+					bcsCertManager.saveBcsCert(entity);
+				}
 			}else{
 				String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
 				if(StringUtils.isNotEmpty(fertileWomanId)){
@@ -176,6 +198,10 @@ public class BcsCertAction extends CrudActionSupport<BcsCert> {
 	@Autowired
 	public void setBcsCertChangeManager(BcsCertChangeManager bcsCertChangeManager) {
 		this.bcsCertChangeManager = bcsCertChangeManager;
+	}
+	@Autowired
+	public void setBcsCertCheckManager(BcsCertCheckManager bcsCertCheckManager) {
+		this.bcsCertCheckManager = bcsCertCheckManager;
 	}
 	public Page<BcsCert> getPage() {
 		return page;

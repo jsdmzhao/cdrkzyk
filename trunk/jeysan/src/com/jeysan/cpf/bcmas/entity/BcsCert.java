@@ -1,13 +1,11 @@
 ﻿package com.jeysan.cpf.bcmas.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -62,6 +60,7 @@ public class BcsCert extends IdExtEntity {
 	 * 证件类型
 	 */
 	private Integer certType;
+
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "WOMAN_ID")
