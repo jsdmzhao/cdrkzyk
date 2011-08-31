@@ -127,6 +127,9 @@
 					<th width="40" align="center">
 						废止
 					</th>
+					<th width="60" align="center">
+						查验
+					</th>
 					<th width="40" align="center">
 						查看证书
 					</th>
@@ -188,6 +191,16 @@
 									href="${ctx}/bcmas/bcscert!input.action?id=${a.id}&type=1"
 									target="navTab" title="证书废止" rel="bcsCert-update"></a>
 							</div></c:if>
+						</td>
+						<td>
+							<div style="width: 50px;">
+								<a class="btnView"
+									href="${ctx}/bcmas/bcscertcheck!list4view.action?filter_EQL_bcs.id=${a.id}"
+									target="navTab" title="查看证书查验记录" rel="bcsCert-view"></a>
+								<a class="btnEdit"
+									href="${ctx}/bcmas/bcscert!input.action?id=${a.id}&type=2"
+									target="navTab" title="新增查验记录" rel="bcsCert-update"></a>
+							</div>
 						</td>
 						<td>
 							<div style="width: 25px;">

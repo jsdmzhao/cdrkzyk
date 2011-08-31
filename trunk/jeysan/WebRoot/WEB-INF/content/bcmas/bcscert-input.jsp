@@ -182,6 +182,30 @@
 					</label>
 					<input name="change.agent" type="text" size="30" />
 				</p>
+</c:if>				
+<c:if test="${param.type == 2}">
+<div class="divider"></div>
+				<p style="width:98%">
+					<label>
+						查验记录：
+					</label>
+					<input class="required" name="check.content" type="text" size="100" />
+				</p>
+				<p>
+					<label>
+						查验日期：
+					</label>
+					<input name="check.dateh" class="date required" readonly="readonly" type="text"
+						size="30"
+						  />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						查验经办人：
+					</label>
+					<input name="check.agent" type="text" size="30" />
+				</p>
 </c:if>			
 			</div>
 			<div class="formBar">
