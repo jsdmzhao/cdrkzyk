@@ -36,7 +36,7 @@
 					<label>
 						所属区域：
 					</label>
-					<input name="area" readonly="readonly" type="text" size="30" value="${area}" />
+					<tags:js.area.selector name="area" value="${area}"></tags:js.area.selector>
 				</p>
 <div class="divider"></div>
 
