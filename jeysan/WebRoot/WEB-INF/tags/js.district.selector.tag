@@ -49,6 +49,7 @@
 </tr>
 </table>
 <script>
+var $box = navTab.getCurrentPanel();
 function setDistrict${_c_}(obj,type){
 	if(type < 5){
 		$.post("${ctx}/district/district"+districts[type-1][0]+"!findSubs.action", {id:obj.value.split('_')[0]}, function(data) {
@@ -58,7 +59,7 @@ function setDistrict${_c_}(obj,type){
 			for (var i = 0; i < data.length; i++) {
 				html += "<option value=\"" + data[i].id+"_"+data[i].code+ "\">" + data[i].name + "</option>";
 			}
-			$("#district_"+districts[type][0]+"_${_c_}").html(html);//alert(districts[type][0]+"**"+obj.value);
+			$("#district_"+districts[type][0]+"_${_c_}",$box).html(html);//alert(districts[type][0]+"**"+obj.value);
 			if(obj.value == ""){
 				initNonData(${_c_},type);
 			}else
@@ -81,7 +82,7 @@ function getAddress(index){
 	var address_ = '';
 	var $select = null;
 	for (var i = 0; i < districts.length; i++) {
-		$select = $("#district_"+districts[i][0]+"_"+index);
+		$select = $("#district_"+districts[i][0]+"_"+index,$box);
 		if($select.val()!=null&&$select.val()!=''){
 			address_ += $("option:selected",$select).text();
 		}
@@ -90,7 +91,7 @@ function getAddress(index){
 }
 function initNonData(index,type){
 	for(var i=type+1;i<=5;i++){
-		$("#district_"+districts[i-1][0]+"_"+index).html("<option value=\"\">所有"+districts[i-1][1]+"</option>");
+		$("#district_"+districts[i-1][0]+"_"+index,$box).html("<option value=\"\">所有"+districts[i-1][1]+"</option>");
 	}
 }
 </c:if>
