@@ -78,6 +78,10 @@ public class DistrictVillageManager {
 	public DistrictVillage getDistrictVillage(String code){
 		return districtVillageDao.findUniqueBy("code", code);
 	}
+	@Transactional(readOnly = true)
+	public List<DistrictVillage> getVillagesByParentId(Integer parentId){
+		return districtVillageDao.find(" from DistrictVillage where town.id = ? order by id " , parentId);
+	}
 	/**
 	 * 分页查找
 	 * @param page
@@ -91,7 +95,7 @@ public class DistrictVillageManager {
 	
 	@Transactional(readOnly = true)
 	public List<DistrictVillage> getAllByParentId(Integer parentId){
-		return districtVillageDao.find(" from DistrictVillage where parentId = ? order by id ",parentId);
+		return districtVillageDao.find(" from DistrictVillage where town.id = ? order by id ",parentId);
 	}
 	
 	@Autowired

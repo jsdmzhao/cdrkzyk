@@ -10,7 +10,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.district.dao.DistrictProvinceDao;
+import com.jeysan.cpf.district.entity.DistrictCity;
+import com.jeysan.cpf.district.entity.DistrictCounty;
 import com.jeysan.cpf.district.entity.DistrictProvince;
+import com.jeysan.cpf.district.entity.DistrictTown;
+import com.jeysan.cpf.district.entity.DistrictVillage;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 import com.jeysan.modules.orm.hibernate.IdEntity;
@@ -106,6 +110,42 @@ public class DistrictProvinceManager {
 			return districtTownManager.getDistrictTown(code);
 		else if(codel.length() == 12)
 			return districtVillageManager.getDistrictVillage(code);
+		return null;
+	}
+	@Transactional(readOnly = true)
+	public String getAreaNameByCode(String code){
+		if(StringUtils.isEmpty(code) || code.length() != 12)
+			return null;
+		String codel = code;
+		if(codel.endsWith("000"))
+			codel = codel.substring(0, 9);
+		if(codel.endsWith("000"))
+			codel = codel.substring(0, 6);
+		if(codel.endsWith("00"))
+			codel = codel.substring(0, 4);
+		if(codel.endsWith("00"))
+			codel = codel.substring(0, 2);
+		if(codel.length() == 2){
+			DistrictProvince area = getDistrictProvince(code);
+			if(area != null)
+				return area.getName();
+		}else if(codel.length() == 4){
+			DistrictCity area = districtCityManager.getDistrictCity(code);
+			if(area != null)
+				return area.getName();
+		}else if(codel.length() == 6){
+			DistrictCounty area = districtCountyManager.getDistrictCounty(code);
+			if(area != null)
+				return area.getName();
+		}else if(codel.length() == 9){
+			DistrictTown area = districtTownManager.getDistrictTown(code);
+			if(area != null)
+				return area.getName();
+		}else if(codel.length() == 12){
+			DistrictVillage area = districtVillageManager.getDistrictVillage(code);
+			if(area != null)
+				return area.getName();
+		}
 		return null;
 	}
 	/**

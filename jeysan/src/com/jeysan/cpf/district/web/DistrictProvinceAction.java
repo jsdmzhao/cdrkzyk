@@ -3,11 +3,12 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.google.common.collect.Lists;
 import com.jeysan.cpf.district.entity.DistrictCity;
 import com.jeysan.cpf.district.entity.DistrictProvince;
 import com.jeysan.cpf.district.service.DistrictProvinceManager;
@@ -23,6 +24,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/district")
+@Results({@Result(name="district-selector",location="district-selector.jsp",type="dispatcher")})
 public class DistrictProvinceAction extends CrudActionSupport<DistrictProvince> {
 	/**
 	 * 
@@ -34,6 +36,7 @@ public class DistrictProvinceAction extends CrudActionSupport<DistrictProvince> 
 	private DistrictProvinceManager districtProvinceManager;
 	private Page<DistrictProvince> page = new Page<DistrictProvince>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
+	
 	@Override
 	public String delete() throws Exception {
 		if(result4Json == null)
@@ -56,6 +59,10 @@ public class DistrictProvinceAction extends CrudActionSupport<DistrictProvince> 
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	public String districtselector() throws Exception {
+		Struts2Utils.getRequest().setAttribute("districtProvince", districtProvinceManager.getAll());
+		return "district-selector";
 	}
 	public String findSubs() throws Exception {
 		prepareModel();
