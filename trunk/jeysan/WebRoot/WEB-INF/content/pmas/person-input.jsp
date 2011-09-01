@@ -8,6 +8,8 @@
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId" value="nav_personmanage"/>
 			<input type="hidden" name="master.dwz_houseLookup.houseId" value="${house.id}"/>
+			<input id="personBasic_address" name="personBasic.address" type="hidden" value="${personBasic.address}" />
+			<input id="personBasic_domicile" name="personBasic.domicile" type="hidden" value="${personBasic.domicile}" />
 			<div class="pageFormContent" layoutH="56">
 					<p>
 					<label>姓名：</label>
@@ -106,15 +108,7 @@
 					</p>
 					<p style="width:98%">
 					<label>现居住地：</label>
-					<tags:js.district.selector onChange="setAddress"/>
-					</p>
-					<p style="width:98%">
-					<label>现居住地：</label>
-					<input id="personBasic_address" name="personBasic.address"    type="text" size="100" value="${personBasic.address}" />
-					</p>
-					<p>
-					<label>现居住地编码：</label>
-					<input id="personBasic_addressCode" name="personBasic.addressCode" readonly="readonly"   type="text" size="30" value="${personBasic.addressCode}" />
+					<tags:js.area.selector readonly="true" size="100" id="personBasic_addressCode" name="personBasic.addressCode" valueLabel="${personBasic.address}" onChange="setAddress"></tags:js.area.selector>
 					</p>
 					<p>
 					<label>现居住地门牌号码：</label>
@@ -159,15 +153,7 @@
 <div class="divider"></div>
 					<p style="width:98%">
 					<label>户籍地：</label>
-					<tags:js.district.selector onChange="setAddress2"/>
-					</p>
-					<p style="width:98%">
-					<label>户籍地：</label>
-					<input id="personBasic_domicile" name="personBasic.domicile"    type="text" size="100" value="${personBasic.domicile}" />
-					</p>
-					<p>
-					<label>户籍地编码：</label>
-					<input id="personBasic_domicileCode" name="personBasic.domicileCode" readonly="readonly"   type="text" size="30" value="${personBasic.domicileCode}" />
+					<tags:js.district2.selector name="personBasic.domicileCode" id="personBasic_domicileCode" readonly="true" size="100" valueLabel="${personBasic.domicile}" onChange="setAddress2" type="5"></tags:js.district2.selector>
 					</p>
 					<p>
 					<label>户籍地门牌号码：</label>
@@ -238,26 +224,21 @@
 	</div>
 </div>
 <script>
-function setAddress(obj,address_,type){
-	$('#personBasic_addressCode').val(obj.value.split('_')[1]);
+function setAddress(orgCode,address_){
 	$('#personBasic_address').val(address_);
-	if(type == 5){
-		var orgCode = obj.value;
-		if(orgCode == null || orgCode == '')
-			return;
-		$.post("${ctx}/pmas/villagerteam!findByCode.action", {orgCode:orgCode.split('_')[1]}, function(data) {
-			var html = "<option value=\"\">所有村民小组</option>";
-			for (var i = 0; i < data.length; i++) {
-				html += "<option value=\"" + data[i].id+ "\">" + data[i].teamName + "</option>";
-			}
-			$("#personBasic_villagerTeamId").html(html);
-		});
-	}else{
-		$("#personBasic_villagerTeamId").html("<option value=\"\">所有村民小组</option>");
+	if(orgCode == null || orgCode == ''){
+		$("#personBasic_villagerTeamId").html("<option value=\"\">请选择</option>");
+		return;
 	}
+	$.post("${ctx}/pmas/villagerteam!findByCode.action", {orgCode:orgCode.split('_')[1]}, function(data) {
+		var html = "<option value=\"\">所有村民小组</option>";
+		for (var i = 0; i < data.length; i++) {
+			html += "<option value=\"" + data[i].id+ "\">" + data[i].teamName + "</option>";
+		}
+		$("#personBasic_villagerTeamId").html(html);
+	});
 }
-function setAddress2(obj,address_){
-	$('#personBasic_domicileCode').val(obj.value.split('_')[1]);
+function setAddress2(orgCode,address_){
 	$('#personBasic_domicile').val(address_);
 }
 var yearNow = new Date().getYear();
