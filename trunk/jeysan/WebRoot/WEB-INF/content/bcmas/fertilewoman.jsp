@@ -36,8 +36,7 @@
 						</td>
 						<td>
 							区域：
-							<input type="text" name="filter_EQS_area"
-								value="${param['filter_EQS_area']}" />
+							<tags:js.area.selector name="filter_EQS_area" value="${param['filter_EQS_area']}"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
@@ -102,7 +101,7 @@
 					<th width="80" orderField="code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="80" orderField="area" class="orderFlag">
+					<th width="150" orderField="area" class="orderFlag">
 						所属区域
 					</th>
 					<th width="75" align="center">
@@ -132,7 +131,7 @@
 							${a.code}
 						</td>
 						<td>
-							${a.area}
+							<tags:js.area.getValue value="${a.area}"></tags:js.area.getValue>
 						</td>
 						<td>
 							<div style="width: 75px;">
