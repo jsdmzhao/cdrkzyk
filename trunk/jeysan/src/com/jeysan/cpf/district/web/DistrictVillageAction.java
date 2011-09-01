@@ -3,12 +3,15 @@ package com.jeysan.cpf.district.web;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.district.entity.DistrictVillage;
 import com.jeysan.cpf.district.service.DistrictVillageManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -21,6 +24,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/district")
+@Results({@Result(name="area-selector",location="area-selector.jsp",type="dispatcher")})
 public class DistrictVillageAction extends CrudActionSupport<DistrictVillage> {
 	/**
 	 * 
@@ -82,6 +86,10 @@ public class DistrictVillageAction extends CrudActionSupport<DistrictVillage> {
 		}else{
 			entity = districtVillageManager.getDistrictVillage(id);
 		}
+	}
+	public String areaselector() throws Exception {
+		Struts2Utils.getRequest().setAttribute("villages", districtVillageManager.getAllByParentId(Constants.COMMON_PARAM.CURRENT_TOWN_ID));
+		return "area-selector";
 	}
 	@Override
 	public String save() throws Exception {
