@@ -120,4 +120,8 @@ public class Constants {
 		public static final Integer CHANGED = 729;//已换证
 		public static final Integer CANCEL = 730;//已废止
 	}
+	
+	public static final class COMMON_PARAM{
+		public static final Integer CURRENT_TOWN_ID = 26879;//当前镇ID
+	}
 }
