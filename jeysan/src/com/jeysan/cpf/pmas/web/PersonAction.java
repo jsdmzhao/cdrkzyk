@@ -2,6 +2,7 @@
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -11,6 +12,7 @@ import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.google.common.collect.Maps;
 import com.jeysan.cpf.bcmas.entity.DeathReg;
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.service.DeathRegManager;
@@ -38,7 +40,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/pmas")
 @Results( { @Result(name = "person4lookup", location = "person4lookup.jsp", type = "dispatcher"), 
-	@Result(name = "person-cancel", location = "person-cancel.jsp", type = "dispatcher")})
+	@Result(name = "person-cancel", location = "person-cancel.jsp", type = "dispatcher"), 
+	@Result(name = "historydestroy", location = "historydestroy.jsp", type = "dispatcher")})
 public class PersonAction extends CrudActionSupport<Person> {
 	/**
 	 * 
@@ -104,6 +107,68 @@ public class PersonAction extends CrudActionSupport<Person> {
 		list();
 		return "person4lookup";
 	}
+	/**
+	 * 历史数据查询，用于数据销毁
+	 * @return
+	 * @throws Exception
+	 */
+	public String historydestroy() throws Exception {
+		Map<String,Object> values = Maps.newHashMap();
+		String tmp = Struts2Utils.getParameter("nameh");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("nameh", tmp);
+		tmp = Struts2Utils.getParameter("sex");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("sex", Integer.parseInt(tmp));
+		tmp = Struts2Utils.getParameter("code");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("code", tmp);
+		tmp = Struts2Utils.getParameter("area");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("area", tmp);
+		tmp = Struts2Utils.getParameter("kind");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("kind", Integer.parseInt(tmp));
+		tmp = Struts2Utils.getParameter("personCode");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("personCode", tmp);
+		tmp = Struts2Utils.getParameter("cancelType");
+		if(StringUtils.isNotEmpty(tmp))
+			values.put("cancelType", Integer.parseInt(tmp));
+		
+		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
+		//设置默认排序方式
+		if (!page.isOrderBySetted()) {
+			page.setOrderBy("id");
+			page.setOrder(Page.ASC);
+		}
+		page = personManager.searchPerson(page, values);
+		return "historydestroy";
+	}
+	/**
+	 * 历史数据销毁
+	 * @return
+	 * @throws Exception
+	 */
+	public String destoryDo() throws Exception {
+		if(result4Json == null)
+			result4Json = new Result4Json();
+		try {
+			if(id!=null){
+				personManager.deletePerson(id);
+				logger.debug("删除了人员："+id);
+			}
+			result4Json.setStatusCode("200");
+			result4Json.setMessage("销毁人员历史数据成功成功");
+			result4Json.setAction(Result4Json.DELETE);
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+			result4Json.setStatusCode("300");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"人员历史数据已经被关联,请先解除关联,删除失败":"删除人员历史数据失败");
+		}
+		Struts2Utils.renderJson(result4Json);
+		return NONE;
+	}
 	public String precancel() throws Exception {
 		prepareModel();
 		Struts2Utils.getRequest().setAttribute("person", entity);
@@ -133,6 +198,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 			String houseId = Struts2Utils.getParameter("master.dwz_houseLookup.houseId");
 			if(StringUtils.isNotEmpty(houseId))
 				entity.getPersonBasic().setHouseId(Long.parseLong(houseId));
+			entity.setArea(entity.getPersonBasic().getAddressCode());
 			personManager.savePerson(entity);
 			entity.getPersonBasic().setPerson(entity);
 			personBasicManager.savePersonBasic(entity.getPersonBasic());

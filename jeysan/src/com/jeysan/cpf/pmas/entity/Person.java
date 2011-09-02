@@ -87,6 +87,10 @@ public class Person extends IdExtEntity {
 	 * 迁入(流入)类别
 	 */
 	private Integer settleInType;
+	/**
+	 * 所属区域
+	 */
+	private String area;
 	
 	private PersonBasic personBasic = new PersonBasic();
 	
@@ -229,6 +233,15 @@ public class Person extends IdExtEntity {
 
 	public void setCertType(Integer certType) {
 		this.certType = certType;
+	}
+	
+	@Column(name = "AREA")
+	public String getArea() {
+		return area;
+	}
+
+	public void setArea(String area) {
+		this.area = area;
 	}
 
 	@OneToOne(mappedBy = "person" ,cascade = { CascadeType.PERSIST, CascadeType.MERGE , CascadeType.REMOVE })
