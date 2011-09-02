@@ -36,7 +36,7 @@
 						</td>
 						<td>
 							区域：
-							<tags:js.area.selector name="filter_EQS_area" value="${param['filter_EQS_area']}"></tags:js.area.selector>
+							<tags:js.area.selector readonly="true" size="20" name="filter_EQS_area" value="${param['filter_EQS_area']}"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
