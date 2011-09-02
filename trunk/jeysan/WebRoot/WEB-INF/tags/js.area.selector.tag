@@ -11,6 +11,6 @@
 </c:if>
 <input id="${id}_code_" name="${name}" type="hidden" value="${value}"/>
 <input id="${id}_name_" size="${size==null?30:size}" type="text" <c:if test="${readonly}">readonly="readonly"</c:if> value="<c:if test="${not empty value}"><tags:js.area.getValue value="${value}"/></c:if><c:if test="${empty value}">${valueLabel}</c:if>" />
-<a class="btnLook"
+<a 
 	href="${ctx}/district/districtvillage!areaselector.action?label4id=${id}_code_&label4name=${id}_name_&value=${value}&onChange=${onChange}"
-	target="dialog" width="405" height="300">定位区域</a>
+	target="dialog" width="405" height="300">选择</a>
