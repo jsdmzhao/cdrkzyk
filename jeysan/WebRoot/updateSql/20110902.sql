@@ -1,0 +1,1 @@
+alter table fhp_person add COLUMN area VARCHAR(20) null;
