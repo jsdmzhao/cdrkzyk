@@ -17,6 +17,8 @@
 		value="${param['filter_EQI_kind']}" />
 	<input type="hidden" name="filter_EQI_cancelType"
 		value="${param['filter_EQI_cancelType']}" />
+	<input type="hidden" name="filter_EQS_area"
+		value="${param['filter_EQS_area']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -27,12 +29,12 @@
 				<table class="searchContent">
 					<tr>
 						<td>
-							姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名：
+							姓名：
 							<input type="text" name="filter_LIKES_nameh"
 								value="${param['filter_LIKES_nameh']}" />
 						</td>
 						<td>
-							性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：
+							性别：
 							<tags:js.dict.selector noRender="true" name="filter_EQI_sex"
 								value="${param['filter_EQI_sex']}" dictCode="JS010" />
 						</td>
@@ -54,11 +56,6 @@
 								value="${param['filter_EQS_code']}" />
 						</td>
 						<td>
-							证件类型：
-							<tags:js.dict.selector noRender="true" name="filter_EQI_certType"
-								value="${param['filter_EQI_certType']}" dictCode="JS1043" />
-						</td>
-						<td>
 							户口类别：
 							<tags:js.dict.selector noRender="true"
 								name="filter_EQI_domicileType"
@@ -69,6 +66,11 @@
 							<tags:js.dict.selector noRender="true"
 								name="filter_EQI_cancelType"
 								value="${param['filter_EQI_cancelType']}" dictCode="JS1010" />
+						</td>
+						<td>
+							区域：
+							<tags:js.area.selector name="filter_EQS_area" readonly="true"  size="20"
+								value="${param['filter_EQS_area']}"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
