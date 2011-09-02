@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.h2.util.StringUtils;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
+@Results( { @Result(name = "personoutquery", location = "personoutquery.jsp", type = "dispatcher")})
 public class PersonOutAction extends CrudActionSupport<PersonOut> {
 	/**
 	 * 
@@ -59,6 +62,10 @@ public class PersonOutAction extends CrudActionSupport<PersonOut> {
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	public String personoutquery() throws Exception {
+		list();
+		return "personoutquery";
 	}
 	@Override
 	public String input() throws Exception {

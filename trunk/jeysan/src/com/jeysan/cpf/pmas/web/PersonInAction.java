@@ -3,6 +3,8 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -22,6 +24,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
+@Results( { @Result(name = "personinquery", location = "personinquery.jsp", type = "dispatcher")})
 public class PersonInAction extends CrudActionSupport<PersonIn> {
 	/**
 	 * 
@@ -76,6 +79,10 @@ public class PersonInAction extends CrudActionSupport<PersonIn> {
 		}
 		page = personInManager.searchPersonIn(page, filters);
 		return SUCCESS;
+	}
+	public String personinquery() throws Exception {
+		list();
+		return "personinquery";
 	}
 	@Override
 	protected void prepareModel() throws Exception {
