@@ -1,12 +1,22 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<script type="text/javascript">
+<!--
+
+//-->
+function ff()
+{
+	alert(12);
+}
+</script>
 <div class="page">
 	<div class="pageContent">
 		<form class="pageForm">
+		
 			<div class="pageFormContent" layoutH="56">
 				<div style="float:left; display:block; margin:10px;padding:10px; overflow:auto; width:90%; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>待双查对象一览表</span></a>
+						<a class="button" href="/jeysan//monitor/hpmonitor!viewdoublecheck.action" width="900" height="500" target="dialog" rel="dlg_page2"><span>待双查对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
@@ -14,11 +24,11 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>孕产期超七个月对象一览表</span></a>
+						<a class="button" href="/jeysan//monitor/hpmonitor!viewoverbirth.action" width="900" height="500" target="dialog" rel="fixmonitor_sub"><span>孕产期超七个月对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>无避孕节育措施一览表</span></a>
+						<a class="button" href="/jeysan//monitor/hpmonitor!getNoContraception.action" width="900" height="500" target="dialog" rel="fixmonitor_sub"><span>无避孕节育措施一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
