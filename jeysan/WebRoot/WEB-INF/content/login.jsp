@@ -18,7 +18,7 @@
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
-				<a href="#"><img src="${ctx4doc}/dwz/themes/default/images/login_logo.gif" /></a>
+				<a href="#"><img src="${ctx4doc}/dwz2/themes/default/images/login_logo.gif" /></a>
 			</h1>
 			<div class="login_headerContent">
 				<div class="navList">
@@ -29,7 +29,7 @@
 						<li><a href="#">帮助</a></li>
 					</ul>
 				</div>
-				<h2 class="login_title"><img src="${ctx4doc}/dwz/themes/default/images/login_title.png" /></h2>
+				<h2 class="login_title"><img src="${ctx4doc}/dwz2/themes/default/images/login_title.png" /></h2>
 			</div>
 		</div>
 		<div id="login_content">
@@ -40,15 +40,20 @@
 				<form action="${ctx}/j_spring_security_check" method="post">
 					<p>
 						<label>机构码：</label>
-						<input type="text" id="j_orgcode" name="j_orgcode" class="login_input"  <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_ORGCODE}"</c:if>/>
+						<input type="text" id="j_orgcode" name="j_orgcode" class="login_input" value="sj001"  <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_ORGCODE}"</c:if>/>
+
 					</p>
 					<p>
 						<label>用户名：</label>
-						<input type="text" id="j_username" name="j_username" size="20" class="login_input" <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if>/>
+
+						<input type="text" id="j_username" name="j_username" size="20" class="login_input" value="admin" <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if>/>
+
 					</p>
 					<p>
 						<label>密&nbsp;&nbsp;&nbsp;码：</label>
-						<input type="password" id="j_password" name="j_password" size="20" class="login_input"/>
+
+						<input type="password" id="j_password" name="j_password" value="admin" size="20" class="login_input"/>
+
 					</p>
 					<p>
 						<label>验证码：</label>
@@ -60,7 +65,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="login_banner"><img src="${ctx4doc}/dwz/themes/default/images/login_banner.jpg" /></div>
+			<div class="login_banner"><img src="${ctx4doc}/dwz2/themes/default/images/login_banner.jpg" /></div>
 			<div class="login_main">
 				<ul class="helpList">
 					<li><a href="#">下载无毒WEB打印插件</a></li>
