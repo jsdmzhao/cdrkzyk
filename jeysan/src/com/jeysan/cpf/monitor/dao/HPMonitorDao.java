@@ -29,13 +29,13 @@ public class HPMonitorDao extends HibernateDao {
 	
 	public List getOverBirth()throws SQLException
 	{
-		String sql="SELECT 	fw. CODE, 	fp.NAMEH, 	'', 	fpb.ADDRESS, 	fwc.nn, 	fc.DATEH, 	fc.EDD, 	fpb.HOUSE_NUMBER FROM 	FHP_FIRST_CHILD_REG fc LEFT JOIN FHP_FERTILE_WOMAN fw ON fc.WOMAN_ID = fw.ID join FHP_PERSON fp on fw.PERSON_ID=fp.ID join FHP_PERSON_BASIC fpb on fp.ID=fpb.PERSON_ID left join (select PERSON_ID,COUNT(*) nn from FHP_WOMAN_CHILDREN group by PERSON_ID) fwc on fp.id=fwc.person_id WHERE DATEDIFF(CURDATE(),fc.DATEH)>210";
+		String sql="SELECT 	fw. CODE, 	fp.NAMEH, 	'', 	fpb.ADDRESS, 	fwc.nn, 	fc.DATEH, 	fc.EDD, 	fpb.HOUSE_NO FROM 	FHP_FIRST_CHILD_REG fc LEFT JOIN FHP_FERTILE_WOMAN fw ON fc.WOMAN_ID = fw.ID join FHP_PERSON fp on fw.PERSON_ID=fp.ID join FHP_PERSON_BASIC fpb on fp.ID=fpb.PERSON_ID left join (select PERSON_ID,COUNT(*) nn from FHP_WOMAN_CHILDREN group by PERSON_ID) fwc on fp.id=fwc.person_id WHERE DATEDIFF(CURDATE(),fc.DATEH)>210";
 		return getDataList(sql);
 	}
 	
 	public List getNoContraception()throws SQLException
 	{
-		String sql="SELECT 	fw. CODE, 	fp.NAMEH, 	fp.CODE, 	'未避孕', 	fwc.nn, 	fwc1.birthday, 	fpb.ADDRESS FROM 	FHP_FERTILE_WOMAN fw JOIN FHP_PERSON fp ON fw.PERSON_ID = fp.ID JOIN FHP_PERSON_BASIC fpb ON fp.ID = fpb.PERSON_ID LEFT JOIN( 	SELECT 		PERSON_ID, 		COUNT(*)nn 	FROM 		FHP_WOMAN_CHILDREN 	GROUP BY 		PERSON_ID )fwc ON fp.id = fwc.person_id LEFT JOIN( 	SELECT 		PERSON_ID, 		min(BIRTHDAY) as birthday 	FROM 		FHP_WOMAN_CHILDREN 	GROUP BY 		PERSON_ID )fwc1 ON fp.id = fwc1.person_id WHERE fw.ID not in(select t.WOMAN_ID from FHP_WOMAN_CONTRACEPT t)";
+		String sql="SELECT 	fw. CODE, 	fp.NAMEH, 	fp.CODE, 	'', 	fwc.nn, 	fwc1.birthday, 	fpb.ADDRESS FROM 	FHP_FERTILE_WOMAN fw JOIN FHP_PERSON fp ON fw.PERSON_ID = fp.ID JOIN FHP_PERSON_BASIC fpb ON fp.ID = fpb.PERSON_ID LEFT JOIN( 	SELECT 		PERSON_ID, 		COUNT(*)nn 	FROM 		FHP_WOMAN_CHILDREN 	GROUP BY 		PERSON_ID )fwc ON fp.id = fwc.person_id LEFT JOIN( 	SELECT 		PERSON_ID, 		min(BIRTHDAY) as birthday 	FROM 		FHP_WOMAN_CHILDREN 	GROUP BY 		PERSON_ID )fwc1 ON fp.id = fwc1.person_id WHERE fw.ID not in(select t.WOMAN_ID from FHP_WOMAN_CONTRACEPT t)";
 		return getDataList(sql);
 	}
 	
