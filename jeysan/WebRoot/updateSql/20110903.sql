@@ -1,0 +1,1 @@
+alter table TEMP_CIVIL_DATA_MARRY_REG add COLUMN DEGREE varchar(20) after HOUSEHODE2;
