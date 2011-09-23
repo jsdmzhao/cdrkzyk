@@ -175,7 +175,14 @@ $(function(){
 										</ul>
 										</c:when>
 										<c:otherwise>
-											<a href="${ctx}/${c.resourceValue}" target="navTab" rel="nav_${c.entityName}manage">${c.resourceName}</a>
+											<c:choose>
+												<c:when test="${fn:contains(c.resourceValue, 'http:')}">
+												<a href="${c.resourceValue}" external="true" target="navTab" rel="nav_${c.entityName}manage">${c.resourceName}</a>
+												</c:when>
+												<c:otherwise>
+												<a href="${ctx}/${c.resourceValue}" target="navTab" rel="nav_${c.entityName}manage">${c.resourceName}</a>
+												</c:otherwise>
+											</c:choose>
 										</c:otherwise>
 									</c:choose>
 								</li>

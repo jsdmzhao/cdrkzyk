@@ -115,8 +115,8 @@
 			<tbody>
 				<c:forEach var="a" items="${page.result}" varStatus="b">
 					<tr target="sid_user" rel="${a.id}">
-						<td height="25">
-							<input type="checkbox" name="ids" value="${a.id}" />
+						<td height="25"><c:if test="${a.id!=999999999}">
+							<input type="checkbox" name="ids" value="${a.id}" /></c:if>
 						</td>
 						<td>
 							${b.index+1}
@@ -144,9 +144,11 @@
 								<a class="btnEdit"
 									href="${ctx}/security/org!input.action?id=${a.id}"
 									target="navTab" title="修改机构信息" rel="org-update"></a>
+<c:if test="${a.id!=999999999}">
 								<a class="btnDel"
 									href="${ctx}/security/org!delete.action?id=${a.id}&result4Json.navTabId=nav_orgmanage"
 									target="ajaxTodo" title="确定要删除吗？"></a>
+</c:if>
 							</div>
 						</td>
 					</tr>
