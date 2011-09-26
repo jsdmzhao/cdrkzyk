@@ -124,4 +124,11 @@ public class Constants {
 	public static final class COMMON_PARAM{
 		public static final Integer CURRENT_TOWN_ID = 26879;//当前镇ID
 	}
+	
+	public static final class SEX{
+		public static final Integer MALE = 1;//男
+		public static final Integer FEMALE = 2;//女
+		public static final Integer NOKNOW = 324;//未知性别
+		public static final Integer NONOTIFY = 325;//未说明性别
+	}
 }
