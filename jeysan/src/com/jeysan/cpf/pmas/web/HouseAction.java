@@ -1,6 +1,7 @@
 ﻿package com.jeysan.cpf.pmas.web;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
@@ -11,6 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.pmas.entity.House;
 import com.jeysan.cpf.pmas.service.HouseManager;
+import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -33,6 +35,7 @@ public class HouseAction extends CrudActionSupport<House> {
 	private String ids;
 	private House entity;
 	private HouseManager houseManager;
+	private PersonManager personManager;
 	private Page<House> page = new Page<House>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -56,6 +59,19 @@ public class HouseAction extends CrudActionSupport<House> {
 			result4Json.setMessage(e instanceof DataIntegrityViolationException?"房屋已经被关联,请先解除关联,删除失败":"删除房屋失败");
 		}
 		Struts2Utils.renderJson(result4Json);
+		return NONE;
+	}
+	public String getPersonNumByHouseCode() throws Exception {
+		String code = Struts2Utils.getParameter("code");
+		//logger.debug("code.............."+code);
+		Map result = personManager.queryPersonNumByHouseCode(code);
+		/*Map result = new HashMap();
+		result.put("totalNum", 1000);
+		result.put("maleNum", 800);
+		result.put("femaleNum", 200);
+		result.put("fertileWomanNum", 150);
+		result.put("notFertileWomanNum", 50);*/
+		Struts2Utils.renderJson(result);
 		return NONE;
 	}
 	public String list4lookup() throws Exception {
@@ -124,6 +140,10 @@ public class HouseAction extends CrudActionSupport<House> {
 	@Autowired
 	public void setHouseManager(HouseManager houseManager) {
 		this.houseManager = houseManager;
+	}
+	@Autowired
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
 	}
 	public Page<House> getPage() {
 		return page;
