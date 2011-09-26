@@ -1,0 +1,679 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+<html> 
+   
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />  
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples  
+      on iOS devices--> 
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/> 
+    <title> 
+    </title> 
+    <link rel="stylesheet" type="text/css" href="http://shally/arcgis_js_api/library/2.4/arcgis/js/dojo/dijit/themes/claro/claro.css"> 
+
+
+    <style type="text/css"> 
+      html, body {  
+        height: 100%; width: 100%; margin: 0;  
+      }  
+      body{ 
+        background-color:white; overflow:hidden;  
+        font-family: "Trebuchet MS";  
+      } 
+      .roundedCorners{ 
+        -moz-border-radius: 4px;       
+      } 
+	  #header { 
+        background-color:white; color:peru; font-size:12pt;  
+        text-align:left; font-weight:bold; height:33px; 
+		padding:0;margin:0;width:100%
+      } 
+
+      #rightPane{ 
+        background-color:white; 
+        color:peru; 
+        border: solid 1px cornflowerblue; 
+        width:20%; 
+        overflow:hidden; 
+      } 
+      #map { 
+		margin:0;padding:0;
+        background-color:white; 
+        
+      } 
+	  #navToolbar {
+		width:100%
+	  }
+
+	  .zoominIcon { background-image:url(images/nav_zoomin.png); width:16px; height:16px; }
+      .zoomoutIcon { background-image:url(images/nav_zoomout.png); width:16px; height:16px; }
+      .zoomfullextIcon { background-image:url(images/nav_fullextent.png); width:16px; height:16px; }
+      .zoomprevIcon { background-image:url(images/nav_previous.png); width:16px; height:16px; }
+      .zoomnextIcon { background-image:url(images/nav_next.png); width:16px; height:16px; }
+      .panIcon { background-image:url(images/nav_pan.png); width:16px; height:16px; }
+      .deactivateIcon { background-image:url(images/nav_decline.png); width:16px; height:16px; }
+	  .distanceIcon { background-image:url(images/Measure_Distance16.png); width:16px; height:16px; }
+      .areaIcon { background-image:url(images/Measure_Area16.png); width:16px; height:16px; }
+      .pointIcon { background-image:url(images/Measure_Point16.png); width:16px; height:16px; }
+	  .queryIcon{background-image:url(images/query.png); width:16px; height:16px; }
+	  .isfullIcon{background-image:url(images/isfull.png); width:16px; height:16px; }
+
+	.titlePane{ 
+        width:240px; 
+      } 
+      .claro .dijitTitlePaneTitle { 
+        background: #808775; 
+        font-weight:600; 
+        border:solid 1px #29201A; 
+      } 
+      .claro .dijitTitlePaneTitleHover { 
+        background:#808775; 
+      } 
+      .claro .dijitTitlePaneTitleActive { 
+        background:#808775; 
+      } 
+      .claro .dijitTitlePaneContentOuter { 
+        border-right: solid 2px #808775 !important; 
+        border-bottom: solid 2px #808775 !important; 
+        border-left: solid 2px #808775 !important; 
+      } 
+	#measure_div{
+		display:none;
+	}
+	#peoplestat_div{
+		display:none;
+		margin-top:5px
+	}
+	#layers_div{
+		margin-top:5px
+	}
+    </style> 
+    <script type="text/javascript"> 
+      var djConfig = { 
+        parseOnLoad: true 
+      }; 
+    </script> 
+    <script type="text/javascript" src="http://shally/arcgis_js_api/library/2.4/arcgis/?v=2.4"></script> 
+    <script type="text/javascript"> 
+      dojo.require("dijit.dijit"); // optimize: load dijit layer 
+	  dojo.require("esri.map"); 
+	  //布局
+      dojo.require("dijit.layout.BorderContainer"); 
+      dojo.require("dijit.layout.ContentPane"); 
+      
+      //鹰眼
+	  dojo.require("esri.dijit.OverviewMap"); 
+
+	  //工具栏:可拖拽
+	  dojo.require("esri.toolbars.draw"); 
+
+	  //工具栏
+	  dojo.require("esri.toolbars.navigation");
+      dojo.require("dijit.form.Button");
+      dojo.require("dijit.Toolbar");
+
+	  //测量工具栏
+      dojo.require("dijit.TitlePane"); 
+      dojo.require("dijit.form.CheckBox");
+      dojo.require("esri.dijit.Measurement");
+      dojo.require("esri.SnappingManager");
+      dojo.require("esri.dijit.Scalebar");
+      dojo.require("esri.layers.FeatureLayer");
+
+	  //查询
+	  dojo.require("esri.tasks.query"); 
+	  //点选查询
+	  dojo.require("esri.tasks.identify"); 
+		
+       
+      var map;
+	  var measurement; //量度工具栏
+	  var navToolbar;//导航工具栏
+
+	  var resizeTimer; 
+
+	  //查询，infoWindow，查询区县
+	  var queryTask, query; 
+	  //查询，右侧，查询省份、直辖市
+	  var queryTask2, query2; 
+	  var isQueryBtn = false;//定义一个查询标志
+	  var featureSet; 
+
+
+	  //图层
+	  var layer,visible = [];
+
+		var featureLayer;
+
+		//左右框架的原始尺寸
+		var oldWidth_left , oldWidth_right;
+		//做一个resize时的标志
+		var flag = false;
+
+		//点选查询
+		var identifyTask, identifyParams;
+
+      function init() { 
+
+		esri.config.defaults.geometryService = new esri.tasks.GeometryService("http://192.168.0.15:8399/arcgis/rest/services/Geometry/GeometryServer");
+
+        var initialExtent = new esri.geometry.Extent({"xmin":70.3650164655762,"ymin":0.901004856101072,"xmax":138.1677742229,"ymax":56.0653986218774,"spatialReference":{"wkid":4214}} ); 
+        map = new esri.Map("map", { 
+          extent: initialExtent,
+		  logo:false
+        }); 
+		var basemapUrl = "http://192.168.0.15:8399/arcgis/rest/services/china6/MapServer"; 
+
+      //    layer = new esri.layers.ArcGISDynamicMapServiceLayer(basemapUrl); 
+	  layer = new esri.layers.ArcGISTiledMapServiceLayer(basemapUrl); 
+
+		map.addLayer(layer);
+
+
+		/*featureLayer = new esri.layers.FeatureLayer("http://192.168.0.15:8399/arcgis/rest/services/china6/MapServer/5",{ 
+          mode: esri.layers.FeatureLayer.MODE_ONDEMAND, 
+          outFields: ["*"], 
+          opacity:.50 
+        }); 
+
+		map.addLayer(featureLayer);*/
+		
+		initLayers(layer);
+
+		 dojo.connect(map, 'onLoad', function(map) { 
+          //initialize the toolbar 
+		  initToolBar(map);
+          dojo.connect(map, 'resize', resizeMap); 
+          //add the overview map  
+          initOverviewMapDijit(map);
+
+		  //dojo.connect(map, "onMouseMove", showCoordinates);
+		//	dojo.connect(map, "onMouseDrag", showCoordinates);
+
+			initMeasureTool(map);
+			
+			initFunctionality(map);
+        }); 
+		
+
+
+		//查询
+
+		//initQuery();
+
+		//initQuery4InfoWindow();
+
+		
+
+
+      } 
+
+
+	  function hiddenLayers(index){
+		if(featureLayer.visible)
+			featureLayer.hide();
+		else
+			featureLayer.show();
+		featureLayer.refresh();
+	  }
+
+	  function initLayers(){
+		if (layer.loaded) {
+          buildLayerList();
+        }
+        else {
+          dojo.connect(layer, "onLoad", buildLayerList);
+        }
+	  }
+
+	  function initQuery(){
+		var whicklayers = document.getElementsByName('whicklayer');
+		var whicklayer = -1;
+		for(var i=0;i<whicklayers.length;i++){
+			if(whicklayers[i].checked){
+				whicklayer = whicklayers[i].value;
+				break;
+			}
+		}
+		if(whicklayer == -1)
+			return;
+        //build query 
+        queryTask2 = new esri.tasks.QueryTask("http://192.168.0.15:8399/arcgis/rest/services/china6/MapServer/"+whicklayer); 
+        //dojo.connect(queryTask, "onComplete", showResults); 
+ 
+        //build query filter 
+        query2 = new esri.tasks.Query(); 
+        query2.returnGeometry = false; 
+        query2.outFields = ["FID","AREA","NAME"]; 
+
+	  }
+
+	  function initFunctionality(map) {
+        dojo.connect(map, "onClick", doIdentify); 
+ 
+        identifyTask = new esri.tasks.IdentifyTask("http://192.168.0.15:8399/arcgis/rest/services/china6/MapServer"); 
+ 
+        identifyParams = new esri.tasks.IdentifyParameters(); 
+        identifyParams.tolerance = 15; 
+        identifyParams.returnGeometry = true; 
+        identifyParams.layerIds = [3]; 
+        identifyParams.layerOption = esri.tasks.IdentifyParameters.LAYER_OPTION_ALL; 
+        identifyParams.width  = map.width; 
+        identifyParams.height = map.height; 
+        //map.infoWindow.resize(415, 200); 
+       // map.infoWindow.setContent(dijit.byId("tabs").domNode); 
+       // map.infoWindow.setTitle("房屋信息"); 
+ 
+        var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.25])); 
+      } 
+
+	 function doIdentify(evt) { 
+        map.graphics.clear(); 
+        identifyParams.geometry = evt.mapPoint; 
+        identifyParams.mapExtent = map.extent;
+
+		featureSet = {displayFieldName:null,features:[]}; 
+
+        identifyTask.execute(identifyParams, function(idResults) {
+			//addToMap(idResults, evt); 
+			for (var i=0, il=idResults.length; i<il; i++) {
+				//alert(idResults[i].feature);
+				//showFeature(idResults[i].feature,evt);
+				featureSet.features.push(idResults[i].feature); 
+			}
+			 if (featureSet.features.length === 1) { 
+				showFeature(featureSet.features[0],evt); 
+			  } else if (featureSet.features.length !== 0) { 
+				showFeatureSet(featureSet,evt); 
+			  } 
+		}); 
+      } 
+
+
+	function execute(stateName) { 
+		initQuery();
+		if(query2 == null)
+			return;
+        query2.text = stateName; 
+        //execute query 
+        queryTask2.execute(query2,showResultsLeft); 
+      } 
+ 
+      function showResultsLeft(results) { 
+        var s = ""; 
+        for (var i=0, il=results.features.length; i<il; i++) { 
+          var featureAttributes = results.features[i].attributes; 
+          for (att in featureAttributes) { 
+            s = s + "<b>" + att + ":</b>  " + featureAttributes[att] + "<br />"; 
+          } 
+        } 
+        dojo.byId("info").innerHTML = s; 
+      } 
+
+	  function initQuery4InfoWindow(){
+		dojo.connect(map, "onClick", executeQueryTask); 
+ 
+        //Listent for infoWindow onHide event 
+        dojo.connect(map.infoWindow, "onHide", function() {map.graphics.clear();}); 
+ 
+ 
+        //build query task  BOUNT_poly (7) 
+        //queryTask = new esri.tasks.QueryTask("http://192.168.0.15:8399/arcgis/rest/services/china6/MapServer/7"); 
+		queryTask = new esri.tasks.QueryTask("http://192.168.0.15:8399/arcgis/rest/services/china6/MapServer/3");
+ 
+        //Can listen for onComplete event to process results or can use the callback option in the queryTask.execute method. 
+        //dojo.connect(queryTask, "onComplete", showResults); 
+ 
+        //build query filter 
+        query = new esri.tasks.Query(); 
+        query.outSpatialReference = {"wkid":4214}; 
+        query.returnGeometry = true; 
+        //query.outFields = ["FID", "AREA", "NAME99"]; 
+		query.outFields = ["FID", "Id", "Name" , "Address","Code"]; 
+	  }
+
+
+	  function executeQueryTask(evt) { 
+		if(!isQueryBtn)
+			return;
+        map.infoWindow.hide(); 
+        map.graphics.clear(); 
+        featureSet = null; 
+ 
+        //onClick event returns the evt point where the user clicked on the map. 
+        //This is contains the mapPoint (esri.geometry.point) and the screenPoint (pixel xy where the user clicked). 
+        //set query geometry = to evt.mapPoint Geometry 
+        query.geometry = evt.mapPoint; 
+ 
+        //Execute task and call showResults on completion 
+        queryTask.execute(query, function(fset) { //alert(fset.features.length);
+          if (fset.features.length === 1) { 
+            showFeature(fset.features[0],evt); 
+          } else if (fset.features.length !== 0) { 
+            showFeatureSet(fset,evt); 
+          } 
+        }); 
+      } 
+ 
+       function showFeature(feature,evt) { 
+        map.graphics.clear(); 
+ 
+        //set symbol 
+        var symbol = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID, new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([255,0,0]), 2), new dojo.Color([255,255,0,0.5])); 
+        feature.setSymbol(symbol); 
+ 
+        //construct infowindow title and content 
+        var attr = feature.attributes; 
+       // var title = attr.NAME99; 
+       // var content = "FID : " + attr.FID  + "<br />AREA : " + attr.AREA  + "<br />NAME99 : " + attr.NAME99 ;
+	   var title = attr.Name; 
+	   var content = "地图ID : " + attr.FID  + "<br />房屋ID : " + attr.Id + "<br />房屋编码 : " + attr.Code  + "<br />房屋名称 : " + attr.Name   + "<br />房屋地址 : " + attr.Address ;
+	   	content += "<br /><A href=\"#\" onclick=\"peoplestat('"+attr.Code+"','"+attr.Address+"');\">查看人员分布</A> ";
+
+	   if(featureSet.features.length > 1)
+			content += "&nbsp;<A href='#' onclick='showFeatureSet(featureSet);'>back</A><br/>";
+
+        map.graphics.add(feature); 
+ 
+        map.infoWindow.setTitle(title); 
+        map.infoWindow.setContent(content); 
+ 
+        (evt) ? map.infoWindow.show(evt.screenPoint,map.getInfoWindowAnchor(evt.screenPoint)) : null; 
+      } 
+	  var evtO = null;
+      function showFeatureSet(fset,evt) { 
+        //remove all graphics on the maps graphics layer 
+        map.graphics.clear(); 
+		if(evt)
+			evtO = evt;
+        var screenPoint = evtO.screenPoint; 
+ 
+        featureSet = fset; 
+ 
+        var numFeatures = featureSet.features.length; 
+ 
+        //QueryTask returns a featureSet.  Loop through features in the featureSet and add them to the infowindow. 
+        var title = "查找到 " + numFeatures + " 个符合条件的对象."; 
+        var content = ""; 
+ 
+        for (var i=0; i<numFeatures; i++) { 
+          var graphic = featureSet.features[i]; 
+          content = content + graphic.attributes.Name + "  (<A href='#' onclick='showFeature(featureSet.features[" + i + "]);'>show</A>)<br/>"; 
+        } 
+ 
+        map.infoWindow.setTitle(title); 
+        map.infoWindow.setContent(content); 
+        map.infoWindow.show(screenPoint,map.getInfoWindowAnchor(evtO.screenPoint)); 
+      } 
+ 
+
+
+
+
+	  function initMeasureTool(map){
+		var sfs = new esri.symbol.SimpleFillSymbol(esri.symbol.SimpleFillSymbol.STYLE_SOLID,
+         new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID,
+         new dojo.Color([195,176,23]), 2),null);
+        
+        measurement = new esri.dijit.Measurement({
+            map: map,
+			defaultAreaUnit: esri.Units.SQUARE_KILOMETERS,
+			defaultLengthUnit: esri.Units.KILOMETERS
+          }, dojo.byId('measurementDiv'));
+          //measurement.hide();
+          measurement.startup();
+		  measurement.hideTool("distance");
+		  measurement.hideTool("area");
+		  measurement.hideTool("location");
+		  //measurement.hide();
+		  //dojo.byId('measure_div').style.display = 'none';
+
+		  //dojo.connect(measurement, "onMeasureEnd", function(activeTool){
+		//	  this.setTool(activeTool, false);
+		//	});
+
+	  }
+
+	  function showCoordinates(evt){
+			var mp1 = evt.screenPoint;
+			dojo.byId("coord1").innerHTML = mp1.x + ", " + mp1.y;
+			var mp2 = evt.mapPoint;
+			dojo.byId("coord2").innerHTML = mp2.x + ", " + mp2.y;
+	  }
+
+	function initToolBar(map){
+		//toolBar = new esri.toolbars.Draw(map); 
+          //dojo.connect(toolBar, "onDrawEnd",onDrawEnd);    
+			navToolbar = new esri.toolbars.Navigation(map);
+		 dojo.connect(navToolbar, "onExtentHistoryChange", extentHistoryChangeHandler);
+	}
+
+	function initOverviewMapDijit(map){
+		var overviewMapDijit = new esri.dijit.OverviewMap({ 
+            map: map, 
+            visible:true ,
+			attachTo:"bottom-right"
+          }); 
+          overviewMapDijit.startup(); 
+	}
+
+
+
+
+	  function extentHistoryChangeHandler() {
+        dijit.byId("zoomprev").disabled = navToolbar.isFirstExtent();
+        dijit.byId("zoomnext").disabled = navToolbar.isLastExtent();
+      }
+	  
+	  function resizeMap() { 
+        //resize the map when the browser resizes - view the 'Resizing and repositioning the map' section in  
+        //the following help topic for more details http://help.esri.com/EN/webapi/javascript/arcgis/help/jshelp_start.htm#jshelp/inside_faq.htm 
+        //var resizeTimer; 
+		if(!flag){
+			clearTimeout(resizeTimer); 
+			resizeTimer = setTimeout(function() { 
+			  map.resize(); 
+			  map.reposition(); 
+			  flag = false;
+			}, 500); 
+		}
+		flag = true;
+      } 
+
+	  function buildLayerList() {
+        var items = dojo.map(layer.layerInfos,function(info,index){
+          if (info.defaultVisibility) {
+            visible.push(info.id);
+          }
+         // return "<input type='checkbox' class='list_item' checked='" + (info.defaultVisibility ? "checked" : "") + "' id='" + info.id + "' onclick='updateLayerVisibility();' /><label for='" + info.id + "'>" + info.name + "</label>";
+		  return "<input name='whicklayer' id='whicklayer' type='radio' class='list_item' value='" + info.id + "' />" + info.name ;
+        });
+
+        dojo.byId("layer_list").innerHTML = items.join();
+       // layer.setVisibleLayers(visible);
+        //map.addLayer(layer);
+
+      }
+
+      function updateLayerVisibility() {
+        var inputs = dojo.query(".list_item"), input;
+    
+        visible = [];
+
+        dojo.forEach(inputs,function(input){
+          if (input.checked) {
+              visible.push(input.id);
+          }
+          });
+        //if there aren't any layers visible set the array to be -1
+        if(visible.length === 0){
+          visible.push(-1);
+        }
+        layer.setVisibleLayers(visible);
+      }
+
+	var code_current = null , address_current = null;
+	function peoplestat(code,address){
+		code_current = code;	
+		address_current = address;
+
+		dojo.byId('peoplestat_div').style.display = 'block';
+		dojo.byId('layers_div').style.display = 'none';
+		dojo.xhrGet({
+			url:"http://127.0.0.1:8080/j/pmas/house!getPersonNumByHouseCode.action?code="+code_current,//服务器指向
+			load:succesHandler,//请求成功完成后的回调函数
+			error:errorHandler,//请求失败的回调函数
+			handleAs:"json"//返回数据的格式
+		});
+	}
+
+	function succesHandler(response){
+		var content = 
+		"房屋编码 : " + code_current 
+		+ "<br />房屋地址 : " + address_current
+		+ "<br />总人数 : " + (response.totalNum?response.totalNum:0)
+		+ "<br />男性人数 : " + (response.maleNum?response.maleNum:0)
+		+ "<br />女性人数 : " + (response.femaleNum?response.femaleNum:0)
+		+ "<br />未知性别人数 : " + (response.noKnowNum?response.noKnowNum:0)
+		+ "<br />未说明性别人数 : " + (response.noNotifyNum?response.noNotifyNum:0)
+		+ "<br />育龄妇女人数 : " + (response.fertileWomanNum?response.fertileWomanNum:0) 
+		+ "<br />非育妇人数 : " + (response.notFertileWomanNum?response.notFertileWomanNum:0)  ;
+		dojo.byId('peoplestatDiv').innerHTML = content;
+	}
+	function errorHandler(errorResponse){
+		alert(errorResponse.message);
+	}
+
+	  
+	  function operator(type){
+		if(type == 'zoomin'){
+			navToolbar.activate(esri.toolbars.Navigation.ZOOM_IN);
+			map.setMapCursor("url(cursors/nav_zoomin.cur),auto");
+		}else if(type == 'zoomout'){
+			navToolbar.activate(esri.toolbars.Navigation.ZOOM_OUT);
+			map.setMapCursor("url(cursors/nav_zoomout.cur),auto");
+		}else if(type == 'zoomfullext'){
+			navToolbar.zoomToFullExtent();
+			//map.setMapCursor("default");
+		}else if(type == 'zoomprev'){
+			navToolbar.zoomToPrevExtent();
+		}else if(type == 'zoomnext'){
+			navToolbar.zoomToNextExtent();
+		}else if(type == 'pan'){
+			navToolbar.activate(esri.toolbars.Navigation.PAN);
+			map.setMapCursor("url(cursors/nav_pan.cur),auto");
+		}else if(type == 'distance'){
+			measurement.clearResult();
+			measurement.setTool('distance',true);
+			dojo.byId('measure_div').style.display = 'block';
+			map.setMapCursor("url(cursors/Measure_Distance16.cur),auto");
+		}else if(type == 'area'){
+			measurement.clearResult();
+			measurement.setTool('area',true);
+			dojo.byId('measure_div').style.display = 'block';
+			map.setMapCursor("url(cursors/Measure_Area16.cur),auto");
+		}else if(type == 'point'){
+			measurement.clearResult();
+			measurement.setTool('location',true);
+			dojo.byId('measure_div').style.display = 'block';
+			map.setMapCursor("url(cursors/Measure_Point16.cur),auto");
+		}else if(type == 'deactivate'){
+			//禁用查询及销毁查询结果
+			isQueryBtn = false;
+			map.infoWindow.hide(); 
+			map.graphics.clear(); 
+			featureSet = null; 
+			//禁用工具条
+			navToolbar.deactivate();
+			//销毁测量工具条
+			measurement.clearResult();
+			try{measurement.setTool('999',true);}catch(e){}
+
+			dojo.byId('measure_div').style.display = 'none';
+			map.setMapCursor("default");
+		}else if(type == 'isfull'){//alert("oldWidth_left:"+oldWidth_left+":oldWidth_right"+oldWidth_right);
+			var isfull_flag = dojo.byId('rightPane').style.display;//alert("left:"+dojo.byId('rightPane').style.left+":width:"+dojo.byId('rightPane').style.width);
+			if(isfull_flag == 'none'){
+				dojo.byId('rightPane').style.display = 'block';
+				dojo.byId('map').style.width = oldWidth_left;
+				dojo.byId('rightPane').style.width = oldWidth_right;
+				//dojo.byId('map').style.width = "80%";
+				//dojo.byId('rightPane').style.width = "20%";
+				dojo.byId('isfull').innerHTML = dojo.byId('isfull').innerHTML.replace('显示','隐藏');
+			}else{
+				oldWidth_left = dojo.byId('map').style.width;
+				oldWidth_right = dojo.byId('rightPane').style.width;
+				dojo.byId('rightPane').style.display = 'none';
+				dojo.byId('map').style.width = '100%';
+				dojo.byId('isfull').innerHTML = dojo.byId('isfull').innerHTML.replace('隐藏','显示');
+			}
+			resizeMap();
+		}
+		if(type != 'distance' && type != 'area' && type != 'point'){
+			try{measurement.setTool('999',true);}catch(e){}
+		}
+		if(type == 'query'){
+			isQueryBtn=true;
+			map.setMapCursor("url(cursors/query.cur),auto");
+		}else{
+			isQueryBtn=false;
+		}
+	  }
+      
+      //show map on load  
+      dojo.addOnLoad(init); 
+    </script> 
+  </head>  
+  <body class="claro"> 
+    <div id="mainWindow" dojotype="dijit.layout.BorderContainer" design="headline" 
+    gutters="false" style="width:100%; height:100%;"> 
+
+	  <div id="header" dojotype="dijit.layout.ContentPane"  class="roundedCorners" region="top"> 
+        
+		<div id="navToolbar" data-dojo-type="dijit.Toolbar">
+		  <div data-dojo-type="dijit.form.Button" id="zoomin"  data-dojo-props="iconClass:'zoominIcon', onClick:function(){operator('zoomin')}">放大</div>
+		  <div data-dojo-type="dijit.form.Button" id="zoomout" data-dojo-props="iconClass:'zoomoutIcon', onClick:function(){operator('zoomout')}">缩小</div>
+		  <div data-dojo-type="dijit.form.Button" id="zoomfullext" data-dojo-props="iconClass:'zoomfullextIcon', onClick:function(){operator('zoomfullext')}">还原</div>
+		  <div data-dojo-type="dijit.form.Button" id="zoomprev" data-dojo-props="iconClass:'zoomprevIcon', onClick:function(){operator('zoomprev')}">前视图</div>
+		  <div data-dojo-type="dijit.form.Button" id="zoomnext" data-dojo-props="iconClass:'zoomnextIcon', onClick:function(){operator('zoomnext')}">后视图</div>
+		  <div data-dojo-type="dijit.form.Button" id="pan" data-dojo-props="iconClass:'panIcon', onClick:function(){operator('pan')}">漫游</div>
+		  <div data-dojo-type="dijit.form.Button" id="distanceTool" data-dojo-props="iconClass:'distanceIcon', onClick:function(){operator('distance')}">距离</div>
+		  <div data-dojo-type="dijit.form.Button" id="areaTool" data-dojo-props="iconClass:'areaIcon', onClick:function(){operator('area')}">面积</div>
+		  <div data-dojo-type="dijit.form.Button" id="pointTool" data-dojo-props="iconClass:'pointIcon', onClick:function(){operator('point')}">定位</div>
+		  <div data-dojo-type="dijit.form.Button" id="queryTool" data-dojo-props="iconClass:'queryIcon', onClick:function(){operator('query')}">查询</div>
+		  <div data-dojo-type="dijit.form.Button" id="deactivate" data-dojo-props="iconClass:'deactivateIcon' ,onClick:function(){operator('deactivate')}">取消</div>
+		  <div data-dojo-type="dijit.form.Button" id="isfull" data-dojo-props="iconClass:'isfullIcon' ,onClick:function(){operator('isfull')}">隐藏</div>
+		</div>
+
+      </div> 
+
+      <div id="map" dojotype="dijit.layout.ContentPane" class="roundedCorners" region="center">
+			 
+	  </div> 
+
+      <div dojotype="dijit.layout.ContentPane" id="rightPane" class="roundedCorners" region="right"  splitter="false" > 
+			<div>
+			  <div id="measure_div" class="titlePane" data-dojo-type="dijit.TitlePane" data-dojo-props="title:'测量窗口', closable:'false', open:'false'">
+				<div id="measurementDiv"></div>
+			  </div>
+			  <div id="layers_div" class="titlePane" data-dojo-type="dijit.TitlePane" data-dojo-props="title:'查询窗口', closable:'false', open:'false'">
+				选择图层 :<br />  
+				<div id="layer_list"></div>
+				关键字 : <br /> <input type="text" id="stateName" value="上海" /> <br /> 
+					<input type="button" value="查询" onclick="execute(dojo.byId('stateName').value);" /><br /> 
+					<div id="info" style="padding:5px; margin:5px; background-color:#eee;"></div>
+			  </div> 
+			  
+			  <div id="peoplestat_div" class="titlePane" data-dojo-type="dijit.TitlePane" data-dojo-props="title:'人口统计窗口', closable:'false', open:'false'">
+				<div id="peoplestatDiv"></div>
+			  </div>
+
+			</div><!--
+	  屏幕坐标 : <span id="coord1"></span><br />
+	  地理坐标 : <span id="coord2"></span><br />
+    <input type="button" value="测试" onclick="hiddenLayers(5)" /> -->
+      </div> 
+
+      </div> 
+  </body> 
+</html> 
