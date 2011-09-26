@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.pmas.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -137,6 +138,64 @@ public class PersonManager {
 				hql.append(" ").append(page.getOrder());
 		}
 		return personDao.findPage(page, hql.toString(), params.toArray());
+	}
+	/**
+	 * result.put("totalNum", 1000);
+		result.put("maleNum", 800);
+		result.put("femaleNum", 200);
+		result.put("fertileWomanNum", 150);
+		result.put("notFertileWomanNum", 50);
+	 * @param houseCode
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Map<String,Integer> queryPersonNumByHouseCode(String houseCode){
+		Map<String,Integer> result = new HashMap<String,Integer>();
+		StringBuilder hql = new StringBuilder();
+		hql.append("select p.sex,count(*) as num from Person as p left join p.personBasic as pb,House as h where (p.cancelType = ")
+		.append(Constants.CANCEL_TYPE.NORMAL)
+		.append(" or p.cancelType = ")
+		.append(Constants.CANCEL_TYPE.RENEW)
+		.append(") and pb.houseId = h.id and h.houseCode = ? group by p.sex ");
+		List<Object[]> sex_result = personDao.find(hql.toString(), houseCode);
+		Integer totalNum = 0 , tmp = 0 ,type = null;
+		if(sex_result.size() > 0){
+			for(Object[] o : sex_result){
+				tmp = Integer.parseInt(o[1].toString());
+				type = (Integer)o[0];
+				if(tmp != null)
+					totalNum += tmp;
+				if(type == Constants.SEX.MALE.intValue()){
+					result.put("maleNum", tmp);
+				}else if(type == Constants.SEX.FEMALE.intValue()){
+					result.put("femaleNum", tmp);
+				}else if(type == Constants.SEX.NOKNOW.intValue()){
+					result.put("noKnowNum", tmp);
+				}else if(type == Constants.SEX.NONOTIFY.intValue()){
+					result.put("noNotifyNum", tmp);
+				}
+			}
+		}
+		hql.delete(0, hql.length()-1);
+		hql.append("select p.kind,count(*) as num from Person as p left join p.personBasic as pb,House as h where (p.cancelType = ")
+		.append(Constants.CANCEL_TYPE.NORMAL)
+		.append(" or p.cancelType = ")
+		.append(Constants.CANCEL_TYPE.RENEW)
+		.append(") and pb.houseId = h.id and h.houseCode = ? group by p.kind ");
+		List<Object[]> kind_result = personDao.find(hql.toString(), houseCode);
+		if(kind_result.size() > 0){
+			for(Object[] o : kind_result){
+				tmp = Integer.parseInt(o[1].toString());
+				type = (Integer)o[0];
+				if(type == Constants.FW_KIND.FW.intValue()){
+					result.put("fertileWomanNum", tmp);
+				}else if(type == Constants.FW_KIND.NOT_FW.intValue()){
+					result.put("notFertileWomanNum", tmp);
+				}
+			}
+		}
+		result.put("totalNum", totalNum);
+		return result;
 	}
 	
 	@Autowired
