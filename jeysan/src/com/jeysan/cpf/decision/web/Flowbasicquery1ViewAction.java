@@ -22,7 +22,6 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/decision")
-@Result(name = "print", location = "print.jsp", type = "dispatcher")
 public class Flowbasicquery1ViewAction extends PrintActionSupport<Flowbasicquery1View> {
 	/**
 	 * 
