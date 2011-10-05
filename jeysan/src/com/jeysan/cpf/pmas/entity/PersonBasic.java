@@ -149,6 +149,10 @@ public class PersonBasic extends IdExtEntity {
 	 */
 	private Integer marryStatus;
 	/**
+	 * 婚变日期
+	 */
+	private java.util.Date marryCryDate;
+	/**
 	 * 初婚日期
 	 */
 	private java.util.Date firstMarryDate;
@@ -541,6 +545,15 @@ public class PersonBasic extends IdExtEntity {
 
 	public void setMotherCode(String motherCode) {
 		this.motherCode = motherCode;
+	}
+	
+	@Column(name = "MARRY_CRY_DATE")
+	public java.util.Date getMarryCryDate() {
+		return marryCryDate;
+	}
+
+	public void setMarryCryDate(java.util.Date marryCryDate) {
+		this.marryCryDate = marryCryDate;
 	}
 
 	@Override

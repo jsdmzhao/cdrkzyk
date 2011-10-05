@@ -221,6 +221,7 @@ public class PersonAction extends CrudActionSupport<Person> {
 				if(entity.getPersonBasic().getMarryStatus() != null){
 					fertileWoman.getWomanBasic().setMarryStatus(entity.getPersonBasic().getMarryStatus());
 					fertileWoman.getWomanBasic().setFertileWoman(fertileWoman);
+					fertileWoman.getWomanBasic().setMarryCryDate(entity.getPersonBasic().getMarryCryDate());
 					womanBasicManager.saveWomanBasic(fertileWoman.getWomanBasic());
 				}
 			}else if(entity.getKind()==Constants.FW_KIND.NOT_FW){//非育龄妇女
