@@ -88,7 +88,7 @@
     }
      function exportExcel(){
         var url = parent.printMainFrm.location.href ;
-        alert(url);
+        //alert(url);
         parent.printMainFrm.location.href = url + ((url.indexOf("?")==-1)?"?":"&")+"operation=export";
     }
 </script>

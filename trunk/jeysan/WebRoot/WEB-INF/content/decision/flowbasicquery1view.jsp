@@ -95,11 +95,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('流入人员基本信息')"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('流入人员基本信息')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>

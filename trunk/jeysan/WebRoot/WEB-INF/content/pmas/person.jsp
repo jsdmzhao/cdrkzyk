@@ -114,12 +114,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="doc/dwz-team.xls" target="dwzExport"
-						targetType="navTab" title="实要导出这些记录吗?"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('人员基本信息')"><span>打印</span>
 					</a>
 				</li>
 			</ul>
@@ -136,10 +131,10 @@
 					<th width="60" orderField="nameh" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="sex" class="orderFlag">
+					<th width="80" orderField="sex" class="orderFlag" htype="dict">
 						性别
 					</th>
-					<th width="80" orderField="certType" class="orderFlag">
+					<th width="80" orderField="certType" class="orderFlag" htype="dict">
 						证件类型
 					</th>
 					<th width="120" orderField="code" class="orderFlag">
@@ -148,13 +143,13 @@
 					<th width="120" orderField="personCode" class="orderFlag">
 						人员编号
 					</th>
-					<th width="80" orderField="cancelType" class="orderFlag">
+					<th width="80" orderField="cancelType" class="orderFlag" htype="dict">
 						状态
 					</th>
-					<th width="80" orderField="domicileType" class="orderFlag">
+					<th width="80" orderField="domicileType" class="orderFlag" htype="dict">
 						户口类别
 					</th>
-					<th width="80" orderField="kind" class="orderFlag">
+					<th width="80" orderField="kind" class="orderFlag" htype="dict">
 						人员类别
 					</th>
 					<th width="80" align="center">

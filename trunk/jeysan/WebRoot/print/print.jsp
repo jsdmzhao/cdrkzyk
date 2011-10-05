@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@page import="org.apache.commons.beanutils.BeanUtils"%>
+<%@ page import="org.apache.commons.beanutils.BeanUtils"%>
 <%@ include file="/common/taglibs.jsp" %>
 <%@ include file="/print/Export.jsp" %>
 <c:set var="datas" value="${page.result}"/>
@@ -41,18 +41,18 @@
 <p>&nbsp;序号</p>
 </td>
 <c:forEach var="head" items="${heads}" varStatus="status" >
-       				<td height="30" align="center" valign="middle" class="<tags:js.print.getCss columns="${fn:length(heads)}" columnIndex="${status.index}" rows="${index2+1}" rowIndex="0" cssNormal="In1-td-rightbottom" cssLastRow="In1-td-right" cssLastColumn="In1-td-bottom"/>">
+       				<td height="30" align="center" valign="middle" class="<tagsold:getCss columns="${fn:length(heads)}" columnIndex="${status.index}" rows="${index2+1}" rowIndex="0"/>">
        					<p>&nbsp;${head.a}</p>
        				</td>
 </c:forEach>
     			</tr>
 <c:forEach var="data" items="${datas}" varStatus="status" begin="${(i-1)*n}" end="${index2}">
 <tr>
-<td height="30" align="center" valign="middle" class="In1-td-rightbottom">
+<td height="30" align="center" valign="middle" class="${status.index==index2?'In1-td-right':'In1-td-rightbottom'}">
 <p>&nbsp;${status.index+1}</p>
 </td>
 	<c:forEach var="head" items="${heads}" varStatus="b">
-		<td height="30" align="center" valign="middle"  class="<tags:js.print.getCss columns="${fn:length(heads)}" columnIndex="${b.index}" rows="${index2+1}" rowIndex="${status.index}" cssNormal="In1-td-rightbottom" cssLastRow="In1-td-right" cssLastColumn="In1-td-bottom"/>">
+		<td height="30" align="center" valign="middle"  class="<tagsold:getCss columns="${fn:length(heads)}" columnIndex="${b.index}" rows="${index2+1}" rowIndex="${status.index}"/>">
 	    	<p>&nbsp;<tags:js.class.getProperty obj="${data}" property="${head.b}" type="${head.c}"/></p>
 		</td>
 	</c:forEach>

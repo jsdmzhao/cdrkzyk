@@ -227,6 +227,55 @@ function JS_print(action,title){
 	showWindowRaw(ctx + '/print/print!print.action?url='+ action+'&print=print&title='+title,800,600);
 }
 /**
+ * 打印
+ * @param {} title
+ * @param {} jsonArray
+ */
+function JS_print2(title){
+	var $form = $('#pagerForm',navTab.getCurrentPanel());
+	$('#numPerPage',$form).val(-1);
+	var params = $form.serializeArray();
+	var paramsInForm = '';
+	var name = null,value = null;
+	for(var i=0;i<params.length;i++){
+		name = params[i].name;
+		value = params[i].value;
+		if(value == null || value == '')
+			continue;
+		paramsInForm += '&' + name + '=' + encodeURI(value);
+	}
+	var rule = new Array();
+	var hcode = '';
+	var htype = '';
+	var htitle = '';
+	var $this = null;
+	$('table thead tr th:gt(0)',navTab.getCurrentPanel()).each(function(){
+		$this = $(this);
+		hcode = $this.attr('orderField');
+		if(hcode == null || hcode == '')
+			hcode = $this.attr('hcode');
+		if(hcode != null && hcode != ''){
+			htype = $this.attr('htype');
+			if(htype == null || htype == '')
+				htype = 'normal';
+			htitle = $this.children().eq(0).html();
+			if(htitle != null && htitle != '')
+				htitle = encodeURI(htitle);
+						
+			//alert($(this).attr('orderField'));;
+			rule[rule.length] = {a:htitle,b:hcode,c:htype};
+		}
+	});
+	var action = $form.attr('action');
+	var url = action.substring(0,action.indexOf('/',1));
+	url += '/print/print!print.action?print=print&url='+ action;
+	url += '&title='+encodeURI(title);
+	url += paramsInForm;
+	url += '&rule='+JSON.stringify(rule);
+	//alert(url);
+	showWindowRaw(url,800,600);
+}
+/**
  * 弹出窗口
  * @param {} strurl
  * @param {} width
@@ -234,4 +283,7 @@ function JS_print(action,title){
  */
 function showWindowRaw(strurl, width, height) {
     window.open(strurl, 'report_select', 'toolbar=no,location=no,status=yes,menubar=no,scrollbars=yes,resizable=yes,width=' + width + ',height=' + height);
+}
+function pdialogOpen(url,title){
+	$.pdialog.open(url, 'btnLook', title, {width:405,height:300});
 }

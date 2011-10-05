@@ -11,7 +11,7 @@
     }
 %>
 
-<script language="javascript" src="${ctx }/print/CheckActivX.js"></script>
+<script language="javascript" src="${ctx}/print/CheckActivX.js"></script>
 <OBJECT  ID="LODOP" CLASSID="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" WIDTH=0 HEIGHT=0> </OBJECT>
 <script language="javascript">CheckLodop();</script>
 <script language='javascript'>
@@ -41,7 +41,7 @@
        // LODOP.ADD_PRINT_HTML(1125, 0, 2000, 1125, document.forms[1].innerHTML);
        // LODOP.ADD_PRINT_HTML(2250, 0, 2000, 1125, document.forms[2].innerHTML);
        
-       	LODOP.PRINT_INIT("统计表");
+       	LODOP.PRINT_INIT("${param.title}");
        	for(var i=0;i<forms.length;i++){
        		LODOP.ADD_PRINT_HTM(0,20,350,1414,forms[i].innerHTML)
        		if(i != forms.length -1){
