@@ -65,6 +65,15 @@
 					<label>初婚日期：</label>
 					<input name="personBasic.firstMarryDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.firstMarryDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
 					</p>
+				<p>
+					<label>
+						婚变日期：
+					</label>
+					<input name="personBasic.marryCryDate" class="date " readonly="readonly"
+						type="text" size="30"
+						value="<fmt:formatDate value="${personBasic.marryCryDate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
 					<p>
 					<label>文化程度：</label>
 					<tags:js.dict.selector name="personBasic.edu" value="${personBasic.edu}" dictCode="JS1041"/>

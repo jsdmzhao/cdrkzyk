@@ -100,6 +100,14 @@
 			</p>
 			<p>
 				<label>
+					婚变日期：
+				</label>
+				<input name="personBasic.marryCryDate" readonly="readonly"
+					type="text" size="30"
+					value="<fmt:formatDate value="${personBasic.marryCryDate}" pattern="yyyy-MM-dd"/>" />
+			</p>
+			<p>
+				<label>
 					文化程度：
 				</label>
 				<input readonly="readonly" type="text" size="30"
