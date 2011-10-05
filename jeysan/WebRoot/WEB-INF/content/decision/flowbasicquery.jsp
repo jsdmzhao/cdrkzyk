@@ -6,19 +6,35 @@
 			<div class="pageFormContent" layoutH="56">
 				<div style="float:left; display:block; margin:10px;padding:10px; overflow:auto; width:90%; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流入人员基本信息</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery1view.action" target="navTab" rel="flowbasicquery_sub"><span>流动人口基本情况查询之流入人员基本信息</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流出人员基本信息</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流动人口基本情况查询之流出人员基本信息</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流入重复人员信息</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流动人口基本情况查询之流入重复人员信息</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之生育子女情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之子女出生情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之符合生育政策人员情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之孕产情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之社会抚养费征收情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
