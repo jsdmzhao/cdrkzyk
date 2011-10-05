@@ -26,7 +26,7 @@ import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.PersonOutManager;
 import com.jeysan.cpf.pmas.service.VillagerTeamManager;
 import com.jeysan.cpf.util.Constants;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -42,7 +42,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 @Results( { @Result(name = "person4lookup", location = "person4lookup.jsp", type = "dispatcher"), 
 	@Result(name = "person-cancel", location = "person-cancel.jsp", type = "dispatcher"), 
 	@Result(name = "historydestroy", location = "historydestroy.jsp", type = "dispatcher")})
-public class PersonAction extends CrudActionSupport<Person> {
+public class PersonAction extends PrintActionSupport<Person> {
 	/**
 	 * 
 	 */
