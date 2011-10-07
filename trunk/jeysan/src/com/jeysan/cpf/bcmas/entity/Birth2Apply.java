@@ -63,6 +63,10 @@ public class Birth2Apply extends IdExtEntity {
 	 * 经办人
 	 */
 	private String agent;
+	/**
+	 * 孕产状态
+	 */
+	private Integer matenalStatus;
 	
 	private Birth2Check birth2Check = new Birth2Check();
 	
@@ -159,6 +163,15 @@ public class Birth2Apply extends IdExtEntity {
 
 	public void setCheckType(Integer checkType) {
 		this.checkType = checkType;
+	}
+	
+	@Column(name = "MATENAL_STATUS")
+	public Integer getMatenalStatus() {
+		return matenalStatus;
+	}
+
+	public void setMatenalStatus(Integer matenalStatus) {
+		this.matenalStatus = matenalStatus;
 	}
 	
 	

@@ -90,6 +90,10 @@ public class MarryCert extends IdExtEntity {
 	 * 照片
 	 */
 	private String photo;
+	/**
+	 * 证书类型
+	 */
+	private Integer issType;
 
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="PERSON_ID")
@@ -243,6 +247,16 @@ public class MarryCert extends IdExtEntity {
 
 	public void setPhoto(String photo) {
 		this.photo = photo;
+	}
+	
+	
+	@Column(name = "ISS_TYPE")
+	public Integer getIssType() {
+		return issType;
+	}
+
+	public void setIssType(Integer issType) {
+		this.issType = issType;
 	}
 
 	@Override

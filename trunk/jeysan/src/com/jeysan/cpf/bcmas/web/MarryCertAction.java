@@ -1,6 +1,5 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -12,8 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.jeysan.cpf.bcmas.entity.MarryCert;
 import com.jeysan.cpf.bcmas.service.MarryCertManager;
 import com.jeysan.cpf.pmas.entity.Person;
-import com.jeysan.cpf.util.Constants;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -25,7 +23,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class MarryCertAction extends CrudActionSupport<MarryCert> {
+public class MarryCertAction extends PrintActionSupport<MarryCert> {
 	/**
 	 * 
 	 */

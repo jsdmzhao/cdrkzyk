@@ -60,6 +60,10 @@ public class BcsCert extends IdExtEntity {
 	 * 证件类型
 	 */
 	private Integer certType;
+	/**
+	 * 有效期
+	 */
+	private java.util.Date validPeroid;
 
 
 	@ManyToOne(optional = false)
@@ -152,6 +156,16 @@ public class BcsCert extends IdExtEntity {
 
 	public void setCertType(Integer certType) {
 		this.certType = certType;
+	}
+	
+	
+	@Column(name = "VALID_PEROID")
+	public java.util.Date getValidPeroid() {
+		return validPeroid;
+	}
+
+	public void setValidPeroid(java.util.Date validPeroid) {
+		this.validPeroid = validPeroid;
 	}
 
 	@Override

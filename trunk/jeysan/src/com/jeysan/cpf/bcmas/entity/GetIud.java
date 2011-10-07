@@ -51,6 +51,10 @@ public class GetIud extends IdExtEntity {
 	 * 记录状态
 	 */
 	private Integer recordType;
+	/**
+	 * 未避孕类型
+	 */
+	private Integer noContraceptType;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "WOMAN_ID")
@@ -123,6 +127,16 @@ public class GetIud extends IdExtEntity {
 
 	public void setRecordType(Integer recordType) {
 		this.recordType = recordType;
+	}
+	
+	
+	@Column(name = "NO_CONTRACEPT_TYPE")
+	public Integer getNoContraceptType() {
+		return noContraceptType;
+	}
+
+	public void setNoContraceptType(Integer noContraceptType) {
+		this.noContraceptType = noContraceptType;
 	}
 
 	@Override

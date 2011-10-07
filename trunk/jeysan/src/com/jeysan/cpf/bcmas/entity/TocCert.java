@@ -55,6 +55,10 @@ public class TocCert extends IdExtEntity {
 	 * 注销日期
 	 */
 	private java.util.Date cancelDate;
+	/**
+	 * 独生证属性
+	 */
+	private Integer issAttr;
 
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="PERSON_ID")
@@ -129,6 +133,16 @@ public class TocCert extends IdExtEntity {
 
 	public void setCancelDate(java.util.Date cancelDate) {
 		this.cancelDate = cancelDate;
+	}
+	
+	
+	@Column(name = "ISS_ATTR")
+	public Integer getIssAttr() {
+		return issAttr;
+	}
+
+	public void setIssAttr(Integer issAttr) {
+		this.issAttr = issAttr;
 	}
 
 	@Override

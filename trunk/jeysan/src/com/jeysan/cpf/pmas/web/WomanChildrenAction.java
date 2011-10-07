@@ -10,13 +10,12 @@ import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.jeysan.cpf.pmas.entity.Spouse;
 import com.jeysan.cpf.pmas.entity.WomanChildren;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.cpf.pmas.service.WomanChildrenManager;
 import com.jeysan.cpf.security.service.DictSubManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -31,7 +30,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 @Namespace("/pmas")
 @Results( { @Result(name = "multiplysubs", location = "womanchildren-subs.jsp", type = "dispatcher"),
 	@Result(name = "simplesub", location = "womanchildren-view-sub.jsp", type = "dispatcher")})
-public class WomanChildrenAction extends CrudActionSupport<WomanChildren> {
+public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 	/**
 	 * 
 	 */

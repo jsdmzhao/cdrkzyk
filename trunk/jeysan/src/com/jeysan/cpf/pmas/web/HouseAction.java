@@ -13,7 +13,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.jeysan.cpf.pmas.entity.House;
 import com.jeysan.cpf.pmas.service.HouseManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -26,7 +26,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/pmas")
 @Results( { @Result(name = "house4lookup", location = "house4lookup.jsp", type = "dispatcher")})
-public class HouseAction extends CrudActionSupport<House> {
+public class HouseAction extends PrintActionSupport<House> {
 	/**
 	 * 
 	 */

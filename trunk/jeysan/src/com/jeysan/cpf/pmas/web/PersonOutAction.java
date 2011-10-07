@@ -15,7 +15,7 @@ import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.PersonOut;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.PersonOutManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -28,7 +28,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/pmas")
 @Results( { @Result(name = "personoutquery", location = "personoutquery.jsp", type = "dispatcher")})
-public class PersonOutAction extends CrudActionSupport<PersonOut> {
+public class PersonOutAction extends PrintActionSupport<PersonOut> {
 	/**
 	 * 
 	 */

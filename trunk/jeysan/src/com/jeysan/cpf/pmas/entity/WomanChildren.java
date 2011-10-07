@@ -107,6 +107,14 @@ public class WomanChildren extends IdExtEntity {
 	 * 照片
 	 */
 	private String photo;
+	/**
+	 * 上报日期
+	 */
+	private java.util.Date upDate;
+	/**
+	 * 备注
+	 */
+	private String remark;
 
 	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
 	@JoinColumn(name="PERSON_ID")
@@ -306,7 +314,24 @@ public class WomanChildren extends IdExtEntity {
 	public void setNativeLabel(String nativeLabel) {
 		this.nativeLabel = nativeLabel;
 	}
+	
+	
+	@Column(name = "UP_DATE")
+	public java.util.Date getUpDate() {
+		return upDate;
+	}
 
+	public void setUpDate(java.util.Date upDate) {
+		this.upDate = upDate;
+	}
+	@Column(name = "REMARK")
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	@Override
 	public String toString() {
 		// return ToStringBuilder.reflectionToString(this);

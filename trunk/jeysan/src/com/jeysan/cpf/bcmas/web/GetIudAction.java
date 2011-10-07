@@ -17,7 +17,7 @@ import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.FertileWomanViewManager;
 import com.jeysan.cpf.bcmas.service.GetIudManager;
 import com.jeysan.cpf.util.Constants;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -30,7 +30,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/bcmas")
 @Results( { @Result(name = "list2", location = "getiud2.jsp", type = "dispatcher")})
-public class GetIudAction extends CrudActionSupport<GetIud> {
+public class GetIudAction extends PrintActionSupport<GetIud> {
 	/**
 	 * 
 	 */
@@ -150,6 +150,10 @@ public class GetIudAction extends CrudActionSupport<GetIud> {
 		}
 		page2 = fertileWomanViewManager.searchFertileWomanView(page2, filters);
 		Struts2Utils.getRequest().setAttribute("page", page2);
+		//用于打印
+		if(checkPrint())
+			return PRINT;
+		
 		return "list2";
 	}
 	@Override

@@ -79,6 +79,10 @@ public class WomanSocialUpbring extends IdExtEntity {
 	 * 征收经办人
 	 */
 	private String lodCharger;
+	/**
+	 * 征收机关类型
+	 */
+	private Integer lodType;
 	
 	/**
 	 * 缴交详情
@@ -223,6 +227,18 @@ public class WomanSocialUpbring extends IdExtEntity {
 
 	public void setInstallmentNum(Integer installmentNum) {
 		this.installmentNum = installmentNum;
+	}
+	
+	
+	@Column(name = "LOD_TYPE")
+	public Integer getLodType() {
+		return lodType;
+	}
+
+
+
+	public void setLodType(Integer lodType) {
+		this.lodType = lodType;
 	}
 
 
