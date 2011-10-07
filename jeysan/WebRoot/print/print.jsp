@@ -41,7 +41,7 @@
 <p>&nbsp;序号</p>
 </td>
 <c:forEach var="head" items="${heads}" varStatus="status" >
-       				<td height="30" align="center" valign="middle" class="<tagsold:getCss columns="${fn:length(heads)}" columnIndex="${status.index}" rows="${index2+1}" rowIndex="0"/>">
+       				<td height="30" align="center" valign="middle" class="<tagsold:getCss columns="${fn:length(heads)}" columnIndex="${status.index}" rows="${index2+2}" rowIndex="0"/>">
        					<p>&nbsp;${head.a}</p>
        				</td>
 </c:forEach>
