@@ -72,11 +72,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('死亡登记基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -93,22 +89,22 @@
 					<th width="80" orderField="person.nameh" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="person.sex" class="orderFlag">
+					<th width="80" orderField="person.sex" class="orderFlag" htype="dict">
 						性别
 					</th>
-					<th width="80" orderField="person.age" class="orderFlag">
+					<th width="80" orderField="person.age" class="orderFlag" htype="digits">
 						年龄
 					</th>
 					<th width="120" orderField="person.code" class="orderFlag">
 						证件号码
 					</th>
-					<th width="80" orderField="dateh" class="orderFlag">
+					<th width="80" orderField="dateh" class="orderFlag" htype="date">
 						死亡日期
 					</th>
 					<th width="80" orderField="nameh" class="orderFlag">
 						户主姓名
 					</th>
-					<th width="80" orderField="relation" class="orderFlag">
+					<th width="80" orderField="relation" class="orderFlag" htype="dict">
 						与户主关系
 					</th>
 					<th width="80" align="center">

@@ -96,11 +96,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('独生子女光荣证基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -117,10 +113,10 @@
 					<th width="80" orderField="children.nameh" class="orderFlag">
 						孩子姓名
 					</th>
-					<th width="120" orderField="children.sex" class="orderFlag">
+					<th width="120" orderField="children.sex" class="orderFlag" htype="dict">
 						性别
 					</th>
-					<th width="120" orderField="children.birthday" class="orderFlag">
+					<th width="120" orderField="children.birthday" class="orderFlag" htype="date">
 						出生日期
 					</th>
 					<th width="80" orderField="person.nameh" class="orderFlag">
@@ -132,13 +128,13 @@
 					<th width="120" orderField="person.code" class="orderFlag">
 						证件号码
 					</th>
-					<th width="80" orderField="issDate" class="orderFlag">
+					<th width="80" orderField="issDate" class="orderFlag" htype="date">
 						发证日期
 					</th>
 					<th width="80" orderField="certCode" class="orderFlag">
 						证书编号
 					</th>
-					<th width="80" orderField="isCancel" class="orderFlag">
+					<th width="80" orderField="isCancel" class="orderFlag" htype="dict">
 						证书状态
 					</th>
 					<th width="80" align="center">

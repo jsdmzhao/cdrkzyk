@@ -130,6 +130,25 @@
 				<input readonly="readonly" type="text" size="30"
 					value="${birth2Check.remark}" />
 			</p>
+<div class="divider"></div>
+
+			<p>
+				<label>
+					停止避孕时间：
+				</label>
+				<input readonly="readonly" type="text" size="30"
+					value="<fmt:formatDate value="${noContraceptDdate}" pattern="yyyy-MM-dd"/>" />
+			</p>
+
+
+			<p>
+				<label>
+					安排生育情况：
+				</label>
+				<input readonly="readonly" type="text" size="30"
+					value="<tags:js.dict.getValue value="${planType}"/>" />
+			</p>
+			
 		</div>
 		<div class="formBar">
 			<ul>

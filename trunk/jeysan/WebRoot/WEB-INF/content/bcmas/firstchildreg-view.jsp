@@ -196,6 +196,13 @@
 				</p>
 				<p>
 					<label>
+						孕产结果：
+					</label>
+					<input readonly="readonly" type="text"
+						size="30" value="<tags:js.dict.getValue value="${matenalStatus}"/>" />
+				</p>
+				<p>
+					<label>
 						备注：
 					</label>
 					<input readonly="readonly" name="remark" type="text" size="30"

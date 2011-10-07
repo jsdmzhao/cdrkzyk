@@ -39,13 +39,13 @@
 					<label>
 						发证机关：
 					</label>
-					<input name="issOrg" type="text" size="30" value="${issOrg}" />
+					<input name="issOrg" class="required" type="text" size="30" value="${issOrg}" />
 				</p>
 				<p>
 					<label>
 						发证日期：
 					</label>
-					<input name="issDate" class="date " readonly="readonly" type="text"
+					<input name="issDate" class="date required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${issDate}" pattern="yyyy-MM-dd"/>" />
 					<a class="inputDateButton" href="javascript:void(0)">选择</a>
@@ -61,7 +61,13 @@
 					<label>
 						证书编号：
 					</label>
-					<input name="certCode" type="text" size="30" value="${certCode}" />
+					<input name="certCode" class="required" type="text" size="30" value="${certCode}" />
+				</p>
+				<p>
+					<label>
+						证书类型：
+					</label>
+					<tags:js.dict.selector name="issType" class1="required"  value="${issType}" dictCode="JS1073"/>
 				</p>
 				<p>
 					<label>

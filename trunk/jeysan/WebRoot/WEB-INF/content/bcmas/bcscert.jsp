@@ -82,11 +82,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('计划生育服务证基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -109,13 +105,13 @@
 					<th width="80" orderField="issOrg" class="orderFlag">
 						发证机关
 					</th>
-					<th width="80" orderField="issDate" class="orderFlag">
+					<th width="80" orderField="issDate" class="orderFlag" htype="date">
 						发证日期
 					</th>
 					<th width="80" orderField="certCode" class="orderFlag">
 						证书编号
 					</th>
-					<th width="80" orderField="certType" class="orderFlag">
+					<th width="80" orderField="certType" class="orderFlag" htype="dict">
 						证书状态
 					</th>
 					<th width="80" align="center">

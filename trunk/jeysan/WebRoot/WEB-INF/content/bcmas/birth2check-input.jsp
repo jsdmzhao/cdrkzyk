@@ -139,6 +139,26 @@
 					</label>
 					<input name="birth2Check.remark" type="text" size="30" value="${birth2Check.remark}" />
 				</p>
+
+
+<div class="divider"></div>
+				
+				<p>
+					<label>
+						停止避孕时间：
+					</label>
+					<input name="noContraceptDdate" class="date " readonly="readonly"
+						type="text" size="30"
+						value="<fmt:formatDate value="${noContraceptDdate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						安排生育情况：
+					</label>
+					<tags:js.dict.selector name="planType" value="${planType}" dictCode="JS1028"/>
+				</p>
+
 			</div>
 			<div class="formBar">
 				<ul>

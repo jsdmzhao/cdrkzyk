@@ -40,6 +40,13 @@
 			</p>
 			<p>
 				<label>
+					现孕状态：
+				</label>
+				<input name="currentConceptStatus" readonly="readonly" type="text"
+					size="30" value="<tags:js.dict.getValue value="${currentConceptStatus}"/>" />
+			</p>
+			<p>
+				<label>
 					怀孕结果：
 				</label>
 				<input name="conceptResult" readonly="readonly" type="text"

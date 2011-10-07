@@ -165,6 +165,16 @@
 					size="30"
 					value="<fmt:formatDate value="${womanBasic.certDate}" pattern="yyyy-MM-dd"/>" />
 			</p>
+			<div class="divider"></div>
+
+			<p>
+				<label>
+					卡片状态：
+				</label>
+				<input name="cardStatus" readonly="readonly" type="text"
+					size="30"
+					value="<tags:js.dict.getValue value="${cardStatus}"/>" />
+			</p>
 		</div>
 		<div class="formBar">
 			<ul>

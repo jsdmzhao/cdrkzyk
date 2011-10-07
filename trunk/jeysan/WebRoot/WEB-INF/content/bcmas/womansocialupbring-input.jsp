@@ -97,6 +97,12 @@
 				</p>
 				<p>
 					<label>
+						征收机关类型：
+					</label>
+					<tags:js.dict.selector name="lodType" value="${lodType}" dictCode="JS1070"/>
+				</p>
+				<p>
+					<label>
 						征收经办人：
 					</label>
 					<input name="lodCharger" type="text" size="30"

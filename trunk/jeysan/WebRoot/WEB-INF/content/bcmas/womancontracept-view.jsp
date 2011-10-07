@@ -8,14 +8,14 @@
 						姓名：
 					</label>
 					<input name="womanId" readonly="readonly" type="text"
-						size="30" value="${fertileWoman.nameh}" />
+						size="30" value="${person.nameh}" />
 				</p>
 				<p>
 					<label>
 						妇女编码：
 					</label>
 					<input name="womanId" readonly="readonly"  type="text"
-						size="30" value="${fertileWoman.code}" />
+						size="30" value="${person.code}" />
 				</p>
 			<p>
 				<label>
@@ -129,6 +129,27 @@
 				</label>
 				<input name="regDate" readonly="readonly" type="text" size="30"
 					value="<fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd"/>" />
+			</p>
+			<p>
+				<label>
+					补救措施：
+				</label>
+				<input name="repairMethod" readonly="readonly" type="text" size="30"
+					value="<tags:js.dict.getValue value="${repairMethod}"/>" />
+			</p>
+			<p>
+				<label>
+					补救措施时间：
+				</label>
+				<input name="repairDate" readonly="readonly" type="text" size="30"
+					value="<fmt:formatDate value="${repairDate}" pattern="yyyy-MM-dd"/>" />
+			</p>
+			<p>
+				<label>
+					补救措施地点：
+				</label>
+				<input name="repairAddress" readonly="readonly" type="text" size="30"
+					value="${repairAddress}" />
 			</p>
 		</div>
 		<div class="formBar">

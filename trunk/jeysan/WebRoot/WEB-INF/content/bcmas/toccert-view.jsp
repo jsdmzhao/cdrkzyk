@@ -127,6 +127,13 @@
 					</label>
 					<input readonly="readonly" type="text" size="30" value="${certCode}" />
 				</p>
+				<p>
+					<label>
+						证书属性：
+					</label>
+					<input readonly="readonly" type="text" size="30"
+						value="<tags:js.dict.getValue value="${issAttr}" />" />
+				</p>
 <c:if test="${isCancel==cancel}">
 <div class="divider"></div>
 				<p>

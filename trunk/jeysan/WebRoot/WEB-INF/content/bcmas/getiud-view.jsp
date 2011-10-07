@@ -33,6 +33,13 @@
 			</p>
 			<p>
 				<label>
+					未避孕类型：
+				</label>
+				<input name="noContraceptType" readonly="readonly" type="text" size="30"
+					value="<tags:js.dict.getValue value="${noContraceptType}"/>" />
+			</p>
+			<p>
+				<label>
 					手术医院：
 				</label>
 				<input name="hospital" readonly="readonly" type="text" size="30"

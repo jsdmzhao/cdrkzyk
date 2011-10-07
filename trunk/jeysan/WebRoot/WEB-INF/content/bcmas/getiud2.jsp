@@ -77,10 +77,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span> </a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('取环名单')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -100,19 +97,19 @@
 					<th width="120" orderField="code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="80" orderField="age" class="orderFlag">
+					<th width="80" orderField="age" class="orderFlag" htype="digits">
 						年龄
 					</th>
-					<th width="80" orderField="domicileType" class="orderFlag">
+					<th width="80" orderField="domicileType" class="orderFlag" htype="dict">
 						户口性质
 					</th>
 					<th width="120" orderField="certCode" class="orderFlag">
 						身份证号
 					</th>
-					<th width="80">
+					<th width="80" hcode="recordType" htype="dict">
 						状态
 					</th>
-					<th width="120">
+					<th width="120" hcode="giTypeh" htype="dict">
 						已确认类别
 					</th>
 					<th width="120">

@@ -45,6 +45,12 @@
 				</p>
 				<p>
 					<label>
+						未避孕类型：
+					</label>
+					<tags:js.dict.selector name="noContraceptType" value="${noContraceptType}" dictCode="JS1074"/>
+				</p>
+				<p>
+					<label>
 						手术医院：
 					</label>
 					<input name="hospital" class=" required" type="text" size="30" value="${hospital}" />

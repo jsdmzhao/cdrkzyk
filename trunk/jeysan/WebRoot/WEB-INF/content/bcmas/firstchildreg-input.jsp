@@ -232,6 +232,12 @@
 					</p>
 					<p>
 						<label>
+							孕产状态：
+						</label>
+						<tags:js.dict.selector name="matenalStatus" value="${matenalStatus}" dictCode="JS1071"/>
+					</p>
+					<p>
+						<label>
 							备注：
 						</label>
 						<input name="remark" type="text" size="30" value="${remark}" />

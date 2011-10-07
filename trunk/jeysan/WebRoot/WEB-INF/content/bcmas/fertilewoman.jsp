@@ -74,11 +74,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('${param.type=='fix'?'户籍人口':'流动人口'}育妇基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -95,13 +91,13 @@
 					<th width="80" orderField="nameh" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="createDate" class="orderFlag">
+					<th width="80" orderField="createDate" class="orderFlag" htype="date">
 						建卡日期
 					</th>
 					<th width="80" orderField="code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="150" orderField="area" class="orderFlag">
+					<th width="150" orderField="area" class="orderFlag" htype="region">
 						所属区域
 					</th>
 					<th width="75" align="center">
@@ -110,6 +106,17 @@
 					<th width="50" align="center">
 						育妇详情
 					</th>
+					<th style="display:none" hcode="womanBasic.marryStatus" htype="dict">婚姻状态</th>
+					<th style="display:none" hcode="womanBasic.spouseMarryStatus" htype="dict">夫婚姻状态</th>
+					<th style="display:none" hcode="womanBasic.firstMarryDate" htype="date">初婚日期</th>
+					<th style="display:none" hcode="womanBasic.marryCryDate" htype="date">婚变日期</th>
+					<th style="display:none" hcode="womanBasic.getGrzDate" htype="dict">领光荣证日期</th>
+					<th style="display:none" hcode="womanBasic.planChild2Cause">安排二孩原因</th>
+					<th style="display:none" hcode="womanBasic.planChild2Date" htype="date">安排二孩日期</th>
+					<th style="display:none" hcode="womanBasic.planBear2Cause">安排再生原因</th>
+					<th style="display:none" hcode="womanBasic.planBear2Date" htype="date">安排再生日期</th>
+					<th style="display:none" hcode="womanBasic.getLdzType">领流动证类型</th>
+					<th style="display:none" hcode="womanBasic.getLdzDate" htype="date">领流动证日期</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -149,7 +156,7 @@
 						<td>
 							<div style="width: 25px;">
 								<a class="btnInfo"
-									href="${ctx}/bcmas/fertilewoman!${param['type']}.action?id=${a.id}"
+									href="${ctx}/bcmas/fertilewoman!${param['type']}.action?id=${a.id}&personId=${a.person.id}"
 									target="navTab" title="育龄妇女详细信息" rel="fertileWomanFix"></a>
 							</div>
 						</td>

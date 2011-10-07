@@ -52,6 +52,15 @@
 				</p>
 				<p>
 					<label>
+						有效期：
+					</label>
+					<input name="validPeroid" class="date required" readonly="readonly" type="text"
+						size="30"
+						value="<fmt:formatDate value="${validPeroid}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
 						发证机关地址：
 					</label>
 					<input name="issOrgAddress" type="text" size="30"

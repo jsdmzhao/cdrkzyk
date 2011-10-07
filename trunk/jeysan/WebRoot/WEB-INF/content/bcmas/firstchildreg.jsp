@@ -66,11 +66,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('一孩登记基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -90,10 +86,10 @@
 					<th width="80" orderField="fertileWoman.code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="80" orderField="dateh" class="orderFlag">
+					<th width="80" orderField="dateh" class="orderFlag" htype="date">
 						登记日期
 					</th>
-					<th width="80" orderField="isSecond" class="orderFlag">
+					<th width="80" orderField="isSecond" class="orderFlag" htype="bool">
 						是否再生一孩
 					</th>
 					<th width="80" orderField="deptOpt" class="orderFlag">

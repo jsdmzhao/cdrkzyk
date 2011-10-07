@@ -145,6 +145,12 @@
 					</label>
 					<input class="required" name="certCode" type="text" size="30" value="${certCode}" />
 				</p>
+				<p>
+					<label>
+						证书属性：
+					</label>
+					<tags:js.dict.selector name="issAttr" class1="required" value="${issAttr}" dictCode="JS1072"/>
+				</p>
 </c:if>
 
 <c:if test="${param.type==1}">
@@ -167,6 +173,12 @@
 						证书编号：
 					</label>
 					<input readonly="readonly" type="text" size="30" value="${certCode}" />
+				</p>
+				<p>
+					<label>
+						证书属性：
+					</label>
+					<tags:js.dict.selector name="issAttr" class1="required" value="${issAttr}" dictCode="JS1072"/>
 				</p>
 <div class="divider"></div>
 				<p>
