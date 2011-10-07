@@ -249,6 +249,7 @@ function JS_print2(title){
 	var htype = '';
 	var htitle = '';
 	var $this = null;
+	var index = -1;
 	$('table thead tr th:gt(0)',navTab.getCurrentPanel()).each(function(){
 		$this = $(this);
 		hcode = $this.attr('orderField');
@@ -259,8 +260,13 @@ function JS_print2(title){
 			if(htype == null || htype == '')
 				htype = 'normal';
 			htitle = $this.children().eq(0).html();
-			if(htitle != null && htitle != '')
+			if(htitle != null && htitle != ''){
+				index = htitle.indexOf('(');
+				if(index != -1){
+					htitle = htitle.substring(0, index);
+				}
 				htitle = encodeURI(htitle);
+			}
 						
 			//alert($(this).attr('orderField'));;
 			rule[rule.length] = {a:htitle,b:hcode,c:htype};
