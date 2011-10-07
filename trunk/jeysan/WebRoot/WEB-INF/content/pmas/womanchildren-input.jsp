@@ -194,6 +194,22 @@
 					</label>
 					<input name="adoptCept" type="text" size="30" value="${adoptCept}" />
 				</p>
+<div class="divider"></div>
+				<p>
+					<label>
+						上报日期：
+					</label>
+					<input name="upDate" class="date required" readonly="readonly"
+						type="text" size="30"
+						value="<fmt:formatDate value="${upDate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						备注：
+					</label>
+					<input name="remark" type="text" size="30" value="${remark}" />
+				</p>
 			</div>
 			<div class="formBar">
 				<ul>

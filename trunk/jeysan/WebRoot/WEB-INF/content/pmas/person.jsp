@@ -114,7 +114,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('人员基本信息')"><span>打印</span>
+					<a class="icon" href="javascript:JS_print2('人员基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -164,6 +164,14 @@
 					<th width="70" align="center">
 						恢复与注销
 					</th>
+					<th style="display:none" hcode="personBasic.nationality" htype="dict">国籍</th>
+					<th style="display:none" hcode="personBasic.native_" htype="dict">民族</th>
+					<th style="display:none" hcode="personBasic.birthday" htype="date">出生日期</th>
+					<th style="display:none" hcode="age" htype="digits">年龄</th>
+					<th style="display:none" hcode="personBasic.marryStatus" htype="dict">婚姻状况</th>
+					<th style="display:none" hcode="personBasic.edu" htype="dict">文化程度</th>
+					<th style="display:none" hcode="personBasic.politicalStatus" htype="dict">政治面貌</th>
+					<th style="display:none" hcode="personBasic.job" htype="dict">职业</th>
 				</tr>
 			</thead>
 			<tbody>

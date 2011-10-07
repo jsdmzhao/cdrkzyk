@@ -175,6 +175,21 @@
 				<input name="adoptCept" readonly="readonly" type="text" size="30"
 					value="${entity.adoptCept}" />
 			</p>
+<div class="divider"></div>
+				<p>
+					<label>
+						上报日期：
+					</label>
+					<input readonly="readonly" type="text" size="30"
+						value="<fmt:formatDate value="${entity.upDate}" pattern="yyyy-MM-dd"/>" />
+				</p>
+				<p>
+					<label>
+						备注：
+					</label>
+					<input readonly="readonly" type="text" size="30"
+						value="${entity.remark}" />
+				</p>
 		</div>
 		<div class="formBar">
 			<ul>

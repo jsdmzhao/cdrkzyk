@@ -1,5 +1,13 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
+<tags:js.pager action="${ctx}/pmas/womanchildren.action">
+	<input type="hidden" name="filter_EQL_person.id"
+		value="${param['filter_EQL_person.id']}" />
+	<input type="hidden" name="personId"
+		value="${param['personId']}" />
+	<input type="hidden" name="from"
+		value="${param['from']}" />
+</tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<div class="searchBar">
@@ -52,11 +60,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('子女基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -70,19 +74,19 @@
 					<th width="30" align="center">
 						序号
 					</th>
-					<th width="80" >
+					<th width="80" hcode="nameh">
 						姓名
 					</th>
-					<th width="80" >
+					<th width="80" hcode="sex" htype="dict">
 						性别
 					</th>
-					<th width="80" >
+					<th width="80" hcode="birthday" htype="date">
 						出生日期
 					</th>
-					<th width="80" >
+					<th width="80" hcode="birthAddress">
 						出生地点
 					</th>
-					<th width="80" >
+					<th width="80" hcode="policy" htype="dict">
 						政策内外
 					</th>
 					<th width="80" align="center">
