@@ -81,11 +81,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('流入人员基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -102,16 +98,16 @@
 					<th width="80" orderField="person.nameh" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="person.sex" class="orderFlag">
+					<th width="80" orderField="person.sex" class="orderFlag" htype="dict">
 						性别
 					</th>
-					<th width="80" orderField="inCause" class="orderFlag">
+					<th width="80" orderField="inCause" class="orderFlag" htype="dict">
 						流入原因
 					</th>
-					<th width="80" orderField="inType" class="orderFlag">
+					<th width="80" orderField="inType" class="orderFlag" htype="dict">
 						流入类型
 					</th>
-					<th width="80" orderField="inDate" class="orderFlag">
+					<th width="80" orderField="inDate" class="orderFlag" htype="date">
 						流入日期
 					</th>
 					<th width="120" orderField="inAddressCode" class="orderFlag">
