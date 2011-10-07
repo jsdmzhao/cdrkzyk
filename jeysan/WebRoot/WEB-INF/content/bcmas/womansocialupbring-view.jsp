@@ -89,6 +89,13 @@
 			</p>
 			<p>
 				<label>
+					征收机关类型：
+				</label>
+				<input name="lodType" readonly="readonly" type="text"
+					size="30" value="<tags:js.dict.getValue value="${lodTYpe}"/>" />
+			</p>
+			<p>
+				<label>
 					征收经办人：
 				</label>
 				<input name="lodCharger" readonly="readonly" type="text" size="30"

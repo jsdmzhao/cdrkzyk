@@ -75,11 +75,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('再生育审批基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -99,19 +95,19 @@
 					<th width="80" orderField="fertileWoman.code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="80" orderField="dateh" class="orderFlag">
+					<th width="80" orderField="dateh" class="orderFlag" htype="date">
 						申请日期
 					</th>
-					<th width="80" orderField="typeh" class="orderFlag">
+					<th width="80" orderField="typeh" class="orderFlag" htype="dict">
 						申请类型
 					</th>
-					<th width="80" orderField="checkType" class="orderFlag">
+					<th width="80" orderField="checkType" class="orderFlag" htype="dict">
 						审批状态
 					</th>
-					<th width="80" orderField="birth2Check.checkDate" class="orderFlag">
+					<th width="80" orderField="birth2Check.checkDate" class="orderFlag" htype="date">
 						审批日期
 					</th>
-					<th width="80" orderField="birth2Check.isAgree" class="orderFlag">
+					<th width="80" orderField="birth2Check.isAgree" class="orderFlag" htype="dict">
 						审批结果
 					</th>
 					<th width="50" align="center">

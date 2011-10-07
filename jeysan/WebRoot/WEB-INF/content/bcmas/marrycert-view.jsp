@@ -55,6 +55,13 @@
 			</p>
 			<p>
 				<label>
+					证书类型：
+				</label>
+				<input readonly="readonly" type="text" size="30"
+					value="<tags:js.dict.getValue value="${issType}" />" />
+			</p>
+			<p>
+				<label>
 					邮政编码：
 				</label>
 				<input name="zipCode" readonly="readonly" type="text" size="30"

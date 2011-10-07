@@ -51,6 +51,12 @@
 				</p>
 				<p>
 					<label>
+						现孕状态：
+					</label>
+					<tags:js.dict.selector name="currentConceptStatus" value="${currentConceptStatus}" dictCode="JS1030"/>
+				</p>
+				<p>
+					<label>
 						怀孕结果：
 					</label>
 					<tags:js.dict.selector name="conceptResult" value="${conceptResult}" dictCode="JS1055"/>

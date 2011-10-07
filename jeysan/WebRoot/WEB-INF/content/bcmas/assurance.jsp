@@ -69,11 +69,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
+					<a class="icon" href="javascript:JS_print2('保险保障基本信息')"><span>打印或导出</span>
 					</a>
 				</li>
 			</ul>
@@ -93,25 +89,25 @@
 					<th width="80" orderField="code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="80" orderField="birthday" class="orderFlag">
+					<th width="80" orderField="birthday" class="orderFlag" htype="date">
 						出生日期
 					</th>
 					<th width="80" orderField="spNameh" class="orderFlag">
 						丈夫姓名
 					</th>
-					<th width="80" orderField="househodeKind" class="orderFlag">
+					<th width="80" orderField="househodeKind" class="orderFlag" htype="dict">
 						户口性质
 					</th>
-					<th width="80" orderField="marryStatus" class="orderFlag">
+					<th width="80" orderField="marryStatus" class="orderFlag" htype="dict">
 						婚姻状况
 					</th>
 					<th width="80">
 						子女数
 					</th>
-					<th width="80" orderField="method" class="orderFlag">
+					<th width="80" orderField="method" class="orderFlag" htype="dict">
 						避孕节育措施
 					</th>
-					<th width="80" orderField="assStatus" class="orderFlag">
+					<th width="80" orderField="assStatus" class="orderFlag" htype="dict">
 						投保情况
 					</th>
 					<th width="80" align="center">

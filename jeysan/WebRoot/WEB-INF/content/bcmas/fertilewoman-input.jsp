@@ -174,6 +174,13 @@
 						value="<fmt:formatDate value="${womanBasic.certDate}" pattern="yyyy-MM-dd"/>" />
 					<a class="inputDateButton" href="javascript:void(0)">选择</a>
 				</p>
+<div class="divider"></div>
+				<p>
+					<label>
+						卡片状态：
+					</label>
+					<tags:js.dict.selector name="cardStatus" value="${cardStatus}" dictCode="JS040"/>
+				</p>
 			</div>
 			<div class="formBar">
 				<ul>

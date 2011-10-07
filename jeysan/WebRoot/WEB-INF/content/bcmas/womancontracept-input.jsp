@@ -6,8 +6,8 @@
 			class="pageForm required-validate"
 			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${id}" />
-			<input type="hidden" name="fertileWoman.id"
-				value="${fertileWoman.id}" />
+			<input type="hidden" name="person.id"
+				value="${person.id}" />
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/>-->
 			<input type="hidden" name="result4Json.navTabId" value="nav_womancontraceptmanage"/> 
@@ -17,14 +17,14 @@
 						姓名：
 					</label>
 					<input name="womanId" readonly="readonly" type="text"
-						size="30" value="${fertileWoman.nameh}" />
+						size="30" value="${person.nameh}" />
 				</p>
 				<p>
 					<label>
 						妇女编码：
 					</label>
 					<input name="womanId" readonly="readonly"  type="text"
-						size="30" value="${fertileWoman.code}" />
+						size="30" value="${person.code}" />
 				</p>
 				<p>
 					<label>
@@ -144,6 +144,29 @@
 						size="30"
 						value="<fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd"/>" />
 					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+
+				<p>
+					<label>
+						补救措施：
+					</label>
+					<tags:js.dict.selector name="repairMethod" value="${repairMethod}" dictCode="JS1031"/>
+				</p>
+				<p>
+					<label>
+						补救措施时间：
+					</label>
+					<input name="repairDate" class="date " readonly="readonly" type="text"
+						size="30"
+						value="<fmt:formatDate value="${repairDate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						补救措施地点：
+					</label>
+					<input name="repairAddress" type="text" size="30"
+						value="${repairAddress}" />
 				</p>
 			</div>
 			<div class="formBar">

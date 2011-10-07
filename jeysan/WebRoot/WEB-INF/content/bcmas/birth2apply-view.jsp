@@ -177,6 +177,13 @@
 					</label>
 					<input readonly="readonly" type="text" size="30" value="${agent}" />
 				</p>
+				<p>
+					<label>
+						孕产结果：
+					</label>
+					<input readonly="readonly" type="text"
+						size="30" value="<tags:js.dict.getValue value="${matenalStatus}"/>" />
+				</p>
 			</div>
 			<div class="divider"></div>
 			<div style="float: left; width: 150%; margin-top: 5px">

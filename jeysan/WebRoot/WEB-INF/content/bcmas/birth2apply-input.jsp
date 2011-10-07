@@ -203,6 +203,12 @@
 						</label>
 						<input id="selector_agent" name="agent" type="text" size="30" value="${agent}" />
 					</p>
+					<p>
+						<label>
+							孕产状态：
+						</label>
+						<tags:js.dict.selector name="matenalStatus" value="${matenalStatus}" dictCode="JS1071"/>
+					</p>
 				</div>
 				<div class="divider"></div>
 				<div style="float: left; width: 150%; margin-top: 5px">

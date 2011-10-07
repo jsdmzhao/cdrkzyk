@@ -36,6 +36,14 @@
 				</p>
 				<p>
 					<label>
+						有效：
+					</label>
+					<input name="validPeroid" readonly="readonly" type="text"
+						size="30"
+						value="<fmt:formatDate value="${validPeroid}" pattern="yyyy-MM-dd"/>" />
+				</p>
+				<p>
+					<label>
 						发证机关地址：
 					</label>
 					<input readonly="readonly" name="issOrgAddress" type="text" size="30"
