@@ -4,16 +4,13 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
-import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.Birth2Apply;
-import com.jeysan.cpf.bcmas.entity.Birth2Check;
 import com.jeysan.cpf.bcmas.service.Birth2ApplyManager;
 import com.jeysan.cpf.bcmas.service.Birth2CheckManager;
-import com.jeysan.cpf.bcmas.service.FertileWomanManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -25,7 +22,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class Birth2CheckAction extends CrudActionSupport<Birth2Apply> {
+public class Birth2CheckAction extends PrintActionSupport<Birth2Apply> {
 	/**
 	 * 
 	 */

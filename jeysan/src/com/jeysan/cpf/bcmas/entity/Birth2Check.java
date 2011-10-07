@@ -60,6 +60,15 @@ public class Birth2Check extends IdExtEntity {
 	 * 备注
 	 */
 	private String remark;
+	/**
+	 * 停止避孕时间
+	 */
+	private java.util.Date noContraceptDdate;
+	/**
+	 * 安排生育情况
+	 */
+	private Integer planType;
+	
 	
 	@OneToOne(cascade = CascadeType.ALL) 
 	@JoinColumn(name="APPLY_ID")
@@ -150,6 +159,24 @@ public class Birth2Check extends IdExtEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	
+	@Column(name = "NO_CONTRACEPT_DATE")
+	public java.util.Date getNoContraceptDdate() {
+		return noContraceptDdate;
+	}
+
+	public void setNoContraceptDdate(java.util.Date noContraceptDdate) {
+		this.noContraceptDdate = noContraceptDdate;
+	}
+	@Column(name = "PLAN_TYPE")
+	public Integer getPlanType() {
+		return planType;
+	}
+
+	public void setPlanType(Integer planType) {
+		this.planType = planType;
 	}
 
 	@Override

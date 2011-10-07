@@ -18,7 +18,7 @@ import com.jeysan.cpf.bcmas.service.BcsCertChangeManager;
 import com.jeysan.cpf.bcmas.service.BcsCertCheckManager;
 import com.jeysan.cpf.bcmas.service.BcsCertManager;
 import com.jeysan.cpf.util.Constants;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -33,7 +33,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 @Namespace("/bcmas")
 @Results( {@Result(name = "list4view", location = "bcscertcheck4view.jsp", type = "dispatcher"),
 	@Result(name = "bcs4lookup", location = "bcscert4lookup.jsp", type = "dispatcher")})
-public class BcsCertAction extends CrudActionSupport<BcsCert> {
+public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	/**
 	 * 
 	 */

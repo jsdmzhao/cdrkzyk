@@ -61,6 +61,10 @@ public class FirstChildReg extends IdExtEntity {
 	 * 备注
 	 */
 	private String remark;
+	/**
+	 * 孕产状态
+	 */
+	private Integer matenalStatus;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "WOMAN_ID")
@@ -151,6 +155,16 @@ public class FirstChildReg extends IdExtEntity {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	
+	@Column(name = "MATENAL_STATUS")
+	public Integer getMatenalStatus() {
+		return matenalStatus;
+	}
+
+	public void setMatenalStatus(Integer matenalStatus) {
+		this.matenalStatus = matenalStatus;
 	}
 
 	@Override

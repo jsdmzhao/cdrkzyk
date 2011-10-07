@@ -13,7 +13,7 @@ import com.jeysan.cpf.bcmas.entity.FirstChildReg;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.FirstChildRegManager;
 import com.jeysan.cpf.pmas.service.SpouseManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -25,7 +25,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class FirstChildRegAction extends CrudActionSupport<FirstChildReg> {
+public class FirstChildRegAction extends PrintActionSupport<FirstChildReg> {
 	/**
 	 * 
 	 */

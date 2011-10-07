@@ -12,7 +12,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.jeysan.cpf.pmas.entity.PersonIn;
 import com.jeysan.cpf.pmas.service.PersonInManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -25,7 +25,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/pmas")
 @Results( { @Result(name = "personinquery", location = "personinquery.jsp", type = "dispatcher")})
-public class PersonInAction extends CrudActionSupport<PersonIn> {
+public class PersonInAction extends PrintActionSupport<PersonIn> {
 	/**
 	 * 
 	 */

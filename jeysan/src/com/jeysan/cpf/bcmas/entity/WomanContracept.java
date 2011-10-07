@@ -1,16 +1,15 @@
 ﻿package com.jeysan.cpf.bcmas.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
@@ -22,9 +21,9 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class WomanContracept extends IdExtEntity {
 	/**
-	 * WOMAN_ID
+	 * PERSON_ID
 	 */
-	private FertileWoman fertileWoman;
+	private Person person;
 	/**
 	 * 避孕节育措施
 	 */
@@ -89,15 +88,27 @@ public class WomanContracept extends IdExtEntity {
 	 * 登记日期
 	 */
 	private java.util.Date regDate;
+	/**
+	 * 补救措施
+	 */
+	private Integer repairMethod;
+	/**
+	 * 补救措施时间
+	 */
+	private java.util.Date repairDate;
+	/**
+	 * 补救措施地点
+	 */
+	private String repairAddress;
 
 	@ManyToOne(optional=false)
-	@JoinColumn(name = "WOMAN_ID")
-	public FertileWoman getFertileWoman() {
-		return fertileWoman;
+	@JoinColumn(name = "PERSON_ID")
+	public Person getPerson() {
+		return person;
 	}
 
-	public void setFertileWoman(FertileWoman fertileWoman) {
-		this.fertileWoman = fertileWoman;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
 
 	@Column(name = "METHOD")
@@ -242,6 +253,34 @@ public class WomanContracept extends IdExtEntity {
 
 	public void setRegDate(java.util.Date regDate) {
 		this.regDate = regDate;
+	}
+	
+	
+	@Column(name = "REPAIR_METHOD")
+	public Integer getRepairMethod() {
+		return repairMethod;
+	}
+
+	public void setRepairMethod(Integer repairMethod) {
+		this.repairMethod = repairMethod;
+	}
+	
+	@Column(name = "REPAIR_DATE")
+	public java.util.Date getRepairDate() {
+		return repairDate;
+	}
+
+	public void setRepairDate(java.util.Date repairDate) {
+		this.repairDate = repairDate;
+	}
+
+	@Column(name = "REPAIR_ADDRESS")
+	public String getRepairAddress() {
+		return repairAddress;
+	}
+
+	public void setRepairAddress(String repairAddress) {
+		this.repairAddress = repairAddress;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.jeysan.cpf.bcmas.entity.WomanContracept;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
 import com.jeysan.cpf.bcmas.service.WomanContraceptManager;
+import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -32,7 +33,7 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 	private String ids;
 	private WomanContracept entity;
 	private WomanContraceptManager womanContraceptManager;
-	private FertileWomanManager fertileWomanManager;
+	private PersonManager personManager;
 	private Page<WomanContracept> page = new Page<WomanContracept>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -83,9 +84,9 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 	protected void prepareModel() throws Exception {
 		if(id == null){
 			entity = new WomanContracept();
-			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
-			if(StringUtils.isNotEmpty(fertileWomanId))
-				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
+			String personId = Struts2Utils.getParameter("personId");
+			if(StringUtils.isNotEmpty(personId))
+				Struts2Utils.getRequest().setAttribute("person", personManager.getPerson(Long.parseLong(personId)));
 		}else{
 			entity = womanContraceptManager.getWomanContracept(id);
 		}
@@ -129,8 +130,8 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 		this.womanContraceptManager = womanContraceptManager;
 	}
 	@Autowired
-	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
-		this.fertileWomanManager = fertileWomanManager;
+	public void setPersonManager(PersonManager personManager) {
+		this.personManager = personManager;
 	}
 	public Page<WomanContracept> getPage() {
 		return page;

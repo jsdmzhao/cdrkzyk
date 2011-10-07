@@ -8,10 +8,9 @@ import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.jeysan.cpf.district.entity.DistrictCity;
 import com.jeysan.cpf.pmas.entity.VillagerTeam;
 import com.jeysan.cpf.pmas.service.VillagerTeamManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -23,7 +22,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
-public class VillagerTeamAction extends CrudActionSupport<VillagerTeam> {
+public class VillagerTeamAction extends PrintActionSupport<VillagerTeam> {
 	/**
 	 * 
 	 */

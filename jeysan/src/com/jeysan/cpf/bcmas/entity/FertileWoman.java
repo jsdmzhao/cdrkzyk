@@ -51,6 +51,10 @@ public class FertileWoman extends IdExtEntity {
 	 */
 	private Integer assStatus;
 	/**
+	 * 卡片状态
+	 */
+	private Integer cardStatus;
+	/**
 	 * 妇女编码
 	 */
 	private String code;
@@ -58,6 +62,10 @@ public class FertileWoman extends IdExtEntity {
 	 * 所属区域
 	 */
 	private String area;
+	/**
+	 * 备注
+	 */
+	private String remark;
 	
 	private WomanBasic womanBasic = new WomanBasic();
 
@@ -153,6 +161,25 @@ public class FertileWoman extends IdExtEntity {
 
 	public void setAssStatus(Integer assStatus) {
 		this.assStatus = assStatus;
+	}
+	
+	
+	@Column(name = "CARD_STATUS")
+	public Integer getCardStatus() {
+		return cardStatus;
+	}
+
+	public void setCardStatus(Integer cardStatus) {
+		this.cardStatus = cardStatus;
+	}
+	
+	@Column(name = "REMARK")
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	@Override

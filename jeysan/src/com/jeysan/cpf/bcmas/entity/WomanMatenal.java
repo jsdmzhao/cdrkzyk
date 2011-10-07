@@ -50,6 +50,10 @@ public class WomanMatenal extends IdExtEntity {
 	 */
 	private Integer typeh;
 	/**
+	 * 现孕状态
+	 */
+	private Integer currentConceptStatus;
+	/**
 	 * 手术医院地址
 	 */
 	private String hospitalAddress;
@@ -216,6 +220,15 @@ public class WomanMatenal extends IdExtEntity {
 
 	public void setChangeCause(String changeCause) {
 		this.changeCause = changeCause;
+	}
+	
+	@Column(name = "CURRENT_CONCEPT_STATUS")
+	public Integer getCurrentConceptStatus() {
+		return currentConceptStatus;
+	}
+
+	public void setCurrentConceptStatus(Integer currentConceptStatus) {
+		this.currentConceptStatus = currentConceptStatus;
 	}
 
 	@Override
