@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@page import="com.jeysan.cpf.util.Constants"%>
 <%@ include file="/common/taglibs.jsp" %>
 <div class="page">
 	<div class="pageContent">
@@ -10,7 +11,7 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流动人口基本情况查询之流出人员基本信息</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery2view.action" target="navTab" rel="flowbasicquery_sub"><span>流动人口基本情况查询之流出人员基本信息</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
@@ -18,7 +19,7 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之生育子女情况</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery3view.action" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之生育子女情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
@@ -26,7 +27,7 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之符合生育政策人员情况</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery4view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之符合生育政策人员情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
