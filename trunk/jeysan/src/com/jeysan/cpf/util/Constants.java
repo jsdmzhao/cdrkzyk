@@ -102,6 +102,15 @@ public class Constants {
 		public static final Integer NOT_FW = 669;//非育龄妇女
 	}
 	/**
+	 * 户口类别
+	 * @author shally
+	 *
+	 */
+	public static final class DOMICILE_TYPE{
+		public static final Integer FIX = 663;//固定人口
+		public static final Integer FLOW = 664;//流动人口
+	}
+	/**
 	 * 证书注销情况
 	 * @author 黄静
 	 *

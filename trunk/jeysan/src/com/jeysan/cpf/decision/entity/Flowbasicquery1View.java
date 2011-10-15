@@ -1,15 +1,13 @@
 ﻿package com.jeysan.cpf.decision.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+
+import com.jeysan.modules.orm.hibernate.IdExtEntity;
 
 /**
  * @author 黄静
@@ -18,12 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 @Entity
 @Table(name = "fhp_flowbasicquery1_view")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@IdClass(Flow1ViewPK.class)
-public class Flowbasicquery1View implements Serializable {
-	/**
-	 * 流动人口id
-	 */
-	private Long id;
+public class Flowbasicquery1View extends IdExtEntity {
 	/**
 	 * 流动人口编码
 	 */
@@ -124,17 +117,7 @@ public class Flowbasicquery1View implements Serializable {
 	 * DOMICILE_TYPE
 	 */
 	private Integer domicileType;
-	
-	
-	@Id
-	@Column(name = "ID")
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	@Column(name = "PERSON_CODE")
 	public String getPersonCode() {
@@ -208,7 +191,6 @@ public class Flowbasicquery1View implements Serializable {
 		this.childnum = childnum;
 	}
 
-	@Id
 	@Column(name = "IN_CAUSE")
 	public Integer getInCause() {
 		return inCause;

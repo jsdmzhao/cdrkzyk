@@ -1,19 +1,21 @@
-package com.jeysan.cpf.decision.entity;
+﻿package com.jeysan.cpf.decision.entity;
 
-import java.io.Serializable;
-
-public class Flow1ViewPK implements Serializable {
+/**
+ * @author 黄静
+ * 
+ */
+public class Flowbasicquery2ViewPK implements java.io.Serializable {
 
 	private Long id;
-	private Integer inType;
+	private Integer outType;
 
-	public Flow1ViewPK() {
+	public Flowbasicquery2ViewPK() {
 
 	}
 
-	public Flow1ViewPK(Long id, Integer inType) {
+	public Flowbasicquery2ViewPK(Long id, Integer outType) {
 		this.id = id;
-		this.inType = inType;
+		this.outType = outType;
 	}
 
 	public Long getId() {
@@ -25,11 +27,11 @@ public class Flow1ViewPK implements Serializable {
 	}
 
 	public Integer getInCause() {
-		return inType;
+		return outType;
 	}
 
-	public void setInCause(Integer inType) {
-		this.inType = inType;
+	public void setInCause(Integer outType) {
+		this.outType = outType;
 	}
 
 	@Override
@@ -41,7 +43,7 @@ public class Flow1ViewPK implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		
-		final Flow1ViewPK other = (Flow1ViewPK) obj;
+		final Flowbasicquery2ViewPK other = (Flowbasicquery2ViewPK) obj;
 		
 		if (id == null) {
 			if (other.id != null)
@@ -49,10 +51,10 @@ public class Flow1ViewPK implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 
-		if (inType == null) {
-			if (other.inType != null)
+		if (outType == null) {
+			if (other.outType != null)
 				return false;
-		} else if (!inType.equals(other.inType))
+		} else if (!outType.equals(other.outType))
 			return false;
 		
 		return true;
@@ -63,8 +65,7 @@ public class Flow1ViewPK implements Serializable {
 		final int PRIME = 31;
 		int result = 1;
 		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
-		result = PRIME * result + ((inType == null) ? 0 : inType.hashCode());
+		result = PRIME * result + ((outType == null) ? 0 : outType.hashCode());
 		return result;
 	}
-
 }

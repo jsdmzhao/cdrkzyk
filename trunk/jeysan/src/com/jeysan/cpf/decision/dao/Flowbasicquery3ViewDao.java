@@ -2,8 +2,7 @@
 
 import org.springframework.stereotype.Component;
 
-import com.jeysan.cpf.decision.entity.Flow1ViewPK;
-import com.jeysan.cpf.decision.entity.Flowbasicquery1View;
+import com.jeysan.cpf.decision.entity.Flowbasicquery3View;
 import com.jeysan.modules.orm.hibernate.HibernateDao;
 
 
@@ -12,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class Flowbasicquery1ViewDao extends HibernateDao<Flowbasicquery1View, Long> {
+public class Flowbasicquery3ViewDao extends HibernateDao<Flowbasicquery3View, Long> {
 
 }

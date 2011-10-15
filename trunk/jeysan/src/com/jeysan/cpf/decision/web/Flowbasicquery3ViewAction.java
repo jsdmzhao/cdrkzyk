@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.jeysan.cpf.decision.entity.Flowbasicquery1View;
-import com.jeysan.cpf.decision.service.Flowbasicquery1ViewManager;
+import com.jeysan.cpf.decision.entity.Flowbasicquery3View;
+import com.jeysan.cpf.decision.service.Flowbasicquery3ViewManager;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -18,9 +18,9 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/decision")
-public class Flowbasicquery1ViewAction extends PrintActionSupport<Flowbasicquery1View> {
-	private Flowbasicquery1ViewManager flowbasicquery1ViewManager;
-	private Page<Flowbasicquery1View> page = new Page<Flowbasicquery1View>(DEFAULT_PAGE_SIZE);
+public class Flowbasicquery3ViewAction extends PrintActionSupport<Flowbasicquery3View> {
+	private Flowbasicquery3ViewManager flowbasicquery3ViewManager;
+	private Page<Flowbasicquery3View> page = new Page<Flowbasicquery3View>(DEFAULT_PAGE_SIZE);
 	
 	@Override
 	public String list() throws Exception {
@@ -31,15 +31,15 @@ public class Flowbasicquery1ViewAction extends PrintActionSupport<Flowbasicquery
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = flowbasicquery1ViewManager.searchFlowbasicquery1View(page, filters);
+		page = flowbasicquery3ViewManager.searchFlowbasicquery3View(page, filters);
 		return SUCCESS;
 	}
 	
 	@Autowired
-	public void setFlowbasicquery1ViewManager(Flowbasicquery1ViewManager flowbasicquery1ViewManager) {
-		this.flowbasicquery1ViewManager = flowbasicquery1ViewManager;
+	public void setFlowbasicquery3ViewManager(Flowbasicquery3ViewManager flowbasicquery3ViewManager) {
+		this.flowbasicquery3ViewManager = flowbasicquery3ViewManager;
 	}
-	public Page<Flowbasicquery1View> getPage() {
+	public Page<Flowbasicquery3View> getPage() {
 		return page;
 	}
 	
