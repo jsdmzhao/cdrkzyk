@@ -3,6 +3,7 @@
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jeysan.cpf.decision.entity.Flowbasicquery3View;
@@ -25,6 +26,18 @@ public class Flowbasicquery3ViewAction extends PrintActionSupport<Flowbasicquery
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+		boolean flag = false;
+		for(PropertyFilter filter : filters){
+			if(StringUtils.equals(filter.getPropertyName(),"childIndex")){
+				if(StringUtils.equals(filter.getMatchValue().toString(), "99")){
+					flag = true;
+					filters.remove(filter);
+					break;
+				}
+			}
+		}
+		if(flag)
+			filters.add(new PropertyFilter("GEI_childIndex","3"));
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {

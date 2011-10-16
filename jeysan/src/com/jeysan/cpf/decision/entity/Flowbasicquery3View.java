@@ -66,6 +66,14 @@ public class Flowbasicquery3View extends IdExtEntity {
 	 */
 	private Long childnum;
 	/**
+	 * 男孩数
+	 */
+	private Long boynum;
+	/**
+	 * 女孩数
+	 */
+	private Long girlnum;
+	/**
 	 * 子女姓名
 	 */
 	private String nameh3;
@@ -81,6 +89,10 @@ public class Flowbasicquery3View extends IdExtEntity {
 	 * 出生日期
 	 */
 	private java.util.Date birthday2;
+	/**
+	 * 上报日期
+	 */
+	private java.util.Date upDate;
 	/**
 	 * 政策内外
 	 */
@@ -117,7 +129,10 @@ public class Flowbasicquery3View extends IdExtEntity {
 	 * 户口性质
 	 */
 	private Integer domicileType;
-
+	/**
+	 * 最小孩出生日期
+	 */
+	private java.util.Date minbirthday;
 
 	@Column(name = "PERSON_CODE")
 	public String getPersonCode() {
@@ -333,6 +348,42 @@ public class Flowbasicquery3View extends IdExtEntity {
 
 	public void setDomicileType(Integer domicileType) {
 		this.domicileType = domicileType;
+	}
+	
+	@Column(name = "boynum")
+	public Long getBoynum() {
+		return boynum;
+	}
+
+	public void setBoynum(Long boynum) {
+		this.boynum = boynum;
+	}
+	@Column(name = "girlnum")
+	public Long getGirlnum() {
+		return girlnum;
+	}
+
+	public void setGirlnum(Long girlnum) {
+		this.girlnum = girlnum;
+	}
+	
+	@Column(name = "minbirthday")
+	public java.util.Date getMinbirthday() {
+		return minbirthday;
+	}
+
+	public void setMinbirthday(java.util.Date minbirthday) {
+		this.minbirthday = minbirthday;
+	}
+	
+	
+	@Column(name = "UP_DATE")
+	public java.util.Date getUpDate() {
+		return upDate;
+	}
+
+	public void setUpDate(java.util.Date upDate) {
+		this.upDate = upDate;
 	}
 
 	@Override

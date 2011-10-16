@@ -2,7 +2,6 @@
 
 import org.springframework.stereotype.Component;
 
-import com.jeysan.cpf.decision.entity.Flow1ViewPK;
 import com.jeysan.cpf.decision.entity.Flowbasicquery1View;
 import com.jeysan.modules.orm.hibernate.HibernateDao;
 
