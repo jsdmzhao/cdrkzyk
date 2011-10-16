@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <tags:js.pager action="${ctx}/decision/flowbasicquery2view.action">
+	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
+	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_EQI_outType" value="${param['filter_EQI_outType']}" />
 	<input type="hidden" name="filter_GED_outDate" value="${param['filter_GED_outDate']}" />
 	<input type="hidden" name="filter_LED_outDate" value="${param['filter_LED_outDate']}" />
@@ -9,6 +11,7 @@
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
 			action="${ctx}/decision/flowbasicquery2view.action" method="post">
+	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
@@ -19,6 +22,11 @@
 						<td>
 							流出人员类型：
 <tags:js.dict.selector name="filter_EQI_outType" value="${param['filter_EQI_outType']}" dictCode="JS1047" noRender="true"/>
+						</td>
+						<td>
+							所属区域：
+							<tags:js.area.selector name="filter_EQS_area" readonly="true"
+								value="${param['filter_EQS_area']}" size="20"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
@@ -60,7 +68,7 @@
 				</li>
 			</ul>
 		</div>
-		<table class="table" width="100%" layouth="138">
+		<table class="table" width="200%" layouth="138">
 			<thead>
 				<tr>
 					<th width="30" align="center">
@@ -75,7 +83,7 @@
 					<th width="80" orderField="sex" class="orderFlag" htype="dict">
 						性别
 					</th>
-					<th width="80" orderField="code" class="orderFlag">
+					<th width="120" orderField="code" class="orderFlag">
 						证件号码
 					</th>
 					<th width="80" orderField="birthday" class="orderFlag" htype="date">

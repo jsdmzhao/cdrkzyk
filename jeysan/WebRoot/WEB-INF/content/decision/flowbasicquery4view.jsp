@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <tags:js.pager action="${ctx}/decision/flowbasicquery4view.action">
+	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
+	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_GED_firstMarryDate" value="${param['filter_GED_firstMarryDate']}" />
 	<input type="hidden" name="filter_GED_firstMarryDate" value="${param['filter_GED_firstMarryDate']}" />
 	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
@@ -9,12 +11,22 @@
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
 			action="${ctx}/decision/flowbasicquery4view.action" method="post">
+	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
 						<td>
+<input type="radio" name="marray_childnum" id="marray_childnum_1" value="1"/>按已婚无孩查询
+<input type="radio" name="marray_childnum" id="marray_childnum_2" value="2"/>按已安排生育二孩查询
+						</td>
+						<td>
 							初婚日期：
 							<input type="text" name="filter_GED_firstMarryDate" class="date" readonly="true" value="${param.filter_GED_firstMarryDate}"/>~<input type="text" name="filter_LED_firstMarryDate" class="date" readonly="true" value="${param.filter_LED_firstMarryDate}"/>
+						</td>
+						<td>
+							所属区域：
+							<tags:js.area.selector name="filter_EQS_area" readonly="true"
+								value="${param['filter_EQS_area']}" size="20"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
@@ -55,7 +67,7 @@
 				</li>
 			</ul>
 		</div>
-		<table class="table" width="100%" layouth="138">
+		<table class="table" width="200%" layouth="138">
 			<thead>
 				<tr>
 					<th width="30" align="center">
@@ -64,7 +76,7 @@
 					<th width="80" orderField="personCode" class="orderFlag">
 						流动人口编号
 					</th>
-					<th width="80" orderField="code" class="orderFlag">
+					<th width="120" orderField="code" class="orderFlag">
 						证件号码
 					</th>
 					<th width="80" orderField="nameh" class="orderFlag">
@@ -160,3 +172,10 @@
 		<%@ include file="/common/page-foot.jsp"%>
 	</div>
 </div>
+<c:if test="${not empty param.marray_childnum}">
+<script>
+	$(function(){
+		$('#marray_childnum_${param.marray_childnum}').attr('checked','checked');
+	});
+</script>
+</c:if>
