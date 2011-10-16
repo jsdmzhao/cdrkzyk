@@ -140,4 +140,8 @@ public class Constants {
 		public static final Integer NOKNOW = 324;//未知性别
 		public static final Integer NONOTIFY = 325;//未说明性别
 	}
+	
+	public static final class MARRY_STATUS{
+		public static final Integer NO = 176;//未婚
+	}
 }
