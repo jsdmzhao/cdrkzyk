@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<tags:js.pager action="${ctx}/decision/flowbasicquery1view.action">
+<tags:js.pager action="${ctx}/decision/flowbasicquery1view.action">	
+	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
+	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_EQI_marryStatus" value="${param['filter_EQI_marryStatus']}" />
 	<input type="hidden" name="filter_EQI_method" value="${param['filter_EQI_method']}" />
 	<input type="hidden" name="filter_GED_birthday" value="${param['filter_GED_birthday']}" />
@@ -18,6 +20,7 @@
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
 			action="${ctx}/decision/flowbasicquery1view.action" method="post">
+	<input type="hidden" name="filter_EQI_domicileType" value="${param['filter_EQI_domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
@@ -62,6 +65,13 @@
 							<input type="text" name="filter_GED_inDate" class="date" readonly="true" value="${param.filter_GED_inDate}"/>~<input type="text" name="filter_LED_inDate" class="date" readonly="true" value="${param.filter_LED_inDate}"/>
 						</td>
 					</tr>
+					<tr>
+						<td>
+							所属区域：
+							<tags:js.area.selector name="filter_EQS_area" readonly="true"
+								value="${param['filter_EQS_area']}" size="20"></tags:js.area.selector>
+						</td>
+					</tr>
 				</table>
 				<div class="subBar">
 					<ul>
@@ -100,7 +110,7 @@
 				</li>
 			</ul>
 		</div>
-		<table class="table" width="100%" layouth="192">
+		<table class="table" width="200%" layouth="219">
 			<thead>
 				<tr>
 					<th width="30" align="center">
