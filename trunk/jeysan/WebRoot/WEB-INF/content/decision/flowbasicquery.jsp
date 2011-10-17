@@ -31,11 +31,11 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之孕产情况</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery5view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之孕产情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之社会抚养费征收情况</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery6view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>子女情况查询之社会抚养费征收情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>

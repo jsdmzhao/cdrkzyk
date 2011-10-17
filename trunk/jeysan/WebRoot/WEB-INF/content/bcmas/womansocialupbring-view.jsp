@@ -21,8 +21,8 @@
 				<label>
 					征收原因：
 				</label>
-				<input name="cause" readonly="readonly" type="text" size="30"
-					value="${cause}" />
+				<input name="cause" readonly="readonly" type="text"
+					size="30" value="<tags:js.dict.getValue value="${cause}"/>" />
 			</p>
 			<p>
 				<label>

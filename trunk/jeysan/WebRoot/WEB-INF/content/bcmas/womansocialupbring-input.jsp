@@ -34,7 +34,7 @@
 					<label>
 						征收原因：
 					</label>
-					<input name="cause" type="text" size="30" value="${cause}" />
+					<tags:js.dict.selector name="cause" value="${cause}" dictCode="JS1075"/>
 				</p>
 				<p>
 					<label>
