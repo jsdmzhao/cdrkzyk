@@ -39,7 +39,7 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>避孕节育情况查询</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之当前夫妇避孕节育情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
