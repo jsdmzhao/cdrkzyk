@@ -68,6 +68,12 @@
 				</p>
 				<p>
 					<label>
+						避孕节育未落实措施类型：
+					</label>
+					<tags:js.dict.selector name="noMethodType" value="${noMethodType}" dictCode="JS1033"/>
+				</p>
+				<p>
+					<label>
 						未避孕原因：
 					</label>
 					<input name="noCause" type="text" size="30" value="${noCause}" />
@@ -167,6 +173,12 @@
 					</label>
 					<input name="repairAddress" type="text" size="30"
 						value="${repairAddress}" />
+				</p>
+				<p>
+					<label>
+						 补救措施未落实措施类型：
+					</label>
+					<tags:js.dict.selector name="noRepairMethodType" value="${noRepairMethodType}" dictCode="JS1034"/>
 				</p>
 			</div>
 			<div class="formBar">
