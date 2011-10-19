@@ -100,6 +100,14 @@ public class WomanContracept extends IdExtEntity {
 	 * 补救措施地点
 	 */
 	private String repairAddress;
+	/**
+	 * 避孕节育未落实措施类型
+	 */
+	private Integer noMethodType;
+	/**
+	 * 补救措施未落实措施类型
+	 */
+	private Integer noRepairMethodType;
 
 	@ManyToOne(optional=false)
 	@JoinColumn(name = "PERSON_ID")
@@ -281,6 +289,24 @@ public class WomanContracept extends IdExtEntity {
 
 	public void setRepairAddress(String repairAddress) {
 		this.repairAddress = repairAddress;
+	}
+	
+	
+	@Column(name="NO_METHOD_TYPE")
+	public Integer getNoMethodType() {
+		return noMethodType;
+	}
+
+	public void setNoMethodType(Integer noMethodType) {
+		this.noMethodType = noMethodType;
+	}
+	@Column(name="NO_REPAIR_METHOD_TYPE")
+	public Integer getNoRepairMethodType() {
+		return noRepairMethodType;
+	}
+
+	public void setNoRepairMethodType(Integer noRepairMethodType) {
+		this.noRepairMethodType = noRepairMethodType;
 	}
 
 	@Override
