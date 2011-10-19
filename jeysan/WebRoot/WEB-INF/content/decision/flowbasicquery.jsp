@@ -39,7 +39,23 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之当前夫妇避孕节育情况</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=1" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之当前夫妇避孕节育情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=2" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之未落实结扎上环情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=3" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之应落实补救措施情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=4" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之有子女未避孕人员情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery7view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=5" target="navTab" rel="flowbasicquery_sub"><span>避孕节育之计划生育手术情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
