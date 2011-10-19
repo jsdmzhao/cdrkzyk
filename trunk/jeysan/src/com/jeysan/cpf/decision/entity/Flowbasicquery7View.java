@@ -125,6 +125,14 @@ public class Flowbasicquery7View extends IdExtEntity {
 	 * 户口类别
 	 */
 	private Integer domicileType;
+	/**
+	 * 避孕节育未落实措施类型
+	 */
+	private Integer noMethodType;
+	/**
+	 * 补救措施未落实措施类型
+	 */
+	private Integer noRepairMethodType;
 
 	@Column(name = "PERSON_CODE")
 	public String getPersonCode() {
@@ -358,6 +366,23 @@ public class Flowbasicquery7View extends IdExtEntity {
 
 	public void setDomicileType(Integer domicileType) {
 		this.domicileType = domicileType;
+	}
+	
+	@Column(name="NO_METHOD_TYPE")
+	public Integer getNoMethodType() {
+		return noMethodType;
+	}
+
+	public void setNoMethodType(Integer noMethodType) {
+		this.noMethodType = noMethodType;
+	}
+	@Column(name="NO_REPAIR_METHOD_TYPE")
+	public Integer getNoRepairMethodType() {
+		return noRepairMethodType;
+	}
+
+	public void setNoRepairMethodType(Integer noRepairMethodType) {
+		this.noRepairMethodType = noRepairMethodType;
 	}
 
 	@Override
