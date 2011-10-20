@@ -22,13 +22,18 @@
 <input type="text" name="filter_GED_settleInDate" class="date" readonly="true" value="${param.filter_GED_settleInDate}"/>~<input type="text" name="filter_LED_settleInDate" class="date" readonly="true" value="${param.filter_LED_settleInDate}"/>
 						</td>
 </tr><tr>
-						<td colspan="3">
+						<td colspan="2">
 <input type="radio" name="doOrNOtMethod" id="doOrNOtMethod_1" value="1"/>应落实措施
 <input type="radio" name="doOrNOtMethod" id="doOrNOtMethod_2" value="2"/>未及时落实措施
 						</td>
 						<td>
 							未落实措施类型：
 <tags:js.dict.selector width="200" name="filter_EQI_noMethodType" value="${param['filter_EQI_noMethodType']}" dictCode="JS1033" noRender="true"/>
+						</td>
+						<td>
+							所属区域：
+							<tags:js.area.selector name="filter_EQS_area" readonly="true"
+								value="${param['filter_EQS_area']}" size="20"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
