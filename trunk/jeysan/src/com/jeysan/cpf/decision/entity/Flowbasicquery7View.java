@@ -94,6 +94,10 @@ public class Flowbasicquery7View extends IdExtEntity {
 	 */
 	private java.util.Date birthday2;
 	/**
+	 * 最小孩孩次
+	 */
+	private Integer chindIndex;
+	/**
 	 * 子女数
 	 */
 	private Long childnum;
@@ -383,6 +387,16 @@ public class Flowbasicquery7View extends IdExtEntity {
 
 	public void setNoRepairMethodType(Integer noRepairMethodType) {
 		this.noRepairMethodType = noRepairMethodType;
+	}
+	
+	
+	@Column(name="CHILD_INDEX")
+	public Integer getChindIndex() {
+		return chindIndex;
+	}
+
+	public void setChindIndex(Integer chindIndex) {
+		this.chindIndex = chindIndex;
 	}
 
 	@Override
