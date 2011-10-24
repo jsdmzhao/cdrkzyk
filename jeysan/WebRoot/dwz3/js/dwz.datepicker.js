@@ -210,7 +210,6 @@
 				$(document).bind("click", closeCalendar);
 				return false;
 			});
-			
 			$this.parent().find(setting.calIcon$).click(function(){
 				$this.trigger("click");
 				return false;
