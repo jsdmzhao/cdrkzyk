@@ -18,7 +18,7 @@
 	<div id="login">
 		<div id="login_header">
 			<h1 class="login_logo">
-				<a href="#"><img src="${ctx4doc}/dwz/themes/default/images/login_logo.gif" /></a>
+				<a href="#"><img src="${ctx4doc}/dwz3/themes/default/images/login_logo.gif" /></a>
 			</h1>
 			<div class="login_headerContent">
 				<div class="navList">
@@ -29,7 +29,7 @@
 						<li><a href="#">帮助</a></li>
 					</ul>
 				</div>
-				<h2 class="login_title"><img src="${ctx4doc}/dwz/themes/default/images/login_title.png" /></h2>
+				<h2 class="login_title"><img src="${ctx4doc}/dwz3/themes/default/images/login_title.png" /></h2>
 			</div>
 		</div>
 		<div id="login_content">
@@ -60,18 +60,18 @@
 					</div>
 				</form>
 			</div>
-			<div class="login_banner"><img src="${ctx4doc}/dwz/themes/default/images/login_banner.jpg" /></div>
+			<div class="login_banner"><img src="${ctx4doc}/dwz3/themes/default/images/login_banner.jpg" /></div>
 			<div class="login_main">
 				<ul class="helpList">
 					<li><a href="${ctx}/print/install_lodop.exe">下载无毒WEB打印插件</a></li>
 					<li><a href="#">忘记密码怎么办？</a></li>
 					<li><a href="#">为什么登录失败？</a></li>
-				</ul>
+				</ul><!-- 
 				<div class="login_inner">
 					<p>界面美观，操作方便</p>
 					<p>五种皮肤，自由选择</p>
 					<p>易扩展，易升级，易安装</p>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<div id="login_footer">
