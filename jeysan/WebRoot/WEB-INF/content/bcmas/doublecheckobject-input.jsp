@@ -2,25 +2,53 @@
 <%@ include file="/common/taglibs.jsp" %>
 <div class="page">
 	<div class="pageContent">
-		<form method="post" action="${ctx}/bcmas/confirmdcobj!save.action" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
+		<form method="post" action="${ctx}/bcmas/doublecheckobject!save.action" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${id}"/><!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
-			<input type="hidden" name="result4Json.navTabId" value="nav_confirmdcobjmanage"/>
+			<input type="hidden" name="result4Json.navTabId" value="nav_doublecheckobjectmanage"/>
 			<div class="pageFormContent" layoutH="56">
 																												<p>
 					<label>轮次ID：</label>
-					<input name="detailId" class="digits  required" type="text" size="30" value="${detailId}"/>
+					<input name="dcId" class="digits" type="text" size="30" value="${dcId}"/>
 					</p>
 																													<p>
-					<label>对象种类：</label>
-					<input name="objType" class="digits" type="text" size="30" value="${objType}"/>
-					</p>
-																													<p>
-					<label>WOMAN_ID：</label>
+					<label>妇女ID：</label>
 					<input name="womanId" class="digits" type="text" size="30" value="${womanId}"/>
 					</p>
 																													<p>
-					<label>双查情况：</label>
+					<label>是否个人：</label>
+					<input name="issingle" class="digits" type="text" size="30" value="${issingle}"/>
+					</p>
+																													<p>
+					<label>年度(主要针对个人)：</label>
+					<input name="year" class="digits" type="text" size="30" value="${year}"/>
+					</p>
+																													<p>
+					<label>本次双查总次数(主要针对个人)：</label>
+					<input name="total" class="digits" type="text" size="30" value="${total}"/>
+					</p>
+																													<p>
+					<label>轮次(主要针对个人)：</label>
+					<input name="seq" class="digits" type="text" size="30" value="${seq}"/>
+					</p>
+																													<p>
+					<label>双查类型：</label>
+					<input name="typeh" class="digits" type="text" size="30" value="${typeh}"/>
+					</p>
+																													<p>
+					<label>双查类型原因：</label>
+					<input name="cause"    type="text" size="30" value="${cause}" />
+					</p>
+																													<p>
+					<label>双查起始年月(主要针对个人)：</label>
+					<input name="start"    type="text" size="30" value="${start}" />
+					</p>
+																													<p>
+					<label>双查结束年月(主要针对个人)：</label>
+					<input name="end"    type="text" size="30" value="${end}" />
+					</p>
+																													<p>
+					<label>双查状态：</label>
 					<input name="dcStatus" class="digits" type="text" size="30" value="${dcStatus}"/>
 					</p>
 																													<p>

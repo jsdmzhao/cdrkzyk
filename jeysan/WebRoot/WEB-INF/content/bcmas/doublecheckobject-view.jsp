@@ -5,18 +5,46 @@
 			<div class="pageFormContent" layoutH="56">
 																													<p>
 					<label>轮次ID：</label>
-					<input name="detailId" readonly="readonly" type="text" size="30" value="${detailId}"/>
+					<input name="dcId" readonly="readonly" type="text" size="30" value="${dcId}"/>
 					</p>
 																														<p>
-					<label>对象种类：</label>
-					<input name="objType" readonly="readonly" type="text" size="30" value="${objType}"/>
-					</p>
-																														<p>
-					<label>WOMAN_ID：</label>
+					<label>妇女ID：</label>
 					<input name="womanId" readonly="readonly" type="text" size="30" value="${womanId}"/>
 					</p>
 																														<p>
-					<label>双查情况：</label>
+					<label>是否个人：</label>
+					<input name="issingle" readonly="readonly" type="text" size="30" value="${issingle}"/>
+					</p>
+																														<p>
+					<label>年度(主要针对个人)：</label>
+					<input name="year" readonly="readonly" type="text" size="30" value="${year}"/>
+					</p>
+																														<p>
+					<label>本次双查总次数(主要针对个人)：</label>
+					<input name="total" readonly="readonly" type="text" size="30" value="${total}"/>
+					</p>
+																														<p>
+					<label>轮次(主要针对个人)：</label>
+					<input name="seq" readonly="readonly" type="text" size="30" value="${seq}"/>
+					</p>
+																														<p>
+					<label>双查类型：</label>
+					<input name="typeh" readonly="readonly" type="text" size="30" value="${typeh}"/>
+					</p>
+																														<p>
+					<label>双查类型原因：</label>
+					<input name="cause" readonly="readonly" type="text" size="30" value="${cause}"/>
+					</p>
+																														<p>
+					<label>双查起始年月(主要针对个人)：</label>
+					<input name="start" readonly="readonly" type="text" size="30" value="${start}"/>
+					</p>
+																														<p>
+					<label>双查结束年月(主要针对个人)：</label>
+					<input name="end" readonly="readonly" type="text" size="30" value="${end}"/>
+					</p>
+																														<p>
+					<label>双查状态：</label>
 					<input name="dcStatus" readonly="readonly" type="text" size="30" value="${dcStatus}"/>
 					</p>
 																														<p>
