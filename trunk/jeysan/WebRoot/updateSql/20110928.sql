@@ -1,0 +1,1 @@
+alter table FHP_PERSON_BASIC add COLUMN MARRY_CRY_DATE date null;
