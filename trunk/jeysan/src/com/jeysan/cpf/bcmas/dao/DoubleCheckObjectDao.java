@@ -2,7 +2,7 @@
 
 import org.springframework.stereotype.Component;
 
-import com.jeysan.cpf.bcmas.entity.DoubleCheck;
+import com.jeysan.cpf.bcmas.entity.DoubleCheckObject;
 import com.jeysan.modules.orm.hibernate.HibernateDao;
 
 
@@ -11,6 +11,6 @@ import com.jeysan.modules.orm.hibernate.HibernateDao;
  *
  */
 @Component
-public class DoubleCheckDao extends HibernateDao<DoubleCheck, Long> {
+public class DoubleCheckObjectDao extends HibernateDao<DoubleCheckObject, Long> {
 
 }
