@@ -1,11 +1,12 @@
 ﻿package com.jeysan.cpf.bcmas.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -16,23 +17,51 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
  * 
  */
 @Entity
-@Table(name = "fhp_confirm_dc_obj")
+@Table(name = "fhp_double_check_object")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ConfirmDcObj extends IdExtEntity {
+public class DoubleCheckObject extends IdExtEntity {
 	/**
 	 * 轮次ID
 	 */
-	private Long detailId;
+	private Long dcId;
 	/**
-	 * 对象种类
+	 * 妇女ID
 	 */
-	private Integer objType;
+	private Long womanId;
 	/**
-	 * WOMAN_ID
+	 * 是否个人
 	 */
-	private FertileWoman fertileWoman;
+	private Integer issingle;
 	/**
-	 * 双查情况
+	 * 年度(主要针对个人)
+	 */
+	private Integer year;
+	/**
+	 * 本次双查总次数(主要针对个人)
+	 */
+	private Integer total;
+	/**
+	 * 轮次(主要针对个人)
+	 */
+	private Integer seq;
+	/**
+	 * 双查类型
+	 */
+	private Integer typeh;
+	/**
+	 * 双查类型原因
+	 */
+	private String cause;
+	/**
+	 * 双查起始年月(主要针对个人)
+	 */
+	private String start;
+	/**
+	 * 双查结束年月(主要针对个人)
+	 */
+	private String end;
+	/**
+	 * 双查状态
 	 */
 	private Integer dcStatus;
 	/**
@@ -64,32 +93,94 @@ public class ConfirmDcObj extends IdExtEntity {
 	 */
 	private String remark;
 
-	@Column(name = "DETAIL_ID")
-	public Long getDetailId() {
-		return detailId;
+	@Column(name = "DC_ID")
+	public Long getDcId() {
+		return dcId;
 	}
 
-	public void setDetailId(Long detailId) {
-		this.detailId = detailId;
+	public void setDcId(Long dcId) {
+		this.dcId = dcId;
 	}
 
-	@Column(name = "OBJ_TYPE")
-	public Integer getObjType() {
-		return objType;
+	@Column(name = "WOMAN_ID")
+	public Long getWomanId() {
+		return womanId;
 	}
 
-	public void setObjType(Integer objType) {
-		this.objType = objType;
+	public void setWomanId(Long womanId) {
+		this.womanId = womanId;
 	}
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "WOMAN_ID")
-	public FertileWoman getFertileWoman() {
-		return fertileWoman;
+	@Column(name = "ISSINGLE")
+	public Integer getIssingle() {
+		return issingle;
 	}
 
-	public void setFertileWoman(FertileWoman fertileWoman) {
-		this.fertileWoman = fertileWoman;
+	public void setIssingle(Integer issingle) {
+		this.issingle = issingle;
+	}
+
+	@Column(name = "YEAR")
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	@Column(name = "TOTAL")
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
+	}
+
+	@Column(name = "SEQ")
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
+
+	@Column(name = "TYPEH")
+	public Integer getTypeh() {
+		return typeh;
+	}
+
+	public void setTypeh(Integer typeh) {
+		this.typeh = typeh;
+	}
+
+	@Column(name = "CAUSE")
+	public String getCause() {
+		return cause;
+	}
+
+	public void setCause(String cause) {
+		this.cause = cause;
+	}
+
+	@Column(name = "START")
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
+	}
+
+	@Column(name = "END")
+	public String getEnd() {
+		return end;
+	}
+
+	public void setEnd(String end) {
+		this.end = end;
 	}
 
 	@Column(name = "DC_STATUS")

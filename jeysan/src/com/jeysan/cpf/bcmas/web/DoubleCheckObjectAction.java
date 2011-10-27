@@ -2,15 +2,13 @@
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
-import com.jeysan.cpf.bcmas.entity.ConfirmDcObj;
-import com.jeysan.cpf.bcmas.service.ConfirmDcObjManager;
-import com.jeysan.cpf.bcmas.service.FertileWomanManager;
+import com.jeysan.cpf.bcmas.entity.DoubleCheckObject;
+import com.jeysan.cpf.bcmas.service.DoubleCheckObjectManager;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -23,17 +21,16 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
-public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
+public class DoubleCheckObjectAction extends CrudActionSupport<DoubleCheckObject> {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
 	private String ids;
-	private ConfirmDcObj entity;
-	private ConfirmDcObjManager confirmDcObjManager;
-	private FertileWomanManager fertileWomanManager;
-	private Page<ConfirmDcObj> page = new Page<ConfirmDcObj>(DEFAULT_PAGE_SIZE);
+	private DoubleCheckObject entity;
+	private DoubleCheckObjectManager doubleCheckObjectManager;
+	private Page<DoubleCheckObject> page = new Page<DoubleCheckObject>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
 	public String delete() throws Exception {
@@ -41,19 +38,19 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				confirmDcObjManager.deleteConfirmDcObj(id);
-				logger.debug("删除了确定双查对象："+id);
+				doubleCheckObjectManager.deleteDoubleCheckObject(id);
+				logger.debug("删除了fhp_double_check_object："+id);
 			}else {
-				confirmDcObjManager.deleteConfirmDcObjs(ids);
-				logger.debug("删除了很多确定双查对象："+ids.toString());
+				doubleCheckObjectManager.deleteDoubleCheckObjects(ids);
+				logger.debug("删除了很多fhp_double_check_object："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除确定双查对象成功");
+			result4Json.setMessage("删除fhp_double_check_object成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"确定双查对象已经被关联,请先解除关联,删除失败":"删除确定双查对象失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"fhp_double_check_object已经被关联,请先解除关联,删除失败":"删除fhp_double_check_object失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -75,18 +72,15 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
-		page = confirmDcObjManager.searchConfirmDcObj(page, filters);
+		page = doubleCheckObjectManager.searchDoubleCheckObject(page, filters);
 		return SUCCESS;
 	}
 	@Override
 	protected void prepareModel() throws Exception {
 		if(id == null){
-			entity = new ConfirmDcObj();
-			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
-			if(StringUtils.isNotEmpty(fertileWomanId))
-				Struts2Utils.getRequest().setAttribute("fertileWoman", fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId)));
+			entity = new DoubleCheckObject();
 		}else{
-			entity = confirmDcObjManager.getConfirmDcObj(id);
+			entity = doubleCheckObjectManager.getDoubleCheckObject(id);
 		}
 	}
 	@Override
@@ -94,13 +88,13 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			confirmDcObjManager.saveConfirmDcObj(entity);
+			doubleCheckObjectManager.saveDoubleCheckObject(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存确定双查对象成功");
+				result4Json.setMessage("保存fhp_double_check_object成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改确定双查对象成功");
+				result4Json.setMessage("修改fhp_double_check_object成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -109,7 +103,7 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存确定双查对象失败");
+				result4Json.setMessage("保存fhp_double_check_object失败");
 			}
 			
 		}
@@ -117,18 +111,14 @@ public class ConfirmDcObjAction extends CrudActionSupport<ConfirmDcObj> {
 		return NONE;
 	}
 	@Override
-	public ConfirmDcObj getModel() {
+	public DoubleCheckObject getModel() {
 		return entity;
 	}
 	@Autowired
-	public void setConfirmDcObjManager(ConfirmDcObjManager confirmDcObjManager) {
-		this.confirmDcObjManager = confirmDcObjManager;
+	public void setDoubleCheckObjectManager(DoubleCheckObjectManager doubleCheckObjectManager) {
+		this.doubleCheckObjectManager = doubleCheckObjectManager;
 	}
-	@Autowired
-	public void setFertileWomanManager(FertileWomanManager fertileWomanManager) {
-		this.fertileWomanManager = fertileWomanManager;
-	}
-	public Page<ConfirmDcObj> getPage() {
+	public Page<DoubleCheckObject> getPage() {
 		return page;
 	}
 	public void setId(Long id) {
