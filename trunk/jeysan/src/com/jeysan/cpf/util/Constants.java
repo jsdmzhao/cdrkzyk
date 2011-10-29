@@ -69,6 +69,51 @@ public class Constants {
 	public static final class DC_TYPEH{
 		public static final Integer NO_CHECK = 186;//不查
 		public static final Integer FREE_CHECK = 191;//免查
+		public static final Integer CHECK_1 = 187;//查一次
+		public static final Integer CHECK_2 = 188;//查二次
+		public static final Integer CHECK_3 = 189;//查三次
+		public static final Integer CHECK_4 = 190;//查四次
+	}
+	/**
+	 * 查环查孕状态
+	 * @author 黄静
+	 *
+	 */
+	public static final class DC_STATUS{
+		public static final Integer CONFIRMED = 758;//已确定
+		public static final Integer NO_CHECK = 759;//漏查
+		public static final Integer CHECKED = 760;//已查
+	}
+	/**
+	 * 查环查孕对象类型
+	 * @author 黄静
+	 */
+	public static final class DC_OBJ_TYPE{
+		public static final Integer DOT_161 = 161;// 上环
+		public static final Integer DOT_162 = 162;// 药具
+		public static final Integer DOT_163 = 163;// 皮埋
+		public static final Integer DOT_164 = 164;// 其他避孕
+		public static final Integer DOT_165 = 165;// 结扎不足一年	
+		public static final Integer DOT_166 = 166;// 应落实未落实
+		public static final Integer DOT_167 = 167;// 有指标待孕
+	}
+	/**
+	 * 避孕节育措施
+	 * @author 黄静
+	 */
+	public static final class METHOD{
+		public static final Integer METHOD_201 = 201;// 男扎
+		public static final Integer METHOD_202 = 202;// 女扎
+		public static final Integer METHOD_203 = 203;// 上环
+		public static final Integer METHOD_204 = 204;// 服注药
+		public static final Integer METHOD_205 = 205;// 避孕套
+		public static final Integer METHOD_206 = 206;// 外用药
+		public static final Integer METHOD_207 = 207;// 皮埋	
+		public static final Integer METHOD_208 = 208;// 未避孕
+		public static final Integer METHOD_209 = 209;// 宫内节育器（IUD）
+		public static final Integer METHOD_210 = 210;// 输卵管结扎
+		public static final Integer METHOD_211 = 211;// 宫型含铜（IUD）
+		public static final Integer METHOD_212 = 212;// 其他避孕法
 	}
 	/**
 	 * 保险情况
