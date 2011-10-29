@@ -4,9 +4,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -27,7 +29,7 @@ public class DoubleCheckObject extends IdExtEntity {
 	/**
 	 * 妇女ID
 	 */
-	private Long womanId;
+	private FertileWoman fertileWoman;
 	/**
 	 * 是否个人
 	 */
@@ -102,13 +104,15 @@ public class DoubleCheckObject extends IdExtEntity {
 		this.dcId = dcId;
 	}
 
-	@Column(name = "WOMAN_ID")
-	public Long getWomanId() {
-		return womanId;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "WOMAN_ID")
+	@JsonIgnore
+	public FertileWoman getFertileWoman() {
+		return fertileWoman;
 	}
 
-	public void setWomanId(Long womanId) {
-		this.womanId = womanId;
+	public void setFertileWoman(FertileWoman fertileWoman) {
+		this.fertileWoman = fertileWoman;
 	}
 
 	@Column(name = "ISSINGLE")
@@ -259,5 +263,84 @@ public class DoubleCheckObject extends IdExtEntity {
 	public String toString() {
 		// return ToStringBuilder.reflectionToString(this);
 		return null;
+	}
+	
+	/**
+	 * 漏查处理情况
+	 */
+	private Integer ldwStatus;
+	/**
+	 * 处理措施
+	 */
+	private String ldwContent;
+	/**
+	 * 处理时间
+	 */
+	private java.util.Date ldwDate;
+	/**
+	 * 违约金
+	 */
+	private Double moneyh;
+	/**
+	 * 交款日期
+	 */
+	private java.util.Date payDate;
+	/**
+	 * 收款人
+	 */
+	private String cashier;
+
+	@Column(name = "LDW_STATUS")
+	public Integer getLdwStatus() {
+		return ldwStatus;
+	}
+
+	public void setLdwStatus(Integer ldwStatus) {
+		this.ldwStatus = ldwStatus;
+	}
+
+	@Column(name = "LDW_CONTENT")
+	public String getLdwContent() {
+		return ldwContent;
+	}
+
+	public void setLdwContent(String ldwContent) {
+		this.ldwContent = ldwContent;
+	}
+
+	@Column(name = "LDW_DATE")
+	public java.util.Date getLdwDate() {
+		return ldwDate;
+	}
+
+	public void setLdwDate(java.util.Date ldwDate) {
+		this.ldwDate = ldwDate;
+	}
+
+	@Column(name = "MONEYH")
+	public Double getMoneyh() {
+		return moneyh;
+	}
+
+	public void setMoneyh(Double moneyh) {
+		this.moneyh = moneyh;
+	}
+
+	@Column(name = "PAY_DATE")
+	public java.util.Date getPayDate() {
+		return payDate;
+	}
+
+	public void setPayDate(java.util.Date payDate) {
+		this.payDate = payDate;
+	}
+
+	@Column(name = "CASHIER")
+	public String getCashier() {
+		return cashier;
+	}
+
+	public void setCashier(String cashier) {
+		this.cashier = cashier;
 	}
 }
