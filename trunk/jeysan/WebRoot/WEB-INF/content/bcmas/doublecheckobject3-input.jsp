@@ -1,19 +1,16 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%
-	//request.setAttribute("filter", java.util.Arrays.asList(187, 188,189,190));
-%>
 <div class="page">
 	<div class="pageContent">
 		<form method="post"
-			action="${ctx}/bcmas/doublecheckobject!save.action"
+			action="${ctx}/bcmas/doublecheckobject!save3.action"
 			class="pageForm required-validate"
 			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${model.id}" />
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId"
-				value="nav_doublecheckobjectmanage" />
+				value="nav_doublecheckobject3manage" />
 			<div class="pageFormContent" layoutH="56">
 				<div style="float: left; width: 98%;">
 					<h2 class="contentTitle">
@@ -91,32 +88,75 @@
 					<label>
 						是否整体轮次：
 					</label>
-					<tags:js.yes.no.selector name="issingle" class1="required" value="${model.issingle}"></tags:js.yes.no.selector>
+					<input readonly="readonly" type="text" size="30"
+						value="<tags:js.yes.no.getValue value="${model.issingle}"/>" />
 				</p>
 				<p>
 					<label>
 						双查类型：
 					</label>
-					<tags:js.dict.selector name="typeh" class1="required"  value="${model.typeh}" dictCode="JS1016"/>
+					<input readonly="readonly" type="text" size="30"
+						value="<tags:js.dict.getValue value="${model.typeh}"/>" />
 				</p>
 				<p>
 					<label>
 						双查类型原因：
 					</label>
-					<input name="cause" type="text" size="30" value="${model.cause}" />
+					<input readonly="readonly" type="text" size="30" value="${model.cause}" />
 				</p>
 				<p>
 					<label>
 						双查起始年月：
 					</label>
-					<input name="start" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM'})" type="text" size="30" value="${model.start}" />
+					<input readonly="readonly" type="text" size="30" value="${model.start}" />
 				</p>
 				<p>
 					<label>
 						双查结束年月：
 					</label>
-					<input name="end" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM'})" type="text" size="30" value="${model.end}" />
+					<input readonly="readonly" type="text" size="30" value="${model.end}" />
 				</p>
+<div class="divider"></div>
+
+				<p>
+					<label>
+						处理措施：
+					</label>
+					<input name="ldwContent" class="required " type="text" size="30"
+						value="${model.ldwContent}" />
+				</p>
+				<p>
+					<label>
+						处理时间：
+					</label>
+					<input name="ldwDate" class="date required" readonly="readonly" type="text"
+						size="30"
+						value="<fmt:formatDate value="${model.ldwDate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						违约金：
+					</label>
+					<input name="moneyh" class="number required" type="text" size="30"
+						value="${model.moneyh}" />
+				</p>
+				<p>
+					<label>
+						交款日期：
+					</label>
+					<input name="payDate" class="date " readonly="readonly" type="text"
+						size="30"
+						value="<fmt:formatDate value="${payDate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						收款人：
+					</label>
+					<input name="cashier" type="text" size="30" value="${model.cashier}" />
+				</p>
+
 			</div>
 			<div class="formBar">
 				<ul>

@@ -1,19 +1,16 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<%
-	//request.setAttribute("filter", java.util.Arrays.asList(187, 188,189,190));
-%>
 <div class="page">
 	<div class="pageContent">
 		<form method="post"
-			action="${ctx}/bcmas/doublecheckobject!save.action"
+			action="${ctx}/bcmas/doublecheckobject!save2.action"
 			class="pageForm required-validate"
 			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${model.id}" />
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId"
-				value="nav_doublecheckobjectmanage" />
+				value="nav_doublecheckobject2manage" />
 			<div class="pageFormContent" layoutH="56">
 				<div style="float: left; width: 98%;">
 					<h2 class="contentTitle">
@@ -91,31 +88,79 @@
 					<label>
 						是否整体轮次：
 					</label>
-					<tags:js.yes.no.selector name="issingle" class1="required" value="${model.issingle}"></tags:js.yes.no.selector>
+					<input readonly="readonly" type="text" size="30"
+						value="<tags:js.yes.no.getValue value="${model.issingle}"/>" />
 				</p>
 				<p>
 					<label>
 						双查类型：
 					</label>
-					<tags:js.dict.selector name="typeh" class1="required"  value="${model.typeh}" dictCode="JS1016"/>
+					<input readonly="readonly" type="text" size="30"
+						value="<tags:js.dict.getValue value="${model.typeh}"/>" />
 				</p>
 				<p>
 					<label>
 						双查类型原因：
 					</label>
-					<input name="cause" type="text" size="30" value="${model.cause}" />
+					<input readonly="readonly" type="text" size="30" value="${model.cause}" />
 				</p>
 				<p>
 					<label>
 						双查起始年月：
 					</label>
-					<input name="start" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM'})" type="text" size="30" value="${model.start}" />
+					<input readonly="readonly" type="text" size="30" value="${model.start}" />
 				</p>
 				<p>
 					<label>
 						双查结束年月：
 					</label>
-					<input name="end" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM'})" type="text" size="30" value="${model.end}" />
+					<input readonly="readonly" type="text" size="30" value="${model.end}" />
+				</p>
+<div class="divider"></div>
+				<p>
+					<label>
+						双查时间：
+					</label>
+					<input name="dcDate" class="date " readonly="readonly" type="text"
+						size="30"
+						value="<fmt:formatDate value="${model.dcDate}" pattern="yyyy-MM-dd"/>" />
+					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+				</p>
+				<p>
+					<label>
+						查环结果：
+					</label>
+					<tags:js.dict.selector name="dcResult1" class1="required"  value="${model.dcResult1}" dictCode="JS1077"/>
+				</p>
+				<p>
+					<label>
+						查孕结果：
+					</label>
+					<tags:js.dict.selector name="dcResult2" class1="required"  value="${model.dcResult2}" dictCode="JS1078"/>
+				</p>
+				<p>
+					<label>
+						双查医院：
+					</label>
+					<input name="hospital" type="text" size="30" value="${model.hospital}" />
+				</p>
+				<p>
+					<label>
+						医院类型：
+					</label>
+					<tags:js.dict.selector name="hospitalType" value="${model.hospitalType}" dictCode="JS1053"/>
+				</p>
+				<p>
+					<label>
+						检查医生：
+					</label>
+					<input name="doctor" type="text" size="30" value="${model.doctor}" />
+				</p>
+				<p>
+					<label>
+						备注：
+					</label>
+					<input name="remark" type="text" size="30" value="${model.remark}" />
 				</p>
 			</div>
 			<div class="formBar">
