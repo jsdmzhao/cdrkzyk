@@ -54,22 +54,61 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				doubleCheckObjectManager.deleteDoubleCheckObject(id);
+				deleteDC(id);
 				logger.debug("删除了双查对象："+id);
 			}else {
-				doubleCheckObjectManager.deleteDoubleCheckObjects(ids);
+				for(String dcId : StringUtils.split(ids,","))
+					deleteDC(Long.parseLong(dcId));
 				logger.debug("删除了很多双查对象："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除双查对象成功");
+			result4Json.setMessage("操作成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"双查对象已经被关联,请先解除关联,删除失败":"删除双查对象失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"对象已经被关联,请先解除关联,删除失败":"操作失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	
+	public void getDoubleChecksByYear() throws Exception {
+		try {
+			String year = Struts2Utils.getRequest().getParameter("year");
+			if(StringUtils.isNotEmpty(year)){
+				List<DoubleCheck> dcs = this.doubleCheckManager.getDoubleChecksByYear(Integer.parseInt(year));
+				Struts2Utils.renderJson(dcs);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
+		}
+	}
+	
+	private void deleteDC(Long dcId) throws Exception{
+		String type = Struts2Utils.getRequest().getParameter("type");
+		if(StringUtils.equals(type, "1")){
+			doubleCheckObjectManager.deleteDoubleCheckObject(dcId);
+		}else{
+			DoubleCheckObject dco = this.doubleCheckObjectManager.getDoubleCheckObject(dcId);
+			 if(StringUtils.equals(type, "2")){
+				 dco.setDcDate(null);
+				 dco.setDcResult1(null);
+				 dco.setDcResult2(null);
+				 dco.setHospital(null);
+				 dco.setHospitalType(null);
+				 dco.setDoctor(null);
+				 dco.setRemark(null);
+			 }else if(StringUtils.equals(type, "3")){
+				 dco.setLdwContent(null);
+				 dco.setLdwDate(null);
+				 dco.setMoneyh(null);
+				 dco.setPayDate(null);
+				 dco.setCashier(null);
+			 }
+			 entity.setDcStatus(Constants.DC_STATUS.CONFIRMED);
+			 doubleCheckObjectManager.saveDoubleCheckObject(dco);
+		}
 	}
 	
 	private DoubleCheckObject getDoubleCheckObject(DoubleCheck dc,FertileWoman fw){
@@ -157,6 +196,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 	}
 	@Override
 	public String view() throws Exception {
+		input();
 		return VIEW;
 	}
 	@Override
@@ -188,6 +228,10 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 				}
 			}
 		}
+		String filter_EQI_year = Struts2Utils.getRequest().getParameter("filter_EQI_year");
+		if(StringUtils.isNotEmpty(filter_EQI_year)){
+			Struts2Utils.getRequest().setAttribute("dcs", this.doubleCheckManager.getDoubleChecksByYear(Integer.parseInt(filter_EQI_year)));
+		}
 		return SUCCESS;
 	}
 	public String list2() throws Exception {
@@ -211,6 +255,10 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 		}
 		if(checkPrint())
 			return PRINT;
+		String filter_EQI_year = Struts2Utils.getRequest().getParameter("filter_EQI_year");
+		if(StringUtils.isNotEmpty(filter_EQI_year)){
+			Struts2Utils.getRequest().setAttribute("dcs", this.doubleCheckManager.getDoubleChecksByYear(Integer.parseInt(filter_EQI_year)));
+		}
 		return "list2";
 	}
 	public String list3() throws Exception {
@@ -237,6 +285,10 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 		}
 		if(checkPrint())
 			return PRINT;
+		String filter_EQI_year = Struts2Utils.getRequest().getParameter("filter_EQI_year");
+		if(StringUtils.isNotEmpty(filter_EQI_year)){
+			Struts2Utils.getRequest().setAttribute("dcs", this.doubleCheckManager.getDoubleChecksByYear(Integer.parseInt(filter_EQI_year)));
+		}
 		return "list3";
 	}
 	@Override
