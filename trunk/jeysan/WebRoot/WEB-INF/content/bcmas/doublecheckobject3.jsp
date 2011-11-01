@@ -28,10 +28,9 @@
 							轮次：
 							<select name="filter_EQI_seq" id="filter_EQI_seq">
 								<option value="">选择轮次</option>
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
+								<c:forEach var="a" items="${dcs}">
+								<option value="${a.seq}">${a.seq}</option>
+								</c:forEach>
 							</select>
 						</td>
 						<td>
@@ -44,11 +43,11 @@
 					<tr>
 						<td>
 							起始年月：
-							<input type="input" id="start" name="start" value="2011-10" readonly="readonly">
+							<input type="input" id="start" name="start" readonly="readonly">
 						</td>
 						<td>
 							终止年月：
-							<input type="input" id="end" name="end" value="2011-12" readonly="readonly">
+							<input type="input" id="end" name="end" readonly="readonly">
 						</td>
 						<td>
 							所属区域：
@@ -218,11 +217,11 @@
 						<td>
 							<div style="width: 50px;">
 								<a class="btnView"
-									href="${ctx}/bcmas/doublecheckobject!view.action?id=${a.id}"
+									href="${ctx}/bcmas/doublecheckobject!view.action?id=${a.id}&type=3"
 									target="navTab" title="查看双查漏查信息"
 									rel="doubleCheckObject3-view"></a>
 								<a class="btnDel"
-									href="${ctx}/bcmas/doublecheckobject!delete.action?id=${a.id}&result4Json.navTabId=nav_doubleCheckObject3manage"
+									href="${ctx}/bcmas/doublecheckobject!delete.action?id=${a.id}&type=3&result4Json.navTabId=nav_doubleCheckObject3manage"
 									target="ajaxTodo" title="确定要删除吗？"></a>
 							</div>
 						</td>
@@ -241,5 +240,49 @@ $(function(){
 	$('#start',$box).val('${param.start}');
 	$('#end',$box).val('${param.end}');
 	$('#status${param.status}',$box).attr('checked','checked');
+
+	var data_tmp = null;
+	$('#filter_EQI_year',$box).change(function(){
+		if(this.value != ''){
+			$.post('${ctx}/bcmas/doublecheckobject!getDoubleChecksByYear.action',{year:this.value},function(data){
+				data_tmp = data;
+				var $seq_selector = $('#filter_EQI_seq',$box);
+				$seq_selector.empty();
+				$("<option value=''>选择轮次</option>").appendTo($seq_selector);
+				for(var i=0;i<data.length;i++)
+					$("<option value='"+data[i].seq+"'>"+data[i].seq+"</option>").appendTo($seq_selector);
+			},'json');
+		}else{
+			$('#filter_EQI_seq',$box).empty();
+			$("<option value=''>选择轮次</option>").appendTo($seq_selector);
+			$('#start',$box).val('');
+			$('#end',$box).val('');
+		}
+	});
+	$('#filter_EQI_seq',$box).change(function(){
+		if(this.value != ''){
+			if(data_tmp == null){
+				<c:if test="${not empty dcs}">
+				<c:forEach var="a" items="${dcs}">
+				if(this.value=='${a.seq}'){
+					$('#start',$box).val('${a.start}');
+					$('#end',$box).val('${a.end}');
+				}
+				</c:forEach>
+				</c:if>
+			}else{
+					for(var i=0;i<data_tmp.length;i++){
+						if(this.value == data_tmp[i].seq){
+							$('#start',$box).val(data_tmp[i].start);
+							$('#end',$box).val(data_tmp[i].end);
+							break;
+						}
+					}
+			}
+		}else{
+			$('#start',$box).val('');
+			$('#end',$box).val('');
+		}
+	});
 });
 </script>
