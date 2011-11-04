@@ -54,7 +54,14 @@ public class DoubleCheckStatAction extends CrudActionSupport {
 			String end = Struts2Utils.getParameter("end");
 			
 			//Map results = this.doubleCheckManager.searchDoubleCheck4Stat(status, filter_EQI_year, filter_EQI_seq, start, end);
-			List results = this.doubleCheckManager.searchDoubleCheck4Stat4AutoPrint(status, filter_EQI_year, filter_EQI_seq, start, end);
+			List results = null;
+			if(StringUtils.equals(type, "1"))
+				results = this.doubleCheckManager.searchDoubleCheck4Stat4AutoPrint(status, filter_EQI_year, filter_EQI_seq, start, end);
+			else if(StringUtils.equals(type, "2"))
+				results = this.doubleCheckManager.searchDoubleCheck4Stat2_4AutoPrint(status, filter_EQI_year, filter_EQI_seq, start, end);
+			else if(StringUtils.equals(type, "3"))
+				results = this.doubleCheckManager.searchDoubleCheck4Stat3_4AutoPrint(status, filter_EQI_year, filter_EQI_seq, start, end);
+			
 			Struts2Utils.getRequest().setAttribute("results", results);
 			if(checkPrint())
 				return "print"+type;
