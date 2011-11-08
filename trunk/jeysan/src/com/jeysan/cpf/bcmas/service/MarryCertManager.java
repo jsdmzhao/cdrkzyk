@@ -46,6 +46,9 @@ public class MarryCertManager {
 	public void deleteMarryCert(Long id){
 		marryCertDao.delete(id);
 	}
+	public void deleteMarryCert(MarryCert entity){
+		marryCertDao.delete(entity);
+	}
 	/**
 	 * 批量删除
 	 * @param ids

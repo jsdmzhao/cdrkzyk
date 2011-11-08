@@ -53,6 +53,10 @@ public class PersonManager {
 		//fertileWomanDao.delete(fertileWomanDao.findUniqueBy("person.id", id));
 		personDao.delete(id);
 	}
+	public void deletePerson(Person entity){
+		//fertileWomanDao.delete(fertileWomanDao.findUniqueBy("person.id", id));
+		personDao.delete(entity);
+	}
 	/**
 	 * 批量删除
 	 * @param ids

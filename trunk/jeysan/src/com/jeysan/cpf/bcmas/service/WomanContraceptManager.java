@@ -84,7 +84,12 @@ public class WomanContraceptManager {
 	public Page<WomanContracept> searchWomanContracept(final Page<WomanContracept> page,final List<PropertyFilter> filter){
 		return womanContraceptDao.findPage(page, filter);
 	}
-	
+	@Transactional(readOnly = true)
+	public List<WomanContracept> searchWomanContracepts(Long personId){
+		if(personId == null)
+			return null;
+		return womanContraceptDao.find("from WomanContracept where person.id = ?", personId);
+	}
 	@Autowired
 	public void setWomanContraceptDao(WomanContraceptDao womanContraceptDao) {
 		this.womanContraceptDao = womanContraceptDao;

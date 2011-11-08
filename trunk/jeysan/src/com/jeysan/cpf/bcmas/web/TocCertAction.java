@@ -2,8 +2,10 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
-import org.h2.util.StringUtils;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -26,6 +28,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/bcmas")
+@Results( {@Result(name = "view4print", location = "toccert-view4print.jsp", type = "dispatcher")})
 public class TocCertAction extends PrintActionSupport<TocCert> {
 	/**
 	 * 
@@ -67,6 +70,10 @@ public class TocCertAction extends PrintActionSupport<TocCert> {
 	}
 	@Override
 	public String view() throws Exception {
+		String print = Struts2Utils.getParameter("print");
+		if(StringUtils.isNotEmpty(print)&&Boolean.parseBoolean(print)){
+			return "view4print";
+		}
 		return VIEW;
 	}
 	@Override

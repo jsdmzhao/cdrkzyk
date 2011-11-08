@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.bcmas.dao.WomanSocialUpbringDao;
 import com.jeysan.cpf.bcmas.entity.WomanSocialUpbring;
+import com.jeysan.cpf.bcmas.entity.WomanUpbringDetail;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 
@@ -84,7 +85,12 @@ public class WomanSocialUpbringManager {
 	public Page<WomanSocialUpbring> searchWomanSocialUpbring(final Page<WomanSocialUpbring> page,final List<PropertyFilter> filter){
 		return womanSocialUpbringDao.findPage(page, filter);
 	}
-	
+	@Transactional(readOnly = true)
+	public List<WomanUpbringDetail> searchWomanSocialUpbrings(Long personId){
+		if(personId == null)
+			return null;
+		return womanSocialUpbringDao.find("select wud from WomanUpbringDetail as wud left join wud.upbring as scu left join scu.fertileWoman as fw left join fw.person as p where p.id = ? ", personId);
+	}
 	@Autowired
 	public void setWomanSocialUpbringDao(WomanSocialUpbringDao womanSocialUpbringDao) {
 		this.womanSocialUpbringDao = womanSocialUpbringDao;
