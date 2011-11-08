@@ -148,12 +148,11 @@
 				<input name="personBasic.company" type="text" size="30"
 					value="${personBasic.company}" readonly="readonly" />
 			</p>
-			<p>
+			<p style="width: 98%; height: 120px">
 				<label>
 					照片：
 				</label>
-				<input name="personBasic.photo" type="text" size="30"
-					value="${personBasic.photo}" readonly="readonly" />
+				<img width="200" height="120" src="${ctx}/${personBasic.photo}" />
 			</p>
 			<p>
 				<label>

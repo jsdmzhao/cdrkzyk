@@ -73,11 +73,11 @@
 					</label>
 					<input readonly="readonly" name="agent" type="text" size="30" value="${agent}" />
 				</p>
-				<p>
+				<p style="width: 98%; height: 120px">
 					<label>
 						照片：
 					</label>
-					<input readonly="readonly" name="photo" type="text" size="30" value="${photo}" />
+					<img width="78" height="78" src="${ctx}/${children.photo}}" />
 				</p>
 <c:if test="${certType == changed}">
 <div class="divider"></div>

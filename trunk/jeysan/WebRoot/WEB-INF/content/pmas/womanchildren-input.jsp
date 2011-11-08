@@ -1,10 +1,16 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
+<script>
+function ok(){
+	navTabAjaxDone4Update(
+			{navTabId:'nav_womanchildrenmanage',message:'操作成功',action:'${id==null?1:2}',statusCode:'200'}
+	);
+}
+</script>
 <div class="page">
 	<div class="pageContent">
 		<form method="post" action="${ctx}/pmas/womanchildren!save.action"
-			class="pageForm required-validate"
-			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
+			 enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this,ok);">
 			<input type="hidden" name="id" value="${id}" />
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
@@ -49,7 +55,8 @@
 					<label>
 						证件类型：
 					</label>
-					<input type="text" size="30" value="<tags:js.dict.getValue value="${person.certType}" />"
+					<input type="text" size="30"
+						value="<tags:js.dict.getValue value="${person.certType}" />"
 						readonly="readonly" />
 				</p>
 				<p>
@@ -77,13 +84,15 @@
 					<label>
 						姓名：
 					</label>
-					<input class="required" name="nameh" type="text" size="30" value="${nameh}" />
+					<input class="required" name="nameh" type="text" size="30"
+						value="${nameh}" />
 				</p>
 				<p>
 					<label>
 						性别：
 					</label>
-					<tags:js.dict.selector name="sex" class1="required"  value="${sex}" dictCode="JS010"/>
+					<tags:js.dict.selector name="sex" class1="required" value="${sex}"
+						dictCode="JS010" />
 				</p>
 				<p>
 					<label>
@@ -105,26 +114,34 @@
 					<label>
 						民族：
 					</label>
-					<tags:js.dict.selector name="native" value="${native}" dictCode="JS1044"/>
+					<tags:js.dict.selector name="native" value="${native}"
+						dictCode="JS1044" />
 				</p>
-				<p>
+				<p style="width: 98%;">
 					<label>
 						照片：
 					</label>
-					<input name="photo" type="text" size="30"
-						value="${photo}" />
+					<input name="photo_" type="file" size="30" />
+				</p>
+				<p style="width: 98%; height: 120px">
+					<label>
+						照片预览：
+					</label>
+					<img width="200" height="120" src="${ctx}/${photo}" />
 				</p>
 				<p>
 					<label>
 						政策内外：
 					</label>
-					<tags:js.dict.selector name="policy" class1="required"  value="${policy}" dictCode="JS1037"/>
+					<tags:js.dict.selector name="policy" class1="required"
+						value="${policy}" dictCode="JS1037" />
 				</p>
 				<p>
 					<label>
 						政策外类型：
 					</label>
-					<tags:js.dict.selector name="outType" class1="required"  value="${outType}" dictCode="JS1059"/>
+					<tags:js.dict.selector name="outType" class1="required"
+						value="${outType}" dictCode="JS1059" />
 				</p>
 				<p>
 					<label>
@@ -143,13 +160,15 @@
 					<label>
 						健康状况：
 					</label>
-					<tags:js.dict.selector name="healthStatus" class1="required"  value="${healthStatus}" dictCode="JS1060"/>
+					<tags:js.dict.selector name="healthStatus" class1="required"
+						value="${healthStatus}" dictCode="JS1060" />
 				</p>
 				<p>
 					<label>
 						血缘关系：
 					</label>
-					<tags:js.dict.selector name="kinship" class1="required"  value="${kinship}" dictCode="JS1061"/>
+					<tags:js.dict.selector name="kinship" class1="required"
+						value="${kinship}" dictCode="JS1061" />
 				</p>
 				<p>
 					<label>
@@ -177,7 +196,8 @@
 					<label>
 						出生医院类型：
 					</label>
-					<tags:js.dict.selector name="hospitalType" class1="required"  value="${hospitalType}" dictCode="JS1053"/>
+					<tags:js.dict.selector name="hospitalType" class1="required"
+						value="${hospitalType}" dictCode="JS1053" />
 				</p>
 				<p>
 					<label>
@@ -194,7 +214,7 @@
 					</label>
 					<input name="adoptCept" type="text" size="30" value="${adoptCept}" />
 				</p>
-<div class="divider"></div>
+				<div class="divider"></div>
 				<p>
 					<label>
 						上报日期：

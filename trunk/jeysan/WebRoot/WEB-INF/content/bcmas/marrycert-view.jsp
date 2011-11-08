@@ -137,13 +137,12 @@
 				<input name="afterGirlCount" readonly="readonly" type="text"
 					size="30" value="${afterGirlCount}" />
 			</p>
-			<p>
-				<label>
-					照片：
-				</label>
-				<input name="photo" readonly="readonly" type="text" size="30"
-					value="${photo}" />
-			</p>
+				<p style="width: 98%; height: 120px">
+					<label>
+						照片：
+					</label>
+					<img width="202" height="143" src="${ctx}/${children.photo}}" />
+				</p>
 		</div>
 		<div class="formBar">
 			<ul>

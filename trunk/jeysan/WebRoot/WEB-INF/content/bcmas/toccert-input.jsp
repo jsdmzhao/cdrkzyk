@@ -111,12 +111,11 @@
 					<input id="children_birthday"  readonly="readonly" type="text" size="30"
 						value="<fmt:formatDate value="${children.birthday}" pattern="yyyy-MM-dd"/>" />
 				</p>
-				<p>
+				<p style="width: 98%; height: 120px">
 					<label>
 						照片：
 					</label>
-					<input id="children_photo" readonly="readonly" type="text" size="30"
-						value="${children.photo}" />
+					<img id="children_photo" width="200" height="120" src="${ctx}/${children.photo}}" />
 				</p>
 				<div style="float: left; width: 98%;">
 					<h2 class="contentTitle">
@@ -245,7 +244,7 @@
 				$('#children_sex',$box).val(data.sexLabel);
 				$('#children_native',$box).val(data.nativeLabel);
 				$('#children_birthday',$box).val(data.birthdayLabel);
-				$('#children_photo',$box).val(data.photo);
+				$('#children_photo',$box).attr('src','${ctx}/'+data.photo);
 				$('#childrenId',$box).val(data.id);
 			});
 		}

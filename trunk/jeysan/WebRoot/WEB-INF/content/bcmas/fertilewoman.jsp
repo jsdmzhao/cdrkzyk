@@ -97,9 +97,6 @@
 					<th width="80" orderField="code" class="orderFlag">
 						妇女编码
 					</th>
-					<th width="150" orderField="area" class="orderFlag" htype="region">
-						所属区域
-					</th>
 					<th width="75" align="center">
 						操作
 					</th>
@@ -136,9 +133,6 @@
 						</td>
 						<td>
 							${a.code}
-						</td>
-						<td>
-							<tags:js.area.getValue value="${a.area}"></tags:js.area.getValue>
 						</td>
 						<td>
 							<div style="width: 75px;">

@@ -149,8 +149,8 @@
 						<td>
 							<div style="width: 25px;">
 								<a class="btnLook"
-									href="${ctx}/bcmas/marrycert!view.action?id=${a.id}"
-									target="dialog" title="查看婚育证书" rel="marryCert-view"></a>
+									href="${ctx}/bcmas/marrycert!view.action?id=${a.id}&print=true"
+									target="navTab" external="true" title="查看婚育证书" rel="marryCert-view"></a>
 							</div>
 						</td>
 					</tr>

@@ -17,6 +17,8 @@
 		value="${param['filter_EQI_kind']}" />
 	<input type="hidden" name="filter_EQI_cancelType"
 		value="${param['filter_EQI_cancelType']}" />
+	<input type="hidden" name="filter_GEI_age"
+		value="${param['filter_GEI_age']}" />
 	<input type="hidden" name="filter_EQS_area"
 		value="${param['filter_EQS_area']}" />
 </tags:js.pager>
@@ -76,7 +78,12 @@
 							<tags:js.dict.selector noRender="true"
 								name="filter_EQI_cancelType"
 								value="${param['filter_EQI_cancelType']}" dictCode="JS1010" />
-						</td><td></td>
+						</td>
+						<td>
+							年龄(>=)：
+							<input type="text" name="filter_GEI_age"
+								value="${param['filter_GEI_age']}" />
+						</td>
 					</tr>
 				</table>
 
