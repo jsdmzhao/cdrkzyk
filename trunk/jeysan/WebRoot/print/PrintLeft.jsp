@@ -11,6 +11,9 @@
    <link href="../css/print1.css" type="text/css" rel="stylesheet"/>
 	<link href="../css/css1.css" type="text/css" rel="stylesheet"/>
 </head>
+<script>
+ var pager_type = 'A4';
+</script>
 
 <body leftmargin="0" topmargin="0">
 <center>
@@ -18,6 +21,11 @@
       <tr><td height="300" align="center" valign="top">
 
       </td></tr>
+         <tr class="table_bgcolor_td2">
+            <td height="30" >
+                <input name="printSet" type="button" class="bottom_bg1" value="A3/A4切换" onclick="exchangePagerType()">
+            </td>
+        </tr>
        <tr><td>
            <table width="100%" border="0" cellpadding="1" cellspacing="1" class="table_bgcolor">
         <tr class="table_bgcolor_td2">
@@ -88,7 +96,16 @@
     }
      function exportExcel(){
         var url = parent.printMainFrm.location.href ;
-        //alert(url);
         parent.printMainFrm.location.href = url + ((url.indexOf("?")==-1)?"?":"&")+"operation=export";
     }
+     function exchangePagerType(){
+    	 var url = parent.printMainFrm.location.href ;
+    	 var new_pager_type = (pager_type=='A3'?'A4':'A3');
+    	 if(url.indexOf('pager_type='+pager_type) != -1){
+         	 parent.printMainFrm.location.href = url.replace('pager_type='+pager_type,'pager_type='+new_pager_type);
+         }else{
+        	 parent.printMainFrm.location.href = url + ((url.indexOf("?")==-1)?"?":"&")+"pager_type="+new_pager_type;
+         }
+         pager_type = new_pager_type;
+      }
 </script>
