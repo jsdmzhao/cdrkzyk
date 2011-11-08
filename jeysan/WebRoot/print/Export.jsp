@@ -40,10 +40,14 @@
         // LODOP.ADD_PRINT_HTML(0, 0, 2000, 1125, document.forms[0].innerHTML);
        // LODOP.ADD_PRINT_HTML(1125, 0, 2000, 1125, document.forms[1].innerHTML);
        // LODOP.ADD_PRINT_HTML(2250, 0, 2000, 1125, document.forms[2].innerHTML);
-       
        	LODOP.PRINT_INIT("${param.title}");
        	for(var i=0;i<forms.length;i++){
-       		LODOP.ADD_PRINT_HTM(0,20,350,1414,forms[i].innerHTML)
+       		<c:if test="${param.pager_type==null||param.pager_type=='A4'}">
+       		LODOP.ADD_PRINT_HTM(0,20,350,1414,forms[i].innerHTML);
+       		</c:if>
+           	<c:if test="${param.pager_type=='A3'}">
+           	LODOP.ADD_PRINT_HTM(0,-220,2000,1125,forms[i].innerHTML);
+           	</c:if>
        		if(i != forms.length -1){
 				LODOP.NewPage();
 			}
