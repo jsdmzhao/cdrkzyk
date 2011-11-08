@@ -1,9 +1,11 @@
 ﻿package com.jeysan.cpf.pmas.web;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
@@ -31,6 +33,8 @@ import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 import com.jeysan.modules.utils.date.DateUtil;
+import com.jeysan.modules.utils.file.FileUploadUtils;
+import com.jeysan.modules.utils.file.FileUtils;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -60,16 +64,18 @@ public class PersonAction extends PrintActionSupport<Person> {
 	private DeathRegManager deathRegManager;
 	private Page<Person> page = new Page<Person>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
+	private File personBasic_photo;
 	@Override
 	public String delete() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				personManager.deletePerson(id);
+				deletePerson(id);
 				logger.debug("删除了人员："+id);
 			}else {
-				personManager.deletePersons(ids);
+				for(String pid : StringUtils.split(ids, ","))
+					deletePerson(Long.parseLong(pid));
 				logger.debug("删除了很多人员："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
@@ -82,6 +88,14 @@ public class PersonAction extends PrintActionSupport<Person> {
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	private void deletePerson(Long pid){
+		Person p = personManager.getPerson(pid);
+		String photo = p.getPersonBasic().getPhoto();
+		personManager.deletePerson(p);
+		if(StringUtils.isNotEmpty(photo)){
+			FileUtils.deleteFile(Struts2Utils.getRequest(), photo);
+		}
 	}
 	@Override
 	public String input() throws Exception {
@@ -199,6 +213,18 @@ public class PersonAction extends PrintActionSupport<Person> {
 			if(StringUtils.isNotEmpty(houseId))
 				entity.getPersonBasic().setHouseId(Long.parseLong(houseId));
 			entity.setArea(entity.getPersonBasic().getAddressCode());
+			if(this.personBasic_photo != null){
+				if(id != null){
+					String photo = entity.getPersonBasic().getPhoto();
+					if(StringUtils.isNotEmpty(photo)){
+						FileUtils.deleteFile(Struts2Utils.getRequest(), photo);
+					}
+				}
+				String filePath = "/img/photo/";
+				String fileName = RandomStringUtils.randomAlphanumeric(32)+"."+FileUtils.getFileExt(personBasic_photo);
+				FileUploadUtils.uploadFileInStruts(personBasic_photo, fileName, FileUtils.getRealPath(Struts2Utils.getRequest(), filePath));
+				entity.getPersonBasic().setPhoto(filePath+fileName);
+			}
 			personManager.savePerson(entity);
 			entity.getPersonBasic().setPerson(entity);
 			personBasicManager.savePersonBasic(entity.getPersonBasic());
@@ -246,7 +272,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 			}
 			
 		}
-		Struts2Utils.renderJson(result4Json);
+		//Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
 	public String cancel() throws Exception {
@@ -346,6 +372,13 @@ public class PersonAction extends PrintActionSupport<Person> {
 	public void setResult4Json(Result4Json result4Json) {
 		this.result4Json = result4Json;
 	}
+	public File getPersonBasic_photo() {
+		return personBasic_photo;
+	}
+	public void setPersonBasic_photo(File personBasic_photo) {
+		this.personBasic_photo = personBasic_photo;
+	}
+	
 	
 	
 }

@@ -1,7 +1,9 @@
 ﻿package com.jeysan.cpf.pmas.web;
 
+import java.io.File;
 import java.util.List;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -20,6 +22,8 @@ import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 import com.jeysan.modules.utils.date.DateUtil;
+import com.jeysan.modules.utils.file.FileUploadUtils;
+import com.jeysan.modules.utils.file.FileUtils;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -44,16 +48,18 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 	private DictSubManager dictSubManager;
 	private Page<WomanChildren> page = new Page<WomanChildren>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
+	private File photo_;
 	@Override
 	public String delete() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				womanChildrenManager.deleteWomanChildren(id);
+				deleteWomanChildren(id);
 				logger.debug("删除了子女："+id);
 			}else {
-				womanChildrenManager.deleteWomanChildrens(ids);
+				for(String pid : StringUtils.split(ids, ","))
+					deleteWomanChildren(Long.parseLong(pid));
 				logger.debug("删除了很多子女："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
@@ -66,6 +72,14 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	private void deleteWomanChildren(Long pid){
+		WomanChildren p = womanChildrenManager.getWomanChildren(pid);
+		String photo_ = p.getPhoto();
+		womanChildrenManager.deleteWomanChildren(p);
+		if(StringUtils.isNotEmpty(photo_)){
+			FileUtils.deleteFile(Struts2Utils.getRequest(), photo_);
+		}
 	}
 	@Override
 	public String input() throws Exception {
@@ -139,6 +153,18 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			if(this.photo_ != null){
+				if(id != null){
+					String photo = entity.getPhoto();
+					if(StringUtils.isNotEmpty(photo)){
+						FileUtils.deleteFile(Struts2Utils.getRequest(), photo);
+					}
+				}
+				String filePath = "/img/photo/";
+				String fileName = RandomStringUtils.randomAlphanumeric(32)+"."+FileUtils.getFileExt(photo_);
+				FileUploadUtils.uploadFileInStruts(photo_, fileName, FileUtils.getRealPath(Struts2Utils.getRequest(), filePath));
+				entity.setPhoto(filePath+fileName);
+			}
 			womanChildrenManager.saveWomanChildren(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -158,7 +184,7 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 			}
 			
 		}
-		Struts2Utils.renderJson(result4Json);
+		//Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
 	@Override
@@ -192,6 +218,12 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 	}
 	public void setResult4Json(Result4Json result4Json) {
 		this.result4Json = result4Json;
+	}
+	public File getPhoto_() {
+		return photo_;
+	}
+	public void setPhoto_(File photo_) {
+		this.photo_ = photo_;
 	}
 	
 	

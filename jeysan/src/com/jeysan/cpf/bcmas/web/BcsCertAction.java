@@ -1,7 +1,9 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
+import java.io.File;
 import java.util.List;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -23,6 +25,8 @@ import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 import com.jeysan.modules.utils.date.DateUtil;
+import com.jeysan.modules.utils.file.FileUploadUtils;
+import com.jeysan.modules.utils.file.FileUtils;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -32,7 +36,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/bcmas")
 @Results( {@Result(name = "list4view", location = "bcscertcheck4view.jsp", type = "dispatcher"),
-	@Result(name = "bcs4lookup", location = "bcscert4lookup.jsp", type = "dispatcher")})
+	@Result(name = "bcs4lookup", location = "bcscert4lookup.jsp", type = "dispatcher"),
+	@Result(name = "view4print", location = "bcscert-view4print.jsp", type = "dispatcher")})
 public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	/**
 	 * 
@@ -46,16 +51,18 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	private BcsCertCheckManager bcsCertCheckManager;
 	private Page<BcsCert> page = new Page<BcsCert>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
+	private File photo_;
 	@Override
 	public String delete() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				bcsCertManager.deleteBcsCerts(id);
+				deleteMarryCert(id);
 				logger.debug("删除了计划生育服务证："+id);
 			}else {
-				bcsCertManager.deleteBcsCerts(ids);
+				for(String pid : StringUtils.split(ids, ","))
+					deleteMarryCert(Long.parseLong(pid));
 				logger.debug("删除了很多计划生育服务证："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
@@ -69,12 +76,27 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
+	private void deleteMarryCert(Long pid){
+		BcsCert p = bcsCertManager.getBcsCert(pid);
+		String photo_ = p.getPhoto();
+		bcsCertManager.deleteBcsCert(p);
+		if(StringUtils.isNotEmpty(photo_)){
+			FileUtils.deleteFile(Struts2Utils.getRequest(), photo_);
+		}
+	}
 	@Override
 	public String input() throws Exception {
 		return INPUT;
 	}
 	@Override
 	public String view() throws Exception {
+		String print = Struts2Utils.getParameter("print");
+		if(StringUtils.isNotEmpty(print)&&Boolean.parseBoolean(print)){
+			//Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(entity.getPerson().getId()));
+			//Struts2Utils.getRequest().setAttribute("wcs", womanContraceptManager.searchWomanContracepts(entity.getPerson().getId()));
+			//Struts2Utils.getRequest().setAttribute("wuds", womanSocialUpbringManager.searchWomanSocialUpbrings(entity.getPerson().getId()));
+			return "view4print";
+		}
 		return VIEW;
 	}
 	public String list4lookup() throws Exception {
@@ -167,6 +189,18 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 					fertileWoman.setId(Long.parseLong(fertileWomanId));
 					entity.setFertileWoman(fertileWoman);
 				}
+				if(this.photo_ != null){
+					if(id != null){
+						String photo = entity.getPhoto();
+						if(StringUtils.isNotEmpty(photo)){
+							FileUtils.deleteFile(Struts2Utils.getRequest(), photo);
+						}
+					}
+					String filePath = "/img/photo/";
+					String fileName = RandomStringUtils.randomAlphanumeric(32)+"."+FileUtils.getFileExt(photo_);
+					FileUploadUtils.uploadFileInStruts(photo_, fileName, FileUtils.getRealPath(Struts2Utils.getRequest(), filePath));
+					entity.setPhoto(filePath+fileName);
+				}
 				entity.setCertType(Constants.CERT_TYPE.NORMAL);
 				bcsCertManager.saveBcsCert(entity);
 			}
@@ -216,5 +250,11 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 		this.result4Json = result4Json;
 	}
 	
+	public File getPhoto_() {
+		return photo_;
+	}
+	public void setPhoto_(File photo_) {
+		this.photo_ = photo_;
+	}
 	
 }

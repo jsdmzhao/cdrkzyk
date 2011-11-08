@@ -43,6 +43,9 @@ public class WomanChildrenManager {
 	 * 删除
 	 * @param id
 	 */
+	public void deleteWomanChildren(WomanChildren entity){
+		womanChildrenDao.delete(entity);
+	}
 	public void deleteWomanChildren(Long id){
 		womanChildrenDao.delete(id);
 	}

@@ -46,6 +46,9 @@ public class BcsCertManager {
 	public void deleteBcsCert(Long id){
 		bcsCertDao.delete(id);
 	}
+	public void deleteBcsCert(BcsCert entity){
+		bcsCertDao.delete(entity);
+	}
 	/**
 	 * 批量删除
 	 * @param ids
