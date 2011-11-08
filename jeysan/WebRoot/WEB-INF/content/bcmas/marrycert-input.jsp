@@ -1,10 +1,16 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
+<script>
+function ok(){
+	navTabAjaxDone4Update(
+			{navTabId:'nav_marrycertmanage',message:'操作成功',action:'${id==null?1:2}',statusCode:'200'}
+	);
+}
+</script>
 <div class="page">
 	<div class="pageContent">
 		<form method="post" action="${ctx}/bcmas/marrycert!save.action"
-			class="pageForm required-validate"
-			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
+			enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this,ok);">
 			<input type="hidden" name="id" value="${id}" />
 			<input type="hidden" name="master.dwz_personLookup.personId" value="${person.id}"/>
 			<!-- 
@@ -145,11 +151,17 @@
 					<input name="afterGirlCount" class="digits" type="text" size="30"
 						value="${afterGirlCount}" />
 				</p>
-				<p>
+				<p style="width: 98%;">
 					<label>
 						照片：
 					</label>
-					<input name="photo" type="text" size="30" value="${photo}" />
+					<input name="photo_" type="file" size="30" />
+				</p>
+				<p style="width: 98%; height: 120px">
+					<label>
+						照片预览：
+					</label>
+					<img width="202" height="143" src="${ctx}/${photo}" />
 				</p>
 			</div>
 			<div class="formBar">

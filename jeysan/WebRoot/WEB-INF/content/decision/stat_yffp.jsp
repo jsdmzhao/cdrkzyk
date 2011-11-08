@@ -7,8 +7,15 @@
 <form method="POST" action="../printReport/--WEBBOT-SELF--">
 <style type="text/css">
 <!--
+<c:if test="${param.pager_type==null||param.pager_type=='A4'}">
   .limitedwidth {height: 285mm;width: 190mm;}
   .In1-table1 {  border: 2px #000000 solid;font-size:12;width: 190mm;}
+</c:if>
+<c:if test="${param.pager_type=='A3'}">
+  .limitedwidth {height: 285mm;width: 410mm;}
+  .In1-table1 {  border: 2px #000000 solid;font-size:12;width: 410mm;}
+</c:if>
+
   .In1-td-right {  border-color: black black black #000000; border-style: solid; border-top-width: 0px; border-right-width: 1px; border-bottom-width: 0px; border-left-width: 0px}
   .In1-td-leftbottom {  border-color: black black black #000000; border-style: solid; border-top-width: 0px; border-right-width: 0px; border-bottom-width: 1px; border-left-width: 1px}
   .In1-td-topbottom2right {  border-color: #000000 black black; border-style: solid; border-top-width: 1px; border-right-width: 1px; border-bottom-width: 2px; border-left-width: 0px}
@@ -81,8 +88,14 @@
 			        <td width="13%" class="In1-td-bottom">&nbsp;</td></tr></table></td></tr>
 			        
 		<tr><td colspan="3" height="40"></td></tr></table>
-		
-		<hr clear=all style='page-break-before:always;width: 190mm' align="center">
+
+<c:if test="${param.pager_type==null||param.pager_type=='A4'}">
+<hr clear=all style='page-break-before:always;width: 190mm' align="center">
+</c:if>
+<c:if test="${param.pager_type=='A3'}">
+<hr clear=all style='page-break-before:always;width: 410mm' align="center">
+</c:if>
+
 </div>
 </center>
 </form>

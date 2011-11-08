@@ -93,6 +93,19 @@
 			</p>
 			<p>
 				<label>
+					民族：
+				</label>
+				<input name="native" readonly="readonly" type="text" size="30"
+					value="<tags:js.dict.getValue value="${entity.native}" />" />
+			</p>
+				<p style="width: 98%; height: 120px">
+					<label>
+						照片：
+					</label>
+					<img width="200" height="120" src="${ctx}/${entity.photo}" />
+				</p>
+			<p>
+				<label>
 					政策内外：
 				</label>
 				<input name="policy" readonly="readonly" type="text" size="30"

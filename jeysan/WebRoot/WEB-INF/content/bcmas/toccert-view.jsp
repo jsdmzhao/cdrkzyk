@@ -95,12 +95,11 @@
 					<input readonly="readonly" type="text" size="30"
 						value="<fmt:formatDate value="${children.birthday}" pattern="yyyy-MM-dd"/>" />
 				</p>
-				<p>
+				<p style="width: 98%; height: 120px">
 					<label>
 						照片：
 					</label>
-					<input  readonly="readonly" type="text" size="30"
-						value="${children.photo}" />
+					<img width="200" height="120" src="${ctx}/${children.photo}}" />
 				</p>
 				<div style="float: left; width: 98%;">
 					<h2 class="contentTitle">

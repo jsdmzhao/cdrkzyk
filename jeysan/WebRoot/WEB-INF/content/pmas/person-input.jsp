@@ -1,8 +1,15 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<script>
+function ok(){
+	navTabAjaxDone4Update(
+			{navTabId:'nav_personmanage',message:'操作成功',action:'${id==null?1:2}',statusCode:'200'}
+	);
+}
+</script>
 <div class="page">
 	<div class="pageContent">
-		<form method="post" action="${ctx}/pmas/person!save.action" class="pageForm required-validate" onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
+		<form method="post" action="${ctx}/pmas/person!save.action" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this,ok);">
 			<input type="hidden" name="id" value="${id}"/>
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
@@ -98,9 +105,13 @@
 					<label>工作单位：</label>
 					<input name="personBasic.company"    type="text" size="30" value="${personBasic.company}" />
 					</p>
-					<p>
+					<p style="width:98%;">
 					<label>照片：</label>
-					<input name="personBasic.photo"    type="text" size="30" value="${personBasic.photo}" />
+					<input name="personBasic_photo"    type="file" size="30" />
+					</p>
+					<p style="width:98%;height:120px">
+					<label>照片预览：</label>
+					<img width="200" height="120" src="${ctx}/${personBasic.photo}"/>
 					</p>
 					<p>
 					<label>指纹：</label>

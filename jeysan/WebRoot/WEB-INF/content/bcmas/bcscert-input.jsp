@@ -90,11 +90,17 @@
 					</label>
 					<input name="agent" type="text" size="30" value="${agent}" />
 				</p>
-				<p>
+				<p style="width: 98%;">
 					<label>
 						照片：
 					</label>
-					<input name="photo" type="text" size="30" value="${photo}" />
+					<input name="photo_" type="file" size="30" />
+				</p>
+				<p style="width: 98%; height: 120px">
+					<label>
+						照片预览：
+					</label>
+					<img width="78" height="78" src="${ctx}/${photo}" />
 				</p>
 <c:if test="${certType == changed}">
 <div class="divider"></div>
