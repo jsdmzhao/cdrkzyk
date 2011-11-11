@@ -201,8 +201,8 @@
 						<td>
 							<div style="width: 25px;">
 								<a class="btnLook"
-									href="${ctx}/bcmas/bcscert!input.action?id=${a.id}&print=true"
-									target="dialog" title="查看计生服务证书" rel="bcsCert-update"></a>
+									href="${ctx}/bcmas/bcscert!view.action?id=${a.id}&print=true"
+									 external="true" target="navTab" title="查看计生服务证书" rel="bcsCert-view"></a>
 							</div>
 						</td>
 					</tr>
