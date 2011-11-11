@@ -189,4 +189,16 @@ public class Constants {
 	public static final class MARRY_STATUS{
 		public static final Integer NO = 176;//未婚
 	}
+	
+	public static final class KIND_SHIP{
+		public static final Integer OWNER = 710;//亲生
+		public static final Integer ADOPT = 711;//领养
+		public static final Integer ADOPTION = 712;//过继
+	}
+	//计划生育奖励优待情况记录
+	public static final class WOMAN_AWARD{
+		public static final Integer AWARD1 = 699;//独生子女优待
+		public static final Integer AWARD2 = 700;//农村养老保险
+		public static final Integer AWARD3 = 766;//其他优待奖励
+	}
 }

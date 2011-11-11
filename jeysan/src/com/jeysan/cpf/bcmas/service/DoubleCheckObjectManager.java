@@ -14,6 +14,7 @@ import com.jeysan.cpf.bcmas.dao.DoubleCheckObjectDao;
 import com.jeysan.cpf.bcmas.dao.FertileWomanExtendsDao;
 import com.jeysan.cpf.bcmas.entity.DoubleCheckObject;
 import com.jeysan.cpf.bcmas.vo.FertileWomanExtends;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 
@@ -77,6 +78,10 @@ public class DoubleCheckObjectManager {
 	@Transactional(readOnly = true)
 	public DoubleCheckObject getDoubleCheckObject(Long id){
 		return doubleCheckObjectDao.get(id);
+	}
+	@Transactional(readOnly = true)
+	public List<DoubleCheckObject> findDoubleCheckObjects(Long fertileWomanId){
+		return doubleCheckObjectDao.find("from DoubleCheckObject as dco where dco.fertileWoman.id = ? and dco.dcStatus = ? order by dco.dcDate ", fertileWomanId , Constants.DC_STATUS.CHECKED );
 	}
 	/**
 	 * 分页查找

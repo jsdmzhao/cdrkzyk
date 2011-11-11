@@ -74,6 +74,10 @@ public class WomanAwardManager {
 	public WomanAward getWomanAward(Long id){
 		return womanAwardDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public List<WomanAward> findWomanAwards(Long fertileWomanId){
+		return womanAwardDao.findBy("fertileWoman.id", fertileWomanId);
+	}
 	/**
 	 * 分页查找
 	 * @param page

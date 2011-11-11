@@ -1,6 +1,7 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
@@ -16,9 +17,20 @@ import com.jeysan.cpf.bcmas.entity.BcsCert;
 import com.jeysan.cpf.bcmas.entity.BcsCertChange;
 import com.jeysan.cpf.bcmas.entity.BcsCertCheck;
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
+import com.jeysan.cpf.bcmas.entity.WomanAward;
 import com.jeysan.cpf.bcmas.service.BcsCertChangeManager;
 import com.jeysan.cpf.bcmas.service.BcsCertCheckManager;
 import com.jeysan.cpf.bcmas.service.BcsCertManager;
+import com.jeysan.cpf.bcmas.service.Birth2ApplyManager;
+import com.jeysan.cpf.bcmas.service.DoubleCheckObjectManager;
+import com.jeysan.cpf.bcmas.service.FirstChildRegManager;
+import com.jeysan.cpf.bcmas.service.WomanAwardManager;
+import com.jeysan.cpf.bcmas.service.WomanContraceptManager;
+import com.jeysan.cpf.bcmas.service.WomanFivePeriodManager;
+import com.jeysan.cpf.bcmas.service.WomanSocialUpbringManager;
+import com.jeysan.cpf.pmas.entity.WomanChildren;
+import com.jeysan.cpf.pmas.service.SpouseManager;
+import com.jeysan.cpf.pmas.service.WomanChildrenManager;
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -47,8 +59,17 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	private String ids;
 	private BcsCert entity;
 	private BcsCertManager bcsCertManager;
+	private SpouseManager spouseManager;
 	private BcsCertChangeManager bcsCertChangeManager;
 	private BcsCertCheckManager bcsCertCheckManager;
+	private WomanChildrenManager womanChildrenManager;
+	private WomanFivePeriodManager womanFivePeriodManager;
+	private FirstChildRegManager firstChildRegManager;
+	private Birth2ApplyManager birth2ApplyManager;
+	private WomanContraceptManager womanContraceptManager;
+	private WomanAwardManager womanAwardManager;
+	private DoubleCheckObjectManager doubleCheckObjectManager;
+	private WomanSocialUpbringManager womanSocialUpbringManager;
 	private Page<BcsCert> page = new Page<BcsCert>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	private File photo_;
@@ -92,9 +113,38 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	public String view() throws Exception {
 		String print = Struts2Utils.getParameter("print");
 		if(StringUtils.isNotEmpty(print)&&Boolean.parseBoolean(print)){
-			//Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(entity.getPerson().getId()));
-			//Struts2Utils.getRequest().setAttribute("wcs", womanContraceptManager.searchWomanContracepts(entity.getPerson().getId()));
-			//Struts2Utils.getRequest().setAttribute("wuds", womanSocialUpbringManager.searchWomanSocialUpbrings(entity.getPerson().getId()));
+			Long personId = entity.getFertileWoman().getPerson().getId();
+			Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(personId));
+			List<WomanChildren> childs =  womanChildrenManager.findWomanChildsByPersonId(personId);
+			List childs1 = new ArrayList() , childs2 = new ArrayList();
+			for(WomanChildren sc : childs){
+				if(StringUtils.equals(sc.getKinship(), Constants.KIND_SHIP.OWNER+"")){
+					childs1.add(sc);
+				}else
+					childs2.add(sc);
+			}
+			Struts2Utils.getRequest().setAttribute("childs1", childs1);
+			Struts2Utils.getRequest().setAttribute("childs2", childs2);
+			Struts2Utils.getRequest().setAttribute("wfps", womanFivePeriodManager.findWomanFivePeriods(entity.getFertileWoman().getId()));
+			Struts2Utils.getRequest().setAttribute("fcr", firstChildRegManager.getFirstChildRegByFertileWomanId(entity.getFertileWoman().getId()));
+			Struts2Utils.getRequest().setAttribute("ba", birth2ApplyManager.getBirth2ApplyByWomanId(entity.getFertileWoman().getId()));
+			Struts2Utils.getRequest().setAttribute("wcs", womanContraceptManager.searchWomanContracepts(personId));
+			List<WomanAward> was = womanAwardManager.findWomanAwards(entity.getFertileWoman().getId());
+			WomanAward was1 = null , was2 = null, was3 = null;
+			for(WomanAward wa : was){
+				if(wa.getTypeh().intValue() == Constants.WOMAN_AWARD.AWARD1){
+					was1 = wa;
+				}else if(wa.getTypeh().intValue() == Constants.WOMAN_AWARD.AWARD1){
+					was2 = wa;
+				}else
+					was3 = wa;
+			}
+			Struts2Utils.getRequest().setAttribute("was1", was1);
+			Struts2Utils.getRequest().setAttribute("was2", was2);
+			Struts2Utils.getRequest().setAttribute("was3", was3);
+			Struts2Utils.getRequest().setAttribute("wsu", womanSocialUpbringManager.getWomanSocialUpbringByFertileWomanId(entity.getFertileWoman().getId()));
+			Struts2Utils.getRequest().setAttribute("dcos", doubleCheckObjectManager.findDoubleCheckObjects(entity.getFertileWoman().getId()));
+			Struts2Utils.getRequest().setAttribute("bccs",bcsCertManager.findBcsCertChecks(id)); 
 			return "view4print";
 		}
 		return VIEW;
@@ -236,6 +286,42 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	@Autowired
 	public void setBcsCertCheckManager(BcsCertCheckManager bcsCertCheckManager) {
 		this.bcsCertCheckManager = bcsCertCheckManager;
+	}
+	@Autowired
+	public void setSpouseManager(SpouseManager spouseManager) {
+		this.spouseManager = spouseManager;
+	}
+	@Autowired
+	public void setWomanChildrenManager(WomanChildrenManager womanChildrenManager) {
+		this.womanChildrenManager = womanChildrenManager;
+	}
+	@Autowired
+	public void setWomanFivePeriodManager(WomanFivePeriodManager womanFivePeriodManager) {
+		this.womanFivePeriodManager = womanFivePeriodManager;
+	}
+	@Autowired
+	public void setFirstChildRegManager(FirstChildRegManager firstChildRegManager) {
+		this.firstChildRegManager = firstChildRegManager;
+	}
+	@Autowired
+	public void setBirth2ApplyManager(Birth2ApplyManager birth2ApplyManager) {
+		this.birth2ApplyManager = birth2ApplyManager;
+	}
+	@Autowired
+	public void setWomanContraceptManager(WomanContraceptManager womanContraceptManager) {
+		this.womanContraceptManager = womanContraceptManager;
+	}
+	@Autowired
+	public void setWomanAwardManager(WomanAwardManager womanAwardManager) {
+		this.womanAwardManager = womanAwardManager;
+	}
+	@Autowired
+	public void setWomanSocialUpbringManager(WomanSocialUpbringManager womanSocialUpbringManager) {
+		this.womanSocialUpbringManager = womanSocialUpbringManager;
+	}
+	@Autowired
+	public void setDoubleCheckObjectManager(DoubleCheckObjectManager doubleCheckObjectManager) {
+		this.doubleCheckObjectManager = doubleCheckObjectManager;
 	}
 	public Page<BcsCert> getPage() {
 		return page;

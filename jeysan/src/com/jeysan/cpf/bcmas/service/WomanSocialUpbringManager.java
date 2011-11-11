@@ -75,6 +75,10 @@ public class WomanSocialUpbringManager {
 	public WomanSocialUpbring getWomanSocialUpbring(Long id){
 		return womanSocialUpbringDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public WomanSocialUpbring getWomanSocialUpbringByFertileWomanId(Long fertilwWomanId){
+		return womanSocialUpbringDao.findUniqueBy("fertileWoman.id", fertilwWomanId);
+	}
 	/**
 	 * 分页查找
 	 * @param page

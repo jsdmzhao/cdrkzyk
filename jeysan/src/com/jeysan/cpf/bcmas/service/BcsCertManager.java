@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.bcmas.dao.BcsCertDao;
 import com.jeysan.cpf.bcmas.entity.BcsCert;
+import com.jeysan.cpf.bcmas.entity.BcsCertCheck;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 
@@ -78,6 +79,10 @@ public class BcsCertManager {
 	@Transactional(readOnly = true)
 	public BcsCert getBcsCert(Long id){
 		return bcsCertDao.get(id);
+	}
+	@Transactional(readOnly = true)
+	public List<BcsCertCheck> findBcsCertChecks(Long id){
+		return bcsCertDao.find("from BcsCertCheck as bcc where bcc.bcs.id = ? order by bcc.dateh ", id);
 	}
 	/**
 	 * 分页查找

@@ -85,6 +85,10 @@ public class FirstChildRegManager {
 	public FirstChildReg getFirstChildReg(Long id){
 		return firstChildRegDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public FirstChildReg getFirstChildRegByFertileWomanId(Long fertileWomanId){
+		return firstChildRegDao.findUniqueBy("fertileWoman.id", fertileWomanId);
+	}
 	/**
 	 * 分页查找
 	 * @param page
