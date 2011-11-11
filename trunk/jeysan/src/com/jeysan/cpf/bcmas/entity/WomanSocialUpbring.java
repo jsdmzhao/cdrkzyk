@@ -10,12 +10,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import com.google.common.collect.Lists;
 import com.jeysan.modules.orm.hibernate.IdExtEntity;
+import com.jeysan.modules.utils.math.MoneyUtil;
 
 /**
  * @author 黄静
@@ -135,6 +137,13 @@ public class WomanSocialUpbring extends IdExtEntity {
 	@Column(name = "TOTAL_MONEY")
 	public Double getTotalMoney() {
 		return totalMoney;
+	}
+	
+	@Transient
+	public String getTotalMoneyStr() {
+		if(totalMoney != null)
+			return MoneyUtil.numToRMBStr(this.totalMoney);
+		return "";
 	}
 
 	public void setTotalMoney(Double totalMoney) {

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.bcmas.dao.WomanFivePeriodDao;
 import com.jeysan.cpf.bcmas.entity.WomanFivePeriod;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 
@@ -73,6 +74,10 @@ public class WomanFivePeriodManager {
 	@Transactional(readOnly = true)
 	public WomanFivePeriod getWomanFivePeriod(Long id){
 		return womanFivePeriodDao.get(id);
+	}
+	@Transactional(readOnly = true)
+	public List<WomanFivePeriod> findWomanFivePeriods(Long fertileWomanId){
+		return womanFivePeriodDao.find("from WomanFivePeriod as wfp where wfp.fertileWoman.id = ? and wfp.eduType != ? order by wfp.eduDate ", fertileWomanId , "229");
 	}
 	/**
 	 * 分页查找
