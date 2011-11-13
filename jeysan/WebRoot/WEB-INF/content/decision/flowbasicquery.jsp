@@ -59,11 +59,23 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>信息通报与反馈情况查询</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery8view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=1" target="navTab" rel="flowbasicquery_sub"><span>证件情况查询之流入人员持证验证情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>证件情况查询</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery8view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=2" target="navTab" rel="flowbasicquery_sub"><span>证件情况查询之流入人员应办证情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery8view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>&type=3" target="navTab" rel="flowbasicquery_sub"><span>证件情况查询之办理国证临时证情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery9view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>证件情况查询之流出人员办证情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery10view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>证件情况查询之行政处罚情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
