@@ -103,6 +103,9 @@
 					<th width="50" align="center">
 						育妇详情
 					</th>
+					<th width="40" align="center">
+						查看卡片
+					</th>
 					<th style="display:none" hcode="womanBasic.marryStatus" htype="dict">婚姻状态</th>
 					<th style="display:none" hcode="womanBasic.spouseMarryStatus" htype="dict">夫婚姻状态</th>
 					<th style="display:none" hcode="womanBasic.firstMarryDate" htype="date">初婚日期</th>
@@ -152,6 +155,13 @@
 								<a class="btnInfo"
 									href="${ctx}/bcmas/fertilewoman!${param['type']}.action?id=${a.id}&personId=${a.person.id}"
 									target="navTab" title="育龄妇女详细信息" rel="fertileWomanFix"></a>
+							</div>
+						</td>
+						<td>
+							<div style="width: 25px;">
+								<a class="btnLook"
+									href="${ctx}/bcmas/fertilewoman!${param['type']}.action?id=${a.id}&personId=${a.person.id}&print=true"
+									target="navTab" external="true" title="查看妇女信息卡" rel="marryCert-view"></a>
 							</div>
 						</td>
 					</tr>
