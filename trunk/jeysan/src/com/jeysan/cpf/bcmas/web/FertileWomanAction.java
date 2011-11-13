@@ -1,18 +1,38 @@
 ﻿package com.jeysan.cpf.bcmas.web;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.h2.util.StringUtils;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
+import com.jeysan.cpf.bcmas.entity.WomanFivePeriod;
+import com.jeysan.cpf.bcmas.service.BcsCertChangeManager;
+import com.jeysan.cpf.bcmas.service.BcsCertCheckManager;
+import com.jeysan.cpf.bcmas.service.BcsCertManager;
+import com.jeysan.cpf.bcmas.service.Birth2ApplyManager;
+import com.jeysan.cpf.bcmas.service.DoubleCheckObjectManager;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
+import com.jeysan.cpf.bcmas.service.FirstChildRegManager;
+import com.jeysan.cpf.bcmas.service.TocCertManager;
+import com.jeysan.cpf.bcmas.service.WomanAwardManager;
 import com.jeysan.cpf.bcmas.service.WomanBasicManager;
+import com.jeysan.cpf.bcmas.service.WomanBearAssuranceManager;
+import com.jeysan.cpf.bcmas.service.WomanContraceptManager;
+import com.jeysan.cpf.bcmas.service.WomanFivePeriodManager;
+import com.jeysan.cpf.bcmas.service.WomanMatenalManager;
+import com.jeysan.cpf.bcmas.service.WomanPunishManager;
+import com.jeysan.cpf.bcmas.service.WomanSocialUpbringManager;
+import com.jeysan.cpf.pmas.service.PersonInManager;
+import com.jeysan.cpf.pmas.service.SpouseManager;
+import com.jeysan.cpf.pmas.service.WomanChildrenManager;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -26,7 +46,9 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/bcmas")
 @Results( { @Result(name = "detail", location = "fertilewomandetail.jsp", type = "dispatcher"),
-	@Result(name = "fertileWoman4lookup", location = "fertilewoman4lookup.jsp", type = "dispatcher")})
+	@Result(name = "fertileWoman4lookup", location = "fertilewoman4lookup.jsp", type = "dispatcher"),
+	@Result(name = "fertileWoman4fixPrint", location = "fertilewoman4fixprint.jsp", type = "dispatcher"),
+	@Result(name = "fertileWoman4flowPrint", location = "fertilewoman4flowprint.jsp", type = "dispatcher")})
 public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 	/**
 	 * 
@@ -37,6 +59,25 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 	private FertileWoman entity;
 	private FertileWomanManager fertileWomanManager;
 	private WomanBasicManager womanBasicManager;
+	
+	private BcsCertManager bcsCertManager;
+	private SpouseManager spouseManager;
+	private BcsCertChangeManager bcsCertChangeManager;
+	private BcsCertCheckManager bcsCertCheckManager;
+	private WomanChildrenManager womanChildrenManager;
+	private WomanFivePeriodManager womanFivePeriodManager;
+	private FirstChildRegManager firstChildRegManager;
+	private Birth2ApplyManager birth2ApplyManager;
+	private WomanContraceptManager womanContraceptManager;
+	private WomanAwardManager womanAwardManager;
+	private DoubleCheckObjectManager doubleCheckObjectManager;
+	private WomanSocialUpbringManager womanSocialUpbringManager;
+	private TocCertManager tocCertManager;
+	private WomanBearAssuranceManager womanBearAssuranceManager;
+	private WomanMatenalManager womanMatenalManager;
+	private PersonInManager personInManager;
+	private WomanPunishManager womanPunishManager;
+	
 	private Page<FertileWoman> page = new Page<FertileWoman>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -98,9 +139,39 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 		return "fertileWoman4lookup";
 	}
 	public String fix() throws Exception {
+		String print = Struts2Utils.getParameter("print");
+		if(StringUtils.isNotEmpty(print)&&Boolean.parseBoolean(print)){
+			prepareModel();
+			Long personId = Long.parseLong(Struts2Utils.getParameter("personId"));
+			Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(personId));
+			List<WomanFivePeriod> wfps = womanFivePeriodManager.findWomanFivePeriods(id);
+			Map<String,WomanFivePeriod> wfp_map = new HashMap();
+			for(WomanFivePeriod wfp : wfps)
+				wfp_map.put("wfp"+wfp.getEduType(), wfp);
+			Struts2Utils.getRequest().setAttribute("wfp_map",wfp_map);
+			Struts2Utils.getRequest().setAttribute("wbas",womanBearAssuranceManager.findWomanBearAssurances(id));
+			Struts2Utils.getRequest().setAttribute("wsu", womanSocialUpbringManager.getWomanSocialUpbringByFertileWomanId(id));
+			Struts2Utils.getRequest().setAttribute("wms", womanMatenalManager.findWomanMatenals(id));
+			Struts2Utils.getRequest().setAttribute("wcs", womanContraceptManager.searchWomanContracepts(personId));
+			Struts2Utils.getRequest().setAttribute("childs", womanChildrenManager.findWomanChildsByPersonId(personId));
+			return "fertileWoman4fixPrint";
+		}
 		return "detail";
 	}
 	public String flow() throws Exception {
+		String print = Struts2Utils.getParameter("print");
+		if(StringUtils.isNotEmpty(print)&&Boolean.parseBoolean(print)){
+			prepareModel();
+			Long personId = Long.parseLong(Struts2Utils.getParameter("personId"));
+			Struts2Utils.getRequest().setAttribute("spouse", spouseManager.getSpouseByPersonId(personId));
+			Struts2Utils.getRequest().setAttribute("pi", personInManager.getPersonInByPersonId(personId));
+			Struts2Utils.getRequest().setAttribute("bc", this.bcsCertManager.getBcsCertByFertileWomanId(id));
+			Struts2Utils.getRequest().setAttribute("wsu", womanSocialUpbringManager.getWomanSocialUpbringByFertileWomanId(id));
+			Struts2Utils.getRequest().setAttribute("wms", womanMatenalManager.findWomanMatenals(id));
+			Struts2Utils.getRequest().setAttribute("childs", womanChildrenManager.findWomanChildsByPersonId(personId));
+			Struts2Utils.getRequest().setAttribute("wps", womanPunishManager.findWomanPunishs(id));
+			return "fertileWoman4flowPrint";
+		}
 		return "detail";
 	}
 	@Override
@@ -151,6 +222,74 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 	@Autowired
 	public void setWomanBasicManager(WomanBasicManager womanBasicManager) {
 		this.womanBasicManager = womanBasicManager;
+	}
+	@Autowired
+	public void setBcsCertManager(BcsCertManager bcsCertManager) {
+		this.bcsCertManager = bcsCertManager;
+	}
+	@Autowired
+	public void setBcsCertChangeManager(BcsCertChangeManager bcsCertChangeManager) {
+		this.bcsCertChangeManager = bcsCertChangeManager;
+	}
+	@Autowired
+	public void setBcsCertCheckManager(BcsCertCheckManager bcsCertCheckManager) {
+		this.bcsCertCheckManager = bcsCertCheckManager;
+	}
+	@Autowired
+	public void setSpouseManager(SpouseManager spouseManager) {
+		this.spouseManager = spouseManager;
+	}
+	@Autowired
+	public void setWomanChildrenManager(WomanChildrenManager womanChildrenManager) {
+		this.womanChildrenManager = womanChildrenManager;
+	}
+	@Autowired
+	public void setWomanFivePeriodManager(WomanFivePeriodManager womanFivePeriodManager) {
+		this.womanFivePeriodManager = womanFivePeriodManager;
+	}
+	@Autowired
+	public void setFirstChildRegManager(FirstChildRegManager firstChildRegManager) {
+		this.firstChildRegManager = firstChildRegManager;
+	}
+	@Autowired
+	public void setBirth2ApplyManager(Birth2ApplyManager birth2ApplyManager) {
+		this.birth2ApplyManager = birth2ApplyManager;
+	}
+	@Autowired
+	public void setWomanContraceptManager(WomanContraceptManager womanContraceptManager) {
+		this.womanContraceptManager = womanContraceptManager;
+	}
+	@Autowired
+	public void setWomanAwardManager(WomanAwardManager womanAwardManager) {
+		this.womanAwardManager = womanAwardManager;
+	}
+	@Autowired
+	public void setWomanSocialUpbringManager(WomanSocialUpbringManager womanSocialUpbringManager) {
+		this.womanSocialUpbringManager = womanSocialUpbringManager;
+	}
+	@Autowired
+	public void setDoubleCheckObjectManager(DoubleCheckObjectManager doubleCheckObjectManager) {
+		this.doubleCheckObjectManager = doubleCheckObjectManager;
+	}
+	@Autowired
+	public void setTocCertManager(TocCertManager tocCertManager) {
+		this.tocCertManager = tocCertManager;
+	}
+	@Autowired
+	public void setWomanBearAssuranceManager(WomanBearAssuranceManager womanBearAssuranceManager) {
+		this.womanBearAssuranceManager = womanBearAssuranceManager;
+	}
+	@Autowired
+	public void setWomanMatenalManager(WomanMatenalManager womanMatenalManager) {
+		this.womanMatenalManager = womanMatenalManager;
+	}
+	@Autowired
+	public void setPersonInManager(PersonInManager personInManager) {
+		this.personInManager = personInManager;
+	}
+	@Autowired
+	public void setWomanPunishManager(WomanPunishManager womanPunishManager) {
+		this.womanPunishManager = womanPunishManager;
 	}
 	public Page<FertileWoman> getPage() {
 		return page;

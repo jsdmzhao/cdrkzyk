@@ -74,6 +74,10 @@ public class WomanPunishManager {
 	public WomanPunish getWomanPunish(Long id){
 		return womanPunishDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public List<WomanPunish> findWomanPunishs(Long fertileWomanId){
+		return womanPunishDao.find("from WomanPunish as wp where wp.fertileWoman.id = ? order by wp.punishDate",fertileWomanId);
+	}
 	/**
 	 * 分页查找
 	 * @param page

@@ -74,6 +74,10 @@ public class WomanBearAssuranceManager {
 	public WomanBearAssurance getWomanBearAssurance(Long id){
 		return womanBearAssuranceDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public List<WomanBearAssurance> findWomanBearAssurances(Long fertileWomanId){
+		return womanBearAssuranceDao.find("from WomanBearAssurance as wba where wba.fertileWoman.id = ? order by wba.dateh", fertileWomanId);
+	}
 	/**
 	 * 分页查找
 	 * @param page

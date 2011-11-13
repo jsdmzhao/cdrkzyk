@@ -74,6 +74,13 @@ public class PersonInManager {
 	public PersonIn getPersonIn(Long id){
 		return personInDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public PersonIn getPersonInByPersonId(Long personId){
+		List<PersonIn> pis = this.personInDao.find("from PersonIn as pi where pi.person.id = ? order by pi.inDate desc ", personId);
+		if(pis != null && pis.size() > 0)
+			return pis.get(0);
+		return null;
+	}
 	/**
 	 * 分页查找
 	 * @param page

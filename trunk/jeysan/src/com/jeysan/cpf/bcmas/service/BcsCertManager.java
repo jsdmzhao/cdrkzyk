@@ -84,6 +84,13 @@ public class BcsCertManager {
 	public List<BcsCertCheck> findBcsCertChecks(Long id){
 		return bcsCertDao.find("from BcsCertCheck as bcc where bcc.bcs.id = ? order by bcc.dateh ", id);
 	}
+	@Transactional(readOnly = true)
+	public BcsCert getBcsCertByFertileWomanId(Long fertileWomanId){
+		List<BcsCert> bcs = bcsCertDao.find("from BcsCert as bc where bc.fertileWoman.id = ? order by bc.issDate desc ", fertileWomanId);
+		if(bcs != null && bcs.size() > 0)
+			return bcs.get(0);
+		return null;
+	}
 	/**
 	 * 分页查找
 	 * @param page

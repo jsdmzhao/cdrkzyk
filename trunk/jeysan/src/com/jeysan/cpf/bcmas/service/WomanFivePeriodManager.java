@@ -77,7 +77,7 @@ public class WomanFivePeriodManager {
 	}
 	@Transactional(readOnly = true)
 	public List<WomanFivePeriod> findWomanFivePeriods(Long fertileWomanId){
-		return womanFivePeriodDao.find("from WomanFivePeriod as wfp where wfp.fertileWoman.id = ? and wfp.eduType != ? order by wfp.eduDate ", fertileWomanId , "229");
+		return womanFivePeriodDao.find("from WomanFivePeriod as wfp where wfp.fertileWoman.id = ? and wfp.eduType != ? order by wfp.eduDate ", fertileWomanId , Constants.FIVE_PERIOD.PERIOD_5+"");
 	}
 	/**
 	 * 分页查找
