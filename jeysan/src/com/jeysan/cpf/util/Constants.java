@@ -201,4 +201,12 @@ public class Constants {
 		public static final Integer AWARD2 = 700;//农村养老保险
 		public static final Integer AWARD3 = 766;//其他优待奖励
 	}
+
+	public static final class FIVE_PERIOD{
+		public static final Integer PERIOD_1 = 225;//青春期
+		public static final Integer PERIOD_2 = 226;//新婚期
+		public static final Integer PERIOD_3 = 227;//孕产期
+		public static final Integer PERIOD_4 = 228;//育儿期
+		public static final Integer PERIOD_5 = 229;//更年期
+	}
 }

@@ -83,7 +83,7 @@ public class WomanChildrenManager {
 	}
 	@Transactional(readOnly = true)
 	public List<WomanChildren> findWomanChildsByPersonId(Long personId){
-		return womanChildrenDao.findBy("person.id", personId);
+		return womanChildrenDao.find("from WomanChildren as wc where wc.person.id = ? order by wc.childIndex", personId);
 	}
 	/**
 	 * 分页查找

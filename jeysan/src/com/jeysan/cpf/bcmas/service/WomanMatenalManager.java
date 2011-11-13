@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.bcmas.dao.WomanMatenalDao;
+import com.jeysan.cpf.bcmas.entity.WomanFivePeriod;
 import com.jeysan.cpf.bcmas.entity.WomanMatenal;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
 
@@ -73,6 +75,10 @@ public class WomanMatenalManager {
 	@Transactional(readOnly = true)
 	public WomanMatenal getWomanMatenal(Long id){
 		return womanMatenalDao.get(id);
+	}
+	@Transactional(readOnly = true)
+	public List<WomanMatenal> findWomanMatenals(Long fertileWomanId){
+		return womanMatenalDao.find("from WomanMatenal as wm where wm.fertileWoman.id = ? order by wm.conceptDate ", fertileWomanId );
 	}
 	/**
 	 * 分页查找
