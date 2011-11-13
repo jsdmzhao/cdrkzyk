@@ -12,7 +12,7 @@
 	<input type="hidden" name="filter_GED_firstMarryDate" value="${param['filter_GED_firstMarryDate']}" />
 	<input type="hidden" name="filter_LED_firstMarryDate" value="${param['filter_LED_firstMarryDate']}" />
 	<input type="hidden" name="filter_EQI_haveStatus2" value="${param['filter_EQI_haveStatus2']}" />
-	<input type="hidden" name="filter_EQI_childNum" value="${param['filter_EQI_childNum']}" />
+	<input type="hidden" name="filter_EQI_childnum" value="${param['filter_EQI_childnum']}" />
 	<input type="hidden" name="filter_GED_inDate" value="${param['filter_GED_inDate']}" />
 	<input type="hidden" name="filter_LED_inDate" value="${param['filter_LED_inDate']}" />
 </tags:js.pager>
@@ -58,7 +58,7 @@
 						</td>
 						<td>
 							子女数：
-<input type="text" name="filter_EQI_childNum" class="text digits" value="${param.filter_EQI_childNum}"/>
+<input type="text" name="filter_EQI_childnum" class="text digits" value="${param.filter_EQI_childnum}"/>
 						</td>
 						<td>
 							流入日期：
