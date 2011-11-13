@@ -14,15 +14,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.bcmas.entity.FertileWoman;
 import com.jeysan.cpf.bcmas.entity.WomanFivePeriod;
-import com.jeysan.cpf.bcmas.service.BcsCertChangeManager;
-import com.jeysan.cpf.bcmas.service.BcsCertCheckManager;
 import com.jeysan.cpf.bcmas.service.BcsCertManager;
-import com.jeysan.cpf.bcmas.service.Birth2ApplyManager;
-import com.jeysan.cpf.bcmas.service.DoubleCheckObjectManager;
 import com.jeysan.cpf.bcmas.service.FertileWomanManager;
-import com.jeysan.cpf.bcmas.service.FirstChildRegManager;
-import com.jeysan.cpf.bcmas.service.TocCertManager;
-import com.jeysan.cpf.bcmas.service.WomanAwardManager;
 import com.jeysan.cpf.bcmas.service.WomanBasicManager;
 import com.jeysan.cpf.bcmas.service.WomanBearAssuranceManager;
 import com.jeysan.cpf.bcmas.service.WomanContraceptManager;
@@ -62,17 +55,10 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 	
 	private BcsCertManager bcsCertManager;
 	private SpouseManager spouseManager;
-	private BcsCertChangeManager bcsCertChangeManager;
-	private BcsCertCheckManager bcsCertCheckManager;
 	private WomanChildrenManager womanChildrenManager;
 	private WomanFivePeriodManager womanFivePeriodManager;
-	private FirstChildRegManager firstChildRegManager;
-	private Birth2ApplyManager birth2ApplyManager;
 	private WomanContraceptManager womanContraceptManager;
-	private WomanAwardManager womanAwardManager;
-	private DoubleCheckObjectManager doubleCheckObjectManager;
 	private WomanSocialUpbringManager womanSocialUpbringManager;
-	private TocCertManager tocCertManager;
 	private WomanBearAssuranceManager womanBearAssuranceManager;
 	private WomanMatenalManager womanMatenalManager;
 	private PersonInManager personInManager;
@@ -228,14 +214,6 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 		this.bcsCertManager = bcsCertManager;
 	}
 	@Autowired
-	public void setBcsCertChangeManager(BcsCertChangeManager bcsCertChangeManager) {
-		this.bcsCertChangeManager = bcsCertChangeManager;
-	}
-	@Autowired
-	public void setBcsCertCheckManager(BcsCertCheckManager bcsCertCheckManager) {
-		this.bcsCertCheckManager = bcsCertCheckManager;
-	}
-	@Autowired
 	public void setSpouseManager(SpouseManager spouseManager) {
 		this.spouseManager = spouseManager;
 	}
@@ -248,32 +226,12 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 		this.womanFivePeriodManager = womanFivePeriodManager;
 	}
 	@Autowired
-	public void setFirstChildRegManager(FirstChildRegManager firstChildRegManager) {
-		this.firstChildRegManager = firstChildRegManager;
-	}
-	@Autowired
-	public void setBirth2ApplyManager(Birth2ApplyManager birth2ApplyManager) {
-		this.birth2ApplyManager = birth2ApplyManager;
-	}
-	@Autowired
 	public void setWomanContraceptManager(WomanContraceptManager womanContraceptManager) {
 		this.womanContraceptManager = womanContraceptManager;
 	}
 	@Autowired
-	public void setWomanAwardManager(WomanAwardManager womanAwardManager) {
-		this.womanAwardManager = womanAwardManager;
-	}
-	@Autowired
 	public void setWomanSocialUpbringManager(WomanSocialUpbringManager womanSocialUpbringManager) {
 		this.womanSocialUpbringManager = womanSocialUpbringManager;
-	}
-	@Autowired
-	public void setDoubleCheckObjectManager(DoubleCheckObjectManager doubleCheckObjectManager) {
-		this.doubleCheckObjectManager = doubleCheckObjectManager;
-	}
-	@Autowired
-	public void setTocCertManager(TocCertManager tocCertManager) {
-		this.tocCertManager = tocCertManager;
 	}
 	@Autowired
 	public void setWomanBearAssuranceManager(WomanBearAssuranceManager womanBearAssuranceManager) {
