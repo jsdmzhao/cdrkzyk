@@ -79,15 +79,31 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>居住地情况查询</span></a>
+						<a class="button" href="${ctx}/pmas/house.action?type=1" target="navTab" rel="flowbasicquery_sub"><span>居住地情况查询之居住地基本信息</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>地区分布情况查询</span></a>
+						<a class="button" href="${ctx}/decision/flowbasicquery11view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>居住地情况查询之居住人员情况</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>注销情况查询</span></a>
+						<a class="button" href="${ctx}/pmas/house.action?type=2" target="navTab" rel="flowbasicquery_sub"><span>居住地情况查询之业主情况</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery12view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>地区分布情况查询之来源情况查询</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery13view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>地区分布情况查询之来源地分布查询</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery14view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>注销情况查询之已注销流入人员查询</span></a>
+					</p>
+					<div class="divider"></div>
+					<p>
+						<a class="button" href="${ctx}/decision/flowbasicquery15view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub"><span>注销情况查询之已注销流出人员查询</span></a>
 					</p>
 				</div>
 			</div>
