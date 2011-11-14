@@ -3,6 +3,7 @@
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -25,7 +26,9 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/pmas")
-@Results( { @Result(name = "house4lookup", location = "house4lookup.jsp", type = "dispatcher")})
+@Results( { @Result(name = "house4lookup", location = "house4lookup.jsp", type = "dispatcher"),
+	@Result(name = "house4stat1", location = "house4stat1.jsp", type = "dispatcher"),
+	@Result(name = "house4stat2", location = "house4stat2.jsp", type = "dispatcher")})
 public class HouseAction extends PrintActionSupport<House> {
 	/**
 	 * 
@@ -96,6 +99,10 @@ public class HouseAction extends PrintActionSupport<House> {
 			page.setOrder(Page.ASC);
 		}
 		page = houseManager.searchHouse(page, filters);
+		String type = Struts2Utils.getParameter("type");
+		if(StringUtils.isNotEmpty(type)){
+			return "house4stat"+type;
+		}
 		return SUCCESS;
 	}
 	@Override
