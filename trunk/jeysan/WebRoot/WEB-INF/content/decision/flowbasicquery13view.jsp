@@ -1,23 +1,47 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/common/taglibs.jsp" %>
+﻿<%@ page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/common/taglibs.jsp"%>
 <tags:js.pager action="${ctx}/decision/flowbasicquery13view.action">
-	<input type="hidden" name="filter_EQI_id" value="${param['filter_EQI_id']}" />
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
+	<input type="hidden" name="areaLevel"
+		value="${param['areaLevel']}" />
+	<input type="hidden" name="filter_GED_dateh"
+		value="${param['filter_GED_dateh']}" />
+	<input type="hidden" name="filter_LED_dateh"
+		value="${param['filter_LED_dateh']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
-		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/flowbasicquery13view.action" method="post">
-		<div class="searchBar">
-			<table class="searchContent">
-				<tr>
-					<td>
-						主键：<input type="text" name="filter_EQI_id" value="${param['filter_EQI_id']}"/>
-					</td>
-					<td>
-						建档日期：<input type="text" class="date" readonly="true" />
-					</td>
-				</tr>
-			</table>
-			<div class="subBar">
+		<form onsubmit="return navTabSearch(this);"
+			action="${ctx}/decision/flowbasicquery13view.action" method="post">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
+			<div class="searchBar">
+				<table class="searchContent">
+					<tr>
+						<td>
+							查询区域级别：
+							<select id="areaLevel" name="areaLevel">
+<option value="">全部</option>
+<c:forEach items="${dict1.dictSubList}" var="a" varStatus="b">
+<option value="${a.id}" <c:if test="${param.areaLevel==a.id}">selected="selected"</c:if>>${a.subName}</option>
+</c:forEach>
+<c:forEach items="${dict2.dictSubList}" var="a" varStatus="b">
+<option value="${a.id}" <c:if test="${param.areaLevel==a.id}">selected="selected"</c:if>>${a.subName}</option>
+</c:forEach>
+							</select>
+						</td>
+						<td colspan="2">
+							流入/流出日期：
+							<input type="text" name="filter_GED_dateh" class="date"
+								readonly="true" value="${param.filter_GED_dateh}" />
+							~
+							<input type="text" name="filter_LED_dateh" class="date"
+								readonly="true" value="${param.filter_LED_dateh}" />
+						</td>
+					</tr>
+				</table>
+				<div class="subBar">
 					<ul>
 						<li>
 							<div class="buttonActive">
@@ -39,7 +63,7 @@
 						</li>
 					</ul>
 				</div>
-		</div>
+			</div>
 		</form>
 	</div>
 	<div class="pageContent">
@@ -49,37 +73,60 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('fhp_flowbasicquery13_view')"><span>打印或者导出</span>
+					<a class="icon"
+						href="javascript:JS_print2('来源地分布查询')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>
 		</div>
-		<table class="table" width="200%" layouth="138">
+		<table class="table" width="100%" layouth="138">
 			<thead>
 				<tr>
-					<th width="30" align="center">序号</th>
-															<th width="80" orderField="area" class="orderFlag">所属区域</th>
-																				<th width="80" orderField="domicileType" class="orderFlag">户口类别</th>
-																				<th width="80" orderField="personnum" class="orderFlag">人口数</th>
-																				<th width="80" orderField="arealevel" class="orderFlag">流入或流出类别</th>
-																				<th width="80" orderField="dateh" class="orderFlag">日期</th>
-																				<th width="80" orderField="inOutType" class="orderFlag">流入或流出</th>
-														</tr>
+					<th width="30" align="center">
+						序号
+					</th>
+					<th width="80" hcode="area" >
+						单位
+					</th>
+					<th width="80" hcode="s_1" htype="digits">
+						流入人数
+					</th>
+					<th width="80" hcode="s_2" htype="digits">
+						流出人数
+					</th>
+					<th width="80" hcode="s_3" htype="per">
+						流入比例
+					</th>
+					<th width="80" hcode="s_4" htype="per">
+						流出比例
+					</th>
+				</tr>
 			</thead>
 			<tbody>
-								<c:forEach var="a" items="${page.result}" varStatus="b">
-				<tr>
-					<td height="25">${b.index+1}</td>
-																				<td>${a.area}</td>
-																														<td>${a.domicileType}</td>
-																														<td>${a.personnum}</td>
-																														<td>${a.arealevel}</td>
-																														<td><fmt:formatDate value="${a.dateh}" pattern="yyyy-MM-dd"/></td>
-																														<td>${a.inOutType}</td>
-																			</tr>
+				<c:forEach var="a" items="${page.result}" varStatus="b">
+					<tr>
+						<td height="25">
+							${b.index+1}
+						</td>
+						<td>
+							${a.area}
+						</td>
+						<td>
+							${a.s_1}
+						</td>
+						<td>
+							${a.s_2}
+						</td>
+						<td>
+							<fmt:formatNumber value="${a.s_3}" type="percent" pattern="#0.00%"/>
+						</td>
+						<td>
+							<fmt:formatNumber value="${a.s_4}" type="percent" pattern="#0.00%"/>
+						</td>
+					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<%@ include file="/common/page-foot.jsp"  %>
+		<%@ include file="/common/page-foot.jsp"%>
 	</div>
 </div>
