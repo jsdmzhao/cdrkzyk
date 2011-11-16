@@ -1,4 +1,5 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
+<%@page import="com.jeysan.cpf.util.Constants"%>
 <%@ include file="/common/taglibs.jsp" %>
 <div class="page">
 	<div class="pageContent">
@@ -6,11 +7,7 @@
 			<div class="pageFormContent" layoutH="56">
 				<div style="float:left; display:block; margin:10px;padding:10px; overflow:auto; width:90%; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>流动人口监控管理</span></a>
-					</p>
-					<div class="divider"></div>
-					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>待双查对象一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor.action?domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowmonitor_sub"><span>待双查对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
