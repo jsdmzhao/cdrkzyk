@@ -1,22 +1,17 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<tags:js.pager action="${ctx}/monitor/hpmonitor!findBirth2Applys.action">
+<tags:js.pager action="${ctx}/monitor/hpmonitor!findBcsCerts.action">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
-	<input type="hidden" name="typeh" value="${param['typeh']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
-			action="${ctx}/monitor/hpmonitor!findBirth2Applys.action" method="post">
+			action="${ctx}/monitor/hpmonitor!findBcsCerts.action" method="post">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
-						<td>
-							申请类型：
-							<tags:js.dict.selector noRender="true" name="typeh" value="${param['typeh']}" dictCode="JS1011"/>
-						</td>
 						<td>
 							所属区域：
 							<tags:js.area.selector name="filter_EQS_area" readonly="true"
@@ -56,7 +51,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('待审批计划生育一览表')"><span>打印或者导出</span>
+					<a class="icon" href="javascript:JS_print2('应持证无持证对象一览表')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>
@@ -68,25 +63,31 @@
 						序号
 					</th>
 					<th width="80" orderField="PERSON_CODE" class="orderFlag">
-						妇女编码
+						流动人口编号
 					</th>
 					<th width="80" orderField="NAMEH" class="orderFlag">
-						妇女姓名
+						姓名
 					</th>
-					<th width="80" orderField="NAMEH2" class="orderFlag">
-						丈夫姓名
+					<th width="80" orderField="SEX" class="orderFlag" htype="dict">
+						性别
 					</th>
-					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
-						现家庭子女数
+					<th width="80" orderField="BIRTHDAY" class="orderFlag" htype="date">
+						出生年月
 					</th>
-					<th width="80" orderField="DATEH" class="orderFlag" htype="date">
-						申请时间
+					<th width="80" orderField="CODE" class="orderFlag">
+						身份证号码
 					</th>
-					<th width="80" orderField="IS_SECOND" class="orderFlag" htype="bool">
-						是否再生二孩
+					<th width="80" orderField="HAVE_STATUS" class="orderFlag" htype="dict">
+						持证情况
 					</th>
-					<th width="80" orderField="COND" class="orderFlag">
-						申请条件
+					<th width="80" orderField="VALID_PEROID" class="orderFlag" htype="date">
+						计生证有效期
+					</th>
+					<th width="80" orderField="COMPANY" class="orderFlag">
+						工作单位
+					</th>
+					<th width="80" orderField="METHOD" class="orderFlag" htype="dict">
+						避孕节育措施
 					</th>
 					<th width="80" orderField="ADDRESS" class="orderFlag">
 						现居住地
@@ -106,19 +107,25 @@
 							${a.NAMEH}
 						</td>
 						<td>
-							${a.NAMEH2}
+							<tags:js.dict.getValue value="${a.SEX}"/>
 						</td>
 						<td>
-							${a.childNum}
+							<fmt:formatDate value="${a.BIRTHDAY}" pattern="yyyy-MM-dd" />
 						</td>
 						<td>
-							<fmt:formatDate value="${a.DATEH}" pattern="yyyy-MM-dd" />
+							${a.CODE}
 						</td>
 						<td>
-							<tags:js.yes.no.getValue value="${a.IS_SECOND}"/>
+							<tags:js.dict.getValue value="${a.HAVE_STATUS}"/>
 						</td>
 						<td>
-							${a.COND}
+							<fmt:formatDate value="${a.VALID_PEROID}" pattern="yyyy-MM-dd" />
+						</td>
+						<td>
+							${a.COMPANY}
+						</td>
+						<td>
+							<tags:js.dict.getValue value="${a.METHOD}"/>
 						</td>
 						<td>
 							${a.ADDRESS}

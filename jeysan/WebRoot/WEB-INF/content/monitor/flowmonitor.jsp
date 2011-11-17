@@ -11,31 +11,31 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>无避孕节育措施一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findNoContracepts.action?domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowmonitor_sub"><span>无避孕节育措施一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>应持证无持证对象一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findBcsCerts.action?domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowmonitor_sub"><span>应持证无持证对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>应交社会抚养费对象一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findSocialUpbrings.action?domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowmonitor_sub"><span>应交社会抚养费对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>应重新验证对象一览表</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="flowmonitor_sub"><span>应重新验证对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>应反馈对象一览表</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="flowmonitor_sub"><span>应反馈对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>新增数据待审核一览表</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="flowmonitor_sub"><span>新增数据待审核一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowmonitor_sub"><span>下级待完成工作汇总</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="flowmonitor_sub"><span>下级待完成工作汇总</span></a>
 					</p>
 				</div>
 			</div>

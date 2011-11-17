@@ -1,22 +1,17 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<tags:js.pager action="${ctx}/monitor/hpmonitor!findBirth2Applys.action">
+<tags:js.pager action="${ctx}/monitor/hpmonitor!findWomanMatenalOver7Months.action">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
-	<input type="hidden" name="typeh" value="${param['typeh']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
-			action="${ctx}/monitor/hpmonitor!findBirth2Applys.action" method="post">
+			action="${ctx}/monitor/hpmonitor!findWomanMatenalOver7Months.action" method="post">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
-						<td>
-							申请类型：
-							<tags:js.dict.selector noRender="true" name="typeh" value="${param['typeh']}" dictCode="JS1011"/>
-						</td>
 						<td>
 							所属区域：
 							<tags:js.area.selector name="filter_EQS_area" readonly="true"
@@ -56,7 +51,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('待审批计划生育一览表')"><span>打印或者导出</span>
+					<a class="icon" href="javascript:JS_print2('孕产期超七个月对象一览表')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>
@@ -71,25 +66,25 @@
 						妇女编码
 					</th>
 					<th width="80" orderField="NAMEH" class="orderFlag">
-						妇女姓名
+						姓名
 					</th>
-					<th width="80" orderField="NAMEH2" class="orderFlag">
-						丈夫姓名
+					<th width="80" orderField="MARRY_STATUS" class="orderFlag" htype="dict">
+						婚姻状况
+					</th>
+					<th width="80" orderField="ADDRESS" class="orderFlag">
+						现居住地
 					</th>
 					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
 						现家庭子女数
 					</th>
-					<th width="80" orderField="DATEH" class="orderFlag" htype="date">
-						申请时间
+					<th width="80" orderField="CONCEPT_DATE" class="orderFlag" htype="date">
+						怀孕时间
 					</th>
-					<th width="80" orderField="IS_SECOND" class="orderFlag" htype="bool">
-						是否再生二孩
+					<th width="80" orderField="EDD" class="orderFlag" htype="date">
+						预产期
 					</th>
-					<th width="80" orderField="COND" class="orderFlag">
-						申请条件
-					</th>
-					<th width="80" orderField="ADDRESS" class="orderFlag">
-						现居住地
+					<th width="80" orderField="HOUSE_NO" class="orderFlag">
+						门牌号码
 					</th>
 				</tr>
 			</thead>
@@ -106,22 +101,22 @@
 							${a.NAMEH}
 						</td>
 						<td>
-							${a.NAMEH2}
+							<tags:js.dict.getValue value="${a.MARRY_STATUS}"/>
+						</td>
+						<td>
+							${a.ADDRESS}
 						</td>
 						<td>
 							${a.childNum}
 						</td>
 						<td>
-							<fmt:formatDate value="${a.DATEH}" pattern="yyyy-MM-dd" />
+							<fmt:formatDate value="${a.CONCEPT_DATE}" pattern="yyyy-MM-dd" />
 						</td>
 						<td>
-							<tags:js.yes.no.getValue value="${a.IS_SECOND}"/>
+							<fmt:formatDate value="${a.EDD}" pattern="yyyy-MM-dd" />
 						</td>
 						<td>
-							${a.COND}
-						</td>
-						<td>
-							${a.ADDRESS}
+							${a.HOUSE_NO}
 						</td>
 					</tr>
 				</c:forEach>

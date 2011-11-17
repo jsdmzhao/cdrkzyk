@@ -16,35 +16,35 @@
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="${ctx}/monitor/hpmonitor!viewoverbirth.action" width="900" height="500" target="dialog" rel="fixmonitor_sub"><span>孕产期超七个月对象一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findWomanMatenalOver7Months.action?domicileType=<%=Constants.DOMICILE_TYPE.FIX%>" target="navTab" rel="fixmonitor_sub"><span>孕产期超七个月对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="${ctx}/monitor/hpmonitor!getNoContraception.action" width="900" height="500" target="dialog" rel="fixmonitor_sub"><span>无避孕节育措施一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findNoContracepts.action?domicileType=<%=Constants.DOMICILE_TYPE.FIX%>" target="navTab" rel="fixmonitor_sub"><span>无避孕节育措施一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>申请缓期节育到期对象清单</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findDelayContracepts.action?domicileType=<%=Constants.DOMICILE_TYPE.FIX%>" target="navTab" rel="fixmonitor_sub"><span>申请缓期节育到期对象清单</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>应交社会抚养费对象一览表</span></a>
+						<a class="button" href="${ctx}/monitor/hpmonitor!findSocialUpbrings.action?domicileType=<%=Constants.DOMICILE_TYPE.FIX%>" target="navTab" rel="fixmonitor_sub"><span>应交社会抚养费对象一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>新增数据待审核一览表</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>新增数据待审核一览表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>下级待完成工作汇总</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>下级待完成工作汇总</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>育龄人员的跟踪管理</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>育龄人员的跟踪管理</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="fixmonitor_sub"><span>怀孕人员的监控跟踪</span></a>
+						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>怀孕人员的监控跟踪</span></a>
 					</p>
 				</div>
 			</div>

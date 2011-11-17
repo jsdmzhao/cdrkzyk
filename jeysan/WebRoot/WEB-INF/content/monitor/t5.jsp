@@ -1,22 +1,17 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
-<tags:js.pager action="${ctx}/monitor/hpmonitor!findBirth2Applys.action">
+<tags:js.pager action="${ctx}/monitor/hpmonitor!findDelayContracepts.action">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
-	<input type="hidden" name="typeh" value="${param['typeh']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
-			action="${ctx}/monitor/hpmonitor!findBirth2Applys.action" method="post">
+			action="${ctx}/monitor/hpmonitor!findDelayContracepts.action" method="post">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
-						<td>
-							申请类型：
-							<tags:js.dict.selector noRender="true" name="typeh" value="${param['typeh']}" dictCode="JS1011"/>
-						</td>
 						<td>
 							所属区域：
 							<tags:js.area.selector name="filter_EQS_area" readonly="true"
@@ -56,7 +51,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('待审批计划生育一览表')"><span>打印或者导出</span>
+					<a class="icon" href="javascript:JS_print2('申请缓期节育到期对象清单')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>
@@ -71,22 +66,25 @@
 						妇女编码
 					</th>
 					<th width="80" orderField="NAMEH" class="orderFlag">
-						妇女姓名
+						姓名
 					</th>
-					<th width="80" orderField="NAMEH2" class="orderFlag">
-						丈夫姓名
+					<th width="80" orderField="FIRST_MARRY_DATE" class="orderFlag" htype="date">
+						初婚日期
 					</th>
-					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
-						现家庭子女数
+					<th width="80" orderField="DELAY_CAUSE" class="orderFlag">
+						缓期原因
 					</th>
-					<th width="80" orderField="DATEH" class="orderFlag" htype="date">
-						申请时间
+					<th width="80" orderField="DELAY_END_CAUSE" class="orderFlag" htype="date">
+						缓期终止日期
 					</th>
-					<th width="80" orderField="IS_SECOND" class="orderFlag" htype="bool">
-						是否再生二孩
+					<th width="80" orderField="DELAY_COMPANY" class="orderFlag">
+						签订单位
 					</th>
-					<th width="80" orderField="COND" class="orderFlag">
-						申请条件
+					<th width="80" orderField="DELAY_DATE" class="orderFlag" htype="date">
+						缓期签订日期
+					</th>
+					<th width="80" orderField="DELAY_DOCTOR" class="orderFlag">
+						缓期鉴定医生
 					</th>
 					<th width="80" orderField="ADDRESS" class="orderFlag">
 						现居住地
@@ -106,19 +104,22 @@
 							${a.NAMEH}
 						</td>
 						<td>
-							${a.NAMEH2}
+							<fmt:formatDate value="${a.FIRST_MARRY_DATE}" pattern="yyyy-MM-dd" />
 						</td>
 						<td>
-							${a.childNum}
+							${a.DELAY_CAUSE}
 						</td>
 						<td>
-							<fmt:formatDate value="${a.DATEH}" pattern="yyyy-MM-dd" />
+							<fmt:formatDate value="${a.DELAY_END_CAUSE}" pattern="yyyy-MM-dd" />
 						</td>
 						<td>
-							<tags:js.yes.no.getValue value="${a.IS_SECOND}"/>
+							${a.DELAY_COMPANY}
 						</td>
 						<td>
-							${a.COND}
+							<fmt:formatDate value="${a.DELAY_DATE}" pattern="yyyy-MM-dd" />
+						</td>
+						<td>
+							${a.DELAY_DOCTOR}
 						</td>
 						<td>
 							${a.ADDRESS}

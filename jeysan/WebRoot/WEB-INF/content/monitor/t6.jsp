@@ -3,14 +3,14 @@
 <%@ include file="/common/taglibs.jsp"%>
 <c:set var="fix" value="<%=Constants.DOMICILE_TYPE.FIX%>"/>
 <c:set var="flow" value="<%=Constants.DOMICILE_TYPE.FLOW%>"/>
-<tags:js.pager action="${ctx}/monitor/hpmonitor.action">
+<tags:js.pager action="${ctx}/monitor/hpmonitor!findSocialUpbrings.action">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
-			action="${ctx}/monitor/hpmonitor.action" method="post">
+			action="${ctx}/monitor/hpmonitor!findSocialUpbrings.action" method="post">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
@@ -54,7 +54,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('待双查对象一览表')"><span>打印或者导出</span>
+					<a class="icon" href="javascript:JS_print2('应交社会抚养费对象一览表')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>
@@ -75,26 +75,17 @@
 					<th width="80" orderField="NAMEH2" class="orderFlag">
 						丈夫姓名
 					</th>
-					<th width="80" orderField="MARRY_STATUS" class="orderFlag" htype="dict">
-						婚姻状况
+					<th width="80" orderField="CAUSE" class="orderFlag">
+						征收原因
 					</th>
-					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
-						现家庭子女数
+					<th width="80" orderField="TOTAL_MONEY" class="orderFlag" htype="money">
+						应交金额
 					</th>
-					<th width="80" orderField="JOB" class="orderFlag" htype="dict">
-						妇女职业
+					<th width="80" orderField="YET_MONEY" class="orderFlag" htype="money">
+						已交金额
 					</th>
-					<th width="80" orderField="METHOD" class="orderFlag" htype="dict">
-						避孕节育措施
-					</th>
-					<th width="80" orderField="OPS_DATE" class="orderFlag" htype="date">
-						避孕节育日期
-					</th>
-					<th width="80" orderField="minBirthday" class="orderFlag" htype="date">
-						最小孩出生日期
-					</th>
-					<th width="80" orderField="DOMICILE" class="orderFlag">
-						户籍地
+					<th width="80" orderField="counth" class="orderFlag" htype="digits">
+						交款次数
 					</th>
 					<th width="80" orderField="ADDRESS" class="orderFlag">
 						现居住地
@@ -117,25 +108,16 @@
 							${a.NAMEH2}
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.MARRY_STATUS}"/>
+							${a.CAUSE}
 						</td>
 						<td>
-							${a.childNum}
+							<fmt:formatNumber value="${a.TOTAL_MONEY}" type="currency" pattern="￥.00"/>
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.JOB}"/>
+							<fmt:formatNumber value="${a.YET_MONEY}" type="currency" pattern="￥.00"/>
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.METHOD}"/>
-						</td>
-						<td>
-							<fmt:formatDate value="${a.OPS_DATE}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>
-							<fmt:formatDate value="${a.minBirthday}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>
-							${a.DOMICILE}
+							${a.counth}
 						</td>
 						<td>
 							${a.ADDRESS}
@@ -158,38 +140,23 @@
 					<th width="80" orderField="NAMEH" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="SEX" class="orderFlag" htype="dict">
-						性别
+					<th width="80" orderField="NAMEH2" class="orderFlag">
+						配偶姓名
 					</th>
-					<th width="80" orderField="CODE" class="orderFlag">
-						身份证号码
+					<th width="80" orderField="CAUSE" class="orderFlag">
+						缴交原因
 					</th>
-					<th width="80" orderField="MARRY_STATUS" class="orderFlag" htype="dict">
-						婚姻状况
+					<th width="80" orderField="TOTAL_MONEY" class="orderFlag" htype="money">
+						应交金额
+					</th>
+					<th width="80" orderField="YET_MONEY" class="orderFlag" htype="money">
+						已交金额
+					</th>
+					<th width="80" orderField="counth" class="orderFlag" htype="digits">
+						缴款次数
 					</th>
 					<th width="80" orderField="ADDRESS" class="orderFlag">
-						现居住地地址
-					</th>
-					<th width="80" orderField="TEL" class="orderFlag">
-						现居住地电话
-					</th>
-					<th width="80" orderField="SETTLE_IN_DATE" class="orderFlag" htype="date">
-						流入日期
-					</th>
-					<th width="80" orderField="COMPANY" class="orderFlag">
-						工作单位
-					</th>
-					<th width="80" orderField="METHOD" class="orderFlag" htype="dict">
-						避孕节育措施
-					</th>
-					<th width="80" orderField="OPS_DATE" class="orderFlag" htype="date">
-						落实措施日期
-					</th>
-					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
-						子女数
-					</th>
-					<th width="80" orderField="minBirthday" class="orderFlag" htype="date">
-						最小孩出生日期
+						现居住地
 					</th>
 				</tr>
 			</thead>
@@ -206,37 +173,22 @@
 							${a.NAMEH}
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.SEX}"/>
+							${a.NAMEH2}
 						</td>
 						<td>
-							${a.CODE}
+							${a.CAUSE}
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.MARRY_STATUS}"/>
+							<fmt:formatNumber value="${a.TOTAL_MONEY}" type="currency" pattern="￥.00"/>
+						</td>
+						<td>
+							<fmt:formatNumber value="${a.YET_MONEY}" type="currency" pattern="￥.00"/>
+						</td>
+						<td>
+							${a.counth}
 						</td>
 						<td>
 							${a.ADDRESS}
-						</td>
-						<td>
-							${a.TEL}
-						</td>
-						<td>
-							${a.SETTLE_IN_DATE}
-						</td>
-						<td>
-							${a.COMPANY}
-						</td>
-						<td>
-							<tags:js.dict.getValue value="${a.METHOD}"/>
-						</td>
-						<td>
-							<fmt:formatDate value="${a.OPS_DATE}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>
-							${a.childNum}
-						</td>
-						<td>
-							<fmt:formatDate value="${a.minBirthday}" pattern="yyyy-MM-dd" />
 						</td>
 					</tr>
 				</c:forEach>
