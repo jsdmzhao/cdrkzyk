@@ -3,18 +3,24 @@
 <%@ include file="/common/taglibs.jsp"%>
 <c:set var="fix" value="<%=Constants.DOMICILE_TYPE.FIX%>"/>
 <c:set var="flow" value="<%=Constants.DOMICILE_TYPE.FLOW%>"/>
-<tags:js.pager action="${ctx}/monitor/hpmonitor.action">
+<%@ include file="/common/taglibs.jsp"%>
+<tags:js.pager action="${ctx}/monitor/hpmonitor!findNoContracepts.action">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 	<input type="hidden" name="filter_EQS_area" value="${param['filter_EQS_area']}" />
+	<input type="hidden" name="method" value="${param['method']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);"
-			action="${ctx}/monitor/hpmonitor.action" method="post">
+			action="${ctx}/monitor/hpmonitor!findNoContracepts.action" method="post">
 	<input type="hidden" name="domicileType" value="${param['domicileType']}" />
 			<div class="searchBar">
 				<table class="searchContent">
 					<tr>
+						<td>
+							应采取节育措施类型选择：
+							<tags:js.dict.selector noRender="true" name="method" value="${param['method']}" dictCode="JS1018"/>
+						</td>
 						<td>
 							所属区域：
 							<tags:js.area.selector name="filter_EQS_area" readonly="true"
@@ -54,7 +60,7 @@
 					line
 				</li>
 				<li>
-					<a class="icon" href="javascript:JS_print2('待双查对象一览表')"><span>打印或者导出</span>
+					<a class="icon" href="javascript:JS_print2('无避孕节育措施一览表')"><span>打印或者导出</span>
 					</a>
 				</li>
 			</ul>
@@ -72,29 +78,14 @@
 					<th width="80" orderField="NAMEH" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="NAMEH2" class="orderFlag">
-						丈夫姓名
-					</th>
-					<th width="80" orderField="MARRY_STATUS" class="orderFlag" htype="dict">
-						婚姻状况
-					</th>
-					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
-						现家庭子女数
-					</th>
-					<th width="80" orderField="JOB" class="orderFlag" htype="dict">
-						妇女职业
+					<th width="80" orderField="CODE" class="orderFlag">
+						身份证号
 					</th>
 					<th width="80" orderField="METHOD" class="orderFlag" htype="dict">
 						避孕节育措施
 					</th>
-					<th width="80" orderField="OPS_DATE" class="orderFlag" htype="date">
-						避孕节育日期
-					</th>
-					<th width="80" orderField="minBirthday" class="orderFlag" htype="date">
-						最小孩出生日期
-					</th>
-					<th width="80" orderField="DOMICILE" class="orderFlag">
-						户籍地
+					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
+						现家庭子女数
 					</th>
 					<th width="80" orderField="ADDRESS" class="orderFlag">
 						现居住地
@@ -114,28 +105,13 @@
 							${a.NAMEH}
 						</td>
 						<td>
-							${a.NAMEH2}
-						</td>
-						<td>
-							<tags:js.dict.getValue value="${a.MARRY_STATUS}"/>
-						</td>
-						<td>
-							${a.childNum}
-						</td>
-						<td>
-							<tags:js.dict.getValue value="${a.JOB}"/>
+							${a.CODE}
 						</td>
 						<td>
 							<tags:js.dict.getValue value="${a.METHOD}"/>
 						</td>
 						<td>
-							<fmt:formatDate value="${a.OPS_DATE}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>
-							<fmt:formatDate value="${a.minBirthday}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>
-							${a.DOMICILE}
+							${a.childNum}
 						</td>
 						<td>
 							${a.ADDRESS}
@@ -158,23 +134,14 @@
 					<th width="80" orderField="NAMEH" class="orderFlag">
 						姓名
 					</th>
-					<th width="80" orderField="SEX" class="orderFlag" htype="dict">
-						性别
+					<th width="80" orderField="BIRTHDAY" class="orderFlag" htype="date">
+						出生年月
 					</th>
 					<th width="80" orderField="CODE" class="orderFlag">
-						身份证号码
+						身份证号
 					</th>
-					<th width="80" orderField="MARRY_STATUS" class="orderFlag" htype="dict">
-						婚姻状况
-					</th>
-					<th width="80" orderField="ADDRESS" class="orderFlag">
-						现居住地地址
-					</th>
-					<th width="80" orderField="TEL" class="orderFlag">
-						现居住地电话
-					</th>
-					<th width="80" orderField="SETTLE_IN_DATE" class="orderFlag" htype="date">
-						流入日期
+					<th width="80" orderField="HAVE_STATUS" class="orderFlag" htype="bool">
+						持证情况
 					</th>
 					<th width="80" orderField="COMPANY" class="orderFlag">
 						工作单位
@@ -182,14 +149,8 @@
 					<th width="80" orderField="METHOD" class="orderFlag" htype="dict">
 						避孕节育措施
 					</th>
-					<th width="80" orderField="OPS_DATE" class="orderFlag" htype="date">
-						落实措施日期
-					</th>
 					<th width="80" orderField="childNum" class="orderFlag" htype="digits">
 						子女数
-					</th>
-					<th width="80" orderField="minBirthday" class="orderFlag" htype="date">
-						最小孩出生日期
 					</th>
 				</tr>
 			</thead>
@@ -206,22 +167,13 @@
 							${a.NAMEH}
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.SEX}"/>
+							<fmt:formatDate value="${a.BIRTHDAY}" pattern="yyyy-MM-dd" />
 						</td>
 						<td>
 							${a.CODE}
 						</td>
 						<td>
-							<tags:js.dict.getValue value="${a.MARRY_STATUS}"/>
-						</td>
-						<td>
-							${a.ADDRESS}
-						</td>
-						<td>
-							${a.TEL}
-						</td>
-						<td>
-							${a.SETTLE_IN_DATE}
+							<tags:js.yes.no.getValue value="${a.HAVE_STATUS}"/>
 						</td>
 						<td>
 							${a.COMPANY}
@@ -230,13 +182,7 @@
 							<tags:js.dict.getValue value="${a.METHOD}"/>
 						</td>
 						<td>
-							<fmt:formatDate value="${a.OPS_DATE}" pattern="yyyy-MM-dd" />
-						</td>
-						<td>
 							${a.childNum}
-						</td>
-						<td>
-							<fmt:formatDate value="${a.minBirthday}" pattern="yyyy-MM-dd" />
 						</td>
 					</tr>
 				</c:forEach>
