@@ -598,3 +598,6 @@ a.btnAttach{background-position: -183px 0}
 .viewInfo dl.nowrap dd {width: auto;}
 .dialogContent .viewInfo {background-color:#fff}
 .pageContent .panel {clear:both; margin: 5px}
+
+.fileselector{float:left}
+.fileselector div{float:left}
