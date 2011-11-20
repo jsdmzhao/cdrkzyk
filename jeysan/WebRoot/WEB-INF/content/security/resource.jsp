@@ -1,8 +1,12 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <tags:js.pager action="${ctx}/security/resource.action">
-	<input type="hidden" name="filter_EQI_id"
-		value="${param['filter_EQI_id']}" />
+	<input type="hidden" name="filter_EQS_resourceCode"
+		value="${param['filter_EQS_resourceCode']}" />
+	<input type="hidden" name="filter_LIKES_resourceName"
+		value="${param['filter_LIKES_resourceName']}" />
+	<input type="hidden" name="filter_EQI_parent.id"
+		value="${param['filter_EQI_parent.id']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -12,13 +16,18 @@
 				<table class="searchContent">
 					<tr>
 						<td>
-							主键：
-							<input type="text" name="filter_EQI_id"
-								value="${param['filter_EQI_id']}" />
+							编码：
+							<input type="text" name="filter_EQS_resourceCode"
+								value="${param['filter_EQS_resourceCode']}" />
 						</td>
 						<td>
-							建档日期：
-							<input type="text" class="date" readonly="true" />
+							名称：
+							<input type="text" name="filter_LIKES_resourceName"
+								value="${param['filter_LIKES_resourceName']}" />
+						</td>
+						<td>
+							父资源：
+							<tags:js.map.selector noRender="true" result="${topLevelResource}" name="filter_EQI_parent.id" value="${param['filter_EQI_parent.id']}"/>
 						</td>
 					</tr>
 				</table>
@@ -32,10 +41,6 @@
 									</button>
 								</div>
 							</div>
-						</li>
-						<li>
-							<a class="button" href="demo_page6.html" target="dialog"
-								rel="dlg_page1" title="查询框"><span>高级检索</span> </a>
 						</li>
 					</ul>
 				</div>

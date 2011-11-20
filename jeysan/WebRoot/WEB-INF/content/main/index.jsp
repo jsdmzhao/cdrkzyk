@@ -88,7 +88,9 @@ $(function(){
 				<a class="logo" href="javascript:void(0)" style="width:300px">标志</a>
 				<ul class="nav">
 					<li><a href="${ctx}/security/changepwd.action" target="dialog">修改密码</a></li>
-					<li><a href="javascript:void(0)" target="_blank">论坛</a></li>
+					<li><a href="http://localhost:8899" target="_blank">论坛</a></li>
+					<li><a href="http://localhost:8899/login.bbscs?action=admin" target="_blank">论坛管理</a></li>
+					<li><a href="http://localhost:9090" target="_blank">OpenFire管理</a></li>
 					<li><a href="javascript:setHomepage()">设为首页</a></li>
 					<li><a href="javascript:AddToFavorite()">加入收藏夹</a></li>
 					<li><a href="javascript:void(0)">帮助</a></li>
@@ -123,6 +125,15 @@ $(function(){
 								<c:forEach items="${a.value}" var="c" varStatus="d">
 								<li>
 									<c:choose>
+										<c:when test="${c.resourceCode=='1001'}">
+										<a>${c.resourceName}</a>
+										<ul>
+											<li><a href="${ctx}/daily/receivemail.action?type=1" target="navTab" rel="nav_receivemailmanage">收件箱</a></li>
+											<li><a href="${ctx}/daily/sendmail.action?type=1" target="navTab" rel="nav_sendmail1manage">发件箱</a></li>
+											<li><a href="${ctx}/daily/sendmail.action?type=2" target="navTab" rel="nav_sendmail2manage">草稿箱</a></li>
+											<li><a href="${ctx}/daily/rubbishmail.action" target="navTab" rel="nav_rubbishemailmanage">垃圾箱</a></li>
+										</ul>
+										</c:when>
 										<c:when test="${c.resourceCode=='1007'}">
 										<a>${c.resourceName}</a>
 										<ul>

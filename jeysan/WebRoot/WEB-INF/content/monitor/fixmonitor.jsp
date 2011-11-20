@@ -29,7 +29,7 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="${ctx}/monitor/hpmonitor!findSocialUpbrings.action?domicileType=<%=Constants.DOMICILE_TYPE.FIX%>" target="navTab" rel="fixmonitor_sub"><span>应交社会抚养费对象一览表</span></a>
-					</p>
+					</p><!-- 
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>新增数据待审核一览表</span></a>
@@ -37,7 +37,7 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>下级待完成工作汇总</span></a>
-					</p>
+					</p> -->
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>育龄人员的跟踪管理</span></a>

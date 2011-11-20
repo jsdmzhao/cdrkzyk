@@ -20,7 +20,7 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="${ctx}/monitor/hpmonitor!findSocialUpbrings.action?domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowmonitor_sub"><span>应交社会抚养费对象一览表</span></a>
-					</p>
+					</p><!-- 
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="flowmonitor_sub"><span>应重新验证对象一览表</span></a>
@@ -36,7 +36,7 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="flowmonitor_sub"><span>下级待完成工作汇总</span></a>
-					</p>
+					</p> -->
 				</div>
 			</div>
 			<div class="formBar">
