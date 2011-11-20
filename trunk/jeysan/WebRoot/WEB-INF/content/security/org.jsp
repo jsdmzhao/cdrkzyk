@@ -17,8 +17,8 @@
 					<tr>
 						<td>
 							机构编码：
-							<input type="text" name="filter_LIKES_orgCode"
-								value="${param['filter_LIKES_orgCode']}" />
+							<input type="text" name="filter_EQS_orgCode"
+								value="${param['filter_EQS_orgCode']}" />
 						</td>
 						<td>
 							机构名称：
@@ -33,10 +33,6 @@
 								value="${param['filter_EQI_orgType']}" dictCode="JS020"
 								width="130" />
 						</td>
-						<td>
-							建档日期：
-							<input type="text" class="date" readonly="true" />
-						</td>
 					</tr>
 				</table>
 				<div class="subBar">
@@ -49,10 +45,6 @@
 									</button>
 								</div>
 							</div>
-						</li>
-						<li>
-							<a class="button" href="demo_page6.html" target="dialog"
-								rel="dlg_page1" title="查询框"><span>高级检索</span> </a>
 						</li>
 					</ul>
 				</div>
@@ -73,13 +65,6 @@
 				</li>
 				<li class="line">
 					line
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span> </a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
-					</a>
 				</li>
 			</ul>
 		</div>
