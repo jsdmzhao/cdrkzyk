@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.comm.service.FileManagerManager;
 import com.jeysan.cpf.daily.entity.Rule;
 import com.jeysan.cpf.daily.service.RuleManager;
 import com.jeysan.modules.action.CrudActionSupport;
@@ -22,14 +24,12 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  */
 @Namespace("/daily")
 public class RuleAction extends CrudActionSupport<Rule> {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
 	private String ids;
 	private Rule entity;
 	private RuleManager ruleManager;
+	private FileManagerManager fileManagerManager;
 	private Page<Rule> page = new Page<Rule>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -38,10 +38,17 @@ public class RuleAction extends CrudActionSupport<Rule> {
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				ruleManager.deleteRule(id);
+				Rule rule = ruleManager.getRule(id);
+				deleteRuleIncludeAttachment(rule);
 				logger.debug("删除了fhp_rule："+id);
 			}else {
-				ruleManager.deleteRules(ids);
+				if(StringUtils.isNotEmpty(ids)){
+					Rule rule = null;
+					for(String sid : StringUtils.split(ids,",")){
+						rule = ruleManager.getRule(Long.parseLong(sid));
+						deleteRuleIncludeAttachment(rule);
+					}
+				}
 				logger.debug("删除了很多fhp_rule："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
@@ -54,6 +61,13 @@ public class RuleAction extends CrudActionSupport<Rule> {
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	private void deleteRuleIncludeAttachment(Rule rule){
+		String attachment = rule.getAttachment();
+		ruleManager.deleteRule(rule);
+		if(StringUtils.isNotEmpty(attachment)){
+			fileManagerManager.deleteFileManagerByIds(attachment);
+		}
 	}
 	@Override
 	public String input() throws Exception {
@@ -89,6 +103,7 @@ public class RuleAction extends CrudActionSupport<Rule> {
 			result4Json = new Result4Json();
 		try{
 			ruleManager.saveRule(entity);
+			fileManagerManager.updateFileManagers2Valid(entity.getAttachment());
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存fhp_rule成功");
@@ -117,6 +132,10 @@ public class RuleAction extends CrudActionSupport<Rule> {
 	@Autowired
 	public void setRuleManager(RuleManager ruleManager) {
 		this.ruleManager = ruleManager;
+	}
+	@Autowired
+	public void setFileManagerManager(FileManagerManager fileManagerManager) {
+		this.fileManagerManager = fileManagerManager;
 	}
 	public Page<Rule> getPage() {
 		return page;

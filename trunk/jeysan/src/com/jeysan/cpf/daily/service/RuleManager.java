@@ -46,6 +46,9 @@ public class RuleManager {
 	public void deleteRule(Long id){
 		ruleDao.delete(id);
 	}
+	public void deleteRule(Rule entity){
+		ruleDao.delete(entity);
+	}
 	/**
 	 * 用于无关联实体的批量删除
 	 * @param ids
