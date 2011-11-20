@@ -223,6 +223,7 @@ $(function(){
 					<div>
 						<div class="accountInfo">
 							<p><span>${_js_user.userName}，您好！</span></p>
+							<br/>所属：${_js_user.org.orgName}
 						</div>
 						<div class="pageFormContent" layoutH="80" style="width:100%;">
 							<div style="width:600px;position: absolute;top:10px;left:10px">
