@@ -209,4 +209,12 @@ public class Constants {
 		public static final Integer PERIOD_4 = 228;//育儿期
 		public static final Integer PERIOD_5 = 229;//更年期
 	}
+	
+	public static final String UPLOAD_DIR = "/datafile";
+	public static final class UPLOAD_FILE_TYPE{
+		public static final Integer RULE1 = 1;//制度管理
+		public static final Integer RULE2 = 2;//法律法规
+		public static final Integer NOTICE = 3;//通知通报
+		public static final Integer MAIL = 4;//邮件
+	}
 }
