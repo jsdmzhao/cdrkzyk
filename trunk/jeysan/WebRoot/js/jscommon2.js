@@ -250,7 +250,18 @@ function JS_print2(title){
 	var htitle = '';
 	var $this = null;
 	var index = -1;
-	$('table thead tr th:gt(0)',navTab.getCurrentPanel()).each(function(){
+	var tr_ui = $('table thead tr',navTab.getCurrentPanel());
+	var th_ui = null;
+	var isList = false;
+	if(tr_ui.length > 1){
+		tr_ui = $('table thead tr[head]',navTab.getCurrentPanel());
+		th_ui = $('th',tr_ui);
+		isList = true;
+	}else if(tr_ui.length == 1){
+		th_ui = $('th:gt(0)',tr_ui);
+		isList = false;
+	}
+	th_ui.each(function(){
 		$this = $(this);
 		hcode = $this.attr('orderField');
 		if(hcode == null || hcode == '')
@@ -259,7 +270,10 @@ function JS_print2(title){
 			htype = $this.attr('htype');
 			if(htype == null || htype == '')
 				htype = 'normal';
-			htitle = $this.children().eq(0).html();
+			if(isList)
+				htitle = $this.html();
+			else
+				htitle = $this.children().eq(0).html();
 			if(htitle != null && htitle != ''){
 				index = htitle.indexOf('(');
 				if(index != -1){
