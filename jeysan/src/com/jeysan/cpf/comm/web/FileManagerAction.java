@@ -46,12 +46,14 @@ public class FileManagerAction extends ActionSupport {
 					f.mkdirs();
 				MultiPartRequestWrapper mhsr = (MultiPartRequestWrapper) request;
 				File[] files = mhsr.getFiles("Filedata");
+				String[] names = mhsr.getFileNames("Filedata");
 				StringBuilder fileIds = new StringBuilder();
 				StringBuilder fileNames = new StringBuilder();
+				int i = 0;
 				for (File file : files) {
 					String fileNewName = new StringBuilder().append(
 							UUID.randomUUID()).append(".").append(
-							FileUtils.getFileExt(file.getName())).toString();
+							FileUtils.getFileExt(names[i])).toString();
 					BufferedInputStream in = new BufferedInputStream( new FileInputStream(file));
 					BufferedOutputStream out = new BufferedOutputStream(
 							new FileOutputStream(new File(
@@ -69,7 +71,7 @@ public class FileManagerAction extends ActionSupport {
 					fileManager.setHandinTime(new Date());
 					fileManager.setNewName(fileNewName);
 					fileManager.setArea(user.getOrg().getOrgCode());
-					fileManager.setOrinName(file.getName());
+					fileManager.setOrinName(names[i]);
 					String flag = Struts2Utils.getParameter("flag");
 					if (StringUtils.isNotEmpty(flag))
 						fileManager.setFlag(Integer.parseInt(flag));
@@ -80,6 +82,7 @@ public class FileManagerAction extends ActionSupport {
 					fileManagerManager.saveFileManager(fileManager);
 					fileIds.append(",").append(fileManager.getId());
 					fileNames.append(",").append(fileNewName);
+					i++;
 				}
 				Map result4Json = new HashMap();
 				result4Json.put("fileId", fileIds.substring(1));

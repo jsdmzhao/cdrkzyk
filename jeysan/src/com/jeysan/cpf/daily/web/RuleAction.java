@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.daily.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -11,7 +12,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import com.jeysan.cpf.comm.service.FileManagerManager;
 import com.jeysan.cpf.daily.entity.Rule;
 import com.jeysan.cpf.daily.service.RuleManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.cpf.security.entity.User;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -23,7 +25,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/daily")
-public class RuleAction extends CrudActionSupport<Rule> {
+public class RuleAction extends PrintActionSupport<Rule> {
 	private static final long serialVersionUID = -1826212472390477005L;
 	private Long id;
 	private String ids;
@@ -40,7 +42,7 @@ public class RuleAction extends CrudActionSupport<Rule> {
 			if(id!=null){
 				Rule rule = ruleManager.getRule(id);
 				deleteRuleIncludeAttachment(rule);
-				logger.debug("删除了fhp_rule："+id);
+				logger.debug("删除了规章制度："+id);
 			}else {
 				if(StringUtils.isNotEmpty(ids)){
 					Rule rule = null;
@@ -49,15 +51,15 @@ public class RuleAction extends CrudActionSupport<Rule> {
 						deleteRuleIncludeAttachment(rule);
 					}
 				}
-				logger.debug("删除了很多fhp_rule："+ids.toString());
+				logger.debug("删除了很多规章制度："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除fhp_rule成功");
+			result4Json.setMessage("删除规章制度成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"fhp_rule已经被关联,请先解除关联,删除失败":"删除fhp_rule失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"规章制度已经被关联,请先解除关联,删除失败":"删除规章制度失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -102,14 +104,20 @@ public class RuleAction extends CrudActionSupport<Rule> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			if(entity.getSendEmployeeId() == null){
+				User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+				entity.setSendEmployeeId(new Long(user.getId()));
+			}
+			if(entity.getDateKt() == null)
+				entity.setDateKt(new Date());
 			ruleManager.saveRule(entity);
 			fileManagerManager.updateFileManagers2Valid(entity.getAttachment());
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存fhp_rule成功");
+				result4Json.setMessage("保存规章制度成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改fhp_rule成功");
+				result4Json.setMessage("修改规章制度成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -118,7 +126,7 @@ public class RuleAction extends CrudActionSupport<Rule> {
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存fhp_rule失败");
+				result4Json.setMessage("保存规章制度失败");
 			}
 			
 		}
