@@ -245,9 +245,10 @@ function ok(){
 </div>
 <script>
 function setAddress(orgCode,address_){
-	$('#personBasic_address').val(address_);
+	var $box = navTab.getCurrentPanel();
+	$('#personBasic_address',box).val(address_);
 	if(orgCode == null || orgCode == ''){
-		$("#personBasic_villagerTeamId").html("<option value=\"\">请选择</option>");
+		$("#personBasic_villagerTeamId",box).html("<option value=\"\">请选择</option>");
 		return;
 	}
 	$.post("${ctx}/pmas/villagerteam!findByCode.action", {orgCode:orgCode.split('_')[1]}, function(data) {
@@ -255,19 +256,20 @@ function setAddress(orgCode,address_){
 		for (var i = 0; i < data.length; i++) {
 			html += "<option value=\"" + data[i].id+ "\">" + data[i].teamName + "</option>";
 		}
-		$("#personBasic_villagerTeamId").html(html);
+		$("#personBasic_villagerTeamId",box).html(html);
 	});
 }
 function setAddress2(orgCode,address_){
-	$('#personBasic_domicile').val(address_);
+	$('#personBasic_domicile',navTab.getCurrentPanel()).val(address_);
 }
 var yearNow = new Date().getYear();
 function setage(birth){
+	var $box = navTab.getCurrentPanel();
 	if(birth==null||birth==''){
-		$('#age').val('');
+		$('#age',box).val('');
 	}else{
 		var year_ = birth.substr(0,birth.indexOf('-'));
-		$('#age').val(yearNow-year_);
+		$('#age',box).val(yearNow-year_);
 	}
 }
 </script>

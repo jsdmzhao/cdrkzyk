@@ -2,62 +2,42 @@
 <%@page import="com.jeysan.cpf.util.Constants"%>
 <%@ include file="/common/taglibs.jsp"%>
 <c:set var="type_" value="<%=Constants.UPLOAD_FILE_TYPE.RULE1 %>"/>
+<c:if test="${param.filter_EQI_typeh==0}"><c:set var="rule_title" value="规章制度"/></c:if>
+<c:if test="${param.filter_EQI_typeh==1}"><c:set var="rule_title" value="法律法规"/></c:if>
+<c:if test="${param.filter_EQI_typeh==2}"><c:set var="rule_title" value="通知通报"/></c:if>
 <div class="page">
 	<div class="pageContent">
 		<form method="post" action="${ctx}/daily/rule!save.action"
 			class="pageForm required-validate"
 			onsubmit="return validateCallback(this, navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${id}" />
+			<input type="hidden" name="filter_EQI_typeh" value="${param.filter_EQI_typeh}" />
+			<input type="hidden" name="typeh" value="${param.filter_EQI_typeh}" />
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId"
-				value="nav_rulemanage" />
+				value="nav_rule${param.filter_EQI_typeh}manage" />
 			<div class="pageFormContent" layoutH="56">
 				<p>
 					<label>
-						类别：
-					</label>
-					<input name="typeh" class="digits" type="text" size="30"
-						value="${typeh}" />
-				</p>
-				<p>
-					<label>
-						标题：
+						${rule_title}名称：
 					</label>
 					<input name="title" class="required" maxlength="200" type="text"
-						size="30" value="${title}" alt="请输入标题" />
+						size="30" value="${title}" alt="请输入${rule_title}名称" />
 				</p>
 				<p>
 					<label>
-						发布人：
+						${rule_title}级别：
 					</label>
-					<input name="sendEmployeeId" class="digits  required" type="text"
-						size="30" value="${sendEmployeeId}" />
+					<tags:js.dict.selector name="levelKt" class1="required"  value="${levelKt}" dictCode="JS1079"/>
 				</p>
-				<p>
+				<p style="width:100%;height:400px">
 					<label>
-						发布时间：
+						${rule_title}内容：
 					</label>
-					<input name="dateKt" class="date  required " readonly="readonly"
-						type="text" size="30"
-						value="<fmt:formatDate value="${dateKt}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<textarea name="content" class="required" maxlength="2000" alt="请输入${rule_title}内容" style="width:500px;height:400px">${content}</textarea>
 				</p>
-				<p>
-					<label>
-						级别：
-					</label>
-					<input name="levelKt" class="required" maxlength="20" type="text"
-						size="30" value="${levelKt}" alt="请输入级别" />
-				</p>
-				<p>
-					<label>
-						内容：
-					</label>
-					<input name="content" class="required" maxlength="2000" type="text"
-						size="30" value="${content}" alt="请输入内容" />
-				</p>
-<div style="width:100%">
+<div style="width:100%;margin-top:10px">
 					<label style="float:left">
 						附件：<tags:fileSelector type="${type_}" isv="true" hiddenId="attachment" labelId="fileQueue" hiddenIdValue="${attachment}"/>
 					</label>
