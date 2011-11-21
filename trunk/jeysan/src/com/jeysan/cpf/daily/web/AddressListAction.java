@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.daily.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
@@ -9,7 +10,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.daily.entity.AddressList;
 import com.jeysan.cpf.daily.service.AddressListManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.cpf.security.entity.User;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -21,7 +23,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/daily")
-public class AddressListAction extends CrudActionSupport<AddressList> {
+public class AddressListAction extends PrintActionSupport<AddressList> {
 	/**
 	 * 
 	 */
@@ -39,18 +41,18 @@ public class AddressListAction extends CrudActionSupport<AddressList> {
 		try {
 			if(id!=null){
 				addressListManager.deleteAddressList(id);
-				logger.debug("删除了fhp_address_list："+id);
+				logger.debug("删除了通讯录："+id);
 			}else {
 				addressListManager.deleteAddressLists(ids);
-				logger.debug("删除了很多fhp_address_list："+ids.toString());
+				logger.debug("删除了很多通讯录："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除fhp_address_list成功");
+			result4Json.setMessage("删除通讯录成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"fhp_address_list已经被关联,请先解除关联,删除失败":"删除fhp_address_list失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"通讯录已经被关联,请先解除关联,删除失败":"删除通讯录失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -66,6 +68,8 @@ public class AddressListAction extends CrudActionSupport<AddressList> {
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		filters.add(new PropertyFilter("EQL_userId",user.getId()+""));
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
@@ -88,13 +92,17 @@ public class AddressListAction extends CrudActionSupport<AddressList> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			if(entity.getUserId() == null){
+				User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+				entity.setUserId(new Long(user.getId()));
+			}
 			addressListManager.saveAddressList(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存fhp_address_list成功");
+				result4Json.setMessage("保存通讯录成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改fhp_address_list成功");
+				result4Json.setMessage("修改通讯录成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -103,7 +111,7 @@ public class AddressListAction extends CrudActionSupport<AddressList> {
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存fhp_address_list失败");
+				result4Json.setMessage("保存通讯录失败");
 			}
 			
 		}
