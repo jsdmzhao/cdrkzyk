@@ -20,110 +20,127 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @Table(name = "fhp_receive_mail")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ReceiveMail extends IdExtEntity {
-						/**
+	/**
 	 * 发件人
 	 */
 	private Long sendEmployeeId;
-				/**
+	/**
 	 * 收件人
 	 */
 	private String receiveEmployeeIds;
-				/**
+	/**
 	 * 主题
 	 */
 	private String title;
-				/**
+	/**
 	 * 附件
 	 */
 	private String attachment;
-				/**
+	/**
 	 * 内容
 	 */
 	private String content;
-				/**
+	/**
 	 * 状态
 	 */
 	private String status;
-				/**
+	/**
 	 * 父邮件
 	 */
 	private Long parMailId;
-				/**
+	/**
 	 * 发送日期
 	 */
 	private java.util.Date dateKt;
-				/**
+	/**
 	 * 是否已读
 	 */
-	private String isRead;
-			
-						@Column(name="SEND_EMPLOYEE_ID")
+	private Integer isRead;
+
+	@Column(name = "SEND_EMPLOYEE_ID")
 	public Long getSendEmployeeId() {
 		return sendEmployeeId;
 	}
+
 	public void setSendEmployeeId(Long sendEmployeeId) {
 		this.sendEmployeeId = sendEmployeeId;
 	}
-				@Column(name="RECEIVE_EMPLOYEE_IDS")
+
+	@Column(name = "RECEIVE_EMPLOYEE_IDS")
 	public String getReceiveEmployeeIds() {
 		return receiveEmployeeIds;
 	}
+
 	public void setReceiveEmployeeIds(String receiveEmployeeIds) {
 		this.receiveEmployeeIds = receiveEmployeeIds;
 	}
-				@Column(name="TITLE")
+
+	@Column(name = "TITLE")
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-				@Column(name="ATTACHMENT")
+
+	@Column(name = "ATTACHMENT")
 	public String getAttachment() {
 		return attachment;
 	}
+
 	public void setAttachment(String attachment) {
 		this.attachment = attachment;
 	}
-				@Column(name="CONTENT")
+
+	@Column(name = "CONTENT")
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-				@Column(name="STATUS")
+
+	@Column(name = "STATUS")
 	public String getStatus() {
 		return status;
 	}
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
-				@Column(name="PAR_MAIL_ID")
+
+	@Column(name = "PAR_MAIL_ID")
 	public Long getParMailId() {
 		return parMailId;
 	}
+
 	public void setParMailId(Long parMailId) {
 		this.parMailId = parMailId;
 	}
-				@Column(name="DATE_KT")
+
+	@Column(name = "DATE_KT")
 	public java.util.Date getDateKt() {
 		return dateKt;
 	}
+
 	public void setDateKt(java.util.Date dateKt) {
 		this.dateKt = dateKt;
 	}
-				@Column(name="IS_READ")
-	public String getIsRead() {
+
+	@Column(name = "IS_READ")
+	public Integer getIsRead() {
 		return isRead;
 	}
-	public void setIsRead(String isRead) {
+
+	public void setIsRead(Integer isRead) {
 		this.isRead = isRead;
 	}
-			
+
 	@Override
 	public String toString() {
-		//return ToStringBuilder.reflectionToString(this);
+		// return ToStringBuilder.reflectionToString(this);
 		return null;
 	}
 }

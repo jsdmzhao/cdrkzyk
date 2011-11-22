@@ -1,14 +1,21 @@
 ﻿package com.jeysan.cpf.daily.web;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.daily.entity.ReceiveMail;
 import com.jeysan.cpf.daily.entity.SendMail;
+import com.jeysan.cpf.daily.service.ReceiveMailManager;
 import com.jeysan.cpf.daily.service.SendMailManager;
+import com.jeysan.cpf.security.entity.User;
+import com.jeysan.cpf.security.service.UserManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +37,8 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	private String ids;
 	private SendMail entity;
 	private SendMailManager sendMailManager;
+	private UserManager userManager;
+	private ReceiveMailManager receiveMailManager;
 	private Page<SendMail> page = new Page<SendMail>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -57,6 +66,7 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	}
 	@Override
 	public String input() throws Exception {
+		Struts2Utils.getRequest().setAttribute("users", userManager.loadAllUsers());
 		return INPUT;
 	}
 	@Override
@@ -87,23 +97,56 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	public String save() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
+		String msg = null;
 		try{
+			if(entity.getSendEmployeeId() == null){
+				User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+				entity.setSendEmployeeId(new Long(user.getId()));
+			}
+			entity.setDateKt(new Date());
+			String send_type = StringUtils.trim(Struts2Utils.getParameter("send_type"));
+			if(StringUtils.equals(send_type, "0")||StringUtils.equals(send_type, "1")){
+				entity.setStatus("2");//草稿箱
+				msg = "保存邮件";
+			}
+
+			if(StringUtils.equals(send_type, "0")||StringUtils.equals(send_type, "2")){
+				entity.setStatus("1");//发件箱
+				msg = "发送邮件";
+			}
+			//0 发送 1保存 2发送并保存
+			if(StringUtils.equals(send_type, "0")||StringUtils.equals(send_type, "2")){
+				String receiveEmployeeIds = entity.getReceiveEmployeeIds();
+				ReceiveMail rm = null;
+				for(String reid : StringUtils.split(receiveEmployeeIds, ",")){
+					rm = new ReceiveMail();
+					rm.setAttachment(entity.getAttachment());
+					rm.setContent(entity.getContent());
+					rm.setDateKt(entity.getDateKt());
+					rm.setIsRead(Constants.IsRead.NO);//未读
+					rm.setReceiveEmployeeIds(reid);
+					rm.setSendEmployeeId(entity.getSendEmployeeId());
+					rm.setTitle(entity.getTitle());
+					rm.setStatus("0");
+					receiveMailManager.saveReceiveMail(rm);
+				}
+			}
 			sendMailManager.saveSendMail(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存fhp_send_mail成功");
+				result4Json.setMessage(msg+"成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改fhp_send_mail成功");
+				result4Json.setMessage(msg+"成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
 			if(e instanceof ObjectNotFoundException){
-				result4Json.setMessage("信息已被删除，请重新添加");
+				result4Json.setMessage("邮件已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存fhp_send_mail失败");
+				result4Json.setMessage(msg+"失败");
 			}
 			
 		}
@@ -117,6 +160,14 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	@Autowired
 	public void setSendMailManager(SendMailManager sendMailManager) {
 		this.sendMailManager = sendMailManager;
+	}
+	@Autowired
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+	@Autowired
+	public void setReceiveMailManager(ReceiveMailManager receiveMailManager) {
+		this.receiveMailManager = receiveMailManager;
 	}
 	public Page<SendMail> getPage() {
 		return page;

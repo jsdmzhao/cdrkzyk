@@ -46,6 +46,9 @@ public class ReceiveMailManager {
 	public void deleteReceiveMail(Long id){
 		receiveMailDao.delete(id);
 	}
+	public void deleteReceiveMail(ReceiveMail entity){
+		receiveMailDao.delete(entity);
+	}
 	/**
 	 * 用于无关联实体的批量删除
 	 * @param ids

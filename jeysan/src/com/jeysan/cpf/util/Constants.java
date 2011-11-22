@@ -217,4 +217,14 @@ public class Constants {
 		public static final Integer NOTICE = 3;//通知通报
 		public static final Integer MAIL = 4;//邮件
 	}
+	
+	/**
+	 * 是否已读
+	 * @author 黄静
+	 *
+	 */
+	public static final class IsRead{
+		public static final Integer YES = 778;//已读
+		public static final Integer NO = 779;//未读
+	}
 }

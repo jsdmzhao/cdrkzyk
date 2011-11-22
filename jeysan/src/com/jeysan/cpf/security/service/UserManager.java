@@ -102,7 +102,10 @@ public class UserManager {
 	public Page<User> searchUser(final Page<User> page,final List<PropertyFilter> filter){
 		return userDao.findPage(page, filter);
 	}
-	
+	@Transactional(readOnly = true)
+	public List<User> loadAllUsers(){
+		return userDao.find("from user4Js order by userCode");
+	}
 	@Autowired
 	public void setUserDao(@Qualifier("userDao4Js")UserDao userDao) {
 		this.userDao = userDao;
