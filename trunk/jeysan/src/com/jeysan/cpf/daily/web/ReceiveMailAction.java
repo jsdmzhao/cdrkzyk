@@ -4,11 +4,16 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.daily.entity.ReceiveMail;
+import com.jeysan.cpf.daily.entity.RubbishMail;
 import com.jeysan.cpf.daily.service.ReceiveMailManager;
+import com.jeysan.cpf.daily.service.RubbishMailManager;
+import com.jeysan.cpf.security.entity.User;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +35,7 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 	private String ids;
 	private ReceiveMail entity;
 	private ReceiveMailManager receiveMailManager;
+	private RubbishMailManager rubbishMailManager;
 	private Page<ReceiveMail> page = new Page<ReceiveMail>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -38,10 +44,19 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				receiveMailManager.deleteReceiveMail(id);
+				ReceiveMail rm = receiveMailManager.getReceiveMail(id);
+				delete2rubbish(rm);
+				receiveMailManager.deleteReceiveMail(rm);
 				logger.debug("删除了fhp_receive_mail："+id);
 			}else {
-				receiveMailManager.deleteReceiveMails(ids);
+				if(StringUtils.isNotEmpty(ids)){
+					ReceiveMail rm = null;
+					for(String id_ : StringUtils.split(ids,",")){
+						rm = receiveMailManager.getReceiveMail(Long.parseLong(id_));
+						delete2rubbish(rm);
+						receiveMailManager.deleteReceiveMail(rm);
+					}
+				}
 				logger.debug("删除了很多fhp_receive_mail："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
@@ -55,22 +70,47 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
+	private void delete2rubbish(ReceiveMail rm){
+		RubbishMail rbm = new RubbishMail();
+		rbm.setAttachment(rm.getAttachment());
+		rbm.setContent(rm.getContent());
+		rbm.setDateKt(rm.getDateKt());
+		rbm.setIsRead(rm.getIsRead());
+		rbm.setReceiveEmployeeIds(rm.getReceiveEmployeeIds());
+		rbm.setSendEmployeeId(rm.getSendEmployeeId());
+		rbm.setTitle(rm.getTitle());
+		rbm.setStatus("0");//不用的字段
+		rbm.setParMailId(rm.getId());
+		rbm.setSource("0");//0 来源于收件箱 1来源于发件箱 2来源于草稿箱
+		rubbishMailManager.saveRubbishMail(rbm);
+	}
 	@Override
 	public String input() throws Exception {
 		return INPUT;
 	}
 	@Override
 	public String view() throws Exception {
+		if(entity.getIsRead().intValue() != Constants.IsRead.YES){
+			entity.setIsRead(Constants.IsRead.YES);
+			receiveMailManager.saveReceiveMail(entity);
+		}
 		return VIEW;
 	}
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		filters.add(new PropertyFilter("EQS_receiveEmployeeIds",user.getId()+""));
+		String dateKt = Struts2Utils.getRequest().getParameter("dateKt");
+		if(StringUtils.isNotEmpty(dateKt)){
+			filters.add(new PropertyFilter("GED_dateKt",dateKt+" 00:00:00"));
+			filters.add(new PropertyFilter("LED_dateKt",dateKt+" 23:59:59"));
+		}
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
-			page.setOrderBy("id");
-			page.setOrder(Page.ASC);
+			page.setOrderBy("dateKt");
+			page.setOrder(Page.DESC);
 		}
 		page = receiveMailManager.searchReceiveMail(page, filters);
 		return SUCCESS;
@@ -117,6 +157,10 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 	@Autowired
 	public void setReceiveMailManager(ReceiveMailManager receiveMailManager) {
 		this.receiveMailManager = receiveMailManager;
+	}
+	@Autowired
+	public void setRubbishMailManager(RubbishMailManager rubbishMailManager) {
+		this.rubbishMailManager = rubbishMailManager;
 	}
 	public Page<ReceiveMail> getPage() {
 		return page;
