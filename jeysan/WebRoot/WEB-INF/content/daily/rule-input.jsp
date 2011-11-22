@@ -1,10 +1,18 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@page import="com.jeysan.cpf.util.Constants"%>
 <%@ include file="/common/taglibs.jsp"%>
-<c:set var="type_" value="<%=Constants.UPLOAD_FILE_TYPE.RULE1 %>"/>
-<c:if test="${param.filter_EQI_typeh==0}"><c:set var="rule_title" value="规章制度"/></c:if>
-<c:if test="${param.filter_EQI_typeh==1}"><c:set var="rule_title" value="法律法规"/></c:if>
-<c:if test="${param.filter_EQI_typeh==2}"><c:set var="rule_title" value="通知通报"/></c:if>
+<c:if test="${param.filter_EQI_typeh==0}">
+<c:set var="rule_title" value="规章制度"/>
+<c:set var="type_" value="<%=Constants.UPLOAD_FILE_TYPE.RULE1%>"/>
+</c:if>
+<c:if test="${param.filter_EQI_typeh==1}">
+<c:set var="rule_title" value="法律法规"/>
+<c:set var="type_" value="<%=Constants.UPLOAD_FILE_TYPE.RULE2%>"/>
+</c:if>
+<c:if test="${param.filter_EQI_typeh==2}">
+<c:set var="rule_title" value="通知通报"/>
+<c:set var="type_" value="<%=Constants.UPLOAD_FILE_TYPE.NOTICE%>"/>
+</c:if>
 <div class="page">
 	<div class="pageContent">
 		<form method="post" action="${ctx}/daily/rule!save.action"
