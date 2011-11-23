@@ -4,11 +4,17 @@ import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
+import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.daily.entity.ReceiveMail;
 import com.jeysan.cpf.daily.entity.RubbishMail;
+import com.jeysan.cpf.daily.entity.SendMail;
+import com.jeysan.cpf.daily.service.ReceiveMailManager;
 import com.jeysan.cpf.daily.service.RubbishMailManager;
+import com.jeysan.cpf.daily.service.SendMailManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -30,6 +36,8 @@ public class RubbishMailAction extends CrudActionSupport<RubbishMail> {
 	private String ids;
 	private RubbishMail entity;
 	private RubbishMailManager rubbishMailManager;
+	private ReceiveMailManager receiveMailManager;
+	private SendMailManager sendMailManager;
 	private Page<RubbishMail> page = new Page<RubbishMail>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -37,23 +45,74 @@ public class RubbishMailAction extends CrudActionSupport<RubbishMail> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
-			if(id!=null){
-				rubbishMailManager.deleteRubbishMail(id);
-				logger.debug("删除了fhp_rubbish_mail："+id);
-			}else {
-				rubbishMailManager.deleteRubbishMails(ids);
-				logger.debug("删除了很多fhp_rubbish_mail："+ids.toString());
+			String type = StringUtils.trim(Struts2Utils.getParameter("type"));
+			if(StringUtils.equals(type, "1")){
+				if(id!=null){
+					RubbishMail rm = rubbishMailManager.getRubbishMail(id);
+					backFromRubbishMail(rm);
+					rubbishMailManager.deleteRubbishMail(rm);
+				}else if(StringUtils.isNotEmpty(ids)){
+					RubbishMail rm = null;
+					for(String id_ : StringUtils.split(ids,",")){
+						rm = rubbishMailManager.getRubbishMail(Long.parseLong(id_));
+						backFromRubbishMail(rm);
+						rubbishMailManager.deleteRubbishMail(rm);
+					}
+				}
+				result4Json.setMessage("还原邮件成功");
+			}else{
+				if(id!=null){
+					RubbishMail rm = rubbishMailManager.getRubbishMail(id);
+					rm.setStatus("0");
+					rubbishMailManager.saveRubbishMail(rm);
+					logger.debug("删除了邮件："+id);
+				}else {
+					if(StringUtils.isNotEmpty(ids)){
+						RubbishMail rm = null;
+						for(String id_ : StringUtils.split(ids,",")){
+							rm = rubbishMailManager.getRubbishMail(Long.parseLong(id_));
+							rm.setStatus("0");
+							rubbishMailManager.saveRubbishMail(rm);
+						}
+					}
+					logger.debug("删除了很多邮件："+ids.toString());
+				}
+				result4Json.setMessage("删除邮件成功");
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除fhp_rubbish_mail成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"fhp_rubbish_mail已经被关联,请先解除关联,删除失败":"删除fhp_rubbish_mail失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"邮件已经被关联,请先解除关联,操作失败":"操作失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
+	}
+	private void backFromRubbishMail(RubbishMail rbm){
+		if(StringUtils.equals(rbm.getSource(),"0")){
+			ReceiveMail rm = new ReceiveMail();
+			rm.setAttachment(rbm.getAttachment());
+			rm.setContent(rbm.getContent());
+			rm.setDateKt(rbm.getDateKt());
+			rm.setIsRead(rbm.getIsRead());
+			rm.setReceiveEmployeeIds(rbm.getReceiveEmployeeIds());
+			rm.setSendEmployeeId(rbm.getSendEmployeeId());
+			rm.setTitle(rbm.getTitle());
+			rm.setParMailId(rbm.getParMailId());
+			receiveMailManager.saveReceiveMail(rm);
+		}else{
+			SendMail sm = new SendMail();
+			sm.setStatus(rbm.getSource());
+			sm.setAttachment(rbm.getAttachment());
+			sm.setContent(rbm.getContent());
+			sm.setDateKt(rbm.getDateKt());
+			sm.setParMailId(rbm.getParMailId());
+			sm.setReceiveEmployeeIds(rbm.getReceiveEmployeeIds());
+			sm.setSendEmployeeId(rbm.getSendEmployeeId());
+			sm.setTitle(rbm.getTitle());
+			sendMailManager.saveSendMail(sm);
+		}
 	}
 	@Override
 	public String input() throws Exception {
@@ -91,10 +150,10 @@ public class RubbishMailAction extends CrudActionSupport<RubbishMail> {
 			rubbishMailManager.saveRubbishMail(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存fhp_rubbish_mail成功");
+				result4Json.setMessage("保存邮件成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改fhp_rubbish_mail成功");
+				result4Json.setMessage("修改邮件成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -103,7 +162,7 @@ public class RubbishMailAction extends CrudActionSupport<RubbishMail> {
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存fhp_rubbish_mail失败");
+				result4Json.setMessage("保存邮件失败");
 			}
 			
 		}
@@ -117,6 +176,14 @@ public class RubbishMailAction extends CrudActionSupport<RubbishMail> {
 	@Autowired
 	public void setRubbishMailManager(RubbishMailManager rubbishMailManager) {
 		this.rubbishMailManager = rubbishMailManager;
+	}
+	@Autowired
+	public void setReceiveMailManager(ReceiveMailManager receiveMailManager) {
+		this.receiveMailManager = receiveMailManager;
+	}
+	@Autowired
+	public void setSendMailManager(SendMailManager sendMailManager) {
+		this.sendMailManager = sendMailManager;
 	}
 	public Page<RubbishMail> getPage() {
 		return page;

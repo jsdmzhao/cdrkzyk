@@ -4,14 +4,18 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.daily.entity.ReceiveMail;
+import com.jeysan.cpf.daily.entity.RubbishMail;
 import com.jeysan.cpf.daily.entity.SendMail;
 import com.jeysan.cpf.daily.service.ReceiveMailManager;
+import com.jeysan.cpf.daily.service.RubbishMailManager;
 import com.jeysan.cpf.daily.service.SendMailManager;
 import com.jeysan.cpf.security.entity.User;
 import com.jeysan.cpf.security.service.UserManager;
@@ -28,6 +32,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/daily")
+@Results( { @Result(name = "input2", location = "sendmail2-input.jsp", type = "dispatcher")})
 public class SendMailAction extends CrudActionSupport<SendMail> {
 	/**
 	 * 
@@ -39,6 +44,7 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	private SendMailManager sendMailManager;
 	private UserManager userManager;
 	private ReceiveMailManager receiveMailManager;
+	private RubbishMailManager rubbishMailManager;
 	private Page<SendMail> page = new Page<SendMail>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -47,19 +53,29 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 			result4Json = new Result4Json();
 		try {
 			if(id!=null){
-				sendMailManager.deleteSendMail(id);
-				logger.debug("删除了fhp_send_mail："+id);
+				SendMail sm = sendMailManager.getSendMail(id);
+				delete2rubbish(sm);
+				sendMailManager.deleteSendMail(sm);
+				logger.debug("删除了邮件："+id);
 			}else {
+				if(StringUtils.isNotEmpty(ids)){
+					SendMail sm = null;
+					for(String id_ : StringUtils.split(ids,",")){
+						sm = sendMailManager.getSendMail(Long.parseLong(id_));
+						delete2rubbish(sm);
+						sendMailManager.deleteSendMail(sm);
+					}
+				}
 				sendMailManager.deleteSendMails(ids);
-				logger.debug("删除了很多fhp_send_mail："+ids.toString());
+				logger.debug("删除了很多邮件："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除fhp_send_mail成功");
+			result4Json.setMessage("删除邮件成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"fhp_send_mail已经被关联,请先解除关联,删除失败":"删除fhp_send_mail失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"邮件已经被关联,请先解除关联,删除失败":"删除邮件失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -104,6 +120,7 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 				entity.setSendEmployeeId(new Long(user.getId()));
 			}
 			entity.setDateKt(new Date());
+			entity.setReceiveEmployeeIds(entity.getReceiveEmployeeIds().replaceAll(" ", ""));
 			String send_type = StringUtils.trim(Struts2Utils.getParameter("send_type"));
 			if(StringUtils.equals(send_type, "0")||StringUtils.equals(send_type, "1")){
 				entity.setStatus("2");//草稿箱
@@ -116,20 +133,19 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 			}
 			//0 发送 1保存 2发送并保存
 			if(StringUtils.equals(send_type, "0")||StringUtils.equals(send_type, "2")){
-				String receiveEmployeeIds = entity.getReceiveEmployeeIds();
-				ReceiveMail rm = null;
-				for(String reid : StringUtils.split(receiveEmployeeIds, ",")){
-					rm = new ReceiveMail();
-					rm.setAttachment(entity.getAttachment());
-					rm.setContent(entity.getContent());
-					rm.setDateKt(entity.getDateKt());
-					rm.setIsRead(Constants.IsRead.NO);//未读
-					rm.setReceiveEmployeeIds(reid);
-					rm.setSendEmployeeId(entity.getSendEmployeeId());
-					rm.setTitle(entity.getTitle());
-					rm.setStatus("0");
-					receiveMailManager.saveReceiveMail(rm);
-				}
+				sendMail(entity);
+			}
+			if(StringUtils.equals(send_type, "2")){//发送并保存时，额外保存一封邮件到草稿箱
+				SendMail sm = new SendMail();
+				sm.setStatus("2");
+				sm.setAttachment(entity.getAttachment());
+				sm.setContent(entity.getContent());
+				sm.setDateKt(entity.getDateKt());
+				sm.setParMailId(entity.getParMailId());
+				sm.setReceiveEmployeeIds(entity.getReceiveEmployeeIds());
+				sm.setSendEmployeeId(entity.getSendEmployeeId());
+				sm.setTitle(entity.getTitle());
+				sendMailManager.saveSendMail(sm);
 			}
 			sendMailManager.saveSendMail(entity);
 			result4Json.setStatusCode("200");
@@ -153,6 +169,72 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
+	/**
+	 * 发送邮件
+	 * @param sm
+	 * @param receiveEmployeeId
+	 */
+	private void sendMail(SendMail sm){
+		ReceiveMail rm = null;
+		String receiveEmployeeIds = sm.getReceiveEmployeeIds();
+		if(StringUtils.isNotEmpty(receiveEmployeeIds)){
+			for(String reid : StringUtils.split(receiveEmployeeIds, ",")){
+				rm = new ReceiveMail();
+				rm.setAttachment(sm.getAttachment());
+				rm.setContent(sm.getContent());
+				rm.setDateKt(sm.getDateKt());
+				rm.setIsRead(Constants.IsRead.NO);//未读
+				rm.setReceiveEmployeeIds(reid.trim());
+				rm.setSendEmployeeId(sm.getSendEmployeeId());
+				rm.setTitle(sm.getTitle());
+				rm.setStatus("0");//无用
+				receiveMailManager.saveReceiveMail(rm);
+			}
+		}
+	}
+	private void delete2rubbish(SendMail sm){
+		RubbishMail rbm = new RubbishMail();
+		rbm.setAttachment(sm.getAttachment());
+		rbm.setContent(sm.getContent());
+		rbm.setDateKt(sm.getDateKt());
+		rbm.setIsRead(Constants.IsRead.YES);
+		rbm.setReceiveEmployeeIds(sm.getReceiveEmployeeIds());
+		rbm.setSendEmployeeId(sm.getSendEmployeeId());
+		rbm.setTitle(sm.getTitle());
+		rbm.setStatus("1");//1正常 0 已经删除
+		rbm.setParMailId(sm.getId());
+		rbm.setSource(sm.getStatus());//0 来源于收件箱 1来源于发件箱 2来源于草稿箱
+		rubbishMailManager.saveRubbishMail(rbm);
+	}
+	public String draft() throws Exception {
+		try{
+			String type = StringUtils.trim(Struts2Utils.getRequest().getParameter("type"));
+			entity = sendMailManager.getSendMail(id);
+			if(StringUtils.equals(type, "0")){//发送
+				sendMail(entity);
+				entity.setStatus("1");//更新到发件箱
+				sendMailManager.saveSendMail(entity);
+				delete2rubbish(entity);
+			}else if(StringUtils.equals(type, "1")){//重新编辑
+				Struts2Utils.getRequest().setAttribute("users", userManager.loadAllUsers());
+				return "input2";
+			}
+			result4Json.setStatusCode("200");
+			result4Json.setMessage("发送成功");
+			result4Json.setAction(Result4Json.UPDATE);
+		}catch(Exception e){
+			logger.error(e.getMessage(), e);
+			result4Json.setStatusCode("300");
+			if(e instanceof ObjectNotFoundException){
+				result4Json.setMessage("邮件已被删除，请重新添加");
+			}else{
+				result4Json.setMessage("发送失败");
+			}
+			
+		}
+		Struts2Utils.renderJson(result4Json);
+		return NONE;
+	}
 	@Override
 	public SendMail getModel() {
 		return entity;
@@ -168,6 +250,10 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	@Autowired
 	public void setReceiveMailManager(ReceiveMailManager receiveMailManager) {
 		this.receiveMailManager = receiveMailManager;
+	}
+	@Autowired
+	public void setRubbishMailManager(RubbishMailManager rubbishMailManager) {
+		this.rubbishMailManager = rubbishMailManager;
 	}
 	public Page<SendMail> getPage() {
 		return page;

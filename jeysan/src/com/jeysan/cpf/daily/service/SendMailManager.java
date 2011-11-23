@@ -46,6 +46,9 @@ public class SendMailManager {
 	public void deleteSendMail(Long id){
 		sendMailDao.delete(id);
 	}
+	public void deleteSendMail(SendMail entity){
+		sendMailDao.delete(entity);
+	}
 	/**
 	 * 用于无关联实体的批量删除
 	 * @param ids
