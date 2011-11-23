@@ -129,10 +129,10 @@ $(function(){
 										<a>${c.resourceName}</a>
 										<ul>
 											<li><a href="${ctx}/daily/receivemail.action?type=1" target="navTab" rel="nav_receivemailmanage">收件箱</a></li>
-											<li><a href="${ctx}/daily/sendmail!input.action" target="navTab" rel="nav_sendmail1manage">写邮件</a></li>
-											<li><a href="${ctx}/daily/sendmail.action?type=1" target="navTab" rel="nav_sendmail1manage">发件箱</a></li>
-											<li><a href="${ctx}/daily/sendmail.action?type=2" target="navTab" rel="nav_sendmail2manage">草稿箱</a></li>
-											<li><a href="${ctx}/daily/rubbishmail.action" target="navTab" rel="nav_rubbishemailmanage">垃圾箱</a></li>
+											<li><a href="${ctx}/daily/sendmail!input.action" target="navTab" rel="todolist-input">写邮件</a></li>
+											<li><a href="${ctx}/daily/sendmail.action?filter_EQS_status=1" target="navTab" rel="nav_sendmail1manage">发件箱</a></li>
+											<li><a href="${ctx}/daily/sendmail.action?filter_EQS_status=2" target="navTab" rel="nav_sendmail2manage">草稿箱</a></li>
+											<li><a href="${ctx}/daily/rubbishmail.action?filter_EQS_status=1" target="navTab" rel="nav_rubbishmailmanage">垃圾箱</a></li>
 										</ul>
 										</c:when>
 										<c:when test="${c.resourceCode=='1007'}">
