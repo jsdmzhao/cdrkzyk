@@ -73,7 +73,7 @@
 					<th width="80" orderField="sendEmployeeId" class="orderFlag">
 						发件人
 					</th>
-					<th width="80" orderField="title" class="orderFlag">
+					<th width="180" orderField="title" class="orderFlag">
 						主题
 					</th>
 					<th width="120" orderField="dateKt" class="orderFlag">
@@ -109,7 +109,7 @@
 							<tags:js.dict.getValue value="${a.isRead}"/>
 						</td>
 						<td>
-							<div style="width: 75px;">
+							<div style="width: 50px;">
 								<a class="btnView"
 									href="${ctx}/daily/receivemail!view.action?id=${a.id}"
 									target="navTab" title="查看邮件信息"

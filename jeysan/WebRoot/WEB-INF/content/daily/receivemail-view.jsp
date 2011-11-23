@@ -19,7 +19,7 @@
 			</p>
 			<p style="width:100%;">
 				<label>
-					发送日期：
+					发送时间：
 				</label>
 				<input style="width:500px" name="dateKt" readonly="readonly" type="text" size="30"
 					value="<fmt:formatDate value="${dateKt}" pattern="yyyy-MM-dd HH:mm:ss"/>" />
