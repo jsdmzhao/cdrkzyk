@@ -46,6 +46,9 @@ public class RubbishMailManager {
 	public void deleteRubbishMail(Long id){
 		rubbishMailDao.delete(id);
 	}
+	public void deleteRubbishMail(RubbishMail entity){
+		rubbishMailDao.delete(entity);
+	}
 	/**
 	 * 用于无关联实体的批量删除
 	 * @param ids

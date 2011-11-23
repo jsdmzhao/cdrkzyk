@@ -47,7 +47,7 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 				ReceiveMail rm = receiveMailManager.getReceiveMail(id);
 				delete2rubbish(rm);
 				receiveMailManager.deleteReceiveMail(rm);
-				logger.debug("删除了fhp_receive_mail："+id);
+				logger.debug("删除了邮件："+id);
 			}else {
 				if(StringUtils.isNotEmpty(ids)){
 					ReceiveMail rm = null;
@@ -57,15 +57,15 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 						receiveMailManager.deleteReceiveMail(rm);
 					}
 				}
-				logger.debug("删除了很多fhp_receive_mail："+ids.toString());
+				logger.debug("删除了很多邮件："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除fhp_receive_mail成功");
+			result4Json.setMessage("删除邮件成功");
 			result4Json.setAction(Result4Json.DELETE);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"fhp_receive_mail已经被关联,请先解除关联,删除失败":"删除fhp_receive_mail失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?"邮件已经被关联,请先解除关联,删除失败":"删除邮件失败");
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -79,9 +79,10 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 		rbm.setReceiveEmployeeIds(rm.getReceiveEmployeeIds());
 		rbm.setSendEmployeeId(rm.getSendEmployeeId());
 		rbm.setTitle(rm.getTitle());
-		rbm.setStatus("0");//不用的字段
+		rbm.setStatus("1");//1正常 0 已经删除
 		rbm.setParMailId(rm.getId());
 		rbm.setSource("0");//0 来源于收件箱 1来源于发件箱 2来源于草稿箱
+		rbm.setParMailId(rm.getParMailId());
 		rubbishMailManager.saveRubbishMail(rbm);
 	}
 	@Override
@@ -131,10 +132,10 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 			receiveMailManager.saveReceiveMail(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存fhp_receive_mail成功");
+				result4Json.setMessage("保存邮件成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改fhp_receive_mail成功");
+				result4Json.setMessage("修改邮件成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
 		}catch(Exception e){
@@ -143,7 +144,7 @@ public class ReceiveMailAction extends CrudActionSupport<ReceiveMail> {
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存fhp_receive_mail失败");
+				result4Json.setMessage("保存邮件失败");
 			}
 			
 		}
