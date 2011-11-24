@@ -32,7 +32,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/daily")
-@Results( { @Result(name = "input2", location = "sendmail2-input.jsp", type = "dispatcher")})
+@Results( { @Result(name = "input2", location = "sendmail2-input.jsp", type = "dispatcher"),
+	@Result(name = "reply", location = "sendmail3-input.jsp", type = "dispatcher")})
 public class SendMailAction extends CrudActionSupport<SendMail> {
 	/**
 	 * 
@@ -85,6 +86,10 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 		Struts2Utils.getRequest().setAttribute("users", userManager.loadAllUsers());
 		return INPUT;
 	}
+	public String reply() throws Exception {
+		Struts2Utils.getRequest().setAttribute("m", receiveMailManager.getReceiveMail(id));
+		return "reply";
+	}
 	@Override
 	public String view() throws Exception {
 		return VIEW;
@@ -92,6 +97,8 @@ public class SendMailAction extends CrudActionSupport<SendMail> {
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		filters.add(new PropertyFilter("EQL_sendEmployeeId",user.getId()+""));
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {

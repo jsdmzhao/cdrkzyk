@@ -31,6 +31,12 @@ public class TodolistManager {
 	public void saveTodolist(Todolist entity){
 		todolistDao.save(entity);
 	}
+	public void saveTodolistOnly(Todolist entity){
+		todolistDao.saveOnly(entity);
+	}
+	public void updateTodolistOnly(Todolist entity){
+		todolistDao.updateOnly(entity);
+	}
 	/**
 	 * 增加Collection
 	 * @param entites
