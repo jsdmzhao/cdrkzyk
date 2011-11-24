@@ -14,6 +14,7 @@ import com.jeysan.cpf.daily.entity.SendMail;
 import com.jeysan.cpf.daily.service.ReceiveMailManager;
 import com.jeysan.cpf.daily.service.RubbishMailManager;
 import com.jeysan.cpf.daily.service.SendMailManager;
+import com.jeysan.cpf.security.entity.User;
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.CrudActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -125,6 +126,8 @@ public class RubbishMailAction extends CrudActionSupport<RubbishMail> {
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		filters.add(new PropertyFilter("EQL_sendEmployeeId",user.getId()+""));
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
