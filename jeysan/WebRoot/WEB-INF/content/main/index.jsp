@@ -135,6 +135,9 @@ $(function(){
 											<li><a href="${ctx}/daily/rubbishmail.action?filter_EQS_status=1" target="navTab" rel="nav_rubbishmailmanage">垃圾箱</a></li>
 										</ul>
 										</c:when>
+										<c:when test="${c.resourceCode=='1005'}">
+										<a href="${ctx}/${c.resourceValue}" external="true" target="navTab" rel="nav_${c.entityName}manage">${c.resourceName}</a>
+										</c:when>
 										<c:when test="${c.resourceCode=='1007'}">
 										<a>${c.resourceName}</a>
 										<ul>

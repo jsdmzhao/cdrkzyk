@@ -53,6 +53,15 @@
 				<li>
 					<div class="button">
 						<div class="buttonContent">
+							<button type="Button" onclick="navTab.openTab('receiveMail-view', '${ctx}/daily/sendmail!reply.action?id=${id}',{title:'回复邮件'});">
+								回复
+							</button>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="button">
+						<div class="buttonContent">
 							<button type="Button" onclick="navTab.closeCurrentTab()">
 								取消
 							</button>
