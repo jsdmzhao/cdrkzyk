@@ -12,13 +12,12 @@
 <script  type="text/javascript" src="${ctx4doc}/js/codebase/GooUploader.js"></script>
 <script type="text/javascript" src="${ctx4doc}/js/codebase/swfupload/swfupload.js"></script>
 
-<script type="text/javascript">//alert(parent.navTab.getCurrentPanel());
+<script type="text/javascript">
 var uploadSuccess = function(file,data){
 	var hiddenId = "<%=request.getParameter("hiddenId")%>";
 	var labelId = "<%=request.getParameter("labelId")%>";
-	var cp = parent.navTab.getCurrentPanel();
-	var parentLabelId = $("#"+labelId, cp);
-	var parentHiddenId = $("#"+hiddenId, cp);
+	var parentLabelId = $("#"+labelId, opener.document);
+	var parentHiddenId = $("#"+hiddenId, opener.document);
 	var fileId = JSON.parse(data).fileId;
 	var fileName = JSON.parse(data).fileName;
 	parentLabelId.append(getLinkHrefStr(fileId,file.name,fileName));
@@ -33,7 +32,7 @@ var uploadError = function(file,code,msg){
 }
 var fileQueueError = function(file,code,msg){
 	if(code == SWFUpload.QUEUE_ERROR.FILE_EXCEEDS_SIZE_LIMIT){
-		alert('文件太大，单个文件不能超过20M');
+		alert('文件太大，不能超过50M');
 	}
 }
 function getLinkHrefStr(fileId,fileLabelName,fileName){
@@ -70,7 +69,7 @@ var property={
 	uploadSuccess:uploadSuccess,
 	uploadError:uploadError,
 	fileQueueError:fileQueueError,
-	file_size_limit:20480,
+	file_size_limit:51200,
 	flash_url:"${ctx4doc}/js/codebase/swfupload.swf",
 	file_upload_limit:<%=(request.getParameter("is4SingleFile")!=null&&request.getParameter("is4SingleFile").equals("true"))?1:10%>
 	//file_queue_limit:5
