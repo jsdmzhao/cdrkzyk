@@ -14,6 +14,7 @@
 			<c:when test="${type=='number'}"><fmt:formatNumber value="${value}" pattern="#,#00.00"/></c:when>
 			<c:when test="${type=='area'}"><fmt:formatNumber value="${value}" pattern="#,#00.00"/>M<sup>2</sup></c:when>
 			<c:when test="${type=='region'}"><tags:js.area.getValue value="${value}"/></c:when>
+			<c:when test="${type=='user'}"><tags:js.user.getValue property="userName" value="${value}"/></c:when>
 			<c:when test="${type=='per'}"><fmt:formatNumber value="${value}" type="percent" pattern="#0.00%"/></c:when>
 			<c:otherwise>${value}</c:otherwise>
 </c:choose>

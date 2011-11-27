@@ -1,4 +1,4 @@
-﻿<%-- 
+<%-- 
 	JSP 扩展标签,文件统一管理器
 	written by Cancerloveshaly @ kt.com
 --%>
@@ -98,7 +98,7 @@
 		</c:set>
 	</c:if>
 	${deleteFileJavascript}
-	<a class="btnLook" mask="true" target="dialog" href="${ctx}/common/preuploadkt.jsp?type=${type}&isv=${isv}&hiddenId=${hiddenId}&labelId=${labelId}&isLimit4Pic=${isLimit4Pic}&is4SingleFile=${is4SingleFile}&isShowPic=${isShowPic}&fileTypes=${fileTypes}" width="312" height="340">文件管理统一控制器</a><input type="hidden" id="${hiddenId}" name="${hiddenId}" value="${hiddenIdValue}"/>
+	<a class="btnLook" href="javascript:" onclick="window.open('${ctx}/common/uploadkt.jsp?type=${type}&isv=${isv}&hiddenId=${hiddenId}&labelId=${labelId}&isLimit4Pic=${isLimit4Pic}&is4SingleFile=${is4SingleFile}&isShowPic=${isShowPic}&fileTypes=${fileTypes}', 'fileselector', 'width=300,height=300,status=no')"></a><input type="hidden" id="${hiddenId}" name="${hiddenId}" value="${hiddenIdValue}"/>
 	</c:if>
 	<c:if test="${!empty(hiddenIdValue)&&fn:length(hiddenIdValue)>0}">
 	<script type="text/javascript">
