@@ -78,7 +78,7 @@
 					</p>
 																													<p>
 					<label>流出日期：</label>
-					<input name="outDate" class="date required" type="text" readonly="readonly" size="30" value="<fmt:formatDate value="${outDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="outDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" type="text" readonly="readonly" size="30" value="<fmt:formatDate value="${outDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 					<p style="width:98%">
 					<label>流入地地址：</label>

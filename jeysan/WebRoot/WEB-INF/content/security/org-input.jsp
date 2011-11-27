@@ -41,7 +41,7 @@
 				</p>
 				<p>
 					<label>建档日期：</label>
-					<input type="text" name="endDate" class="date" size="30" readonly="readonly"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input type="text" name="endDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" size="30" readonly="readonly"/>
 				</p>
 			</div>
 			<div class="formBar">

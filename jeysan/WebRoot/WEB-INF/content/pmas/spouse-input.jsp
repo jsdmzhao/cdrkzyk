@@ -135,10 +135,10 @@
 					<label>
 						出生日期：
 					</label>
-					<input name="birthday" class="date required" readonly="readonly"
+					<input name="birthday" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly"
 						type="text" size="30" onpropertychange="setage(this.value)"
 						value="<fmt:formatDate value="${birthday}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 
 				<p>

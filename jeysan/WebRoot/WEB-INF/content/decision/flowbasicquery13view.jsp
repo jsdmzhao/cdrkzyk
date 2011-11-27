@@ -33,10 +33,10 @@
 						</td>
 						<td colspan="2">
 							流入/流出日期：
-							<input type="text" name="filter_GED_dateh" class="date"
+							<input type="text" name="filter_GED_dateh" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_dateh}" />
 							~
-							<input type="text" name="filter_LED_dateh" class="date"
+							<input type="text" name="filter_LED_dateh" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_dateh}" />
 						</td>
 					</tr>

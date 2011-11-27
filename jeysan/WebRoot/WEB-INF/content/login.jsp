@@ -2,12 +2,12 @@
 <%@ include file="/common/taglibs.jsp" %>
 <%@ page import="org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter" %>
 <%@ page import="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter" %>
-<%@ page import="org.springframework.security.web.WebAttributes" %>
+<%@ page import="org.springframework.security.web.WebAttributes,com.jeysan.modules.utils.Constants.Application" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><%=com.jeysan.modules.utils.Constants.Application.PLATFORM_TITLE%></title>
+<title><%=Application.PLATFORM_TITLE%></title>
 <link href="${ctx4doc}/dwz3/themes/css/login.css" rel="stylesheet" type="text/css" />
 <script src="${ctx4doc}/dwz3/js/jquery-1.4.4.js" type="text/javascript"></script>
 <script src="${ctx4doc}/dwz3/js/jquery.cookie.js" type="text/javascript"></script>
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div id="login_footer">
-			Copyright &copy; 2011 www.jeysan.com Inc. All Rights Reserved.
+			Copyright &copy; <%=Application.PLATFORM_EXPIRE%>&nbsp;&nbsp;<a href="<%=Application.PLATFORM_SITE%>" target="_blank"><%=Application.PLATFORM_COMPANY%></a>
 		</div>
 	</div>
 </body>

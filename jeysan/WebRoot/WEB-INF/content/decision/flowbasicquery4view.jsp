@@ -21,7 +21,7 @@
 						</td>
 						<td>
 							初婚日期：
-							<input type="text" name="filter_GED_firstMarryDate" class="date" readonly="true" value="${param.filter_GED_firstMarryDate}"/>~<input type="text" name="filter_LED_firstMarryDate" class="date" readonly="true" value="${param.filter_LED_firstMarryDate}"/>
+							<input type="text" name="filter_GED_firstMarryDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_firstMarryDate}"/>~<input type="text" name="filter_LED_firstMarryDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_firstMarryDate}"/>
 						</td>
 						<td>
 							所属区域：

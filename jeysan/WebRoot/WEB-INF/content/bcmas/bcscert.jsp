@@ -34,7 +34,7 @@
 						</td>
 						<td>
 							发证日期：
-							<input class="date" readonly="readonly" type="text" name="filter_EQD_issDate"
+							<input class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="readonly" type="text" name="filter_EQD_issDate"
 								value="${param['filter_EQD_issDate']}" />
 						</td>
 						<td>

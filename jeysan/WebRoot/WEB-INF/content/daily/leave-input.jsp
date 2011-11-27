@@ -27,19 +27,19 @@
 					<label>
 						请假开始日期：
 					</label>
-					<input name="leaveStart" class="date  required "
+					<input name="leaveStart" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate  required "
 						readonly="readonly" type="text" size="30"
 						value="<fmt:formatDate value="${leaveStart}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						请假结束日期：
 					</label>
-					<input name="leaveEnd" class="date  required " readonly="readonly"
+					<input name="leaveEnd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate  required " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${leaveEnd}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

@@ -45,19 +45,19 @@
 					<label>
 						发证日期：
 					</label>
-					<input name="issDate" class="date required" readonly="readonly" type="text"
+					<input name="issDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${issDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						有效期：
 					</label>
-					<input name="validPeroid" class="date required" readonly="readonly" type="text"
+					<input name="validPeroid" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${validPeroid}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -162,9 +162,9 @@
 					<label>
 						换证日期：
 					</label>
-					<input name="change.dateh" class="date required" readonly="readonly" type="text"
+					<input name="change.dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -186,10 +186,10 @@
 					<label>
 						废止日期：
 					</label>
-					<input name="change.dateh" class="date required" readonly="readonly" type="text"
+					<input name="change.dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						  />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -210,10 +210,10 @@
 					<label>
 						查验日期：
 					</label>
-					<input name="check.dateh" class="date required" readonly="readonly" type="text"
+					<input name="check.dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						  />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

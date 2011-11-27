@@ -101,15 +101,15 @@
 <div class="divider"></div>
 																													<p>
 					<label>租赁许可证签证时间：</label>
-					<input name="rentPermitDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${rentPermitDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="rentPermitDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${rentPermitDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>治安责任书签订时间：</label>
-					<input name="orderDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${orderDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="orderDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${orderDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>计生责任书签订时间：</label>
-					<input name="bcsDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${bcsDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="bcsDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${bcsDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 
 <div class="divider"></div>

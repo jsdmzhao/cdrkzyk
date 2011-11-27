@@ -21,11 +21,11 @@
 						</td>
 						<td>
 							发证日期：
-							<input name="filter_EQD_bcs.issDate" value="${param.filter_EQD_bcs.issDate}" type="text" class="date" readonly="true" />
+							<input name="filter_EQD_bcs.issDate" value="${param.filter_EQD_bcs.issDate}" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" />
 						</td>
 						<td>
 							查验日期：
-							<input name="filter_EQD_dateh" value="${param.filter_EQD_dateh}" type="text" class="date" readonly="true" />
+							<input name="filter_EQD_dateh" value="${param.filter_EQD_dateh}" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" />
 						</td>
 					</tr>
 				</table>

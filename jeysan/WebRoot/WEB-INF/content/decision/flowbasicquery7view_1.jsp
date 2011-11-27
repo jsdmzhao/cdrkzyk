@@ -44,11 +44,11 @@
 </tr><tr>
 						<td colspan="2">
 							流入日期：
-<input type="text" name="filter_GED_settleInDate" class="date" readonly="true" value="${param.filter_GED_settleInDate}"/>~<input type="text" name="filter_LED_settleInDate" class="date" readonly="true" value="${param.filter_LED_settleInDate}"/>
+<input type="text" name="filter_GED_settleInDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_settleInDate}"/>~<input type="text" name="filter_LED_settleInDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_settleInDate}"/>
 						</td>
 						<td colspan="2">
 							出生日期：
-<input type="text" name="filter_GED_birthday" class="date" readonly="true" value="${param.filter_GED_birthday}"/>~<input type="text" name="filter_LED_birthday" class="date" readonly="true" value="${param.filter_LED_birthday}"/>
+<input type="text" name="filter_GED_birthday" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_birthday}"/>~<input type="text" name="filter_LED_birthday" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_birthday}"/>
 						</td>
 </tr><tr>
 						<td>
@@ -60,7 +60,7 @@
 						</td>
 						<td colspan="2">
 							落实措施日期：
-<input type="text" name="filter_GED_opsDate" class="date" readonly="true" value="${param.filter_GED_opsDate}"/>~<input type="text" name="filter_LED_opsDate" class="date" readonly="true" value="${param.filter_LED_opsDate}"/>
+<input type="text" name="filter_GED_opsDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_opsDate}"/>~<input type="text" name="filter_LED_opsDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_opsDate}"/>
 						</td>
 </tr><tr>
 						<td colspan="4">

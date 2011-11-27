@@ -37,10 +37,10 @@
 						</td>
 						<td colspan="2">
 							流出日期：
-							<input type="text" name="filter_GED_outDate" class="date"
+							<input type="text" name="filter_GED_outDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_outDate}" />
 							~
-							<input type="text" name="filter_LED_outDate" class="date"
+							<input type="text" name="filter_LED_outDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_outDate}" />
 						</td>
 						<td>

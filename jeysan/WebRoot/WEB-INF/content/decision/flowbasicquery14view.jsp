@@ -53,10 +53,10 @@
 					<tr>
 						<td colspan="2">
 							注销日期：
-							<input type="text" name="filter_GED_cancelDate" class="date"
+							<input type="text" name="filter_GED_cancelDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_cancelDate}" />
 							~
-							<input type="text" name="filter_LED_cancelDate" class="date"
+							<input type="text" name="filter_LED_cancelDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_cancelDate}" />
 						</td>
 						<td>

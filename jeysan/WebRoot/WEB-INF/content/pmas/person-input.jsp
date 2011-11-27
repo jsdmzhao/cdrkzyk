@@ -58,7 +58,7 @@ function ok(){
 					</p>
 					<p>
 					<label>出生日期：</label>
-					<input name="personBasic.birthday" class="date required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.birthday}" pattern="yyyy-MM-dd"/>" onpropertychange="setage(this.value)"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="personBasic.birthday" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.birthday}" pattern="yyyy-MM-dd"/>" onpropertychange="setage(this.value)"/>
 					</p>
 					<p>
 					<label>年龄：</label>
@@ -70,16 +70,16 @@ function ok(){
 					</p>
 					<p>
 					<label>初婚日期：</label>
-					<input name="personBasic.firstMarryDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.firstMarryDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="personBasic.firstMarryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.firstMarryDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 				<p>
 					<label>
 						婚变日期：
 					</label>
-					<input name="personBasic.marryCryDate" class="date " readonly="readonly"
+					<input name="personBasic.marryCryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${personBasic.marryCryDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 					<p>
 					<label>文化程度：</label>
@@ -216,7 +216,7 @@ function ok(){
 					</p>
 					<p>
 					<label>迁入(流入)日期：</label>
-					<input name="settleInDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${settleInDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="settleInDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${settleInDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 					<p>
 					<label>迁入(流入)原因：</label>

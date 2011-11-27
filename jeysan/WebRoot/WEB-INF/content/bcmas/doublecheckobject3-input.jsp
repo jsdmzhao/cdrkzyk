@@ -129,10 +129,10 @@
 					<label>
 						处理时间：
 					</label>
-					<input name="ldwDate" class="date required" readonly="readonly" type="text"
+					<input name="ldwDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${model.ldwDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -145,10 +145,10 @@
 					<label>
 						交款日期：
 					</label>
-					<input name="payDate" class="date " readonly="readonly" type="text"
+					<input name="payDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${payDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

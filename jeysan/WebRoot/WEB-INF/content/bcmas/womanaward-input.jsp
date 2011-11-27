@@ -31,10 +31,10 @@
 					<label>
 						奖励日期：
 					</label>
-					<input name="awardDate" class="date " readonly="readonly"
+					<input name="awardDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${awardDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

@@ -33,7 +33,7 @@
 						</td>
 						<td>
 							申请日期：
-							<input type="text" name="filter_EQD_dateh" class="date"
+							<input type="text" name="filter_EQD_dateh" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param['filter_EQD_dateh']}" />
 						</td>
 					</tr><tr>
@@ -43,7 +43,7 @@
 						</td>
 						<td>
 							审批日期：
-							<input type="text" name="filter_EQD_birth2Check.checkDate" class="date"
+							<input type="text" name="filter_EQD_birth2Check.checkDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param['filter_EQD_birth2Check.checkDate']}" />
 						</td>
 						<td>

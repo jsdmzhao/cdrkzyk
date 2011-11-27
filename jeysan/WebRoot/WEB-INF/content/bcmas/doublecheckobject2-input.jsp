@@ -121,10 +121,10 @@
 					<label>
 						双查时间：
 					</label>
-					<input name="dcDate" class="date " readonly="readonly" type="text"
+					<input name="dcDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${model.dcDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

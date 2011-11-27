@@ -174,7 +174,7 @@
 										value="${a.charger}" />
 								</td>
 								<td>
-									<input type="text" name="dateh_${b.index+1}" class="date"
+									<input type="text" name="dateh_${b.index+1}" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 										size="15" value="<fmt:formatDate value="${a.dateh}" pattern="yyyy-MM-dd"/>" />
 									<a class="inputDateButton" href="javascript:;">选择</a>
 								</td>
@@ -202,7 +202,7 @@
 									<input type="text" name="charger_1" size="15" />
 								</td>
 								<td>
-									<input type="text" name="dateh_1" class="date" size="15" />
+									<input type="text" name="dateh_1" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" size="15" />
 									<a class="inputDateButton" href="javascript:;">选择</a>
 								</td>
 								<td>

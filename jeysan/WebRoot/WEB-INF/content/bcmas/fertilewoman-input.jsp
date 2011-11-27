@@ -22,7 +22,7 @@
 					<label>
 						建卡日期：
 					</label>
-					<input name="createDate" class="date " readonly="readonly"
+					<input name="createDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${createDate}" pattern="yyyy-MM-dd"/>" />
 				</p>
@@ -56,29 +56,29 @@
 					<label>
 						初婚日期：
 					</label>
-					<input name="womanBasic.firstMarryDate" class="date " readonly="readonly"
+					<input name="womanBasic.firstMarryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.firstMarryDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						婚变日期：
 					</label>
-					<input name="womanBasic.marryCryDate" class="date " readonly="readonly"
+					<input name="womanBasic.marryCryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.marryCryDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 <div class="divider"></div>
 				<p>
 					<label>
 						领光荣证日期：
 					</label>
-					<input name="womanBasic.getGrzDate" class="date " readonly="readonly"
+					<input name="womanBasic.getGrzDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.getGrzDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -91,10 +91,10 @@
 					<label>
 						安排二孩日期：
 					</label>
-					<input name="womanBasic.planChild2Date" class="date " readonly="readonly"
+					<input name="womanBasic.planChild2Date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.planChild2Date}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -107,10 +107,10 @@
 					<label>
 						安排再生日期：
 					</label>
-					<input name="womanBasic.planBear2Date" class="date " readonly="readonly"
+					<input name="womanBasic.planBear2Date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.planBear2Date}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 <div class="divider"></div>
 				<p>
@@ -124,10 +124,10 @@
 					<label>
 						领流动证日期：
 					</label>
-					<input name="womanBasic.getLdzDate" class="date " readonly="readonly"
+					<input name="womanBasic.getLdzDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.getLdzDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -147,10 +147,10 @@
 					<label>
 						注销日期：
 					</label>
-					<input name="womanBasic.cancelDate" class="date " readonly="readonly"
+					<input name="womanBasic.cancelDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.cancelDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p> -->
 				<p>
 					<label>
@@ -169,10 +169,10 @@
 					<label>
 						计生证有效期：
 					</label>
-					<input name="womanBasic.certDate" class="date " readonly="readonly"
+					<input name="womanBasic.certDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${womanBasic.certDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 <div class="divider"></div>
 				<p>

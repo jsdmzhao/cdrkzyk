@@ -37,10 +37,10 @@
 					<label>
 						教育日期：
 					</label>
-					<input name="eduDate" class="date " readonly="readonly" type="text"
+					<input name="eduDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${eduDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

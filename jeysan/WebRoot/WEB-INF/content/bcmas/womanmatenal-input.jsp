@@ -37,10 +37,10 @@
 					<label>
 						怀孕日期：
 					</label>
-					<input name="conceptDate" class="date " readonly="readonly"
+					<input name="conceptDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${conceptDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -65,10 +65,10 @@
 					<label>
 						预产期：
 					</label>
-					<input name="edd" class="date " readonly="readonly" type="text"
+					<input name="edd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${edd}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -93,10 +93,10 @@
 					<label>
 						手术日期：
 					</label>
-					<input name="endDate" class="date " readonly="readonly" type="text"
+					<input name="endDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -120,10 +120,10 @@
 					<label>
 						变化日期：
 					</label>
-					<input name="changeDate" class="date " readonly="readonly"
+					<input name="changeDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${changeDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

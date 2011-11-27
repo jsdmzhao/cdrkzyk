@@ -35,28 +35,28 @@
 					<label>
 						初婚日期：
 					</label>
-					<input name="firstMarryDate" class="date " readonly="readonly"
+					<input name="firstMarryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${firstMarryDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						婚变日期：
 					</label>
-					<input name="marryCryDate" class="date " readonly="readonly"
+					<input name="marryCryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${marryCryDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						领光荣证日期：
 					</label>
-					<input name="getGrzDate" class="date " readonly="readonly"
+					<input name="getGrzDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${getGrzDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -69,10 +69,10 @@
 					<label>
 						安排二孩日期：
 					</label>
-					<input name="planChild2Date" class="date " readonly="readonly"
+					<input name="planChild2Date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${planChild2Date}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -85,10 +85,10 @@
 					<label>
 						安排再生日期：
 					</label>
-					<input name="planBear2Date" class="date " readonly="readonly"
+					<input name="planBear2Date" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${planBear2Date}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -101,10 +101,10 @@
 					<label>
 						领流动证日期：
 					</label>
-					<input name="getLdzDate" class="date " readonly="readonly"
+					<input name="getLdzDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${getLdzDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -124,10 +124,10 @@
 					<label>
 						注销日期：
 					</label>
-					<input name="cancelDate" class="date " readonly="readonly"
+					<input name="cancelDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${cancelDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -145,10 +145,10 @@
 					<label>
 						计生证有效期：
 					</label>
-					<input name="certDate" class="date " readonly="readonly"
+					<input name="certDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${certDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 			</div>
 			<div class="formBar">

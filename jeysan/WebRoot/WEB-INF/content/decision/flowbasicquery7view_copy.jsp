@@ -18,7 +18,7 @@
 						</td>
 						<td>
 							建档日期：
-							<input type="text" class="date" readonly="true" />
+							<input type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" />
 						</td>
 					</tr>
 				</table>

@@ -40,10 +40,10 @@
 					<label>
 						政策外生育日期：
 					</label>
-					<input name="outDate" class="date " readonly="readonly" type="text"
+					<input name="outDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${outDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -69,10 +69,10 @@
 					<label>
 						缴交期限：
 					</label>
-					<input name="endDate" class="date " readonly="readonly" type="text"
+					<input name="endDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -84,10 +84,10 @@
 					<label>
 						决定书日期：
 					</label>
-					<input name="lodDate" class="date " readonly="readonly" type="text"
+					<input name="lodDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${lodDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

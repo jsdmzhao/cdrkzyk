@@ -23,7 +23,7 @@
 						</td>
 						<td>
 							时间：
-							<input type="text" name="dateKt" class="date" readonly="true"
+							<input type="text" name="dateKt" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true"
 								value="${param['dateKt']}" />
 						</td>
 					</tr>

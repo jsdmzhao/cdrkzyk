@@ -87,10 +87,10 @@
 					<label>
 						投保日期：
 					</label>
-					<input name="assDate" class="date required" readonly="readonly" type="text"
+					<input name="assDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30" 
 						value="<fmt:formatDate value="${assDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -182,10 +182,10 @@
 					<label>
 						取消保险日期：
 					</label>
-					<input name="cancelDate" class="date required" readonly="readonly"
+					<input name="cancelDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${cancelDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

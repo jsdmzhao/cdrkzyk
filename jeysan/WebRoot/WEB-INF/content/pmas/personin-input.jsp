@@ -66,7 +66,7 @@
 					</p>
 																													<p>
 					<label>流入日期：</label>
-					<input name="inDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${inDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="inDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${inDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 					<p style="width:98%">
 					<label>流入地地址：</label>
@@ -91,11 +91,11 @@
 					</p>
 																													<p>
 					<label>配偶流入日期：</label>
-					<input name="spouseInDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${spouseInDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="spouseInDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${spouseInDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>配偶流出日期：</label>
-					<input name="spouseOutDate" class="date " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${spouseOutDate}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="spouseOutDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${spouseOutDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																	</div>
 			<div class="formBar">

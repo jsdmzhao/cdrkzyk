@@ -45,25 +45,25 @@
 </tr><tr>
 						<td colspan="2">
 							出生日期：
-<input type="text" name="filter_GED_birthday" class="date" readonly="true" value="${param.filter_GED_birthday}"/>~<input type="text" name="filter_LED_birthday" class="date" readonly="true" value="${param.filter_LED_birthday}"/>
+<input type="text" name="filter_GED_birthday" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_birthday}"/>~<input type="text" name="filter_LED_birthday" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_birthday}"/>
 						</td>
 						<td colspan="2">
 							流入日期：
-<input type="text" name="filter_GED_settleInDate" class="date" readonly="true" value="${param.filter_GED_settleInDate}"/>~<input type="text" name="filter_LED_settleInDate" class="date" readonly="true" value="${param.filter_LED_settleInDate}"/>
+<input type="text" name="filter_GED_settleInDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_settleInDate}"/>~<input type="text" name="filter_LED_settleInDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_settleInDate}"/>
 						</td>
 </tr><tr>
 						<td colspan="2">
 							流出日期：
-<input type="text" name="filter_GED_outDate" class="date" readonly="true" value="${param.filter_GED_outDate}"/>~<input type="text" name="filter_LED_outDate" class="date" readonly="true" value="${param.filter_LED_outDate}"/>
+<input type="text" name="filter_GED_outDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_outDate}"/>~<input type="text" name="filter_LED_outDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_outDate}"/>
 						</td>
 						<td colspan="2">
 							怀孕日期：
-<input type="text" name="filter_GED_conceptDate" class="date" readonly="true" value="${param.filter_GED_conceptDate}"/>~<input type="text" name="filter_LED_conceptDate" class="date" readonly="true" value="${param.filter_LED_conceptDate}"/>
+<input type="text" name="filter_GED_conceptDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_conceptDate}"/>~<input type="text" name="filter_LED_conceptDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_conceptDate}"/>
 						</td>
 </tr><tr>
 						<td colspan="2">
 							孕产日期：
-<input type="text" name="filter_GED_endDate" class="date" readonly="true" value="${param.filter_GED_endDate}"/>~<input type="text" name="filter_LED_endDate" class="date" readonly="true" value="${param.filter_LED_endDate}"/>
+<input type="text" name="filter_GED_endDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_endDate}"/>~<input type="text" name="filter_LED_endDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_endDate}"/>
 						</td>
 						<td colspan="2">
 							所属区域：

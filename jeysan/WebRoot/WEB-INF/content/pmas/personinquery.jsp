@@ -37,7 +37,7 @@
 						</td>
 						<td>
 							流入日期：
-							<input name="filter_EQD_inDate" type="text" class="date"
+							<input name="filter_EQD_inDate" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param['filter_EQD_inDate']}" />
 						</td>
 						<td>
