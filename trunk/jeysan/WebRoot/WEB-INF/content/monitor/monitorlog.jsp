@@ -13,7 +13,7 @@
 						主键：<input type="text" name="filter_EQI_id" value="${param['filter_EQI_id']}"/>
 					</td>
 					<td>
-						建档日期：<input type="text" class="date" readonly="true" />
+						建档日期：<input type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" />
 					</td>
 				</tr>
 			</table>

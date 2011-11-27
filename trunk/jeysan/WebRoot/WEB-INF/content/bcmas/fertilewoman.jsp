@@ -26,7 +26,7 @@
 						</td>
 						<td>
 							建卡日期：
-							<input type="text" name="filter_EQD_createDate" class="date"
+							<input type="text" name="filter_EQD_createDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param['filter_EQD_createDate']}" />
 						</td>
 						<td>

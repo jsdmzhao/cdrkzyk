@@ -26,10 +26,10 @@
 					<tr>
 						<td colspan="2">
 							发证日期：
-							<input type="text" name="filter_GED_issDate" class="date"
+							<input type="text" name="filter_GED_issDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_issDate}" />
 							~
-							<input type="text" name="filter_LED_issDate" class="date"
+							<input type="text" name="filter_LED_issDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_issDate}" />
 						</td>
 						<td>

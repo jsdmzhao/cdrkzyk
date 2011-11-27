@@ -48,7 +48,7 @@
 					</p>
 					<p>
 					<label id="dateh_tips">发生时间：</label>
-					<input name="dateh" class="date required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${person.dateh}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${person.dateh}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 					
 																	</div>

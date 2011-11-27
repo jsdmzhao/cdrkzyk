@@ -9,7 +9,7 @@
 			<div class="pageFormContent" layoutH="56">
 																												<p>
 					<label>操作时间：</label>
-					<input name="operatTime" class="date  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${operatTime}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="operatTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${operatTime}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>操作人：</label>

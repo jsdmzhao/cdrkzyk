@@ -164,10 +164,10 @@
 										value="${a.charger}" />
 								</td>
 								<td>
-									<input name="dateh_${b.index}" class="date "
+									<input name="dateh_${b.index}" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate "
 										readonly="readonly" type="text" size="15"
 										value="<fmt:formatDate value="${a.dateh}" pattern="yyyy-MM-dd"/>" />
-									<a class="inputDateButton" href="javascript:void(0)">选择</a>
+									
 								</td>
 								<td>
 									<input name="voucherCode_${b.index}" type="text" size="15"

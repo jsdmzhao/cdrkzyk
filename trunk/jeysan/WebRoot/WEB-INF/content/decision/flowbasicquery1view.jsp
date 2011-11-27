@@ -34,7 +34,7 @@
 						</td>
 						<td>
 							出生日期：
-							<input type="text" name="filter_GED_birthday" class="date" readonly="true" value="${param.filter_GED_birthday}"/>~<input type="text" name="filter_LED_birthday" class="date" readonly="true" value="${param.filter_LED_birthday}"/>
+							<input type="text" name="filter_GED_birthday" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_birthday}"/>~<input type="text" name="filter_LED_birthday" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_birthday}"/>
 						</td>
 					</tr>
 					<tr>
@@ -48,7 +48,7 @@
 						</td>
 						<td>
 							初婚日期：
-							<input type="text" name="filter_GED_firstMarryDate" class="date" readonly="true" value="${param.filter_GED_firstMarryDate}"/>~<input type="text" name="filter_LED_firstMarryDate" class="date" readonly="true" value="${param.filter_LED_firstMarryDate}"/>
+							<input type="text" name="filter_GED_firstMarryDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_firstMarryDate}"/>~<input type="text" name="filter_LED_firstMarryDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_firstMarryDate}"/>
 						</td>
 					</tr>
 					<tr>
@@ -62,7 +62,7 @@
 						</td>
 						<td>
 							流入日期：
-							<input type="text" name="filter_GED_inDate" class="date" readonly="true" value="${param.filter_GED_inDate}"/>~<input type="text" name="filter_LED_inDate" class="date" readonly="true" value="${param.filter_LED_inDate}"/>
+							<input type="text" name="filter_GED_inDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_GED_inDate}"/>~<input type="text" name="filter_LED_inDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param.filter_LED_inDate}"/>
 						</td>
 					</tr>
 					<tr>

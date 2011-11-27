@@ -51,10 +51,10 @@ function ok(){
 					<label>
 						发证日期：
 					</label>
-					<input name="issDate" class="date required" readonly="readonly" type="text"
+					<input name="issDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${issDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p style="width:98%">
 					<label>
@@ -91,10 +91,10 @@ function ok(){
 					<label>
 						有效期：
 					</label>
-					<input name="validPeriod" class="date " readonly="readonly"
+					<input name="validPeriod" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${validPeriod}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -106,10 +106,10 @@ function ok(){
 					<label>
 						结婚时间：
 					</label>
-					<input name="marryDate" class="date " readonly="readonly"
+					<input name="marryDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${marryDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

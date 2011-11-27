@@ -33,7 +33,7 @@
 					<tr>
 						<td>
 							查验日期：
-							<input name="filter_EQD_dateh" value="${param.filter_EQD_dateh}" type="text" class="date" readonly="true" />
+							<input name="filter_EQD_dateh" value="${param.filter_EQD_dateh}" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" />
 						</td><td><input name="filter_EQL_bcs.id" type="hidden" value="${param['filter_EQL_bcs.id']}"/></td><td></td><td></td>
 					</tr>
 				</table>

@@ -1,11 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
+<%@ page import="com.jeysan.modules.utils.Constants.Application" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title><%=com.jeysan.modules.utils.Constants.Application.PLATFORM_TITLE%></title>
+<title><%=Application.PLATFORM_TITLE%></title>
 
 <link href="${ctx4doc}/dwz3/themes/default/style.css" rel="stylesheet" type="text/css" />
 <link href="${ctx4doc}/dwz3/themes/css/core.css" rel="stylesheet" type="text/css" />
@@ -275,7 +276,9 @@ $(function(){
 		<div id="splitBarProxy"></div>
 	</div>
 
-	<div id="footer">Copyright &copy; 2011 <a href="http://www.jeysan.com" target="navTab" rel="jeysan">三杰软件</a></div>
+	<div id="footer">
+Copyright &copy; <%=Application.PLATFORM_EXPIRE%>&nbsp;&nbsp;<a href="<%=Application.PLATFORM_SITE%>" target="_blank"><%=Application.PLATFORM_COMPANY%></a>
+	</div>
 
 <script type="text/javascript">
   var _gaq = _gaq || [];

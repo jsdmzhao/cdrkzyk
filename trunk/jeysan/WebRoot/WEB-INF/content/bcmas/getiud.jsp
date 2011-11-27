@@ -29,7 +29,7 @@
 						</td>
 						<td>
 							取环时间：
-							<input type="text" name="filter_EQD_dateh" class="date"
+							<input type="text" name="filter_EQD_dateh" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param['filter_EQD_dateh']}" />
 						</td>
 						<td>

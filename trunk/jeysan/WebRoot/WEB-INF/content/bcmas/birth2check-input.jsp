@@ -92,10 +92,10 @@
 					<label>
 						生育合同日期：
 					</label>
-					<input name="birth2Check.dateh" class="date " readonly="readonly" type="text"
+					<input name="birth2Check.dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${birth2Check.dateh}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -107,10 +107,10 @@
 					<label>
 						二孩预产期：
 					</label>
-					<input name="birth2Check.edd" class="date required" readonly="readonly" type="text"
+					<input name="birth2Check.edd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${birth2Check.edd}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p style="width:98%">
 					<label>
@@ -128,10 +128,10 @@
 					<label>
 						审批日期：
 					</label>
-					<input name="birth2Check.checkDate" class="date required" readonly="readonly"
+					<input name="birth2Check.checkDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${birth2Check.checkDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -147,10 +147,10 @@
 					<label>
 						停止避孕时间：
 					</label>
-					<input name="noContraceptDdate" class="date " readonly="readonly"
+					<input name="noContraceptDdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${noContraceptDdate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

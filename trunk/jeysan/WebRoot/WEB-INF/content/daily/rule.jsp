@@ -37,10 +37,10 @@
 						</td>
 						<td>
 							发布日期：
-							<input type="text" name="filter_GED_dateKt" class="date"
+							<input type="text" name="filter_GED_dateKt" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_dateKt}" />
 							~
-							<input type="text" name="filter_LED_dateKt" class="date"
+							<input type="text" name="filter_LED_dateKt" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_dateKt}" />
 						</td>
 					</tr>
@@ -66,12 +66,12 @@
 			<ul class="toolBar">
 				<li>
 					<a class="add" href="${ctx}/daily/rule!input.action?filter_EQI_typeh=${param.filter_EQI_typeh}"
-						target="navTab" rel="rule-input" title="添加${rule_title}"><span>添加</span>
+						target="navTab" rel="rule${param.filter_EQI_typeh}-input" title="添加${rule_title}"><span>添加</span>
 					</a>
 				</li>
 				<li>
 					<a class="delete"
-						href="${ctx}/daily/rule!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_rule0manage&filter_EQI_typeh=${param.filter_EQI_typeh}"
+						href="${ctx}/daily/rule!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_rule${param.filter_EQI_typeh}manage&filter_EQI_typeh=${param.filter_EQI_typeh}"
 						target="ajaxTodo" title="确定要删除吗?"><span>删除</span>
 					</a>
 				</li>
@@ -135,10 +135,10 @@
 							<div style="width: 75px;">
 								<a class="btnView"
 									href="${ctx}/daily/rule!view.action?id=${a.id}" target="navTab"
-									title="查看${rule_title}信息" rel="rule-view"></a>
+									title="查看${rule_title}信息" rel="rule${param.filter_EQI_typeh}-view"></a>
 								<a class="btnEdit"
 									href="${ctx}/daily/rule!input.action?id=${a.id}&filter_EQI_typeh=${param.filter_EQI_typeh}"
-									target="navTab" title="修改${rule_title}信息" rel="rule-update"></a>
+									target="navTab" title="修改${rule_title}信息" rel="rule${param.filter_EQI_typeh}-update"></a>
 								<a class="btnDel"
 									href="${ctx}/daily/rule!delete.action?id=${a.id}&result4Json.navTabId=nav_rule${param.filter_EQI_typeh}manage&filter_EQI_typeh=${param.filter_EQI_typeh}"
 									target="ajaxTodo" title="确定要删除吗？"></a>

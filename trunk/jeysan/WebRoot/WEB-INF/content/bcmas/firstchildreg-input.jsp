@@ -175,10 +175,10 @@
 						<label>
 							登记日期：
 						</label>
-						<input name="dateh" class="date " readonly="readonly" type="text"
+						<input name="dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 							size="30"
 							value="<fmt:formatDate value="${dateh}" pattern="yyyy-MM-dd"/>" />
-						<a class="inputDateButton" href="javascript:void(0)">选择</a>
+						
 					</p>
 					<p>
 						<label>
@@ -210,10 +210,10 @@
 						<label>
 							合同签署日期：
 						</label>
-						<input name="assignDate" class="date " readonly="readonly"
+						<input name="assignDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 							type="text" size="30"
 							value="<fmt:formatDate value="${assignDate}" pattern="yyyy-MM-dd"/>" />
-						<a class="inputDateButton" href="javascript:void(0)">选择</a>
+						
 					</p>
 					<p>
 						<label>
@@ -225,10 +225,10 @@
 						<label>
 							一孩预产期：
 						</label>
-						<input name="edd" class="date " readonly="readonly" type="text"
+						<input name="edd" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 							size="30"
 							value="<fmt:formatDate value="${edd}" pattern="yyyy-MM-dd"/>" />
-						<a class="inputDateButton" href="javascript:void(0)">选择</a>
+						
 					</p>
 					<p>
 						<label>

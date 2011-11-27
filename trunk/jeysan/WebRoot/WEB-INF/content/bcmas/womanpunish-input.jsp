@@ -31,10 +31,10 @@
 					<label>
 						处罚日期：
 					</label>
-					<input name="punishDate" class="date " readonly="readonly"
+					<input name="punishDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${punishDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

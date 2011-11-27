@@ -54,10 +54,10 @@
 					<label>
 						手术日期：
 					</label>
-					<input name="opsDate" class="date " readonly="readonly" type="text"
+					<input name="opsDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${opsDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -82,19 +82,19 @@
 					<label>
 						避孕终止日期：
 					</label>
-					<input name="endDate" class="date " readonly="readonly" type="text"
+					<input name="endDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${endDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						变化日期：
 					</label>
-					<input name="changeDate" class="date " readonly="readonly"
+					<input name="changeDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${changeDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -114,10 +114,10 @@
 					<label>
 						缓期终止日期：
 					</label>
-					<input name="delayEndCause" class="date " readonly="readonly"
+					<input name="delayEndCause" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${delayEndCause}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -137,19 +137,19 @@
 					<label>
 						缓期鉴定日期：
 					</label>
-					<input name="delayDate" class="date " readonly="readonly"
+					<input name="delayDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${delayDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
 						登记日期：
 					</label>
-					<input name="regDate" class="date " readonly="readonly" type="text"
+					<input name="regDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 
 				<p>
@@ -162,10 +162,10 @@
 					<label>
 						补救措施时间：
 					</label>
-					<input name="repairDate" class="date " readonly="readonly" type="text"
+					<input name="repairDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${repairDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

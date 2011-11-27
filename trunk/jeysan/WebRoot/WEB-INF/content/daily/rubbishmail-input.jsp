@@ -37,7 +37,7 @@
 					</p>
 																													<p>
 					<label>时间：</label>
-					<input name="dateKt" class="date  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${dateKt}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="dateKt" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${dateKt}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>是否已读：</label>

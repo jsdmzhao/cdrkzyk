@@ -30,18 +30,18 @@
 					<tr>
 						<td colspan="2">
 							流入日期：
-							<input type="text" name="filter_GED_settleInDate" class="date"
+							<input type="text" name="filter_GED_settleInDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_settleInDate}" />
 							~
-							<input type="text" name="filter_LED_settleInDate" class="date"
+							<input type="text" name="filter_LED_settleInDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_settleInDate}" />
 						</td>
 						<td colspan="2">
 							处罚日期：
-							<input type="text" name="filter_GED_punishDate" class="date"
+							<input type="text" name="filter_GED_punishDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_GED_punishDate}" />
 							~
-							<input type="text" name="filter_LED_punishDate" class="date"
+							<input type="text" name="filter_LED_punishDate" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param.filter_LED_punishDate}" />
 						</td>
 					</tr>

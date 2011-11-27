@@ -36,7 +36,7 @@
 						</td>
 						<td>
 							孩子出生日期：
-							<input readonly="readonly" type="text" class="date" name="filter_EQD_children.birthday"
+							<input readonly="readonly" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" name="filter_EQD_children.birthday"
 								value="${param['filter_EQD_children.birthday']}" />
 						</td>
 						<td>

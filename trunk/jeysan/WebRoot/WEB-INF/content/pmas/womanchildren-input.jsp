@@ -98,10 +98,10 @@ function ok(){
 					<label>
 						出生日期：
 					</label>
-					<input name="birthday" class="date " readonly="readonly"
+					<input name="birthday" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${birthday}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -174,10 +174,10 @@ function ok(){
 					<label>
 						变化日期：
 					</label>
-					<input name="changeDate" class="date " readonly="readonly"
+					<input name="changeDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${changeDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -203,10 +203,10 @@ function ok(){
 					<label>
 						收养日期：
 					</label>
-					<input name="adoptDate" class="date " readonly="readonly"
+					<input name="adoptDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${adoptDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -219,10 +219,10 @@ function ok(){
 					<label>
 						上报日期：
 					</label>
-					<input name="upDate" class="date required" readonly="readonly"
+					<input name="upDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${upDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

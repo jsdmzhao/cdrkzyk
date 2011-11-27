@@ -46,10 +46,10 @@
 					<label>
 						死亡日期：
 					</label>
-					<input name="dateh" class="date " readonly="readonly" type="text"
+					<input name="dateh" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${dateh}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>

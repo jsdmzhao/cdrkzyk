@@ -26,7 +26,7 @@
 						</td>
 						<td>
 							${do_title}时间：
-							<input type="text" name="dateKt" class="date" readonly="true" value="${param['dateKt']}"/>
+							<input type="text" name="dateKt" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" value="${param['dateKt']}"/>
 						</td>
 					</tr>
 				</table>

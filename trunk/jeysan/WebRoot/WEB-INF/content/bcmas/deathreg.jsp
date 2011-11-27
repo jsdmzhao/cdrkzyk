@@ -33,7 +33,7 @@
 						</td>
 						<td>
 							死亡日期：
-							<input type="text" class="date" readonly="true" name="filter_EQD_dateh"
+							<input type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" readonly="true" name="filter_EQD_dateh"
 								value="${param['filter_EQD_dateh']}" />
 						</td>
 					</tr>

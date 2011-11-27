@@ -13,11 +13,11 @@
 					</p>
 																													<p>
 					<label>开始时间：</label>
-					<input name="startTime" class="date  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${startTime}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="startTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${startTime}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>结束时间：</label>
-					<input name="endTime" class="date  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${endTime}" pattern="yyyy-MM-dd"/>"/><a class="inputDateButton" href="javascript:void(0)">选择</a>
+					<input name="endTime" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate  required " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${endTime}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 																													<p>
 					<label>标题：</label>

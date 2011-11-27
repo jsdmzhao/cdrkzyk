@@ -133,10 +133,10 @@
 					<label>
 						发证日期：
 					</label>
-					<input name="issDate" class="date required" readonly="readonly" type="text"
+					<input name="issDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text"
 						size="30"
 						value="<fmt:formatDate value="${issDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 				<p>
 					<label>
@@ -191,10 +191,10 @@
 					<label>
 						注销日期：
 					</label>
-					<input name="cancelDate" class="date required" readonly="readonly"
+					<input name="cancelDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly"
 						type="text" size="30"
 						value="<fmt:formatDate value="${cancelDate}" pattern="yyyy-MM-dd"/>" />
-					<a class="inputDateButton" href="javascript:void(0)">选择</a>
+					
 				</p>
 </c:if>
 </div>
