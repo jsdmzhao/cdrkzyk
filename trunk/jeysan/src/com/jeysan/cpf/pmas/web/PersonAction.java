@@ -70,12 +70,16 @@ public class PersonAction extends PrintActionSupport<Person> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				deletePerson(id);
+				monitorLogManager.saveMonitorLog("删除人员信息", System.currentTimeMillis()-t1_, 1);
 				logger.debug("删除了人员："+id);
 			}else {
-				for(String pid : StringUtils.split(ids, ","))
+				String[] cts = StringUtils.split(ids, ",");
+				for(String pid : cts)
 					deletePerson(Long.parseLong(pid));
+				monitorLogManager.saveMonitorLog("删除人员信息", System.currentTimeMillis()-t1_, cts.length);
 				logger.debug("删除了很多人员："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
@@ -168,6 +172,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				personManager.deletePerson(id);
 				logger.debug("删除了人员："+id);
@@ -175,6 +180,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("销毁人员历史数据成功成功");
 			result4Json.setAction(Result4Json.DELETE);
+			monitorLogManager.saveMonitorLog("销毁人员历史数据", System.currentTimeMillis()-t1_, 1);
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -207,6 +213,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			if(id == null)
 				entity.setCancelType(Constants.CANCEL_TYPE.NORMAL);
 			String houseId = Struts2Utils.getParameter("master.dwz_houseLookup.houseId");
@@ -253,14 +260,15 @@ public class PersonAction extends PrintActionSupport<Person> {
 			}else if(entity.getKind()==Constants.FW_KIND.NOT_FW){//非育龄妇女
 				fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
 			}
-			
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存人员成功");
 				result4Json.setAction(Result4Json.SAVE);
+				monitorLogManager.saveMonitorLog("增加人员信息", System.currentTimeMillis()-t1_, 1);
 			}else{
 				result4Json.setMessage("修改人员成功");
 				result4Json.setAction(Result4Json.UPDATE);
+				monitorLogManager.saveMonitorLog("修改人员信息", System.currentTimeMillis()-t1_, 1);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
@@ -283,6 +291,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			Person person = personManager.getPerson(Long.parseLong(id));
 			if(StringUtils.isEmpty(cancelType))
 				cancelType = Constants.CANCEL_TYPE.RENEW + "";
@@ -297,13 +306,18 @@ public class PersonAction extends PrintActionSupport<Person> {
 				personOut.setPerson(person);
 				personOut.setOutDate(person.getDateh());
 				personOutManager.savePersonOut(personOut);
+				monitorLogManager.saveMonitorLog("注销流出人员", System.currentTimeMillis()-t1_, 1);
 			}else if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.DEATH+"")){
 				DeathReg deathReg = new DeathReg();
 				deathReg.setPerson(person);
 				deathReg.setDateh(person.getDateh());
 				deathRegManager.saveDeathReg(deathReg);
+				monitorLogManager.saveMonitorLog("注销死亡人员", System.currentTimeMillis()-t1_, 1);
+			}else if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.OLD_AGE+"")){
+				monitorLogManager.saveMonitorLog("注销超龄人员", System.currentTimeMillis()-t1_, 1);
+			}else if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.RENEW+"")){
+				monitorLogManager.saveMonitorLog("恢复注销人员", System.currentTimeMillis()-t1_, 1);
 			}
-			
 			result4Json.setStatusCode("200");
 			result4Json.setAction(Result4Json.UPDATE);
 			if(StringUtils.equals(type, "0")){

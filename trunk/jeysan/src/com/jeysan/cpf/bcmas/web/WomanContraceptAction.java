@@ -41,6 +41,7 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				womanContraceptManager.deleteWomanContracept(id);
 				logger.debug("删除了避孕："+id);
@@ -51,6 +52,9 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除避孕成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除避孕信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -96,6 +100,7 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String methodh = Struts2Utils.getParameter("methodh");
 			if(StringUtils.isNotEmpty(methodh))
 				entity.setMethod(Integer.parseInt(methodh));
@@ -108,6 +113,8 @@ public class WomanContraceptAction extends CrudActionSupport<WomanContracept> {
 				result4Json.setMessage("修改避孕成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"避孕信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

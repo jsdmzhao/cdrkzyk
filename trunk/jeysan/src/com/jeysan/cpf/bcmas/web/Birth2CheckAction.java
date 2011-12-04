@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,7 @@ public class Birth2CheckAction extends PrintActionSupport<Birth2Apply> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				birth2CheckManager.deleteBirth2Check(id);
 				logger.debug("删除了再生育审批："+id);
@@ -47,6 +49,7 @@ public class Birth2CheckAction extends PrintActionSupport<Birth2Apply> {
 				birth2CheckManager.deleteBirth2Checks(ids);
 				logger.debug("删除了很多再生育审批："+ids.toString());
 			}
+			monitorLogManager.saveMonitorLog("删除再生育审批信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除再生育审批成功");
 			result4Json.setAction(Result4Json.DELETE);
@@ -92,6 +95,7 @@ public class Birth2CheckAction extends PrintActionSupport<Birth2Apply> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			entity.setCheckType(com.jeysan.cpf.util.Constants.CheckType.YES);
 			birth2ApplyManager.saveBirth2Apply(entity);
 			
@@ -105,6 +109,8 @@ public class Birth2CheckAction extends PrintActionSupport<Birth2Apply> {
 				result4Json.setMessage("修改再生育审批成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"再生育审批信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

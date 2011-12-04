@@ -43,12 +43,15 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				spouseManager.deleteSpouse(id);
 				logger.debug("删除了配偶表："+id);
+				monitorLogManager.saveMonitorLog("删除配偶信息", System.currentTimeMillis()-t1_, 1);
 			}else {
 				spouseManager.deleteSpouses(ids);
 				logger.debug("删除了很多配偶表："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除配偶信息", System.currentTimeMillis()-t1_, StringUtils.split(ids, ",").length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除配偶表成功");
@@ -102,6 +105,7 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String personId = Struts2Utils.getParameter("personId");
 			Person person = new Person();
 			person.setId(Long.parseLong(personId));
@@ -111,9 +115,11 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 			if(id == null){
 				result4Json.setMessage("保存配偶表成功");
 				result4Json.setAction(Result4Json.SAVE);
+				monitorLogManager.saveMonitorLog("增加配偶信息", System.currentTimeMillis()-t1_, 1);
 			}else{
 				result4Json.setMessage("修改配偶表成功");
 				result4Json.setAction(Result4Json.UPDATE);
+				monitorLogManager.saveMonitorLog("修改配偶信息", System.currentTimeMillis()-t1_, 1);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);

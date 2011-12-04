@@ -38,11 +38,20 @@ public class RuleAction extends PrintActionSupport<Rule> {
 	public String delete() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
+		String filter_EQI_typeh = StringUtils.trim(Struts2Utils.getRequest().getParameter("filter_EQI_typeh"));
+		String title = null;
+		if(StringUtils.equals(filter_EQI_typeh, "0"))
+			title = "规章制度";
+		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+			title = "法律法规";
+		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+			title = "通知通报";
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				Rule rule = ruleManager.getRule(id);
 				deleteRuleIncludeAttachment(rule);
-				logger.debug("删除了规章制度："+id);
+				logger.debug("删除了"+title+"："+id);
 			}else {
 				if(StringUtils.isNotEmpty(ids)){
 					Rule rule = null;
@@ -51,15 +60,18 @@ public class RuleAction extends PrintActionSupport<Rule> {
 						deleteRuleIncludeAttachment(rule);
 					}
 				}
-				logger.debug("删除了很多规章制度："+ids.toString());
+				logger.debug("删除了很多"+title+"："+ids.toString());
 			}
 			result4Json.setStatusCode("200");
-			result4Json.setMessage("删除规章制度成功");
+			result4Json.setMessage("删除"+title+"成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除"+title+"信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
-			result4Json.setMessage(e instanceof DataIntegrityViolationException?"规章制度已经被关联,请先解除关联,删除失败":"删除规章制度失败");
+			result4Json.setMessage(e instanceof DataIntegrityViolationException?(title+"已经被关联,请先解除关联,删除失败"):("删除"+title+"失败"));
 		}
 		Struts2Utils.renderJson(result4Json);
 		return NONE;
@@ -103,7 +115,16 @@ public class RuleAction extends PrintActionSupport<Rule> {
 	public String save() throws Exception {
 		if(result4Json == null)
 			result4Json = new Result4Json();
+		String filter_EQI_typeh = StringUtils.trim(Struts2Utils.getRequest().getParameter("filter_EQI_typeh"));
+		String title = null;
+		if(StringUtils.equals(filter_EQI_typeh, "0"))
+			title = "规章制度";
+		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+			title = "法律法规";
+		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+			title = "通知通报";
 		try{
+			long t1_ = System.currentTimeMillis();
 			if(entity.getSendEmployeeId() == null){
 				User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
 				entity.setSendEmployeeId(new Long(user.getId()));
@@ -114,19 +135,22 @@ public class RuleAction extends PrintActionSupport<Rule> {
 			fileManagerManager.updateFileManagers2Valid(entity.getAttachment());
 			result4Json.setStatusCode("200");
 			if(id == null){
-				result4Json.setMessage("保存规章制度成功");
+				result4Json.setMessage("保存"+title+"成功");
 				result4Json.setAction(Result4Json.SAVE);
 			}else{
-				result4Json.setMessage("修改规章制度成功");
+				result4Json.setMessage("修改"+title+"成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+title+"信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
 			if(e instanceof ObjectNotFoundException){
 				result4Json.setMessage("信息已被删除，请重新添加");
 			}else{
-				result4Json.setMessage("保存规章制度失败");
+				result4Json.setMessage("保存"+title+"失败");
 			}
 			
 		}

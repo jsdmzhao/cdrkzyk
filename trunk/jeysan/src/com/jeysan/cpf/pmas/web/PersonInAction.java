@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
@@ -42,12 +43,15 @@ public class PersonInAction extends PrintActionSupport<PersonIn> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				personInManager.deletePersonIn(id);
 				logger.debug("删除了人口流入："+id);
+				monitorLogManager.saveMonitorLog("删除人口流入信息", System.currentTimeMillis()-t1_, 1);
 			}else {
 				personInManager.deletePersonIns(ids);
 				logger.debug("删除了很多人口流入："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除人口流入信息", System.currentTimeMillis()-t1_, StringUtils.split(ids, ",").length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除人口流入成功");
@@ -97,6 +101,7 @@ public class PersonInAction extends PrintActionSupport<PersonIn> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			Long personId = Long.parseLong(Struts2Utils.getParameter("master.dwz_personLookup.personId"));
 			entity.setPerson(personManager.getPerson(personId));
 			personInManager.savePersonIn(entity);
@@ -104,9 +109,11 @@ public class PersonInAction extends PrintActionSupport<PersonIn> {
 			if(id == null){
 				result4Json.setMessage("保存人口流入成功");
 				result4Json.setAction(Result4Json.SAVE);
+				monitorLogManager.saveMonitorLog("增加人口流入信息", System.currentTimeMillis()-t1_, 1);
 			}else{
 				result4Json.setMessage("修改人口流入成功");
 				result4Json.setAction(Result4Json.UPDATE);
+				monitorLogManager.saveMonitorLog("修改人口流入信息", System.currentTimeMillis()-t1_, 1);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);

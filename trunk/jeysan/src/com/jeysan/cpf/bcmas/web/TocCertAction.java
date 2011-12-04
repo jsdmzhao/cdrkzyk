@@ -46,6 +46,7 @@ public class TocCertAction extends PrintActionSupport<TocCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				tocCertManager.deleteTocCert(id);
 				logger.debug("删除了独生子女光荣证："+id);
@@ -56,6 +57,9 @@ public class TocCertAction extends PrintActionSupport<TocCert> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除独生子女光荣证成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除独生子女光荣证信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -103,6 +107,7 @@ public class TocCertAction extends PrintActionSupport<TocCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			Long personId = Long.parseLong(Struts2Utils.getParameter("master.dwz_personLookup.personId"));
 			Person person = new Person();
 			person.setId(personId);
@@ -125,6 +130,8 @@ public class TocCertAction extends PrintActionSupport<TocCert> {
 				result4Json.setMessage("修改独生子女光荣证成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"独生子女光荣证信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

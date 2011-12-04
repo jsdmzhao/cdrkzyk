@@ -54,13 +54,17 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				deleteWomanChildren(id);
 				logger.debug("删除了子女："+id);
+				monitorLogManager.saveMonitorLog("删除子女信息", System.currentTimeMillis()-t1_, 1);
 			}else {
-				for(String pid : StringUtils.split(ids, ","))
+				String[] cts = StringUtils.split(ids, ",");
+				for(String pid : cts)
 					deleteWomanChildren(Long.parseLong(pid));
 				logger.debug("删除了很多子女："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除子女信息", System.currentTimeMillis()-t1_, cts.length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除子女成功");
@@ -153,6 +157,7 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			if(this.photo_ != null){
 				if(id != null){
 					String photo = entity.getPhoto();
@@ -170,9 +175,11 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 			if(id == null){
 				result4Json.setMessage("保存子女成功");
 				result4Json.setAction(Result4Json.SAVE);
+				monitorLogManager.saveMonitorLog("保存子女信息", System.currentTimeMillis()-t1_, 1);
 			}else{
 				result4Json.setMessage("修改子女成功");
 				result4Json.setAction(Result4Json.UPDATE);
+				monitorLogManager.saveMonitorLog("修改子女信息", System.currentTimeMillis()-t1_, 1);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);

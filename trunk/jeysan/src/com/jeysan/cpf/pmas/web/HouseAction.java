@@ -46,12 +46,15 @@ public class HouseAction extends PrintActionSupport<House> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				houseManager.deleteHouse(id);
 				logger.debug("删除了房屋："+id);
+				monitorLogManager.saveMonitorLog("删除房屋信息信息", System.currentTimeMillis()-t1_, 1);
 			}else {
 				houseManager.deleteHouses(ids);
 				logger.debug("删除了很多房屋："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除房屋信息信息", System.currentTimeMillis()-t1_, StringUtils.split(ids, ",").length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除房屋成功");
@@ -118,14 +121,17 @@ public class HouseAction extends PrintActionSupport<House> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			houseManager.saveHouse(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存房屋成功");
 				result4Json.setAction(Result4Json.SAVE);
+				monitorLogManager.saveMonitorLog("增加房屋信息", System.currentTimeMillis()-t1_, 1);
 			}else{
 				result4Json.setMessage("修改房屋成功");
 				result4Json.setAction(Result4Json.UPDATE);
+				monitorLogManager.saveMonitorLog("修改房屋信息", System.currentTimeMillis()-t1_, 1);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);

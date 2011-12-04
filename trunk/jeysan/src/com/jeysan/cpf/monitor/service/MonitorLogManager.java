@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.monitor.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.tool.hbm2x.StringUtils;
@@ -11,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.monitor.dao.MonitorLogDao;
 import com.jeysan.cpf.monitor.entity.MonitorLog;
+import com.jeysan.cpf.security.entity.User;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
+import com.jeysan.modules.utils.web.IpUtil;
+import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
 /**
  * @author 黄静
@@ -29,6 +33,21 @@ public class MonitorLogManager {
 	 * @param entity
 	 */
 	public void saveMonitorLog(MonitorLog entity){
+		monitorLogDao.save(entity);
+	}
+	/**
+	 * 增加
+	 * @param entity
+	 */
+	public void saveMonitorLog(String content,Long lastTime,Integer effectRows){
+		MonitorLog entity = new MonitorLog();
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		entity.setOperator(user.getId());
+		entity.setContent(content);
+		entity.setEffectRows(effectRows);
+		entity.setLastTime(lastTime.intValue());
+		entity.setOperatIp(IpUtil.getIpAddr(Struts2Utils.getRequest()));
+		entity.setOperatTime(new Date());
 		monitorLogDao.save(entity);
 	}
 	/**

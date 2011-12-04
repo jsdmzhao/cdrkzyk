@@ -43,6 +43,7 @@ public class FirstChildRegAction extends PrintActionSupport<FirstChildReg> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				firstChildRegManager.deleteFirstChildReg(id);
 				logger.debug("删除了一孩登记："+id);
@@ -53,6 +54,8 @@ public class FirstChildRegAction extends PrintActionSupport<FirstChildReg> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除一孩登记成功");
 			result4Json.setAction(Result4Json.DELETE);
+			monitorLogManager.saveMonitorLog("删除一孩登记信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -102,6 +105,7 @@ public class FirstChildRegAction extends PrintActionSupport<FirstChildReg> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
 			if(StringUtils.isNotEmpty(fertileWomanId)){
 				FertileWoman fertileWoman = fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId));
@@ -120,6 +124,8 @@ public class FirstChildRegAction extends PrintActionSupport<FirstChildReg> {
 				result4Json.setMessage("修改一孩登记成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"一孩登记信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
