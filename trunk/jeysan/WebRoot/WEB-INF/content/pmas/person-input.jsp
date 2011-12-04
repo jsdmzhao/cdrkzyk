@@ -58,7 +58,7 @@ function ok(){
 					</p>
 					<p>
 					<label>出生日期：</label>
-					<input name="personBasic.birthday" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.birthday}" pattern="yyyy-MM-dd"/>" onpropertychange="setage(this.value)"/>
+					<input name="personBasic.birthday" id="personBasic_birthday" onclick="WdatePicker({dateFmt:'yyyy-MM-dd',onpicked:setage})" class="Wdate required" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${personBasic.birthday}" pattern="yyyy-MM-dd"/>"/>
 					</p>
 					<p>
 					<label>年龄：</label>
@@ -246,9 +246,9 @@ function ok(){
 <script>
 function setAddress(orgCode,address_){
 	var $box = navTab.getCurrentPanel();
-	$('#personBasic_address',box).val(address_);
+	$('#personBasic_address',$box).val(address_);
 	if(orgCode == null || orgCode == ''){
-		$("#personBasic_villagerTeamId",box).html("<option value=\"\">请选择</option>");
+		$("#personBasic_villagerTeamId",$box).html("<option value=\"\">请选择</option>");
 		return;
 	}
 	$.post("${ctx}/pmas/villagerteam!findByCode.action", {orgCode:orgCode.split('_')[1]}, function(data) {
@@ -256,20 +256,21 @@ function setAddress(orgCode,address_){
 		for (var i = 0; i < data.length; i++) {
 			html += "<option value=\"" + data[i].id+ "\">" + data[i].teamName + "</option>";
 		}
-		$("#personBasic_villagerTeamId",box).html(html);
+		$("#personBasic_villagerTeamId",$box).html(html);
 	});
 }
 function setAddress2(orgCode,address_){
 	$('#personBasic_domicile',navTab.getCurrentPanel()).val(address_);
 }
 var yearNow = new Date().getYear();
-function setage(birth){
+function setage(){
 	var $box = navTab.getCurrentPanel();
+	var birth = $('#personBasic_birthday',$box).val();
 	if(birth==null||birth==''){
-		$('#age',box).val('');
+		$('#age',$box).val('');
 	}else{
 		var year_ = birth.substr(0,birth.indexOf('-'));
-		$('#age',box).val(yearNow-year_);
+		$('#age',$box).val(yearNow-year_);
 	}
 }
 </script>
