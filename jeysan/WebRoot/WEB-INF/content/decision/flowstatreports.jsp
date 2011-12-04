@@ -6,35 +6,35 @@
 			<div class="pageFormContent" layoutH="56">
 				<div style="float:left; display:block; margin:10px;padding:10px; overflow:auto; width:90%; border:solid 1px #CCC; line-height:21px; background:#FFF;">
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>统计表1</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>统计表1-期间计划生育情况统计表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>统计表2</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>统计表2</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>统计表3</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>统计表3</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>统计表4</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>统计表4</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流动人口计划生育情况表</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>流动人口计划生育情况表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>本省流入人员持证情况表</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>本省流入人员持证情况表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>外省流入人员持证情况表</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>外省流入人员持证情况表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
-						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流出人员计划生育情况表</span></a>
+						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>流出人员计划生育情况表</span></a>
 					</p>
 					<div class="divider"></div>
 					<p>
