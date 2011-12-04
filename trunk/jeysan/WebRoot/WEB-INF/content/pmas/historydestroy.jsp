@@ -88,7 +88,7 @@
 				</li>
 			</ul>
 		</div>
-		<table class="table" width="100%" layouth="163">
+		<table class="table" width="100%" layouth="165">
 			<thead>
 				<tr>
 					<th width="30" align="center">
