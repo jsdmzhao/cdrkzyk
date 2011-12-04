@@ -71,6 +71,7 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				fertileWomanManager.deleteFertileWoman(id);
 				logger.debug("删除了育龄妇女："+id);
@@ -78,6 +79,7 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 				fertileWomanManager.deleteFertileWomans(ids);
 				logger.debug("删除了很多育龄妇女："+ids.toString());
 			}
+			monitorLogManager.saveMonitorLog("删除育龄妇女信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除育龄妇女成功");
 			result4Json.setAction(Result4Json.DELETE);
@@ -173,6 +175,7 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			fertileWomanManager.saveFertileWoman(entity);
 			entity.getWomanBasic().setFertileWoman(entity);
 			womanBasicManager.saveWomanBasic(entity.getWomanBasic());
@@ -184,6 +187,8 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 				result4Json.setMessage("修改育龄妇女成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"育龄妇女信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

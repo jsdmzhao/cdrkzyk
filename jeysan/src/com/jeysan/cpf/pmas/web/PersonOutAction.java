@@ -3,10 +3,10 @@
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
-import org.h2.util.StringUtils;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -45,12 +45,15 @@ public class PersonOutAction extends PrintActionSupport<PersonOut> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				personOutManager.deletePersonOut(id);
 				logger.debug("删除了人口流出："+id);
+				monitorLogManager.saveMonitorLog("删除人口流出信息", System.currentTimeMillis()-t1_, 1);
 			}else {
 				personOutManager.deletePersonOuts(ids);
 				logger.debug("删除了很多人口流出："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除人口流出信息", System.currentTimeMillis()-t1_, StringUtils.split(ids, ",").length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除人口流出成功");
@@ -102,6 +105,7 @@ public class PersonOutAction extends PrintActionSupport<PersonOut> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			Long personId = Long.parseLong(Struts2Utils.getParameter("master.dwz_personLookup.personId"));
 			entity.setPerson(personManager.getPerson(personId));
 			personOutManager.savePersonOut(entity);
@@ -109,9 +113,11 @@ public class PersonOutAction extends PrintActionSupport<PersonOut> {
 			if(id == null){
 				result4Json.setMessage("保存人口流出成功");
 				result4Json.setAction(Result4Json.SAVE);
+				monitorLogManager.saveMonitorLog("增加人口流出信息", System.currentTimeMillis()-t1_, 1);
 			}else{
 				result4Json.setMessage("修改人口流出成功");
 				result4Json.setAction(Result4Json.UPDATE);
+				monitorLogManager.saveMonitorLog("修改人口流出信息", System.currentTimeMillis()-t1_, 1);
 			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
@@ -132,6 +138,7 @@ public class PersonOutAction extends PrintActionSupport<PersonOut> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			Person person = personManager.getPerson(Long.parseLong(personId));
 			result4Json.setStatusCode("200");
 			result4Json.setAction(Result4Json.UPDATE);
@@ -139,10 +146,12 @@ public class PersonOutAction extends PrintActionSupport<PersonOut> {
 				person.setCancelType(154);
 				person.setCancelDate(new Date());
 				result4Json.setMessage("注销成功");
+				monitorLogManager.saveMonitorLog("注销流出人员", System.currentTimeMillis()-t1_, 1);
 			}else if(StringUtils.equals(type, "1")){
 				person.setCancelType(673);
 				person.setCancelDate(new Date());
 				result4Json.setMessage("恢复注销成功");
+				monitorLogManager.saveMonitorLog("恢复注销人员", System.currentTimeMillis()-t1_, 1);
 			}
 			personManager.savePerson(person);
 		}catch(Exception e){

@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.monitor.entity.MonitorLog;
-import com.jeysan.cpf.monitor.service.MonitorLogManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.cpf.security.service.UserManager;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -21,7 +21,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/monitor")
-public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
+public class MonitorLogAction extends PrintActionSupport<MonitorLog> {
 	/**
 	 * 
 	 */
@@ -29,7 +29,7 @@ public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
 	private Long id;
 	private String ids;
 	private MonitorLog entity;
-	private MonitorLogManager monitorLogManager;
+	private UserManager userManager;
 	private Page<MonitorLog> page = new Page<MonitorLog>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -73,6 +73,7 @@ public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
 			page.setOrder(Page.ASC);
 		}
 		page = monitorLogManager.searchMonitorLog(page, filters);
+		Struts2Utils.getRequest().setAttribute("users", userManager.loadAllUsers());
 		return SUCCESS;
 	}
 	@Override
@@ -114,10 +115,6 @@ public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
 	public MonitorLog getModel() {
 		return entity;
 	}
-	@Autowired
-	public void setMonitorLogManager(MonitorLogManager monitorLogManager) {
-		this.monitorLogManager = monitorLogManager;
-	}
 	public Page<MonitorLog> getPage() {
 		return page;
 	}
@@ -130,6 +127,10 @@ public class MonitorLogAction extends CrudActionSupport<MonitorLog> {
 	public void setResult4Json(Result4Json result4Json) {
 		this.result4Json = result4Json;
 	}
-	
+
+	@Autowired
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
 	
 }

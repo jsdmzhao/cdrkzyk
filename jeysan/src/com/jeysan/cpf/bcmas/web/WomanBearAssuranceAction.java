@@ -40,6 +40,7 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				womanBearAssuranceManager.deleteWomanBearAssurance(id);
 				logger.debug("删除了计划生育保险："+id);
@@ -50,6 +51,9 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除计划生育保险成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除计划生育保险信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -95,6 +99,7 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			womanBearAssuranceManager.saveWomanBearAssurance(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -104,6 +109,8 @@ public class WomanBearAssuranceAction extends CrudActionSupport<WomanBearAssuran
 				result4Json.setMessage("修改计划生育保险成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"计划生育保险信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

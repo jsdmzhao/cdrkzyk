@@ -78,13 +78,17 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				deleteMarryCert(id);
 				logger.debug("删除了计划生育服务证："+id);
+				monitorLogManager.saveMonitorLog("删除计划生育服务证信息", System.currentTimeMillis()-t1_, 1);
 			}else {
-				for(String pid : StringUtils.split(ids, ","))
+				String[] cts = StringUtils.split(ids, ",");
+				for(String pid : cts)
 					deleteMarryCert(Long.parseLong(pid));
 				logger.debug("删除了很多计划生育服务证："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除计划生育服务证信息", System.currentTimeMillis()-t1_, cts.length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除计划生育服务证成功");
@@ -182,6 +186,7 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 	public String change() throws Exception {
 		String type = Struts2Utils.getParameter("type");
 		if(StringUtils.isNotEmpty(type)){
+			long t1_ = System.currentTimeMillis();
 			BcsCertChange change = new BcsCertChange();
 			change.setTypeh(Integer.parseInt(type));
 			change.setCertId(entity.getId());
@@ -193,6 +198,7 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 			if(StringUtils.isNotEmpty(dateh))
 				change.setDateh(DateUtil.createUtilDate(dateh));
 			bcsCertChangeManager.saveBcsCertChange(change);
+			monitorLogManager.saveMonitorLog((StringUtils.equals(type, "0")?"更换":"废止")+"计划生育服务证", System.currentTimeMillis()-t1_, 1);
 		}
 		return NONE;
 	}
@@ -201,6 +207,7 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String type = Struts2Utils.getParameter("type");
 			if(StringUtils.isNotEmpty(type)){
 				if(StringUtils.equals(type, "2")){//查验
@@ -212,6 +219,7 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 					if(StringUtils.isNotEmpty(dateh))
 						check.setDateh(DateUtil.createUtilDate(dateh));
 					bcsCertCheckManager.saveBcsCertCheck(check);
+					monitorLogManager.saveMonitorLog("查验计划生育服务证信息", System.currentTimeMillis()-t1_, 1);
 				}else{//换证 0 废止1
 					BcsCertChange change = bcsCertChangeManager.getBcsCertChangeByCertId(id);
 					if(change == null)
@@ -231,6 +239,7 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 					else if(StringUtils.equals(type, "1"))
 						entity.setCertType(Constants.CERT_TYPE.CANCEL);
 					bcsCertManager.saveBcsCert(entity);
+					monitorLogManager.saveMonitorLog((StringUtils.equals(type, "0")?"更换":"废止")+"计划生育服务证", System.currentTimeMillis()-t1_, 1);
 				}
 			}else{
 				String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
@@ -253,6 +262,7 @@ public class BcsCertAction extends PrintActionSupport<BcsCert> {
 				}
 				entity.setCertType(Constants.CERT_TYPE.NORMAL);
 				bcsCertManager.saveBcsCert(entity);
+				monitorLogManager.saveMonitorLog("增加计划生育服务证信息", System.currentTimeMillis()-t1_, 1);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("操作成功");

@@ -40,6 +40,7 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				womanSocialUpbringManager.deleteWomanSocialUpbring(id);
 				logger.debug("删除了社会抚养费："+id);
@@ -50,6 +51,9 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除社会抚养费成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除社会抚养费信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -95,6 +99,7 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			womanSocialUpbringManager.saveWomanSocialUpbring(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -104,6 +109,9 @@ public class WomanSocialUpbringAction extends CrudActionSupport<WomanSocialUpbri
 				result4Json.setMessage("修改社会抚养费成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"社会抚养费信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

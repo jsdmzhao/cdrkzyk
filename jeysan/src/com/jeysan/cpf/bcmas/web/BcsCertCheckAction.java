@@ -2,11 +2,11 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.hibernate.ObjectNotFoundException;
-import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
@@ -44,12 +44,15 @@ public class BcsCertCheckAction extends PrintActionSupport<BcsCertCheck> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				bcsCertCheckManager.deleteBcsCertCheck(id);
 				logger.debug("删除了计划生育服务证查验："+id);
+				monitorLogManager.saveMonitorLog("删除计划生育服务证查验信息", System.currentTimeMillis()-t1_, 1);
 			}else {
 				bcsCertCheckManager.deleteBcsCertChecks(ids);
 				logger.debug("删除了很多计划生育服务证查验："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除计划生育服务证查验信息", System.currentTimeMillis()-t1_, StringUtils.split(ids, ",").length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除计划生育服务证查验成功");
@@ -103,6 +106,7 @@ public class BcsCertCheckAction extends PrintActionSupport<BcsCertCheck> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String bcsId = Struts2Utils.getParameter("master.dwz_bcsLookup.bcsId");
 			if(StringUtils.isNotEmpty(bcsId)){
 				BcsCert bcs = new BcsCert();
@@ -118,6 +122,7 @@ public class BcsCertCheckAction extends PrintActionSupport<BcsCertCheck> {
 				result4Json.setMessage("修改计划生育服务证查验成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id==null?"增加":"修改")+"计划生育服务证查验信息", System.currentTimeMillis()-t1_, 1);
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

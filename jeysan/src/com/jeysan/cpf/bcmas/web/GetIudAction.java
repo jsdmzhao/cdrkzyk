@@ -48,6 +48,7 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				getIudManager.deleteGetIud(id);
 				logger.debug("删除了取环："+id);
@@ -58,6 +59,8 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除取环成功");
 			result4Json.setAction(Result4Json.DELETE);
+			monitorLogManager.saveMonitorLog("删除取环信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -75,6 +78,7 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			String typeh = Struts2Utils.getParameter("typeh");
 			if(id!=null){
 				GetIud iud = getIudManager.getGetIudByWomanId(id);
@@ -111,6 +115,9 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("确定名单成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("确定取环名单", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -172,6 +179,7 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			entity.setRecordType(Constants.RECORD_TYPE.HAS_REGISTER);
 			getIudManager.saveGetIud(entity);
 			result4Json.setStatusCode("200");
@@ -182,6 +190,8 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 				result4Json.setMessage("修改取环成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"取环信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

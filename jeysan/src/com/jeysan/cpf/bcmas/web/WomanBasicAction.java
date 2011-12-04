@@ -2,6 +2,7 @@
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				womanBasicManager.deleteWomanBasic(id);
 				logger.debug("删除了基础信息："+id);
@@ -47,6 +49,9 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除基础信息成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除育龄妇女基础信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -89,6 +94,7 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			womanBasicManager.saveWomanBasic(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -98,6 +104,9 @@ public class WomanBasicAction extends CrudActionSupport<WomanBasic> {
 				result4Json.setMessage("修改基础信息成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"育龄妇女基础信息信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

@@ -43,6 +43,7 @@ public class Birth2ApplyAction extends PrintActionSupport<Birth2Apply> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				birth2ApplyManager.deleteBirth2Apply(id);
 				logger.debug("删除了再生育申请："+id);
@@ -50,6 +51,7 @@ public class Birth2ApplyAction extends PrintActionSupport<Birth2Apply> {
 				birth2ApplyManager.deleteBirth2Applys(ids);
 				logger.debug("删除了很多再生育申请："+ids.toString());
 			}
+			monitorLogManager.saveMonitorLog("删除再生育申请信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除再生育申请成功");
 			result4Json.setAction(Result4Json.DELETE);
@@ -113,6 +115,7 @@ public class Birth2ApplyAction extends PrintActionSupport<Birth2Apply> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String fertileWomanId = Struts2Utils.getParameter("master.dwz_fertileWomanLookup.fertileWomanId");
 			if(StringUtils.isNotEmpty(fertileWomanId)){
 				FertileWoman fertileWoman = fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId));
@@ -134,6 +137,7 @@ public class Birth2ApplyAction extends PrintActionSupport<Birth2Apply> {
 				result4Json.setMessage("修改再生育申请成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"再生育申请信息", System.currentTimeMillis()-t1_, 1);
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

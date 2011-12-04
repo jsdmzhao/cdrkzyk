@@ -44,6 +44,7 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				womanUpbringDetailManager.deleteWomanUpbringDetail(id);
 				logger.debug("删除了社会抚养费缴交："+id);
@@ -54,6 +55,9 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除社会抚养费缴交成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除社会抚养费缴交信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -102,6 +106,7 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String upbringId = Struts2Utils.getParameter("upbringId");
 			WomanSocialUpbring upbring =  womanSocialUpbringManager.getWomanSocialUpbring(Long.parseLong(upbringId));
 			entity.setUpbring(upbring);
@@ -129,6 +134,9 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 				result4Json.setMessage("修改社会抚养费缴交成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"社会抚养费(未分期)缴交信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -151,6 +159,7 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 		boolean flag = false;
 		boolean isPayup = false;
 		try {
+			long t1_ = System.currentTimeMillis();
 			String[] detailIds = Struts2Utils.getParameterValues("detailId");
 			Long detailId = null;
 			if(detailIds!=null&&detailIds.length>0){
@@ -160,12 +169,15 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 					WomanUpbringDetail detail = null;
 					String tmp = null;
 					Double factMoneyTotal = 0d;
+					int ct1 = 0 ,ct2 = 0;
 					for(int i=0;i<detailIds.length;i++){
 						detailId = Long.parseLong(detailIds[i]);
 						if(detailId==-1){
+							ct1++;
 							detail = new WomanUpbringDetail();
 							detail.setUpbring(upbring);
 						}else{
+							ct2++;
 							detail = womanUpbringDetailManager.getWomanUpbringDetail(detailId);
 						}
 						detail.setCounth(i+1);
@@ -194,9 +206,17 @@ public class WomanUpbringDetailAction extends CrudActionSupport<WomanUpbringDeta
 					womanSocialUpbringManager.saveWomanSocialUpbring(upbring);
 					
 					flag = true;
+					
+					if(ct1 > 0)
+						monitorLogManager.saveMonitorLog("增加社会抚养费(分期)缴交信息", System.currentTimeMillis()-t1_, ct1);
+					if(ct2 > 0)
+						monitorLogManager.saveMonitorLog("修改社会抚养费(分期)缴交信息", System.currentTimeMillis()-t1_, ct2);
+					
 				}else if(upbring.getIsPayup() == 1){
 					isPayup = true;
 				}
+				
+
 			}
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);

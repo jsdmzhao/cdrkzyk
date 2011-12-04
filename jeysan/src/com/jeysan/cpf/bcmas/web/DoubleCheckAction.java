@@ -40,6 +40,7 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				doubleCheckManager.deleteDoubleCheck(id);
 				logger.debug("删除了双查轮次："+id);
@@ -47,6 +48,8 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 				doubleCheckManager.deleteDoubleChecks(ids);
 				logger.debug("删除了很多双查轮次："+ids.toString());
 			}
+			monitorLogManager.saveMonitorLog("删除双查轮次信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除双查轮次成功");
 			result4Json.setAction(Result4Json.DELETE);
@@ -100,6 +103,7 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String[] detail_starts = Struts2Utils.getParameterValues("detail_start");
 			String[] detail_ends = Struts2Utils.getParameterValues("detail_end");
 			Integer year = Integer.parseInt(Struts2Utils.getParameter("year"));
@@ -131,6 +135,8 @@ public class DoubleCheckAction extends CrudActionSupport<DoubleCheck> {
 				result4Json.setMessage("修改双查轮次成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"双查轮次信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

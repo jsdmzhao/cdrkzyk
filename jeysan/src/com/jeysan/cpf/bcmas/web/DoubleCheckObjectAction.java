@@ -53,6 +53,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				deleteDC(id);
 				logger.debug("删除了双查对象："+id);
@@ -61,6 +62,8 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 					deleteDC(Long.parseLong(dcId));
 				logger.debug("删除了很多双查对象："+ids.toString());
 			}
+			monitorLogManager.saveMonitorLog("删除双查对象信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("操作成功");
 			result4Json.setAction(Result4Json.DELETE);
@@ -148,6 +151,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			String year = Struts2Utils.getRequest().getParameter("filter_EQI_year");
 			String seq = Struts2Utils.getRequest().getParameter("filter_EQI_seq");
 				if(StringUtils.isNotEmpty(year)&&StringUtils.isNotEmpty(seq)){
@@ -168,6 +172,18 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 					result4Json.setStatusCode("200");
 					result4Json.setMessage("操作成功");
 					result4Json.setAction(Result4Json.DELETE);
+					
+					String check = Struts2Utils.getRequest().getParameter("check");
+					String tips = null;
+					if(StringUtils.equals(check, "no"))
+						tips = "不查";
+					else if(StringUtils.equals(check, "free"))
+						tips = "免查";
+					else if(StringUtils.equals(check, "yes")){
+						tips = "应查";
+					}
+					monitorLogManager.saveMonitorLog("双查对象"+tips, System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 				}
 			} catch (Exception e) {
 				logger.error(e.getMessage(), e);
@@ -304,6 +320,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			entity = doubleCheckObjectManager.getDoubleCheckObject(id);
 			String issingle = Struts2Utils.getParameter("issingle");
 			if(StringUtils.isNotEmpty(issingle))
@@ -327,6 +344,8 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 				result4Json.setMessage("修改双查对象成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"双查对象信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

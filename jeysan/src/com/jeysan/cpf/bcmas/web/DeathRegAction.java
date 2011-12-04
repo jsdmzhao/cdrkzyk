@@ -3,6 +3,7 @@
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,7 @@ public class DeathRegAction extends PrintActionSupport<DeathReg> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				deathRegManager.deleteDeathReg(id);
 				logger.debug("删除了死亡登记："+id);
@@ -49,6 +51,8 @@ public class DeathRegAction extends PrintActionSupport<DeathReg> {
 				deathRegManager.deleteDeathRegs(ids);
 				logger.debug("删除了很多死亡登记："+ids.toString());
 			}
+			monitorLogManager.saveMonitorLog("删除死亡登记信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除死亡登记成功");
 			result4Json.setAction(Result4Json.DELETE);
@@ -93,6 +97,7 @@ public class DeathRegAction extends PrintActionSupport<DeathReg> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			Person person = null;
 			if(id == null){
 				String personId = Struts2Utils.getParameter("master.dwz_personLookup.personId");
@@ -104,6 +109,8 @@ public class DeathRegAction extends PrintActionSupport<DeathReg> {
 			}
 			deathRegManager.saveDeathReg(entity);
 			result4Json.setStatusCode("200");
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"死亡登记信息", System.currentTimeMillis()-t1_, 1);
+
 			if(id == null){
 				result4Json.setMessage("保存死亡登记成功");
 				result4Json.setAction(Result4Json.SAVE);

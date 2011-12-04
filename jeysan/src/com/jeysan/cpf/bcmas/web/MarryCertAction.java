@@ -53,6 +53,7 @@ public class MarryCertAction extends PrintActionSupport<MarryCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				deleteMarryCert(id);
 				logger.debug("删除了婚育证明："+id);
@@ -64,6 +65,9 @@ public class MarryCertAction extends PrintActionSupport<MarryCert> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除婚育证明成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除婚育证明信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -120,7 +124,8 @@ public class MarryCertAction extends PrintActionSupport<MarryCert> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
-			
+
+			long t1_ = System.currentTimeMillis();
 			if(id == null){
 				String personId = Struts2Utils.getParameter("master.dwz_personLookup.personId");
 				if(StringUtils.isNotEmpty(personId)){
@@ -152,6 +157,8 @@ public class MarryCertAction extends PrintActionSupport<MarryCert> {
 				result4Json.setMessage("修改婚育证明成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"婚育证明信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

@@ -40,6 +40,7 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(id!=null){
 				womanAwardManager.deleteWomanAward(id);
 				logger.debug("删除了奖励信息："+id);
@@ -50,6 +51,9 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除奖励信息成功");
 			result4Json.setAction(Result4Json.DELETE);
+			
+			monitorLogManager.saveMonitorLog("删除奖励信息", System.currentTimeMillis()-t1_, id!=null?1:StringUtils.split(ids, ",").length);
+
 		} catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
@@ -95,6 +99,7 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			womanAwardManager.saveWomanAward(entity);
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -104,6 +109,9 @@ public class WomanAwardAction extends CrudActionSupport<WomanAward> {
 				result4Json.setMessage("修改奖励信息成功");
 				result4Json.setAction(Result4Json.UPDATE);
 			}
+			
+			monitorLogManager.saveMonitorLog((id == null?"增加":"修改")+"奖励信息", System.currentTimeMillis()-t1_, 1);
+
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");

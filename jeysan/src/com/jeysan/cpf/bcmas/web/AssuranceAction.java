@@ -46,12 +46,15 @@ public class AssuranceAction extends PrintActionSupport<Assurance> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try {
+			long t1_ = System.currentTimeMillis();
 			if(fertileWomanId!=null){
 				assuranceManager.deleteAssurance(fertileWomanId);
 				logger.debug("删除了保险保障："+fertileWomanId);
+				monitorLogManager.saveMonitorLog("删除保险信息", System.currentTimeMillis()-t1_, 1);
 			}else {
 				assuranceManager.deleteAssurances(ids);
 				logger.debug("删除了很多保险保障："+ids.toString());
+				monitorLogManager.saveMonitorLog("删除保险信息", System.currentTimeMillis()-t1_, StringUtils.split(ids, ",").length);
 			}
 			result4Json.setStatusCode("200");
 			result4Json.setMessage("删除保险保障成功");
@@ -103,6 +106,7 @@ public class AssuranceAction extends PrintActionSupport<Assurance> {
 		if(result4Json == null)
 			result4Json = new Result4Json();
 		try{
+			long t1_ = System.currentTimeMillis();
 			String type = Struts2Utils.getParameter("type");
 			String fertileWomanId = Struts2Utils.getParameter("fertileWomanId");
 			FertileWoman fw = fertileWomanManager.getFertileWoman(Long.parseLong(fertileWomanId));
@@ -120,6 +124,11 @@ public class AssuranceAction extends PrintActionSupport<Assurance> {
 			fertileWomanManager.saveFertileWoman(fw);
 			result4Json.setStatusCode("200");
 			result4Json.setAction(Result4Json.UPDATE);
+			if(StringUtils.equals(type, "0")){
+				monitorLogManager.saveMonitorLog("登记保险信息", System.currentTimeMillis()-t1_, 1);
+			}else if(StringUtils.equals(type, "1")){
+				monitorLogManager.saveMonitorLog("取消保险", System.currentTimeMillis()-t1_, 1);
+			}
 		}catch(Exception e){
 			logger.error(e.getMessage(), e);
 			result4Json.setStatusCode("300");
