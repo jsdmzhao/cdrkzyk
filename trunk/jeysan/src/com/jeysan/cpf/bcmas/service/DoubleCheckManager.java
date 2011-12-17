@@ -156,7 +156,7 @@ public class DoubleCheckManager {
 		}
 		sql
 		.append(" group by dcsv.AREA,dcsv.dcobjtype ")
-		.append(" UNION ")
+		.append(" UNION ALL ")
 		.append(" select dcsv.AREA,ifnull(count(dcsv.AREA),0) as area_count,dcsv.dcobjtype,ifnull(count(dcsv.dcobjtype),0) as dcobjtype_count,1 as type ")
 		.append(" from double_check_stat_view as dcsv,FHP_DOUBLE_CHECK_OBJECT as dco ")
 		.append(" where dcsv.ID = dco.WOMAN_ID ");
