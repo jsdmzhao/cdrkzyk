@@ -5,6 +5,8 @@
 	<c:set var="action" value="${ctx}/decision/fixbasicquery5view.action"/>
 </c:if>
 <tags:js.pager action="${action}">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<c:if test="${param.isTake eq 1}">
 		<input type="hidden" name="filter_EQS_typeh" value="${param['filter_EQS_typeh']}" />
 	</c:if>
@@ -25,6 +27,8 @@ $(function(){
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${action}" method="post">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>

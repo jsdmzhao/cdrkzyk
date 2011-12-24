@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/decision/fixbasicquery17view.action">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_GED_dateh" value="${param['filter_GED_dateh']}" />
 	<input type="hidden" name="filter_LED_dateh" value="${param['filter_LED_dateh']}" />
 	<input type="hidden" name="filter_EQI_typeh" value="${param['filter_EQI_typeh']}" />
@@ -16,6 +18,9 @@ $(function(){
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/fixbasicquery17view.action" method="post">
+
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>

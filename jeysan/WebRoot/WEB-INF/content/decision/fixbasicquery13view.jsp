@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/decision/fixbasicquery13view.action">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_EQI_househodeKind" value="${param['filter_EQI_househodeKind']}" />
 	<input type="hidden" name="filter_EQI_househodeKind2" value="${param['filter_EQI_househodeKind2']}" />
 	<input type="hidden" name="filter_EQI_sex2" value="${param['filter_EQI_sex2']}" />
@@ -8,6 +10,9 @@
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/fixbasicquery13view.action" method="post">
+
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>
