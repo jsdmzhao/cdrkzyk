@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/decision/fixbasicquery6view.action">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<c:choose>
 		<c:when test="${param.p_type eq 1}">
 			<input type="hidden" name="filter_GED_edd" class="text" size="52" value="${param.filter_GED_edd}"/>
@@ -11,6 +13,10 @@
 		</c:when>
 		<c:when test="${param.p_type eq 2}">
 			<input type="hidden" name="filter_EQI_unBornType" class="text" value="${param.filter_EQI_unBornType}"/>	
+		</c:when>
+		<c:when test="${param.p_type eq 3}">
+			<input type="hidden" name="filter_GED_birthday" class="text" size="52" value="${param.filter_GED_birthday}"/>
+			<input type="hidden" name="filter_LED_birthday" class="text" value="${param.filter_LED_birthday}"/>
 		</c:when>
 		<c:otherwise>
 		</c:otherwise>
@@ -54,6 +60,8 @@ function JS_getKindTitle(p_type){
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/fixbasicquery6view.action" method="post">
 		<input type="hidden" name="p_type" value="${param.p_type }"/>
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 		<table class="searchContent">
 			<c:set var="layouth" value="138"/>
@@ -80,6 +88,14 @@ function JS_getKindTitle(p_type){
 					<tr>
 					<td>安排生育未生类型：
 <tags:js.dict.selector name="filter_EQI_unBornType" value="${param.filter_EQI_unBornType}" dictCode="JS1025" noRender="true"/>
+					</td>
+					</tr>
+				</c:when>
+				<c:when test="${param.p_type eq 3}">
+					<tr>
+					<td>出生日期：
+<input type="text" name="filter_GED_birthday" class="date" readonly="true" value="${param.filter_GED_birthday}"/>~
+<input type="text" name="filter_LED_birthday" class="date" readonly="true" value="${param.filter_LED_birthday}"/>
 					</td>
 					</tr>
 				</c:when>

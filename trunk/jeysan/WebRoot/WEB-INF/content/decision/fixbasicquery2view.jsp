@@ -5,6 +5,8 @@
 	<c:set var="action" value="${ctx}/decision/fixbasicquery3view.action"/>
 </c:if>
 <tags:js.pager action="${action}">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="hasAccept" value="${param.hasAccept}" />
 	<c:if test="${param.hasAccept eq 1}">
 	<input type="hidden" name="filter_EQS_eduType" value="${param.filter_EQS_eduType}" />
@@ -42,6 +44,8 @@ $(function(){
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${action}" method="post">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>

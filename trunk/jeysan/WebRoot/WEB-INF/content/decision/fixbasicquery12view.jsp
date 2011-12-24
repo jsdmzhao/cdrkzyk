@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/decision/fixbasicquery12view.action">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<c:choose>
 		<c:when test="${param.p_type eq 1}">
 			<input type="hidden" name="filter_GED_upDate" class="text" size="52" value="${param.filter_GED_upDate}"/>
@@ -91,6 +93,8 @@ function JS_getKindTitle(p_type){
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/fixbasicquery12view.action" method="post">
 		<input type="hidden" name="p_type" value="${param.p_type }"/>
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 			<c:set var="layouth" value="138"/>

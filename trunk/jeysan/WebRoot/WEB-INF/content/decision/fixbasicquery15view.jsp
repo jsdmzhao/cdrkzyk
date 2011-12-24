@@ -1,12 +1,17 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/decision/fixbasicquery15view.action">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<input type="hidden" name="filter_GED_issDate" class="text" value="${param.filter_GED_issDate}"/>
 	<input type="hidden" name="filter_LED_issDate" class="text" value="${param.filter_LED_issDate}"/>
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/fixbasicquery15view.action" method="post">
+
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 				<tr>

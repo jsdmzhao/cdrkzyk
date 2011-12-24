@@ -1,6 +1,8 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ include file="/common/taglibs.jsp" %>
 <tags:js.pager action="${ctx}/decision/fixbasicquery1view.action">
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 	<c:choose>
 		<c:when test="${param.p_type eq 1}">
 			<input type="hidden" name="filter_LIKES_address" class="text" size="52" value="${param.filter_LIKES_address}"/>
@@ -99,6 +101,8 @@ function JS_getKindTitle(p_type){
 	<div class="pageHeader">
 		<form onsubmit="return navTabSearch(this);" action="${ctx}/decision/fixbasicquery1view.action" method="post">
 		<input type="hidden" name="p_type" value="${param.p_type }"/>
+	<input type="hidden" name="filter_EQI_domicileType"
+		value="${param['filter_EQI_domicileType']}" />
 		<div class="searchBar">
 			<table class="searchContent">
 			<c:set var="layouth" value="138"/>
@@ -258,7 +262,7 @@ function JS_getKindTitle(p_type){
 					<th width="80" orderField="firstMarryDate" class="orderFlag" htype="date">初婚日期</th>
 					<th width="80" orderField="marryStatus" class="orderFlag" htype="dict">婚姻状况</th>
 					<th width="80" orderField="househodeKind" class="orderFlag" htype="dict" distype="9,10">户口性质</th>
-					<th width="80" orderField="method" class="orderFlag">避孕节育措施</th>
+					<th width="80" orderField="method" class="orderFlag" htype="dict">避孕节育措施</th>
 					<th width="80" htype="digits">子女数</th>
 					<th width="80" orderField="boynum" class="orderFlag" htype="digits">男孩数</th>
 					<th width="80" orderField="girlnum" class="orderFlag" htype="digits">女孩数</th>
@@ -268,11 +272,11 @@ function JS_getKindTitle(p_type){
 					<th width="80" orderField="politicalStatus2" class="orderFlag" htype="dict" distype="1,2,3,4,9,10,11">丈夫政治面貌</th>
 					<th width="80" orderField="houseNo" class="orderFlag" distype="2,3,4,7,9,10">门牌号码</th>
 					<th width="80" orderField="settleInPlace" class="orderFlag" distype="1,2,3,4,7,9,10,11">何地迁入</th>
-					<th width="80" orderField="settleInDate" class="orderFlag" distype="1,2,3,4,7,9,10,11">迁入日期</th>
+					<th width="80" orderField="settleInDate" class="orderFlag" htype="date" distype="1,2,3,4,7,9,10,11">迁入日期</th>
 					<th width="80" orderField="createDate" class="orderFlag" htype="date" distype="1,2,3,4,7,9,10">建卡日期</th>
 					<th width="80" orderField="domicile" class="orderFlag" distype="1,2,3,4,7,9,10,11">丈夫户籍地</th>
-					<th width="80" orderField="domicileType" class="orderFlag" distype="1,2,3,4,7,9,10,11">丈夫户口类别</th>
-					<th width="80" orderField="area" class="orderFlag" distype="1,2,3,4,7,9,10,11">所属区域</th>
+					<th width="80" orderField="domicileType" class="orderFlag" htype="dict" distype="1,2,3,4,7,9,10,11">丈夫户口类别</th>
+					<th width="80" orderField="area" class="orderFlag" htype="region" distype="1,2,3,4,7,9,10,11">所属区域</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -304,8 +308,8 @@ function JS_getKindTitle(p_type){
 					<td><fmt:formatDate value="${a.cancelDate}" pattern="yyyy-MM-dd"/></td>
 					<td>${a.cardStatus}</td>
 					<td>${a.domicile}</td>
-					<td>${a.domicileType}</td>
-					<td>${a.area}</td>
+					<td><tags:js.dict.getValue value="${a.domicileType}"/></td>
+					<td><tags:js.area.getValue value="${a.area}"></tags:js.area.getValue></td>
 				</tr>
 				</c:forEach>
 			</tbody>
