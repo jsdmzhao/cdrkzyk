@@ -74,9 +74,9 @@ public class TodolistAction extends CrudActionSupport<Todolist> {
 		page.setAutoCount(false);
 		page = todolistManager.searchTodolist(page, filters);
 		List<Todolist> result = page.getResult();
+		StringBuilder strb = new StringBuilder();
+		strb.append("<data>");
 		if(result!=null && result.size() > 0){
-			StringBuilder strb = new StringBuilder();
-			strb.append("<data>");
 			for(Todolist todolist:result){
 				strb.append("<event id=\"" ).append( todolist.getId() ).append( "\">")
 				.append("<start_date><![CDATA[" ).append( DateUtil.convertDateToString(todolist.getStartTime()) ).append( "]]></start_date>")
@@ -85,11 +85,11 @@ public class TodolistAction extends CrudActionSupport<Todolist> {
 				.append("<details><![CDATA[" ).append( todolist.getDetail() ).append( "]]></details>")
 				.append("</event>");
 			}
-			strb.append("</data>");
-			//mv.addObject(strb);
-			Struts2Utils.getResponse().setContentType("text/xml;charset=UTF-8");
-			Struts2Utils.getResponse().getWriter().print(strb.toString());
 		}
+		strb.append("</data>");
+		//mv.addObject(strb);
+		Struts2Utils.getResponse().setContentType("text/xml;charset=UTF-8");
+		Struts2Utils.getResponse().getWriter().print(strb.toString());
 		return NONE;
 	}
 	@Override
