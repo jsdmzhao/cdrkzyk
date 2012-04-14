@@ -61,6 +61,12 @@ public class Fixbasicquery20View extends IdExtEntity {
 	 * area
 	 */
 	private String area;
+	
+	/**
+	 * DOMICILE_TYPE
+	 */
+	private Integer domicileType;
+	
 			
 			@Column(name="TEAM_NAME")
 	public String getTeamName() {
@@ -138,6 +144,14 @@ public class Fixbasicquery20View extends IdExtEntity {
 	}
 	public void setArea(String area) {
 		this.area = area;
+	}
+	
+	@Column(name="DOMICILE_TYPE")
+	public Integer getDomicileType() {
+		return domicileType;
+	}
+	public void setDomicileType(Integer domicileType) {
+		this.domicileType = domicileType;
 	}
 			
 	@Override
