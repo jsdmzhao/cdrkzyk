@@ -50,11 +50,11 @@ function ok(){
 <div class="divider"></div>
 					<p>
 					<label>国籍：</label>
-					<tags:js.dict.selector name="personBasic.nationality" value="${personBasic.nationality}" dictCode="JS1045"/>
+					<tags:js.dict.selector name="personBasic.nationality" value="${empty(personBasic.nationality)?'419':personBasic.nationality}" dictCode="JS1045"/>
 					</p>
 					<p>
 					<label>民族：</label>
-					<tags:js.dict.selector name="personBasic.native" value="${personBasic.native}" dictCode="JS1044"/>
+					<tags:js.dict.selector name="personBasic.native" value="${empty(personBasic.native)?'341':personBasic.native}" dictCode="JS1044"/>
 					</p>
 					<p>
 					<label>出生日期：</label>
