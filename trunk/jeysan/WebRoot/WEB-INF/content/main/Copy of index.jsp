@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>三杰通用管理平台</title>
+<title>高新区计生局通用管理平台</title>
 
 <link href="${ctx4doc}/dwz/themes/default/style.css" rel="stylesheet" type="text/css" />
 <link href="${ctx4doc}/dwz/themes/css/core.css" rel="stylesheet" type="text/css" />
@@ -240,7 +240,7 @@ Http 405原因是IIS不允许ajax访问*.htm或是*.html后缀的网页，这是
 		<div id="splitBarProxy"></div>
 	</div>
 
-	<div id="footer">Copyright &copy; 2011 <a href="http://www.jeysan.com" target="navTab" rel="jeysan">三杰软件</a></div>
+	<div id="footer">Copyright &copy; 2011 <a href="http://www.jeysan.com" target="navTab" rel="jeysan">高新区计生局软件</a></div>
 
 <!--拖动效果-->
 	<div class="resizable"></div>

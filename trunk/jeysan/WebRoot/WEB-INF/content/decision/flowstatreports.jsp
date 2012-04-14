@@ -36,11 +36,11 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:" target="navTab" rel="flowstatreports_sub"><span>流出人员计划生育情况表</span></a>
-					</p> -->
+					</p>
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:" target="navTab" rel="flowbasicquery_sub"><span>流出人员流量分析</span></a>
-					</p>
+					</p> -->
 				</div>
 			</div>
 			<div class="formBar">
