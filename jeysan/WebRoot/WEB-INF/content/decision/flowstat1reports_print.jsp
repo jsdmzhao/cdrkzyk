@@ -109,9 +109,9 @@
 			        <td width="10%" align="center" height="20">编制日期：</td>
 			        <td width="9%" align="left"><fmt:formatDate value="${date}" pattern="yyyy-MM-dd"/> </td>
 			        <td width="10%" align="center">编制者：</td>
-			        <td width="8%" >jeysan</td>
+			        <td width="8%" >${_js_user.userName}</td>
 			        <td width="10%" align="center">编制单位：</td>
-			        <td width="10%" >三杰</td>
+			        <td width="10%" >高新区计生局</td>
 			        <td width="10%" align="center">审核单位：</td>
 			        <td width="13%" class="In1-td-bottom">&nbsp;</td></tr></table></td></tr>
 			        

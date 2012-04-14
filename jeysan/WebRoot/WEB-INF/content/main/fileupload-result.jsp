@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=7" />
-<title>三杰通用管理平台</title>
+<title>高新区计生局通用管理平台</title>
 <script type="text/javascript">
 	window.parent.navTabAjaxDone4Update(${result});
 </script>

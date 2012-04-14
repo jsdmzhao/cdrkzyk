@@ -13,7 +13,7 @@
 									<ul>
 										<li><a href="${ctx}/decision/flowbasicquery1view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub">流入人员基本信息</a></li>
 										<li><a href="${ctx}/decision/flowbasicquery2view.action?filter_EQI_domicileType=<%=Constants.DOMICILE_TYPE.FLOW%>" target="navTab" rel="flowbasicquery_sub">流出人员基本信息</a></li>
-										<li><a href="javascript:" target="navTab" rel="flowbasicquery_sub">流入重复人员信息</a></li>
+										<!-- <li><a href="javascript:" target="navTab" rel="flowbasicquery_sub">流入重复人员信息</a></li> -->
 									</ul>
 								</li>
 								<li><a href="javascript:">子女情况查询</a>

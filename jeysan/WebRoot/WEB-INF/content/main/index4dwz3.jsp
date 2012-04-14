@@ -246,7 +246,7 @@ if ($.browser.msie) {
 		<div id="splitBarProxy"></div>
 	</div>
 
-	<div id="footer">Copyright &copy; 2011 <a href="http://www.jeysan.com" target="navTab" rel="jeysan">三杰软件</a></div>
+	<div id="footer">Copyright &copy; 2011 <a href="http://www.jeysan.com" target="navTab" rel="jeysan">高新区计生局软件</a></div>
 
 <!--拖动效果-->
 	<div class="resizable"></div>

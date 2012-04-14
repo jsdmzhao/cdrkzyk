@@ -37,7 +37,7 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>下级待完成工作汇总</span></a>
-					</p> -->
+					</p> 
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>育龄人员的跟踪管理</span></a>
@@ -45,7 +45,7 @@
 					<div class="divider"></div>
 					<p>
 						<a class="button" href="javascript:void(0)" target="navTab" rel="fixmonitor_sub"><span>怀孕人员的监控跟踪</span></a>
-					</p>
+					</p>-->
 				</div>
 			</div>
 			<div class="formBar">
