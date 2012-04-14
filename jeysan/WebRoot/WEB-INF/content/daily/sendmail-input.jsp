@@ -51,7 +51,7 @@
 					<li>
 						<div class="buttonActive">
 							<div class="buttonContent">
-								<button type="submit" onclick="javascript:$('#send_type').val(0)">
+								<button type="submit" onclick="javascript:$('#send_type',navTab.getCurrentPanel()).val(0)">
 									发送
 								</button>
 							</div>
@@ -60,7 +60,7 @@
 					<li>
 						<div class="button">
 							<div class="buttonContent">
-								<button type="submit" onclick="javascript:$('#send_type').val(1)">
+								<button type="submit" onclick="javascript:$('#send_type',navTab.getCurrentPanel()).val(1)">
 									保存
 								</button>
 							</div>

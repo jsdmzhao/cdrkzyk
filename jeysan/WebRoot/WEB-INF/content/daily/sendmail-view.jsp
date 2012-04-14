@@ -58,7 +58,7 @@
 				<li>
 					<div class="buttonActive">
 						<div class="buttonContent">
-							<button type="submit" onclick="$('#type').val(0)">
+							<button type="submit" onclick="$('#type',navTab.getCurrentPanel()).val(0)">
 								发送
 							</button>
 						</div>
