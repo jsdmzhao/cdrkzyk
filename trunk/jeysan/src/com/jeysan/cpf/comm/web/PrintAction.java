@@ -36,11 +36,19 @@ public class PrintAction extends ActionSupport implements ServletRequestAware{
 			/*String paramsInForm = null;
 			String title = null;*/
 			//String rule = null;
+			//Struts2Utils.getRequest().setCharacterEncoding("utf-8"); 
+
+			//Struts2Utils.getResponse().setCharacterEncoding("utf-8");
+
 			while (names.hasMoreElements()) {
 				String name = (String) names.nextElement();
 				if (name.equals("url")) {
 					continue;
-				}/*else if (name.equals("rule")) {
+				}
+				/*if (name.equals("title")) {
+					String title = request.getParameter(name);new String(title.getBytes("ISO-8859-1"),"gb2312");
+					System.out.println(title);
+				}*//*else if (name.equals("rule")) {
 					rule = request.getParameter(name);
 					System.out.println(rule);
 				}*//*else if (name.equals("title")) {

@@ -211,8 +211,8 @@ public class FlowStatReportsManager {
 		Integer count_tmp = null , type_tmp = null;
 		for(Map<String,Object> ros : result_orin){
 			area_tmp = (String)ros.get("AREA");
-			count_tmp = ((BigInteger)ros.get("COUNTH")).intValue();
-			type_tmp = ((BigInteger)ros.get("TYPEH")).intValue();
+			count_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("COUNTH"));
+			type_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("TYPEH"));
 			//注意这里极易出现统计错误
 			if(!result.containsKey(area_tmp)){
 				result.put(area_tmp, new HashMap<String,Object>());
@@ -435,9 +435,9 @@ public class FlowStatReportsManager {
 		Integer count_tmp = null , type_tmp = null, sex_tmp = null;
 		for(Map<String,Object> ros : result_orin){
 			area_tmp = (String)ros.get("AREA");
-			count_tmp = ((BigInteger)ros.get("counth")).intValue();
-			type_tmp = ((BigInteger)ros.get("TYPEH")).intValue();
-			sex_tmp = ((BigInteger)ros.get("sex")).intValue();
+			count_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("counth"));
+			type_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("TYPEH"));
+			sex_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("sex"));
 			//注意这里极易出现统计错误
 			if(!result.containsKey(area_tmp)){
 				result.put(area_tmp, new HashMap<String,Object>());
@@ -807,8 +807,8 @@ public class FlowStatReportsManager {
 		Integer count_tmp = null , type_tmp = null;
 		for(Map<String,Object> ros : result_orin){
 			area_tmp = (String)ros.get("AREA");
-			count_tmp = ((BigInteger)ros.get("counth")).intValue();
-			type_tmp = ((BigInteger)ros.get("TYPEH")).intValue();
+			count_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("counth"));
+			type_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("TYPEH"));
 			//注意这里极易出现统计错误
 			if(!result.containsKey(area_tmp)){
 				result.put(area_tmp, new HashMap<String,Object>());
@@ -1079,9 +1079,9 @@ public class FlowStatReportsManager {
 		Integer count_tmp = null , type_tmp = null , chind_index_tmp = null;
 		for(Map<String,Object> ros : result_orin){
 			area_tmp = (String)ros.get("AREA");
-			count_tmp = ((BigInteger)ros.get("counth")).intValue();
-			type_tmp = ((BigInteger)ros.get("TYPEH")).intValue();
-			chind_index_tmp = ((BigInteger)ros.get("CHIND_INDEX")).intValue();
+			count_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("counth"));
+			type_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("TYPEH"));
+			chind_index_tmp = IntegerUtil.getIntegerFromBigInteger(ros.get("CHIND_INDEX"));
 			//注意这里极易出现统计错误
 			if(!result.containsKey(area_tmp)){
 				result.put(area_tmp, new HashMap<String,Object>());
