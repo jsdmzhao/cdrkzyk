@@ -265,9 +265,9 @@
 	var a = 0;
 	function setCond(value) {
 		if (value == '' || value == 0) {
-			$('#cond__').val('');
+			$('#cond__',$box).val('');
 		} else if (value == 1) {
-			$('#cond__').val('孩子死亡安排再生二孩');
+			$('#cond__',$box).val('孩子死亡安排再生二孩');
 		}
 	}
 	function setSpouseAndChildren() {
