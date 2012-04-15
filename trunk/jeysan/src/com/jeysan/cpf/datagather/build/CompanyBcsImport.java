@@ -44,16 +44,16 @@ public class CompanyBcsImport extends BaseImport{
 			
 			conn = dataSource.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql.toString());
-			String[] colValue = null;
+			Object[] colValue = null;
 			int i = 0;
-			String company = null;
+			Object company = null;
 			for(Object o : datas){
 				i++;
 				/**忽略行数*/
-				colValue = (String[])o;
+				colValue = (Object[])o;
 				if(i == 2) company = colValue[1];
 				if(i <= 12) continue;
-				if(colValue[0].contains("调查人")) continue;
+				if(colValue[0].toString().contains("调查人")) continue;
 				
 				psmt.setObject(1, colValue[0]);
 				psmt.setObject(2, colValue[1]);
@@ -64,7 +64,7 @@ public class CompanyBcsImport extends BaseImport{
 				psmt.setObject(7, colValue[6]);
 				psmt.setObject(8, colValue[7]);
 				psmt.setObject(9, colValue[8]);
-				psmt.setObject(10, colValue[9]+colValue[10]+colValue[11]+colValue[12]);
+				psmt.setObject(10, colValue[9].toString()+colValue[10].toString()+colValue[11].toString()+colValue[12].toString());
 				psmt.setObject(11, colValue[13]);
 				psmt.setObject(12, company);
 				psmt.setObject(13, new Date());

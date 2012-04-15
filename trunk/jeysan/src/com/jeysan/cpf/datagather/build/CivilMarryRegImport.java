@@ -8,6 +8,9 @@ import java.util.Date;
 import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.tool.hbm2x.StringUtils;
+
+import com.jeysan.modules.utils.date.DateUtil;
 
 
 public class CivilMarryRegImport extends BaseImport{
@@ -44,13 +47,13 @@ public class CivilMarryRegImport extends BaseImport{
 			
 			conn = dataSource.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql.toString());
-			String[] colValue = null;
+			Object[] colValue = null;
 			int i = 0;
 			for(Object o : datas){
 				i++;
 				/**忽略行数*/
 				if(i <= 2) continue;
-				colValue = (String[])o;
+				colValue = (Object[])o;
 				psmt.setObject(1,colValue[1]);
 				psmt.setObject(2,colValue[2]);
 				psmt.setObject(3,colValue[3]);
@@ -78,6 +81,32 @@ public class CivilMarryRegImport extends BaseImport{
 		}finally{
 			if(conn != null) conn.close();
 		}
+		
+	}
+	
+	private String translateDateValue(String dateStr){
+		if(StringUtils.isEmpty(dateStr))
+			return null;
+		String[] datetimes = dateStr.split(" ");
+		String[] subs = datetimes[0].split("-");
+		if(subs.length != 3)
+			return dateStr;
+		StringBuilder sb = new StringBuilder();
+		if(subs[0].length() == 2)
+			sb.append("20").append(subs[0]);
+		else
+			sb.append(subs[0]);
+		sb.append("-");
+		if(subs[1].length() == 1)
+			sb.append("0").append(subs[1]);
+		else
+			sb.append(subs[1]);
+		sb.append("-");
+		if(subs[2].length() == 1)
+			sb.append("0").append(subs[2]);
+		else
+			sb.append(subs[2]);
+		return sb.toString();
 		
 	}
 	

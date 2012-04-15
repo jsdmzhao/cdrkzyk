@@ -47,23 +47,24 @@ public class HospitalEpistationImport extends BaseImport{
 			
 			conn = dataSource.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql.toString());
-			String[] colValue = null;
+			Object[] colValue = null;
 			int i = 0;
 			for(Object o : datas){
 				i++;
 				/**忽略行数*/
 				if(i == 1) continue;
-				colValue = (String[])o;
+				colValue = (Object[])o;
 				psmt.setObject(1, colValue[0]);
 				psmt.setObject(2, colValue[1]);
 				psmt.setObject(3, colValue[2]);
 				psmt.setObject(4, colValue[3]);
 				psmt.setObject(5, colValue[4]);
 				/**日期格式 11/25/10 0:00 */
-				if(StringUtils.isNotEmpty(colValue[5]))
+				/*if(StringUtils.isNotEmpty(colValue[5]))
 					psmt.setObject(6, SDF.parse(colValue[5]));
 				else
-					psmt.setObject(6, null);
+					psmt.setObject(6, null);*/
+				psmt.setObject(6, (colValue[5]==null||StringUtils.isEmpty(colValue[5].toString()))?null:colValue[5]);
 				
 				psmt.setObject(7, colValue[6]);
 				psmt.setObject(8, colValue[7]);
@@ -72,10 +73,12 @@ public class HospitalEpistationImport extends BaseImport{
 				psmt.setObject(11, colValue[10]);
 				psmt.setObject(12, colValue[11]);		
 				/**日期格式 11/25/10 0:00 */
-				if(StringUtils.isNotEmpty(colValue[12]))
+				/*if(StringUtils.isNotEmpty(colValue[12]))
 					psmt.setObject(13, SDF.parse(colValue[12]));
 				else
-					psmt.setObject(13, null);
+					psmt.setObject(13, null);*/
+				psmt.setObject(13, (colValue[12]==null||StringUtils.isEmpty(colValue[12].toString()))?null:colValue[12]);
+				
 				
 				psmt.setObject(14, colValue[13]);
 				psmt.setObject(15, colValue[14]);
@@ -84,10 +87,12 @@ public class HospitalEpistationImport extends BaseImport{
 				psmt.setObject(18, colValue[17]);
 				psmt.setObject(19, colValue[18]);
 				/**日期格式 11/25/10 0:00 */
-				if(StringUtils.isNotEmpty(colValue[19]))
+				/*if(StringUtils.isNotEmpty(colValue[19]))
 					psmt.setObject(20, SDF.parse(colValue[19]));
 				else
-					psmt.setObject(20, null);
+					psmt.setObject(20, null);*/
+				psmt.setObject(20, (colValue[19]==null||StringUtils.isEmpty(colValue[19].toString()))?null:colValue[19]);
+				
 				
 				psmt.setObject(21, new Date());
 				psmt.setObject(22, colValue[0]);
