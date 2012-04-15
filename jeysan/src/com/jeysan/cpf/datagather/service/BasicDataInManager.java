@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jxl.Cell;
+import jxl.CellType;
+import jxl.DateCell;
 import jxl.Sheet;
 
 import org.apache.commons.lang.StringUtils;
@@ -86,22 +88,26 @@ public class BasicDataInManager {
 	
 	@SuppressWarnings("unchecked")
 	private void importData(Sheet sheet,Class clazz)throws SQLException{	
-		List<String[]> datas = new ArrayList<String[]>();
+		List<Object[]> datas = new ArrayList<Object[]>();
 		BaseImport bit = DataImportFactory.getImportInstance(
 				SessionFactoryUtils.getDataSource(dataCollectDao.getSessionFactory()),clazz);
-		Cell cell = null;String content = null;String[] str = null;Boolean flag = null;
+		Cell cell = null;Object content = null;Object[] str = null;Boolean flag = null;
 		try {
 			int rows = sheet.getRows();
 			for (int i = 0; i < rows; i++) {
-				str = new String[sheet.getColumns()];		
+				str = new Object[sheet.getColumns()];		
 				/**是否为空行*/
 				flag = true;
 				/**列数*/
 				for (int j = 0; j < sheet.getColumns(); j++) {
 					/**获取第i行，第j列的值*/
 					cell = sheet.getCell(j, i);
-					content = cell.getContents();
-					if(StringUtils.isNotEmpty(content)) flag = false;
+					if (cell.getType() == CellType.DATE) { 
+						DateCell dc = (DateCell) cell; 
+						content = dc.getDate(); 
+					}else
+						content = cell.getContents();
+					if(content != null && StringUtils.isNotEmpty(content.toString())) flag = false;
 					str[j] = content;
 				}
 				/**空行忽略*/

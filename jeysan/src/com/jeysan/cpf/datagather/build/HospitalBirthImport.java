@@ -44,13 +44,13 @@ public class HospitalBirthImport extends BaseImport{
 			
 			conn = dataSource.getConnection();
 			PreparedStatement psmt = conn.prepareStatement(sql.toString());
-			String[] colValue = null;
+			Object[] colValue = null;
 			int i = 0;
 			for(Object o : datas){
 				i++;
 				/**忽略行数*/
 				if(i <= 4) continue;
-				colValue = (String[])o;
+				colValue = (Object[])o;
 				psmt.setObject(1, colValue[0]);
 				psmt.setObject(2, colValue[2]);
 				psmt.setObject(3, colValue[3]);
