@@ -236,7 +236,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 			entity.getPersonBasic().setPerson(entity);
 			personBasicManager.savePersonBasic(entity.getPersonBasic());
 			//同步到育妇表..................
-			if(entity.getKind()==Constants.FW_KIND.FW){//育龄妇女
+			if(entity.getKind()==Constants.FW_KIND.FW.intValue()){//育龄妇女
 				FertileWoman fertileWoman = fertileWomanManager.getFertileWomanByPersonId(entity.getId());
 				if(fertileWoman == null)
 					fertileWoman = new FertileWoman();
@@ -257,7 +257,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 					fertileWoman.getWomanBasic().setMarryCryDate(entity.getPersonBasic().getMarryCryDate());
 					womanBasicManager.saveWomanBasic(fertileWoman.getWomanBasic());
 				}
-			}else if(entity.getKind()==Constants.FW_KIND.NOT_FW){//非育龄妇女
+			}else if(entity.getKind()==Constants.FW_KIND.NOT_FW.intValue()){//非育龄妇女
 				fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
 			}
 			result4Json.setStatusCode("200");
