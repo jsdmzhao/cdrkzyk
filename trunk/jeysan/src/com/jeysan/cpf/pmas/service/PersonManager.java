@@ -193,10 +193,12 @@ public class PersonManager {
 				for(Object[] o : kind_result){
 					tmp = Integer.parseInt(o[1].toString());
 					type = (Integer)o[0];
-					if(type == Constants.FW_KIND.FW.intValue()){
-						result.put("fertileWomanNum", tmp);
-					}else if(type == Constants.FW_KIND.NOT_FW.intValue()){
-						result.put("notFertileWomanNum", tmp);
+					if(type != null){
+						if(type == Constants.FW_KIND.FW.intValue()){
+							result.put("fertileWomanNum", tmp);
+						}else if(type == Constants.FW_KIND.NOT_FW.intValue()){
+							result.put("notFertileWomanNum", tmp);
+						}
 					}
 				}
 			}
