@@ -12,7 +12,9 @@ import org.hibernate.tool.hbm2x.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.WomanChildren;
+import com.jeysan.cpf.pmas.service.PersonBasicManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.SpouseManager;
 import com.jeysan.cpf.pmas.service.WomanChildrenManager;
@@ -44,6 +46,7 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 	private WomanChildren entity;
 	private WomanChildrenManager womanChildrenManager;
 	private PersonManager personManager;
+	private PersonBasicManager personBasicManager;
 	private SpouseManager spouseManager;
 	private DictSubManager dictSubManager;
 	private Page<WomanChildren> page = new Page<WomanChildren>(DEFAULT_PAGE_SIZE);
@@ -80,6 +83,8 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 	private void deleteWomanChildren(Long pid){
 		WomanChildren p = womanChildrenManager.getWomanChildren(pid);
 		String photo_ = p.getPhoto();
+		//删除人员表中对于的子女信息
+		personManager.deletePerson(p.getPersonSelfIn());
 		womanChildrenManager.deleteWomanChildren(p);
 		if(StringUtils.isNotEmpty(photo_)){
 			FileUtils.deleteFile(Struts2Utils.getRequest(), photo_);
@@ -170,7 +175,26 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 				FileUploadUtils.uploadFileInStruts(photo_, fileName, FileUtils.getRealPath(Struts2Utils.getRequest(), filePath));
 				entity.setPhoto(filePath+fileName);
 			}
+			
+			//将子女加入到人员基表，这样子女也会出现在统计信息里面
+			//开始************
+			Person personSelfIn = new Person();
+			personSelfIn.setNameh(entity.getNameh());
+			personSelfIn.setSex(entity.getSex());
+			personSelfIn.getPersonBasic().setNative(entity.getNative());
+			personSelfIn.getPersonBasic().setBirthday(entity.getBirthday());
+			personSelfIn.getPersonBasic().setPhoto(entity.getPhoto());
+			personSelfIn.getPersonBasic().setRemark("出生证号:"+entity.getBirthCert());
+			
+			personManager.savePerson(personSelfIn);
+			personSelfIn.getPersonBasic().setPerson(personSelfIn);
+			personBasicManager.savePersonBasic(personSelfIn.getPersonBasic());
+			
+			entity.setPersonSelfIn(personSelfIn);
+			//结束************
+			
 			womanChildrenManager.saveWomanChildren(entity);
+			
 			result4Json.setStatusCode("200");
 			if(id == null){
 				result4Json.setMessage("保存子女成功");
@@ -205,6 +229,10 @@ public class WomanChildrenAction extends PrintActionSupport<WomanChildren> {
 	@Autowired
 	public void setPersonManager(PersonManager personManager) {
 		this.personManager = personManager;
+	}
+	@Autowired
+	public void setPersonBasicManager(PersonBasicManager personBasicManager) {
+		this.personBasicManager = personBasicManager;
 	}
 	@Autowired
 	public void setSpouseManager(SpouseManager spouseManager) {

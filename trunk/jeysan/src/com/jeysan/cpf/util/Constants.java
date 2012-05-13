@@ -1,5 +1,8 @@
 package com.jeysan.cpf.util;
 
+import org.apache.commons.lang.StringUtils;
+
+
 public class Constants {
 	/**
 	 * 是否进行一孩登记
@@ -154,6 +157,14 @@ public class Constants {
 	public static final class DOMICILE_TYPE{
 		public static final Integer FIX = 663;//固定人口
 		public static final Integer FLOW = 664;//流动人口
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "固定")!=-1){
+				return FIX;
+			}else if(StringUtils.indexOf(status, "流动")!=-1){
+				return FLOW;
+			}else
+				return null;
+		}
 	}
 	/**
 	 * 证书注销情况
@@ -175,19 +186,208 @@ public class Constants {
 		public static final Integer CANCEL = 730;//已废止
 	}
 	
+	
+	//329	43	001	身份证			1
+	public static final class CARD_TYPE{
+		public static final Integer CERT = 329;//身份证
+	}
 	public static final class COMMON_PARAM{
 		public static final Integer CURRENT_TOWN_ID = 26879;//当前镇ID
 	}
+	/**
+	 * 304	40	001	家庭户户主
+305	40	002	集体户户主
+306	40	003	配偶
+307	40	004	子
+308	40	005	女
+309	40	006	父亲
+310	40	007	母亲
+311	40	008	其他亲属
+312	40	009	非亲属
+326	40	010	孙子、孙女或外孙子、外孙女
+327	40	011	祖父母或外祖父母
+328	40	012	兄弟姐妹
+
+	 */
+	public static final class RELATION{
+		public static final Integer RE_1 = 304;//家庭户户主
+		public static final Integer RE_2 = 305;//集体户户主
+		public static final Integer RE_3 = 306;//配偶
+		public static final Integer RE_4 = 307;//子
+		public static final Integer RE_5 = 308;//女
+		public static final Integer RE_6 = 309;//父亲
+		public static final Integer RE_7 = 310;//母亲
+		public static final Integer RE_8 = 311;//其他亲属
+		public static final Integer RE_9 = 312;//非亲属
+		public static final Integer RE_10 = 326;//孙子、孙女或外孙子、外孙女
+		public static final Integer RE_11 = 327;//祖父母或外祖父母
+		public static final Integer RE_12 = 328;//兄弟姐妹
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.equals(status, "家庭户户主")){
+				return RE_1;
+			}else if(StringUtils.equals(status, "集体户户主")){
+				return RE_2;
+			}else if(StringUtils.equals(status, "配偶")){
+				return RE_3;
+			}else if(StringUtils.equals(status, "子")){
+				return RE_4;
+			}else if(StringUtils.equals(status, "女")){
+				return RE_5;
+			}else if(StringUtils.equals(status, "父亲")){
+				return RE_6;
+			}else if(StringUtils.equals(status, "母亲")){
+				return RE_7;
+			}else if(StringUtils.equals(status, "其他亲属")){
+				return RE_8;
+			}else if(StringUtils.equals(status, "非亲属")){
+				return RE_9;
+			}else if(StringUtils.equals(status, "孙子、孙女或外孙子、外孙女")){
+				return RE_10;
+			}else if(StringUtils.equals(status, "祖父母或外祖父母")){
+				return RE_11;
+			}else if(StringUtils.equals(status, "兄弟姐妹")){
+				return RE_12;
+			}else
+				return null;
+		}
+	}
 	
+	/**
+	 * 169	14	001	非农业			1
+170	14	002	农业			2
+171	14	003	军人			3
+172	14	004	非转农			4
+173	14	005	农转非			5
+174	14	006	状态不明			6
+
+	 * @author shally
+	 *
+	 */
+	public static final class HOUSEHODE_KIND{
+		public static final Integer HK_1 = 169;//非农业
+		public static final Integer HK_2 = 170;//农业
+		public static final Integer HK_3 = 171;//军人
+		public static final Integer HK_4 = 172;//非转农
+		public static final Integer HK_5 = 173;//农转非
+		public static final Integer HK_6 = 174;//状态不明
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.equals(status, "非农业")){
+				return HK_1;
+			}else if(StringUtils.equals(status, "农业")){
+				return HK_2;
+			}else if(StringUtils.equals(status, "军人")){
+				return HK_3;
+			}else if(StringUtils.equals(status, "非转农")){
+				return HK_4;
+			}else if(StringUtils.equals(status, "农转非")){
+				return HK_5;
+			}else
+				return HK_6;
+		}
+	}
 	public static final class SEX{
 		public static final Integer MALE = 1;//男
 		public static final Integer FEMALE = 2;//女
 		public static final Integer NOKNOW = 324;//未知性别
 		public static final Integer NONOTIFY = 325;//未说明性别
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "男")!=-1){
+				return MALE;
+			}else if(StringUtils.indexOf(status, "女")!=-1){
+				return FEMALE;
+			}else if(StringUtils.indexOf(status, "未知")!=-1){
+				return NOKNOW;
+			}else if(StringUtils.indexOf(status, "未说明")!=-1){
+				return NONOTIFY;
+			}else
+				return NOKNOW;
+		}
 	}
-	
+	/**
+	 * 175	15	001	未婚			1
+176	15	002	有偶			2
+177	15	003	有效初婚			3
+178	15	004	事实初婚			4
+179	15	005	再婚			5
+180	15	006	同居			6
+181	15	007	复婚			7
+182	15	008	离婚			8
+183	15	009	丧偶			9
+184	15	010	重婚			10
+185	15	011	其他			11
+
+	 * @author shally
+	 *
+	 */
 	public static final class MARRY_STATUS{
-		public static final Integer NO = 176;//未婚
+		public static final Integer NO = 175;//未婚
+		public static final Integer YES = 176;//有偶
+		public static final Integer DESTROY = 182;//离婚
+		public static final Integer MARRY_AGAIN = 179;//再婚
+		public static final Integer MARRY_REPLY = 181;//复婚
+		public static final Integer LOST_OTHER = 183;//丧偶
+		public static final Integer MARRY_FIRST = 177;//初婚
+		public static final Integer OTHER = 185;//其他
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.equals(status, "未婚")){
+				return NO;
+			}else if(StringUtils.equals(status, "有偶")){
+				return YES;
+			}else if(StringUtils.equals(status, "已婚")){
+				return MARRY_FIRST;
+			}else if(StringUtils.equals(status, "离婚")){
+				return DESTROY;
+			}else if(StringUtils.equals(status, "丧偶")){
+				return LOST_OTHER;
+			}else if(StringUtils.equals(status, "再婚")){
+				return MARRY_AGAIN;
+			}else if(StringUtils.equals(status, "复婚")){
+				return MARRY_REPLY;
+			}else if(StringUtils.equals(status, "初婚")){
+				return MARRY_FIRST;
+			}else
+				return OTHER;
+		}
+	}
+	/**
+	 * 313	41	001	研究生及以上
+314	41	002	大学本科
+315	41	003	大学专科
+316	41	004	中等职业
+317	41	005	普通高级中学
+318	41	006	初级中学
+319	41	007	小学
+320	41	008	其他
+	 * @author shally
+	 *
+	 */
+	public static final class DEGREE{
+		public static final Integer D1 = 313;//研究生及以上
+		public static final Integer D2 = 314;//大学本科
+		public static final Integer D3 = 315;//大学专科
+		public static final Integer D4 = 316;//中等职业
+		public static final Integer D5 = 317;//普通高级中学
+		public static final Integer D6 = 318;//初级中学
+		public static final Integer D7 = 319;//小学
+		public static final Integer OTHER = 320;//其他
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "研究生")!=-1||StringUtils.indexOf(status, "硕士")!=-1||StringUtils.indexOf(status, "博士")!=-1){
+				return D1;
+			}else if(StringUtils.indexOf(status, "本科")!=-1){
+				return D2;
+			}if(StringUtils.indexOf(status, "大学专科")!=-1||StringUtils.indexOf(status, "专科")!=-1||StringUtils.indexOf(status, "大专")!=-1){
+				return D3;
+			}if(StringUtils.indexOf(status, "中等职业")!=-1||StringUtils.indexOf(status, "中专")!=-1){
+				return D4;
+			}if(StringUtils.indexOf(status, "普通高级中学")!=-1||StringUtils.indexOf(status, "高中")!=-1){
+				return D5;
+			}if(StringUtils.indexOf(status, "初级中学")!=-1||StringUtils.indexOf(status, "初中")!=-1){
+				return D6;
+			}else if(StringUtils.indexOf(status, "小学")!=-1){
+				return D7;
+			}else
+				return OTHER;
+		}
 	}
 	
 	public static final class KIND_SHIP{
@@ -227,4 +427,22 @@ public class Constants {
 		public static final Integer YES = 778;//已读
 		public static final Integer NO = 779;//未读
 	}
+	
+	/**
+	 * 是否已读
+	 * @author 黄静
+	 *
+	 */
+	public static final class IN_TYPE{
+		public static final Integer FROM_PROVINCE_OUT = 659;//省外迁入
+		public static final Integer FROM_CITY_OUT = 660;//市外迁入
+		public static final Integer FROM_CITY_IN = 780;//市内迁入
+	}
+	//怀孕结果
+	public static final class CONCEPT_RESULT{
+		public static final Integer SUCCESS = 691;//活产
+		public static final Integer FAIL = 692;//流产
+	}
+	
+	
 }

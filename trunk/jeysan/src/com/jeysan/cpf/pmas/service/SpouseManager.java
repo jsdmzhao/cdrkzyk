@@ -83,6 +83,18 @@ public class SpouseManager {
 	public Spouse getSpouse(Long id){
 		return spouseDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public boolean getSpouseByCertCode(String code , boolean filterSelf , Long id){
+		StringBuilder hql = new StringBuilder();
+		hql.append("select 1 as r from Spouse as p where p.code = ? ");
+		if(filterSelf){
+			hql.append(" and p.id <> ?");
+		}
+		if(!filterSelf)
+			return spouseDao.createQuery(hql.toString(),code).list().size() > 0;
+		else
+			return spouseDao.createQuery(hql.toString(),code,id).list().size() > 0;
+	}
 	/**
 	 * 分页查找
 	 * @param page

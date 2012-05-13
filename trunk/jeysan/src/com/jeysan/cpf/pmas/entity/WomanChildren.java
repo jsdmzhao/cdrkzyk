@@ -8,7 +8,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
@@ -26,9 +25,13 @@ import com.jeysan.modules.orm.hibernate.IdExtEntity;
 @JsonIgnoreProperties(value={"hibernateLazyInitializer"}) 
 public class WomanChildren extends IdExtEntity {
 	/**
-	 * 人员ID
+	 * 父母人员ID
 	 */
 	private Person person;
+	/**
+	 * 自己人员ID
+	 */
+	private Person personSelfIn;
 	/**
 	 * 姓名
 	 */
@@ -121,6 +124,17 @@ public class WomanChildren extends IdExtEntity {
 	@JsonIgnore
 	public Person getPerson() {
 		return person;
+	}
+	
+	@ManyToOne( cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@JoinColumn(name="PERSON_SELF_ID")
+	@JsonIgnore
+	public Person getPersonSelfIn() {
+		return personSelfIn;
+	}
+	
+	public void setPersonSelfIn(Person personSelfIn) {
+		this.personSelfIn = personSelfIn;
 	}
 
 	public void setPerson(Person person) {
