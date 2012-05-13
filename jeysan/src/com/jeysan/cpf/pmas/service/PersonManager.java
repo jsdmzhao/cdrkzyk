@@ -86,6 +86,20 @@ public class PersonManager {
 	public Person getPerson(Long id){
 		return personDao.get(id);
 	}
+	@Transactional(readOnly = true)
+	public boolean getPersonByCertCodeOrPersonCode(String code , boolean isCert , boolean filterSelf , Long id){
+		StringBuilder hql = new StringBuilder();
+		hql.append("select 1 as r from Person as p where p.")
+		.append(isCert?"code":"personCode")
+		.append(" = ? ");
+		if(filterSelf){
+			hql.append(" and p.id <> ?");
+		}
+		if(!filterSelf)
+			return personDao.createQuery(hql.toString(),code).list().size() > 0;
+		else
+			return personDao.createQuery(hql.toString(),code,id).list().size() > 0;
+	}
 	/**
 	 * 分页查找
 	 * @param page

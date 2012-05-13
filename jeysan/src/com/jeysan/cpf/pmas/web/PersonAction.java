@@ -210,12 +210,31 @@ public class PersonAction extends PrintActionSupport<Person> {
 	}
 	@Override
 	public String save() throws Exception {
-		if(result4Json == null)
+		if(result4Json == null){
 			result4Json = new Result4Json();
+		}
+		//result4Json.setNavTabId(Struts2Utils.getRequest().getParameter("result4Json.navTabId"));
 		try{
 			long t1_ = System.currentTimeMillis();
-			if(id == null)
+			//校验证件号码和人员编码
+			if(personManager.getPersonByCertCodeOrPersonCode(entity.getCode(), true , id!=null,id)){
+				result4Json.setStatusCode("300");
+				result4Json.setMessage("保存失败！证件号码已存在！");
+				result4Json.setAction(id==null?Result4Json.SAVE:Result4Json.UPDATE);
+				Struts2Utils.renderJson(result4Json);
+				return NONE;
+			}
+			if(personManager.getPersonByCertCodeOrPersonCode(entity.getPersonCode(), false,id!=null ,id)){
+				result4Json.setStatusCode("300");
+				result4Json.setMessage("保存失败！人员编码已存在！");
+				result4Json.setAction(id==null?Result4Json.SAVE:Result4Json.UPDATE);
+				Struts2Utils.renderJson(result4Json);
+				return NONE;
+			}
+			//*********************校验结束
+			if(id == null){
 				entity.setCancelType(Constants.CANCEL_TYPE.NORMAL);
+			}
 			String houseId = Struts2Utils.getParameter("master.dwz_houseLookup.houseId");
 			if(StringUtils.isNotEmpty(houseId))
 				entity.getPersonBasic().setHouseId(Long.parseLong(houseId));
@@ -236,29 +255,31 @@ public class PersonAction extends PrintActionSupport<Person> {
 			entity.getPersonBasic().setPerson(entity);
 			personBasicManager.savePersonBasic(entity.getPersonBasic());
 			//同步到育妇表..................
-			if(entity.getKind()==Constants.FW_KIND.FW.intValue()){//育龄妇女
-				FertileWoman fertileWoman = fertileWomanManager.getFertileWomanByPersonId(entity.getId());
-				if(fertileWoman == null)
-					fertileWoman = new FertileWoman();
-				if(fertileWoman.getCreateDate() == null)
-					fertileWoman.setCreateDate(new Date());
-				fertileWoman.setTypeh(entity.getDomicileType());
-				fertileWoman.setCode(entity.getPersonCode());
-				fertileWoman.setNameh(entity.getNameh());
-				fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.NO);
-				fertileWoman.setBirth2Type(com.jeysan.cpf.util.Constants.Birth2Type.NO);
-				fertileWoman.setAssStatus(com.jeysan.cpf.util.Constants.ASS_STATUS.NO_ASS);
-				fertileWoman.setPerson(entity);
-				//entity.setFertileWoman(fertileWoman);
-				fertileWomanManager.saveFertileWoman(fertileWoman);
-				if(entity.getPersonBasic().getMarryStatus() != null){
-					fertileWoman.getWomanBasic().setMarryStatus(entity.getPersonBasic().getMarryStatus());
-					fertileWoman.getWomanBasic().setFertileWoman(fertileWoman);
-					fertileWoman.getWomanBasic().setMarryCryDate(entity.getPersonBasic().getMarryCryDate());
-					womanBasicManager.saveWomanBasic(fertileWoman.getWomanBasic());
+			if(entity.getKind()!=null){
+				if(entity.getKind()==Constants.FW_KIND.FW.intValue()){//育龄妇女
+					FertileWoman fertileWoman = fertileWomanManager.getFertileWomanByPersonId(entity.getId());
+					if(fertileWoman == null)
+						fertileWoman = new FertileWoman();
+					if(fertileWoman.getCreateDate() == null)
+						fertileWoman.setCreateDate(new Date());
+					fertileWoman.setTypeh(entity.getDomicileType());
+					fertileWoman.setCode(entity.getPersonCode());
+					fertileWoman.setNameh(entity.getNameh());
+					fertileWoman.setRegisterType(com.jeysan.cpf.util.Constants.RegisterType.NO);
+					fertileWoman.setBirth2Type(com.jeysan.cpf.util.Constants.Birth2Type.NO);
+					fertileWoman.setAssStatus(com.jeysan.cpf.util.Constants.ASS_STATUS.NO_ASS);
+					fertileWoman.setPerson(entity);
+					//entity.setFertileWoman(fertileWoman);
+					fertileWomanManager.saveFertileWoman(fertileWoman);
+					if(entity.getPersonBasic().getMarryStatus() != null){
+						fertileWoman.getWomanBasic().setMarryStatus(entity.getPersonBasic().getMarryStatus());
+						fertileWoman.getWomanBasic().setFertileWoman(fertileWoman);
+						fertileWoman.getWomanBasic().setMarryCryDate(entity.getPersonBasic().getMarryCryDate());
+						womanBasicManager.saveWomanBasic(fertileWoman.getWomanBasic());
+					}
+				}else if(entity.getKind()==Constants.FW_KIND.NOT_FW.intValue()){//非育龄妇女
+					fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
 				}
-			}else if(entity.getKind()==Constants.FW_KIND.NOT_FW.intValue()){//非育龄妇女
-				fertileWomanManager.deleteFertileWomanByPersonId(entity.getId());
 			}
 			result4Json.setStatusCode("200");
 			if(id == null){
@@ -280,7 +301,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 			}
 			
 		}
-		//Struts2Utils.renderJson(result4Json);
+		Struts2Utils.renderJson(result4Json);
 		return NONE;
 	}
 	public String cancel() throws Exception {

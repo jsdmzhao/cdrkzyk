@@ -1,8 +1,11 @@
 package com.jeysan.cpf.datagather.build;
 
 import java.lang.reflect.Constructor;
+import java.sql.Connection;
 
 import javax.sql.DataSource;
+
+import com.jeysan.cpf.datagather.check.BaseCheck;
 
 /** 
  * @author  gemstone	E-mail: xlsky0713@163.com
@@ -23,6 +26,23 @@ public class DataImportFactory {
 			
 		} catch (Exception e) {
 			throw new RuntimeException("数据导入类初始化失败！",e);
+		} 
+
+		return bit;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static BaseCheck getCheckInstance(Connection conn,Class clazz){
+		
+		BaseCheck bit = null;
+
+		try {
+			Constructor cons = clazz.getConstructor(Connection.class);
+			
+			bit = (BaseCheck)cons.newInstance(conn);
+			
+		} catch (Exception e) {
+			throw new RuntimeException("数据校验类初始化失败！",e);
 		} 
 
 		return bit;

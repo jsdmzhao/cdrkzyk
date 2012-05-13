@@ -106,6 +106,16 @@ public class SpouseAction extends CrudActionSupport<Spouse> {
 			result4Json = new Result4Json();
 		try{
 			long t1_ = System.currentTimeMillis();
+			
+			//校验证件号码
+			if(spouseManager.getSpouseByCertCode(entity.getCode() , id!=null,id)){
+				result4Json.setStatusCode("300");
+				result4Json.setMessage("保存失败！证件号码已存在！");
+				result4Json.setAction(id==null?Result4Json.SAVE:Result4Json.UPDATE);
+				Struts2Utils.renderJson(result4Json);
+				return NONE;
+			}
+			
 			String personId = Struts2Utils.getParameter("personId");
 			Person person = new Person();
 			person.setId(Long.parseLong(personId));
