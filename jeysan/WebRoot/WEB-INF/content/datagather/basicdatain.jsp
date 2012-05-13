@@ -11,7 +11,6 @@
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">导入</button></div></div>
 						</p>
 					</form>
-					<div class="divider"></div>
 
 					<form action="${ctx}/datagather/basicdatain!importCivilData.action" method="post" enctype="multipart/form-data" onsubmit="return iframeCallback(this)">
 						<p style="float:left;width:620px">
@@ -20,7 +19,6 @@
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">导入</button></div></div>
 						</p>
 					</form>
-					<div class="divider"></div>
 
 					<form action="${ctx}/datagather/basicdatain!importHospital.action" method="post" enctype="multipart/form-data" onsubmit="return iframeCallback(this)">
 						<p style="float:left;width:620px">
@@ -29,7 +27,6 @@
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">导入</button></div></div>
 						</p>
 					</form>
-					<div class="divider"></div>
 					
 					<form action="${ctx}/datagather/basicdatain!importGmcc.action" method="post" enctype="multipart/form-data" onsubmit="return iframeCallback(this)">
 						<p style="float:left;width:620px">
@@ -38,7 +35,6 @@
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">导入</button></div></div>
 						</p>
 					</form>
-					<div class="divider"></div>
 					
 					<form action="${ctx}/datagather/basicdatain!importEdudata.action" method="post" enctype="multipart/form-data" onsubmit="return iframeCallback(this)">
 						<p style="float:left;width:620px">
@@ -47,7 +43,6 @@
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">导入</button></div></div>
 						</p>
 					</form>
-					<div class="divider"></div>
 					
 					<form action="${ctx}/datagather/basicdatain!importCompany.action" method="post" enctype="multipart/form-data" onsubmit="return iframeCallback(this)">
 						<p style="float:left;width:620px">
@@ -56,7 +51,6 @@
 						<div class="buttonActive"><div class="buttonContent"><button type="submit">导入</button></div></div>
 						</p>
 					</form>
-					<div class="divider"></div>
 					
 					<form action="${ctx}/datagather/basicdatain!importEpistation.action" method="post" enctype="multipart/form-data" onsubmit="return iframeCallback(this)">
 						<p style="float:left;width:620px">

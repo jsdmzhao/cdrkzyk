@@ -9,7 +9,7 @@ function ok(){
 </script>
 <div class="page">
 	<div class="pageContent">
-		<form method="post" action="${ctx}/pmas/person!save.action" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return iframeCallback(this,ok);">
+		<form method="post" action="${ctx}/pmas/person!save.action" enctype="multipart/form-data" class="pageForm required-validate" onsubmit="return validateCallback(this,navTabAjaxDone4Update);">
 			<input type="hidden" name="id" value="${id}"/>
 			<!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
