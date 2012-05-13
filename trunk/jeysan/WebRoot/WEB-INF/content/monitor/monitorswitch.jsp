@@ -20,7 +20,6 @@
 			<div class="subBar">
 				<ul>
 					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">检索</button></div></div></li>
-					<li><a class="button" href="demo_page6.html" target="dialog" rel="dlg_page1" title="查询框"><span>高级检索</span></a></li>
 				</ul>
 			</div>
 		</div>
