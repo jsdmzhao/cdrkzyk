@@ -36,6 +36,19 @@ public abstract class BaseCheck {
 		}
 	}
 	
+	protected Long getCurrentId(String table) throws SQLException {
+		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
+		try {
+			List<Object[]> rst = ResultSetUtil.toArrayList(jdbcUtil.executePreparedStatementQuery("select max(id) from " + table, null));
+			return (Long)(rst.get(0)[0]);
+		} catch (Exception e) {
+			throw new SQLException(e);
+		}finally{
+			jdbcUtil.closeDBConection();
+		}
+	}
+	
+
 	/**
 	 * 校验参数集的长度，并判断是否提交批处理事务
 	 * @param jdbcUtil
