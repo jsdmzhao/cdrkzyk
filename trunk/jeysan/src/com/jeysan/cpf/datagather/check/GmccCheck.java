@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.jeysan.cpf.util.Constants;
@@ -93,7 +94,11 @@ public class GmccCheck extends BaseCheck{
 					address = (String)m[11];
 					company = (String)m[12];
 					area = (String)m[13];
-					
+					if(StringUtils.isNotEmpty(area)){
+						logger.debug(String.format("居委会名称:%s",area));
+						area = getVillageCode(area);
+						logger.debug(String.format("最后居委会CODE:%s",area));
+					}
 					id = (Long)m[15];
 					
 					remark = String.format("生育证件类型:%s,生育类型:%s,医疗机构名称:%s,生育发生时间:%s,胎儿数:%s,子女死亡标志:%s", bcs_type,birth_type,hospital,m[7],fetus_count,death_flag);

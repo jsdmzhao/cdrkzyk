@@ -7,9 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
-import org.h2.util.StringUtils;
 
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.utils.date.DateUtil;
@@ -30,17 +31,17 @@ public class HospitalEpistationCheck extends BaseCheck{
 	private static final String update_personbasic4child_sql = "update FHP_PERSON_BASIC set DOMICILE=?,ADDRESS=?,BIRTHDAY=?,OWNER_NAME=?,RELATION=?,FATHER=?,MOTHER=? where PERSON_ID = (select id from FHP_PERSON where PERSON_CODE = ? limit 1)";
 	private static final String insert_personbasic4child_sql = "insert FHP_PERSON_BASIC ( DOMICILE,ADDRESS,BIRTHDAY,OWNER_NAME,RELATION,FATHER,MOTHER,PERSON_ID) select ?,?,?,?,?,?,?,id from FHP_PERSON where PERSON_CODE = ?";
 	private static final String insert_personbasic4parent_sql = "insert FHP_PERSON_BASIC ( DOMICILE,ADDRESS,OWNER_NAME,RELATION,COMPANY,TEL,REMARK,SPOUSE_ID,PERSON_ID) values(?,?,?,?,?,?,?,?,?) ";
-	private static final String insert_spouse_sql = "insert FHP_SPOUSE (NAME,SEX, DOMICILE,ADDRESS,DOMICILE_TYPE,COMPANY,TEL,REMARK,PERSON_ID) values(?,?,?,?,?,?,?,?,?) ";
-	private static final String insert_children_sql = "insert FHP_WOMAN_CHILDREN (NAME,SEX, BIRTHDAY,PERSON_ID,PERSON_SELF_ID) select ?,?,?,? id from FHP_PERSON where PERSON_CODE = ? ";
+	private static final String insert_spouse_sql = "insert FHP_SPOUSE (NAMEH,SEX, DOMICILE,ADDRESS,DOMICILE_TYPE,COMPANY,TEL,REMARK,PERSON_ID) values(?,?,?,?,?,?,?,?,?) ";
+	private static final String insert_children_sql = "insert FHP_WOMAN_CHILDREN (NAMEH,SEX, BIRTHDAY,PERSON_ID,PERSON_SELF_ID) select ?,?,?,? id from FHP_PERSON where PERSON_CODE = ? ";
 	private static final String insert_person4parent_sql = "insert into FHP_PERSON (NAMEH,SEX,DOMICILE_TYPE,CANCEL_TYPE,CANCEL_DATE,DATEH,AREA) values (?,?,?,?,?,?,?)";
 	private static final String select_person_sql = "select id from FHP_PERSON where PERSON_CODE = ? ";
 	
 	private static final String update_person4parent_sql = "update FHP_PERSON set NAMEH=?,SEX=?,DOMICILE_TYPE=?,CANCEL_TYPE=?,CANCEL_DATE=?,DATEH=?,AREA=? where id = ? ";
 	private static final String update_personbasic4father_sql = "update FHP_PERSON_BASIC set DOMICILE=?,ADDRESS=?,OWNER_NAME=?,RELATION=?,COMPANY=?,TEL=?,REMARK=?,SPOUSE_ID=? where PERSON_ID = ? ";
 	private static final String update_personbasic4mother_sql = "update FHP_PERSON_BASIC set DOMICILE=?,ADDRESS=?,OWNER_NAME=?,RELATION=?,COMPANY=?,SPOUSE_ID=? where PERSON_ID = ? ";
-	private static final String update_spouse4father_sql = "update FHP_SPOUSE set NAME=?,SEX=?, DOMICILE=?,ADDRESS=?,DOMICILE_TYPE=?,COMPANY=? where PERSON_ID=?";
-	private static final String update_spouse4mother_sql = "update FHP_SPOUSE set NAME=?,SEX=?, DOMICILE=?,ADDRESS=?,DOMICILE_TYPE=?,COMPANY=?,TEL=?,REMARK=? where PERSON_ID=?";
-	private static final String update_children_sql = "update FHP_WOMAN_CHILDREN set NAME=?,SEX=?, BIRTHDAY=?,PERSON_ID=? where PERSON_SELF_ID = (select id from FHP_PERSON where PERSON_CODE = ?) ";
+	private static final String update_spouse4father_sql = "update FHP_SPOUSE set NAMEH=?,SEX=?, DOMICILE=?,ADDRESS=?,DOMICILE_TYPE=?,COMPANY=? where PERSON_ID=?";
+	private static final String update_spouse4mother_sql = "update FHP_SPOUSE set NAMEH=?,SEX=?, DOMICILE=?,ADDRESS=?,DOMICILE_TYPE=?,COMPANY=?,TEL=?,REMARK=? where PERSON_ID=?";
+	private static final String update_children_sql = "update FHP_WOMAN_CHILDREN set NAMEH=?,SEX=?, BIRTHDAY=?,PERSON_ID=? where PERSON_SELF_ID = (select id from FHP_PERSON where PERSON_CODE = ?) ";
 	
 	private static final SimpleDateFormat SDF = new SimpleDateFormat("mm/dd/yy hh:mm");
 	
@@ -58,8 +59,6 @@ public class HospitalEpistationCheck extends BaseCheck{
 		try {
 			//新增
 			addNewData(jdbcUtil,false);
-			//修改
-			addNewData(jdbcUtil,true);
 			//更新状态
 			updateStatus(TABLE_IN_DB,tmpIds4Update);
 			logger.info("导入防疫站 电子数据成功......");
@@ -116,6 +115,11 @@ public class HospitalEpistationCheck extends BaseCheck{
 					mobile = (String)m[9];
 					address = (String)m[10];
 					area = (String)m[11];
+					if(StringUtils.isNotEmpty(area)){
+						logger.debug(String.format("居委会名称:%s",area));
+						area = getVillageCode(area);
+						logger.debug(String.format("最后居委会CODE:%s",area));
+					}
 					create_date = (Date)m[12];
 					mother_company = (String)m[13];
 					father_company = (String)m[14];
