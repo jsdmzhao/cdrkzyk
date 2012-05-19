@@ -27,7 +27,7 @@ public class HospitalFouropsImport extends BaseImport{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run(Collection datas) throws SQLException{	
+	public int run(Collection datas) throws SQLException{	
 		try {
 			logger.info("开始导入医院 四术落实登记数据......");
 			StringBuffer sql = new StringBuffer();
@@ -71,6 +71,7 @@ public class HospitalFouropsImport extends BaseImport{
 			int[] result = psmt.executeBatch();
 			conn.commit();
 			logger.info("成功导入医院 四术落实登记数据条数：" + getCount(result));
+			return getCount(result);
 		} catch (SQLException e) {		
 			logger.error("导入医院 四术落实登记数据出错！" ,e);
 			throw e;

@@ -27,7 +27,7 @@ public class PolicySettleInImport extends BaseImport{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run(Collection datas) throws SQLException{	
+	public int run(Collection datas) throws SQLException{	
 		try {
 			logger.info("开始导入公安部门 珠海人口市内/市外 迁入数据......");
 			StringBuffer sql = new StringBuffer();
@@ -66,6 +66,7 @@ public class PolicySettleInImport extends BaseImport{
 			int[] result = psmt.executeBatch();
 			conn.commit();
 			logger.info("成功导入公安部门 珠海人口市内/市外 迁入数据条数：" + getCount(result));
+			return getCount(result);
 		} catch (SQLException e) {		
 			logger.error("导入公安部门 珠海人口市内/市外 迁入数据出错！" ,e);
 			throw e;

@@ -66,11 +66,11 @@ public class DataCheckManager {
 		}
 	}
 	
-	public void checkPolicyData()throws SQLException{
+	public int[][] checkPolicyData()throws SQLException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			checkPolicyData(conn);
+			return checkPolicyData(conn);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new SQLException(e);
@@ -82,25 +82,26 @@ public class DataCheckManager {
 		}
 	}
 	
-	private void checkPolicyData(Connection conn)throws SQLException{
+	private int[][] checkPolicyData(Connection conn)throws SQLException{
 		
 		try{
 			/**公安部门 婴儿出生入户数据*/
-			checkData(conn,PolicyBabyCheck.class);
+			int[] count_1 = checkData(conn,PolicyBabyCheck.class);
 			/**公安部门 珠海市外/市内迁入数据*/
-			checkData(conn,PolicySettleInCheck.class);
+			int[] count_2 = checkData(conn,PolicySettleInCheck.class);
 			/**公安部门 死亡人口情况 数据*/
-			checkData(conn,PolicyDeathCheck.class);
+			int[] count_3 = checkData(conn,PolicyDeathCheck.class);
+			return new int[][]{count_1,count_2,count_3};
 		}catch(Exception e){
 			throw new SQLException(e);
 		}
 	}
 	
-	public void checkCivilData()throws SQLException{
+	public int[] checkCivilData()throws SQLException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			checkCivilData(conn);
+			return checkCivilData(conn);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new SQLException(e);
@@ -112,17 +113,17 @@ public class DataCheckManager {
 		}
 	}
 	
-	private void checkCivilData(Connection conn)throws SQLException{
+	private int[] checkCivilData(Connection conn)throws SQLException{
 		/**民政部门数据*/
-		checkData(conn,CivilMarryRegCheck.class);
+		return checkData(conn,CivilMarryRegCheck.class);
 		
 	}
 	
-	public void checkHospitalData()throws SQLException{
+	public int[][] checkHospitalData()throws SQLException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			checkHospitalData(conn);
+			return checkHospitalData(conn);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new SQLException(e);
@@ -134,22 +135,23 @@ public class DataCheckManager {
 		}
 	}
 	
-	private void checkHospitalData(Connection conn)throws SQLException{
+	private int[][] checkHospitalData(Connection conn)throws SQLException{
 		/**医院 妇产科出生登记数据*/
-		checkData(conn,HospitalBirthCheck.class);
+		int[] count_1 = checkData(conn,HospitalBirthCheck.class);
 		/**医院 四术落实登记数据*/
-		checkData(conn,HospitalFouropsCheck.class);
+		int[] count_2 = checkData(conn,HospitalFouropsCheck.class);
 		/**医院 孕前检查登记数据*/
-		checkData(conn,HospitalPregtestCheck.class);
+		int[] count_3 = checkData(conn,HospitalPregtestCheck.class);
 		/**医院 防疫登记数据*/
-		checkData(conn,HospitalEpipreCheck.class);
+		int[] count_4 = checkData(conn,HospitalEpipreCheck.class);
+		return new int[][]{count_1,count_2,count_3,count_4};
 	}
 	
-	public void checkGmccData()throws SQLException{
+	public int[] checkGmccData()throws SQLException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			checkGmccData(conn);
+			return checkGmccData(conn);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new SQLException(e);
@@ -161,16 +163,16 @@ public class DataCheckManager {
 		}
 	}
 	
-	private void checkGmccData(Connection conn)throws SQLException{
+	private int[] checkGmccData(Connection conn)throws SQLException{
 		/**社保 社会保险项目数据*/
-		checkData(conn,GmccCheck.class);
+		return checkData(conn,GmccCheck.class);
 	}
 	
-	public void checkCompanyDataBcs()throws SQLException{
+	public int[] checkCompanyDataBcs()throws SQLException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			checkCompanyDataBcs(conn);
+			return checkCompanyDataBcs(conn);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new SQLException(e);
@@ -182,16 +184,16 @@ public class DataCheckManager {
 		}
 	}
 	
-	private void checkCompanyDataBcs(Connection conn)throws SQLException{
+	private int[] checkCompanyDataBcs(Connection conn)throws SQLException{
 		/**企业 人员计划生育数据*/
-		checkData(conn,CompanyBcsCheck.class);
+		return checkData(conn,CompanyBcsCheck.class);
 	}
 	
-	public void checkEpistationData()throws SQLException{
+	public int[] checkEpistationData()throws SQLException{
 		Connection conn = null;
 		try{
 			conn = getConnection();
-			checkEpistationData(conn);
+			return checkEpistationData(conn);
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new SQLException(e);
@@ -203,16 +205,16 @@ public class DataCheckManager {
 		}
 	}
 	
-	private void checkEpistationData(Connection conn)throws SQLException{
+	private int[] checkEpistationData(Connection conn)throws SQLException{
 		/**防疫站 电子数据*/
-		checkData(conn,HospitalEpistationCheck.class);
+		return checkData(conn,HospitalEpistationCheck.class);
 	}
 	
 	
 	@SuppressWarnings("unchecked")
-	private void checkData(Connection conn ,Class clazz)throws SQLException{
+	private int[] checkData(Connection conn ,Class clazz)throws SQLException{
 		BaseCheck bit = DataImportFactory.getCheckInstance(conn,clazz);
-		bit.run();
+		return bit.run();
 	}
 	
 	@SuppressWarnings("unchecked")

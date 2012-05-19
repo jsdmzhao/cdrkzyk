@@ -27,7 +27,7 @@ public class CompanyBcsImport extends BaseImport{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run(Collection datas) throws SQLException{	
+	public int run(Collection datas) throws SQLException{	
 		try {
 			logger.info("开始导入企业 人员计划生育数据......");
 			StringBuffer sql = new StringBuffer();
@@ -74,6 +74,7 @@ public class CompanyBcsImport extends BaseImport{
 			int[] result = psmt.executeBatch();
 			conn.commit();
 			logger.info("成功导入企业 人员计划生育数据条数：" + getCount(result));
+			return getCount(result);
 		} catch (SQLException e) {		
 			logger.error("导入企业 人员计划生育数据出错！" ,e);
 			throw e;

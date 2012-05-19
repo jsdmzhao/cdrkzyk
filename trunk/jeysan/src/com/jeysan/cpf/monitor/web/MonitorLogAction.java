@@ -69,8 +69,8 @@ public class MonitorLogAction extends PrintActionSupport<MonitorLog> {
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
-			page.setOrderBy("id");
-			page.setOrder(Page.ASC);
+			page.setOrderBy("operatTime");
+			page.setOrder(Page.DESC);
 		}
 		page = monitorLogManager.searchMonitorLog(page, filters);
 		Struts2Utils.getRequest().setAttribute("users", userManager.loadAllUsers());

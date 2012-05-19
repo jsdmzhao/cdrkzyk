@@ -41,15 +41,16 @@ public class HospitalPregtestCheck extends BaseCheck{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run() throws SQLException{	
+	public int[] run() throws SQLException{	
 		logger.info("开始导入医院 孕前检查登记数据......");
 		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
 		try {
 			//新增
-			addNewData(jdbcUtil);
+			int add = addNewData(jdbcUtil);
 			//更新状态
 			updateStatus(TABLE_IN_DB,tmpIds4Update);
 			logger.info("导入医院 孕前检查登记数据成功......");
+			return new int[]{add,0};
 		} catch (Exception e) {		
 			logger.error("导入医院 孕前检查登记数据出错！" ,e);
 			throw new SQLException(e);
@@ -65,7 +66,7 @@ public class HospitalPregtestCheck extends BaseCheck{
 	 * @param update
 	 * @throws Exception
 	 */
-	private void addNewData(JdbcUtil jdbcUtil) throws Exception{
+	private int addNewData(JdbcUtil jdbcUtil) throws Exception{
 		logger.info(String.format("开始新增医院 孕前检查登记数据......"));
 		try{
 			List<Object[]> data4new = getData4Todo();
@@ -119,6 +120,7 @@ public class HospitalPregtestCheck extends BaseCheck{
 				checkAndCommmitData(jdbcUtil, params_5, INSERT_SQL_4NEWDATA_5, false);
 			}
 			logger.info(String.format("新增医院 孕前检查登记数据成功......"));
+			return data4new.size();
 		}catch(Exception e){
 			logger.error(String.format("新增医院 孕前检查登记数据出错......"),e);
 			throw e;

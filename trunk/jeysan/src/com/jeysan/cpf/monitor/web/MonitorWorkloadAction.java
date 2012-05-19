@@ -9,7 +9,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.monitor.entity.MonitorWorkload;
 import com.jeysan.cpf.monitor.service.MonitorWorkloadManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.cpf.security.service.UserManager;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -21,7 +22,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/monitor")
-public class MonitorWorkloadAction extends CrudActionSupport<MonitorWorkload> {
+public class MonitorWorkloadAction extends PrintActionSupport<MonitorWorkload> {
 	/**
 	 * 
 	 */
@@ -30,6 +31,7 @@ public class MonitorWorkloadAction extends CrudActionSupport<MonitorWorkload> {
 	private String ids;
 	private MonitorWorkload entity;
 	private MonitorWorkloadManager monitorWorkloadManager;
+	private UserManager userManager;
 	private Page<MonitorWorkload> page = new Page<MonitorWorkload>(DEFAULT_PAGE_SIZE);
 	private Result4Json result4Json;
 	@Override
@@ -69,10 +71,11 @@ public class MonitorWorkloadAction extends CrudActionSupport<MonitorWorkload> {
 		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
-			page.setOrderBy("id");
-			page.setOrder(Page.ASC);
+			page.setOrderBy("operatTime");
+			page.setOrder(Page.DESC);
 		}
 		page = monitorWorkloadManager.searchMonitorWorkload(page, filters);
+		Struts2Utils.getRequest().setAttribute("users", userManager.loadAllUsers());
 		return SUCCESS;
 	}
 	@Override
@@ -131,5 +134,9 @@ public class MonitorWorkloadAction extends CrudActionSupport<MonitorWorkload> {
 		this.result4Json = result4Json;
 	}
 	
+	@Autowired
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
 	
 }

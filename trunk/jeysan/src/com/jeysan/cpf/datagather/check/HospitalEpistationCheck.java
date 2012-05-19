@@ -7,7 +7,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -32,7 +31,7 @@ public class HospitalEpistationCheck extends BaseCheck{
 	private static final String insert_personbasic4child_sql = "insert FHP_PERSON_BASIC ( DOMICILE,ADDRESS,BIRTHDAY,OWNER_NAME,RELATION,FATHER,MOTHER,PERSON_ID) select ?,?,?,?,?,?,?,id from FHP_PERSON where PERSON_CODE = ?";
 	private static final String insert_personbasic4parent_sql = "insert FHP_PERSON_BASIC ( DOMICILE,ADDRESS,OWNER_NAME,RELATION,COMPANY,TEL,REMARK,SPOUSE_ID,PERSON_ID) values(?,?,?,?,?,?,?,?,?) ";
 	private static final String insert_spouse_sql = "insert FHP_SPOUSE (NAMEH,SEX, DOMICILE,ADDRESS,DOMICILE_TYPE,COMPANY,TEL,REMARK,PERSON_ID) values(?,?,?,?,?,?,?,?,?) ";
-	private static final String insert_children_sql = "insert FHP_WOMAN_CHILDREN (NAMEH,SEX, BIRTHDAY,PERSON_ID,PERSON_SELF_ID) select ?,?,?,? id from FHP_PERSON where PERSON_CODE = ? ";
+	private static final String insert_children_sql = "insert FHP_WOMAN_CHILDREN (NAMEH,SEX, BIRTHDAY,PERSON_ID,PERSON_SELF_ID) select ?,?,?,?, id from FHP_PERSON where PERSON_CODE = ? ";
 	private static final String insert_person4parent_sql = "insert into FHP_PERSON (NAMEH,SEX,DOMICILE_TYPE,CANCEL_TYPE,CANCEL_DATE,DATEH,AREA) values (?,?,?,?,?,?,?)";
 	private static final String select_person_sql = "select id from FHP_PERSON where PERSON_CODE = ? ";
 	
@@ -53,15 +52,16 @@ public class HospitalEpistationCheck extends BaseCheck{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run() throws SQLException{	
+	public int[] run() throws SQLException{	
 		logger.info("开始导入防疫站 电子数据......");
 		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
 		try {
 			//新增
-			addNewData(jdbcUtil,false);
+			int[] count = addNewData(jdbcUtil,false);
 			//更新状态
 			updateStatus(TABLE_IN_DB,tmpIds4Update);
 			logger.info("导入防疫站 电子数据成功......");
+			return count;
 		} catch (Exception e) {		
 			logger.error("导入防疫站 电子数据出错！" ,e);
 			throw new SQLException(e);
@@ -77,10 +77,11 @@ public class HospitalEpistationCheck extends BaseCheck{
 	 * @param update
 	 * @throws Exception
 	 */
-	private void addNewData(JdbcUtil jdbcUtil,boolean update) throws Exception{
+	private int[] addNewData(JdbcUtil jdbcUtil,boolean update) throws Exception{
 		logger.info(String.format("开始%s防疫站 电子数据......",update?"修改":"新增"));
 		try{
 			List<Object[]> data4new = getData4Todo();
+			int add_count = 0 , update_count = 0;
 			if(data4new!=null && data4new.size() > 0){
 				//CHILD_CODE,FATHER,MOTHER,NAME,SEX,BIRTHDAY,DOMICILE_TYPE,TEL,OFFICE_TEL,MOBILE,ADDRESS,AREA,CREATE_DATE,MOTHER_COMPANY,
 				//FATHER_COMPANY,DOMICILE_ADDRESS,DOMICILE_UNIT,UNIT_BELONG,STANDARD,SETTLE_OUT_DATE,UPDATE_TIME,ID
@@ -137,6 +138,7 @@ public class HospitalEpistationCheck extends BaseCheck{
 					Object[] params_person4child = new Object[]{name,sex,DateUtil.dateDiff("YEAR", birthday, today),Constants.CARD_TYPE.CERT,standard,domicile_type,settle_out_date==null?null:Constants.CANCEL_TYPE.PERSON_OUT,settle_out_date,settle_out_date==null?null:today,area,child_code};
 					Object[] params_personbasic4child = new Object[]{domicile_address,address,birthday,father,sex.intValue()==Constants.SEX.MALE?Constants.RELATION.RE_4:Constants.RELATION.RE_5,father,mother,child_code};
 					if(rst.size() > 0){
+						update_count++;
 						Long childPersonId = (Long)(rst.get(0)[0]);
 						params_updateperson4child.add(params_person4child);
 						params_updatepersonbasic4child.add(params_personbasic4child);
@@ -232,6 +234,7 @@ public class HospitalEpistationCheck extends BaseCheck{
 							params_insertchildren.add(params_children);
 						}
 					}else{
+						add_count++;
 						//小孩子信息入库
 						params_insertperson4child.add(params_person4child);
 						params_insertpersonbasic4child.add(params_personbasic4child);
@@ -300,6 +303,7 @@ public class HospitalEpistationCheck extends BaseCheck{
 				
 			}
 			logger.info(String.format("%s防疫站 电子数据成功......",update?"修改":"新增"));
+			return new int[]{add_count,update_count};
 		}catch(Exception e){
 			logger.error(String.format("%s防疫站 电子数据出错......",update?"修改":"新增"),e);
 			throw e;
