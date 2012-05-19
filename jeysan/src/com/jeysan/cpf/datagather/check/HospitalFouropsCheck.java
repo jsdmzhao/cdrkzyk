@@ -95,6 +95,11 @@ public class HospitalFouropsCheck extends BaseCheck{
 					address = (String)m[9];
 					hospital = (String)m[10];
 					area = (String)m[11];
+					if(StringUtils.isNotEmpty(area)){
+						logger.debug(String.format("居委会名称:%s",area));
+						area = getVillageCode(area);
+						logger.debug(String.format("最后居委会CODE:%s",area));
+					}
 					tel = (String)m[12];
 					
 					id = (Long)m[14];

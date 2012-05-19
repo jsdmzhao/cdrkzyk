@@ -4,8 +4,11 @@ package com.jeysan.cpf.datagather.check;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.utils.sql.JdbcUtil;
 import com.jeysan.modules.utils.sql.ResultSetUtil;
 
@@ -13,9 +16,36 @@ import com.jeysan.modules.utils.sql.ResultSetUtil;
 public abstract class BaseCheck {
 	protected static final int BATCH_LIMIT = 500 ;
     protected Connection conn;
-    
+    private Map<String,String> villages = new HashMap<String,String>();
     public BaseCheck(Connection conn){	
     	this.conn = conn;
+    }
+    
+    protected String getVillageCode(String name) throws Exception{
+    	if(villages.isEmpty()){
+    		ResultSet rs = null;
+    		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
+    		try {
+    			rs = jdbcUtil.executePreparedStatementQuery("select CODE,NAME from FHP_DISTRICT_VILLAGE where PARENT_ID = ? order by id " , new Object[]{Constants.COMMON_PARAM.CURRENT_TOWN_ID});
+    			while(rs.next()){
+    				villages.put(rs.getString(2), rs.getString(1));
+    			}
+    		} catch (Exception e) {
+    			throw new SQLException(e);
+    		}finally{
+    			jdbcUtil.closeDBConection();
+    		}
+    	}
+    	if(!villages.containsKey(name)){
+	    	if(name.contains("居委会"))
+	    		name = name.replaceAll("居委会", "社区居委会");
+			else
+				name = name + "社区居委会";
+    	}
+    	if(villages.containsKey(name)){
+    		return villages.get(name);
+    	}
+    	return name;
     }
     
 
