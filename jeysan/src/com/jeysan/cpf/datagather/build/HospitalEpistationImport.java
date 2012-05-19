@@ -30,7 +30,7 @@ public class HospitalEpistationImport extends BaseImport{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run(Collection datas) throws SQLException{	
+	public int run(Collection datas) throws SQLException{	
 		try {
 			logger.info("开始导入防疫站 电子数据......");
 			StringBuffer sql = new StringBuffer();
@@ -101,6 +101,7 @@ public class HospitalEpistationImport extends BaseImport{
 			int[] result = psmt.executeBatch();
 			conn.commit();
 			logger.info("成功导入防疫站 电子数据条数：" + getCount(result));
+			return getCount(result);
 		} catch (Exception e) {		
 			logger.error("导入防疫站 电子数据出错！" ,e);
 			throw new RuntimeException(e.getMessage(),e);

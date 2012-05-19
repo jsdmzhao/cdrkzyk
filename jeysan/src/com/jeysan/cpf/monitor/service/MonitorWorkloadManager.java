@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.monitor.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.tool.hbm2x.StringUtils;
@@ -11,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.jeysan.cpf.monitor.dao.MonitorWorkloadDao;
 import com.jeysan.cpf.monitor.entity.MonitorWorkload;
+import com.jeysan.cpf.security.entity.User;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
+import com.jeysan.modules.utils.web.IpUtil;
+import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
 /**
  * @author 黄静
@@ -29,6 +33,23 @@ public class MonitorWorkloadManager {
 	 * @param entity
 	 */
 	public void saveMonitorWorkload(MonitorWorkload entity){
+		monitorWorkloadDao.save(entity);
+	}
+	/**
+	 * 增加
+	 * @param entity
+	 */
+	public void saveMonitorWorkload(Integer workType,Integer operatType,Integer workLoad,String remark){
+		MonitorWorkload entity = new MonitorWorkload();
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		entity.setOperator(user.getId());
+		entity.setOperatIp(IpUtil.getIpAddr(Struts2Utils.getRequest()));
+		entity.setOperatTime(new Date());
+		entity.setOrgCode(user.getOrg().getOrgCode());
+		entity.setWorkLoad(workLoad);
+		entity.setWorkType(workType);
+		entity.setOperatType(operatType);
+		entity.setRemark(remark);
 		monitorWorkloadDao.save(entity);
 	}
 	/**

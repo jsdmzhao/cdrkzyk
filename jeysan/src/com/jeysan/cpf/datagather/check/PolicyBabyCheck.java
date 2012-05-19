@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.h2.util.StringUtils;
 
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.utils.sql.JdbcUtil;
@@ -37,17 +36,20 @@ public class PolicyBabyCheck extends BaseCheck{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run() throws SQLException{	
+	public int[] run() throws SQLException{	
 		logger.info("开始导入公安部门 婴儿出生入户数据......");
 		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
 		try {
+			List add_lst = getData4Todo(false);
+			List update_lst = getData4Todo(true);
 			//新增
-			addNewData(jdbcUtil,false);
+			int add = addNewData(jdbcUtil,false,add_lst);
 			//修改
-			addNewData(jdbcUtil,true);
+			int update = addNewData(jdbcUtil,true,update_lst);
 			//更新状态
 			updateStatus(TABLE_IN_DB,tmpIds4Update);
 			logger.info("导入公安部门 婴儿出生入户数据成功......");
+			return new int[]{add,update};
 		} catch (Exception e) {		
 			logger.error("导入公安部门 婴儿出生入户数据出错！" ,e);
 			throw new SQLException(e);
@@ -63,10 +65,10 @@ public class PolicyBabyCheck extends BaseCheck{
 	 * @param update
 	 * @throws Exception
 	 */
-	private void addNewData(JdbcUtil jdbcUtil,boolean update) throws Exception{
+	private int addNewData(JdbcUtil jdbcUtil,boolean update,List<Object[]> data4new) throws Exception{
 		logger.info(String.format("开始%s公安部门 婴儿出生入户数据......",update?"修改":"新增"));
 		try{
-			List<Object[]> data4new = getData4Todo(update);
+			//List<Object[]> data4new = getData4Todo(update);
 			if(data4new!=null && data4new.size() > 0){
 				String name , code ,address , father,mother;
 				Integer sex;
@@ -98,6 +100,7 @@ public class PolicyBabyCheck extends BaseCheck{
 				checkAndCommmitData(jdbcUtil, params_3, update?UPDATE_SQL_4UPDATEDATA_3:INSERT_SQL_4NEWDATA_3, false);
 			}
 			logger.info(String.format("%s公安部门 婴儿出生入户数据成功......",update?"修改":"新增"));
+			return data4new.size();
 		}catch(Exception e){
 			logger.error(String.format("%s公安部门 婴儿出生入户数据出错......",update?"修改":"新增"),e);
 			throw e;

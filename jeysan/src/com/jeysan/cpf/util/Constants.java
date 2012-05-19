@@ -444,5 +444,17 @@ public class Constants {
 		public static final Integer FAIL = 692;//流产
 	}
 	
+	public static final class WORK_TYPE{
+		public static final Integer IMPORT = 781;//导入
+		public static final Integer CHECK = 782;//校验
+	}
+	
+	public static final class OPERATOR_TYPE{
+		public static final Integer ADD = 783;//增加
+		public static final Integer UPDATE = 784;//修改
+	}
+	
+	
+	
 	
 }

@@ -8,7 +8,7 @@ import java.util.Collection;
 import javax.sql.DataSource;
 
 
-public class BaseImport {
+public abstract class BaseImport {
 	
     protected DataSource dataSource;
     protected Connection conn;
@@ -32,6 +32,6 @@ public class BaseImport {
 		return sum;
 	}
 	
-	public void run(Collection datas)throws SQLException{};
+	public abstract int run(Collection datas)throws SQLException;
 	
 }

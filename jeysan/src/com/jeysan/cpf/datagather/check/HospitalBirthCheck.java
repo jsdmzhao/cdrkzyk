@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.h2.util.StringUtils;
 
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.utils.sql.JdbcUtil;
@@ -44,17 +43,20 @@ public class HospitalBirthCheck extends BaseCheck{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void run() throws SQLException{	
+	public int[] run() throws SQLException{	
 		logger.info("开始导入医院 妇产科出生登记数据......");
 		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
 		try {
+			List add_lst = getData4Todo(false);
+			List update_lst = getData4Todo(true);
 			//新增
-			addNewData(jdbcUtil,false);
+			int add = addNewData(jdbcUtil,false,add_lst);
 			//修改
-			addNewData(jdbcUtil,true);
+			int update = addNewData(jdbcUtil,true,update_lst);
 			//更新状态
 			updateStatus(TABLE_IN_DB,tmpIds4Update);
 			logger.info("导入医院 妇产科出生登记数据成功......");
+			return new int[]{add,update};
 		} catch (Exception e) {		
 			logger.error("导入医院 妇产科出生登记数据出错！" ,e);
 			throw new SQLException(e);
@@ -70,10 +72,10 @@ public class HospitalBirthCheck extends BaseCheck{
 	 * @param update
 	 * @throws Exception
 	 */
-	private void addNewData(JdbcUtil jdbcUtil,boolean update) throws Exception{
+	private int addNewData(JdbcUtil jdbcUtil,boolean update,List<Object[]> data4new) throws Exception{
 		logger.info(String.format("开始%s医院 妇产科出生登记数据......",update?"修改":"新增"));
 		try{
-			List<Object[]> data4new = getData4Todo(update);
+			//List<Object[]> data4new = getData4Todo(update);
 			if(data4new!=null && data4new.size() > 0){
 				//CHART_NUMBER,FEMALE_NAME,FEMALE_CODE,FEMALE_DOMICILE,
 				//CHILD_SEQ,CHILD_SEX,CHILD_BIRTHDAY,FEMALE_ADDRESS,
@@ -152,6 +154,7 @@ public class HospitalBirthCheck extends BaseCheck{
 				checkAndCommmitData(jdbcUtil, params_5_b, update?UPDATE_SQL_4UPDATEDATA_5:INSERT_SQL_4NEWDATA_5, false);
 			}
 			logger.info(String.format("%s医院 妇产科出生登记数据成功......",update?"修改":"新增"));
+			return data4new.size();
 		}catch(Exception e){
 			logger.error(String.format("%s医院 妇产科出生登记数据出错......",update?"修改":"新增"),e);
 			throw e;

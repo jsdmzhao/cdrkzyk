@@ -90,8 +90,8 @@ public abstract class BaseCheck {
 	protected void checkAndCommmitData(JdbcUtil jdbcUtil , List params , String sql , boolean inLoop) throws Exception{
 		if((inLoop && params.size() >= BATCH_LIMIT) || (!inLoop && params.size() > 0) ){
 			jdbcUtil.executeBatchPreparedStatementUpdate(sql, params);
-			params.clear();
 			conn.commit();
+			params.clear();
 		}
 	}
 	
@@ -124,7 +124,11 @@ public abstract class BaseCheck {
 	}
 
 	public abstract int getCount() throws SQLException;
-	
-	public abstract void run() throws SQLException;
+	/**
+	 * int[] 增加、修改影响行数
+	 * @return
+	 * @throws SQLException
+	 */
+	public abstract int[] run() throws SQLException;
 	
 }
