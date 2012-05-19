@@ -113,9 +113,9 @@
 			</div>
 			<div class="formBar">
 				<ul>
-					<li>
+					<!-- <li>
 						<div class="button"><div class="buttonContent"><button type="Button" onclick="navTab.closeCurrentTab()">全部校验</button></div></div>
-					</li>
+					</li> -->
 					<li>
 						<div class="button"><div class="buttonContent"><button type="Button" onclick="navTab.closeCurrentTab()">取消</button></div></div>
 					</li>
