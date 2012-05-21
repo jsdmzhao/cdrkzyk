@@ -17,9 +17,11 @@
 					<param name="operationMode">AUTOMATIC</param>
 				</interceptor-ref>
 				<interceptor-ref name="paramsPrepareParamsStack" />
+				<interceptor-ref name="fileUpload">  
+				  <param name="maximumSize">20971520</param>  
+				</interceptor-ref>
 			</interceptor-stack>
-		</interceptors>
-
+		</interceptors>  
 		<default-interceptor-ref name="crudStack" />
 	</package>
 	<!-- 
