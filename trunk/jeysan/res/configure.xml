@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configure module="bcmas" prefix="FHP_" projectrealpath="E:\workspace\springside\jeysan">
+<configure module="decision" prefix="FHP_" projectrealpath="E:\workspace\jeysan\jeysan20110807">
   <tables>
     <table tablename="fhp_house" tableLabel="房屋" primaryKey="id" isCreated="true" tableModule="pmas" tablePrefix="FHP_">
       <column columnName="ID" columnLabel="ID" orinType="-5" length="" isNullable="false" />
@@ -226,6 +226,24 @@
       <column columnName="DELAY_DOCTOR" columnLabel="缓期鉴定医生" orinType="12" length="20" isNullable="true" />
       <column columnName="DELAY_DATE" columnLabel="缓期鉴定日期" orinType="91" length="" isNullable="true" />
       <column columnName="REG_DATE" columnLabel="登记日期" orinType="91" length="" isNullable="true" />
+    </table>
+    <table tablename="fhp_flowbasicquery2_view" tableLabel="fhp_flowbasicquery2_view" primaryKey="" isCreated="true" tableModule="decision" tablePrefix="FHP_">
+      <column columnName="PERSON_CODE" columnLabel="流动人口编码" orinType="12" length="30" isNullable="true" />
+      <column columnName="nameh" columnLabel="姓名" orinType="12" length="50" isNullable="true" />
+      <column columnName="SEX" columnLabel="性别" orinType="4" length="" isNullable="true" />
+      <column columnName="CODE" columnLabel="证件号码" orinType="12" length="20" isNullable="true" />
+      <column columnName="BIRTHDAY" columnLabel="出生日期" orinType="91" length="" isNullable="true" />
+      <column columnName="MARRY_STATUS" columnLabel="婚姻状况" orinType="4" length="" isNullable="true" />
+      <column columnName="childNum" columnLabel="子女数" orinType="-5" length="" isNullable="true" />
+      <column columnName="METHOD" columnLabel="避孕节育措施" orinType="4" length="" isNullable="true" />
+      <column columnName="IN_ADDRESS" columnLabel="流入地" orinType="12" length="100" isNullable="true" />
+      <column columnName="OUT_DATE" columnLabel="流出日期" orinType="91" length="" isNullable="true" />
+      <column columnName="HAVE_STATUS" columnLabel="是否持证" orinType="4" length="" isNullable="true" />
+      <column columnName="OUT_TYPE" columnLabel="流出类型" orinType="4" length="" isNullable="true" />
+      <column columnName="IS_FAMILY_ALL_OUT" columnLabel="夫妻是否共同流出" orinType="-6" length="" isNullable="true" />
+      <column columnName="REMARK" columnLabel="备注" orinType="12" length="100" isNullable="true" />
+      <column columnName="area" columnLabel="所属地区" orinType="12" length="20" isNullable="true" />
+      <column columnName="DOMICILE_TYPE" columnLabel="户口类别" orinType="4" length="" isNullable="true" />
     </table>
   </tables>
 </configure>
