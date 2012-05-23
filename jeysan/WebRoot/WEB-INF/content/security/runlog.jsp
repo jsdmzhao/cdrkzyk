@@ -131,7 +131,9 @@
 							${a.bussMethod}
 						</td>
 						<td>
-							${a.lastTime}
+							<c:if test="${a.lastTime<=20}"><font color="green">${a.lastTime}</font></c:if>
+							<c:if test="${a.lastTime>20&&a.lastTime<=50}">${a.lastTime}</c:if>
+							<c:if test="${a.lastTime>50}"><font color="red">${a.lastTime}</font></c:if>
 						</td>
 						<td>
 							${a.remark}
