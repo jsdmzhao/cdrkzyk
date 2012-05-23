@@ -23,7 +23,7 @@ public class LogInterceptor {
 	
 	private static final String SQL = "insert into JS_AUTH_RUN_LOG(UPDATE_TIME,BUSS_CLASS,BUSS_METHOD,LAST_TIME,REMARK) values (?,?,?,?,?)";
 	
-	private static final int limit = 1;
+	private static final int limit = 10;
 	
 	private int record = 0;
 	
