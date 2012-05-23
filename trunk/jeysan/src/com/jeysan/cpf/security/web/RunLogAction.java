@@ -9,7 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.security.entity.RunLog;
 import com.jeysan.cpf.security.service.RunLogManager;
-import com.jeysan.modules.action.CrudActionSupport;
+import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
@@ -21,7 +21,7 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
  *
  */
 @Namespace("/security")
-public class RunLogAction extends CrudActionSupport<RunLog> {
+public class RunLogAction extends PrintActionSupport<RunLog> {
 	/**
 	 * 
 	 */

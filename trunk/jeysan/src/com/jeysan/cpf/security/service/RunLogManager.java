@@ -28,6 +28,7 @@ public class RunLogManager {
 	 * 增加
 	 * @param entity
 	 */
+	@Transactional(readOnly = false)
 	public void saveRunLog(RunLog entity){
 		runLogDao.save(entity);
 	}
