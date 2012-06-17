@@ -7,8 +7,6 @@
 				<li><a class="add" href="${ctx}/bcmas/womanmatenal!input.action?fertileWomanId=${param['filter_EQL_fertileWoman.id']}" target="navTab" rel="womanMatenal-input" title="添加孕产"><span>添加</span></a></li>
 				<li><a class="delete" href="${ctx}/bcmas/womanmatenal!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_womanmatenalmanage" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 				<li class="line">line</li>
-				<li><a class="icon" href="javascript:void(0);"><span>打印</span></a></li>
-				<li><a class="icon" href="javascript:void(0);"><span>导出EXCEL</span></a></li>
 			</ul>
 		</div>
 		<table class="table" width="100%" layouth="112">
