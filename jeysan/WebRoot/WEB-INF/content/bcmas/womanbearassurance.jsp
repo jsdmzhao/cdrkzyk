@@ -7,8 +7,6 @@
 				<li><a class="add" href="${ctx}/bcmas/womanbearassurance!input.action?fertileWomanId=${param['filter_EQL_fertileWoman.id']}" target="navTab" rel="womanBearAssurance-input" title="添加计划生育保险"><span>添加</span></a></li>
 				<li><a class="delete" href="${ctx}/bcmas/womanbearassurance!delete.action?ids={sid_xxx}&result4Json.navTabId=nav_womanbearassurancemanage" target="ajaxTodo" title="确定要删除吗?"><span>删除</span></a></li>
 				<li class="line">line</li>
-				<li><a class="icon" href="javascript:void(0);"><span>打印</span></a></li>
-				<li><a class="icon" href="javascript:void(0);"><span>导出EXCEL</span></a></li>
 			</ul>
 		</div>
 		<table class="table" width="100%" layouth="112">

@@ -59,14 +59,6 @@
 				<li class="line">
 					line
 				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>打印</span>
-					</a>
-				</li>
-				<li>
-					<a class="icon" href="javascript:void(0);"><span>导出EXCEL</span>
-					</a>
-				</li>
 			</ul>
 		</div>
 		<table class="table" width="100%" layouth="164">
