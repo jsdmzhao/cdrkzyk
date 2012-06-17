@@ -53,6 +53,9 @@ public class PersonOutManager {
 	public void deletePersonOuts(Long id){
 		personOutDao.batchExecute("delete PersonOut where id = ? ", id);
 	}
+	public void deletePersonOutsByPersonId(Long personId){
+		personOutDao.batchExecute("delete PersonOut where person.id = ? ", personId);
+	}
 	/**
 	 * 批量删除
 	 * @param id

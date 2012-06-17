@@ -53,6 +53,9 @@ public class DeathRegManager {
 	public void deleteDeathRegs(Long id){
 		deathRegDao.batchExecute("delete DeathReg where id = ? ", id);
 	}
+	public void deleteDeathRegsByPersonId(Long personId){
+		deathRegDao.batchExecute("delete DeathReg where person.id = ? ", personId);
+	}
 	/**
 	 * 批量删除
 	 * @param id

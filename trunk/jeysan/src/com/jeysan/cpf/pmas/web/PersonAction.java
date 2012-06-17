@@ -337,6 +337,11 @@ public class PersonAction extends PrintActionSupport<Person> {
 			}else if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.OLD_AGE+"")){
 				monitorLogManager.saveMonitorLog("注销超龄人员", System.currentTimeMillis()-t1_, 1);
 			}else if(StringUtils.equals(cancelType, Constants.CANCEL_TYPE.RENEW+"")){
+				if(person.getCancelType().intValue() ==  Constants.CANCEL_TYPE.PERSON_OUT){
+					personOutManager.deletePersonOutsByPersonId(person.getId());
+				}else if(person.getCancelType().intValue() ==  Constants.CANCEL_TYPE.DEATH){
+					deathRegManager.deleteDeathRegsByPersonId(person.getId());
+				}
 				monitorLogManager.saveMonitorLog("恢复注销人员", System.currentTimeMillis()-t1_, 1);
 			}
 			result4Json.setStatusCode("200");

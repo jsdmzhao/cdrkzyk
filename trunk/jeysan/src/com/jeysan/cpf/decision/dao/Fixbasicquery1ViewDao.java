@@ -19,7 +19,7 @@ public class Fixbasicquery1ViewDao extends HibernateDao<Fixbasicquery1View, Long
 		
 		Assert.notNull(repeat,"查询参数为空！！");
 		
-		StringBuffer hql = new StringBuffer().append("From Fixbasicquery1View where 1=1 ");
+		StringBuffer hql = new StringBuffer().append("from Fixbasicquery1View where 1=1 ");
 		if(repeat.indexOf("1") > -1){
 			hql.append("and nameh in (select nameh from Fixbasicquery1View group by nameh having count(nameh) > 1)");
 		}

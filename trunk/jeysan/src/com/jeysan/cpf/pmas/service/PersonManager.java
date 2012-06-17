@@ -118,7 +118,7 @@ public class PersonManager {
 		.append(Constants.CANCEL_TYPE.OLD_AGE)
 		.append(" or  p.cancelType = ").append(Constants.CANCEL_TYPE.PERSON_OUT)
 		.append(" or  p.cancelType = ").append(Constants.CANCEL_TYPE.DEATH)
-		.append(") AND DATEDIFF(CURRENT_DATE(),p.cancelDate) >= 730 ");
+		.append(") AND DATEDIFF(CURRENT_DATE(),p.dateh) >= 730 ");
 		List params = Lists.newArrayList();
 		if(values != null){
 			if(values.get("nameh")!=null){
