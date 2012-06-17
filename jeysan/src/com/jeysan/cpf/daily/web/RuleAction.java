@@ -42,9 +42,9 @@ public class RuleAction extends PrintActionSupport<Rule> {
 		String title = null;
 		if(StringUtils.equals(filter_EQI_typeh, "0"))
 			title = "规章制度";
-		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+		else if(StringUtils.equals(filter_EQI_typeh, "1"))
 			title = "法律法规";
-		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+		else if(StringUtils.equals(filter_EQI_typeh, "2"))
 			title = "通知通报";
 		try {
 			long t1_ = System.currentTimeMillis();
@@ -119,9 +119,9 @@ public class RuleAction extends PrintActionSupport<Rule> {
 		String title = null;
 		if(StringUtils.equals(filter_EQI_typeh, "0"))
 			title = "规章制度";
-		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+		else if(StringUtils.equals(filter_EQI_typeh, "1"))
 			title = "法律法规";
-		else if(StringUtils.equals(filter_EQI_typeh, "0"))
+		else if(StringUtils.equals(filter_EQI_typeh, "2"))
 			title = "通知通报";
 		try{
 			long t1_ = System.currentTimeMillis();

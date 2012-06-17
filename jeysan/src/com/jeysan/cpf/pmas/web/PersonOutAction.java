@@ -15,6 +15,7 @@ import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.entity.PersonOut;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.PersonOutManager;
+import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -143,7 +144,7 @@ public class PersonOutAction extends PrintActionSupport<PersonOut> {
 			result4Json.setStatusCode("200");
 			result4Json.setAction(Result4Json.UPDATE);
 			if(StringUtils.equals(type, "0")){
-				person.setCancelType(154);
+				person.setCancelType(Constants.CANCEL_TYPE.PERSON_OUT);
 				person.setCancelDate(new Date());
 				result4Json.setMessage("注销成功");
 				monitorLogManager.saveMonitorLog("注销流出人员", System.currentTimeMillis()-t1_, 1);
