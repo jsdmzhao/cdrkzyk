@@ -94,7 +94,7 @@ $(function(){
 					<li><a href="http://localhost:9090" target="_blank">OpenFire管理</a></li>
 					<li><a href="javascript:setHomepage()">设为首页</a></li>
 					<li><a href="javascript:AddToFavorite()">加入收藏夹</a></li>
-					<li><a href="javascript:void(0)">帮助</a></li>
+					<li><a href="${ctx}/help/UserManual.doc">帮助</a></li>
 					<li><a href="${ctx}/j_spring_security_logout">退出</a></li>
 				</ul>
 				<ul class="themeList" id="themeList">
