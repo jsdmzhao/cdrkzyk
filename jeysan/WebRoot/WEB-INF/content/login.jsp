@@ -64,8 +64,8 @@
 			<div class="login_main">
 				<ul class="helpList">
 					<li><a href="${ctx}/print/install_lodop.exe">下载无毒WEB打印插件</a></li>
-					<li><a href="#">忘记密码怎么办？</a></li>
-					<li><a href="#">为什么登录失败？</a></li>
+					<!-- <li><a href="#">忘记密码怎么办？</a></li>
+					<li><a href="#">为什么登录失败？</a></li> -->
 				</ul><!-- 
 				<div class="login_inner">
 					<p>界面美观，操作方便</p>
