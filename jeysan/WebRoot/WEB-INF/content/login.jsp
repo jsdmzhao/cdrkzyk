@@ -25,8 +25,8 @@
 					<ul>
 						<li><a href="javascript:setHomepage()">设为首页</a></li>
 						<li><a href="javascript:AddToFavorite()">加入收藏</a></li>
-						<li><a href="#">反馈</a></li>
-						<li><a href="#">帮助</a></li>
+						<!-- <li><a href="#">反馈</a></li>
+						<li><a href="#">帮助</a></li> -->
 					</ul>
 				</div>
 				<h2 class="login_title"><img src="${ctx4doc}/dwz3/themes/default/images/login_title.png" /></h2>
@@ -64,6 +64,7 @@
 			<div class="login_main">
 				<ul class="helpList">
 					<li><a href="${ctx}/print/install_lodop.exe">下载无毒WEB打印插件</a></li>
+					<li><a href="${ctx}/help/UserManual.doc">下载帮助文档</a></li>
 					<!-- <li><a href="#">忘记密码怎么办？</a></li>
 					<li><a href="#">为什么登录失败？</a></li> -->
 				</ul><!-- 
