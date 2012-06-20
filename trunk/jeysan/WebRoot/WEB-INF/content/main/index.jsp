@@ -78,7 +78,6 @@ $(function(){
 		}
 	});
 });
-
 </script>
 </head>
 
@@ -89,9 +88,9 @@ $(function(){
 				<a class="logo" href="javascript:void(0)" style="width:300px">标志</a>
 				<ul class="nav">
 					<li><a href="${ctx}/security/changepwd.action" target="dialog">修改密码</a></li>
-					<li><a href="http://localhost:8899" target="_blank">论坛</a></li>
-					<li><a href="http://localhost:8899/login.bbscs?action=admin" target="_blank">论坛管理</a></li>
-					<li><a href="http://localhost:9090" target="_blank">OpenFire管理</a></li>
+					<li><a href="<%=Application.OTHER_BBS%>" target="_blank">论坛</a></li>
+					<li><a href="<%=Application.OTHER_BBS_ADMIN%>" target="_blank">论坛管理</a></li>
+					<li><a href="<%=Application.OTHER_IM_ADMIN%>" target="_blank">OpenFire管理</a></li>
 					<li><a href="javascript:setHomepage()">设为首页</a></li>
 					<li><a href="javascript:AddToFavorite()">加入收藏夹</a></li>
 					<li><a href="${ctx}/help/UserManual.doc">帮助</a></li>
