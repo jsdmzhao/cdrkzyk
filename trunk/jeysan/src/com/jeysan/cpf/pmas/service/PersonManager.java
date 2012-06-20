@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.pmas.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -218,6 +219,21 @@ public class PersonManager {
 			}
 		}
 		result.put("totalNum", totalNum);
+		return result;
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Person> queryPersonListByHouseCode(String houseCode){
+		List<Person> result = new ArrayList<Person>();
+		if(StringUtils.isNotEmpty(houseCode)){
+			StringBuilder hql = new StringBuilder();
+			hql.append("select p from Person as p left join p.personBasic as pb,House as h where (p.cancelType = ")
+			.append(Constants.CANCEL_TYPE.NORMAL)
+			.append(" or p.cancelType = ")
+			.append(Constants.CANCEL_TYPE.RENEW)
+			.append(") and pb.houseId = h.id and h.houseCode = ? ");
+			result = personDao.find(hql.toString(), houseCode);
+		}
 		return result;
 	}
 	
