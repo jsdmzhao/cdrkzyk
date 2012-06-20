@@ -1,5 +1,6 @@
 ﻿package com.jeysan.cpf.pmas.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 
 import com.jeysan.cpf.pmas.entity.House;
+import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.service.HouseManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
 import com.jeysan.modules.orm.PropertyFilter;
+import com.jeysan.modules.utils.encode.EscapeCode;
 import com.jeysan.modules.utils.object.DataBeanUtil;
 import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 
@@ -78,6 +81,44 @@ public class HouseAction extends PrintActionSupport<House> {
 		result.put("fertileWomanNum", 150);
 		result.put("notFertileWomanNum", 50);*/
 		Struts2Utils.renderJson(result);
+		return NONE;
+	}
+	public String getPersonListByHouseCode() throws Exception {
+		String code = Struts2Utils.getParameter("code");
+		List<Person> plist = personManager.queryPersonListByHouseCode(code);
+		List<Person> result = new ArrayList<Person>();
+		Person newP = null;
+		for(Person p : plist){
+			newP = new Person();
+			newP.setNameh(p.getNameh());
+			newP.setAge(p.getAge());
+			newP.setArea(p.getArea());
+			newP.setCertType(p.getCertType());
+			newP.setCode(p.getCode());
+			newP.setKind(p.getKind());
+			newP.setDomicileType(p.getDomicileType());
+			newP.setPersonCode(p.getPersonCode());
+			newP.setSex(p.getSex());
+			result.add(newP);
+		}
+		Struts2Utils.renderJson(result);
+		return NONE;
+	}
+	public String getPersonNumByKeyword() throws Exception {
+		String keyword = EscapeCode.unescape(Struts2Utils.getParameter("keyword"));
+		String type = Struts2Utils.getParameter("type");
+		if(StringUtils.isEmpty(type))
+			type = "ownerName";
+		List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
+		filters.add(new PropertyFilter("LIKES_"+type,keyword));
+		page.setPageSize(-1);
+		//设置默认排序方式
+		if (!page.isOrderBySetted()) {
+			page.setOrderBy("id");
+			page.setOrder(Page.ASC);
+		}
+		page = houseManager.searchHouse(page, filters);
+		Struts2Utils.renderJson(page.getResult());
 		return NONE;
 	}
 	public String list4lookup() throws Exception {
