@@ -15,6 +15,9 @@
 		<s:intercept-url pattern="/js/**" filters="none" />
 		<s:intercept-url pattern="/dwz/**" filters="none" />
 		<s:intercept-url pattern="/login.action" filters="none" />
+		<s:intercept-url pattern="/pmas/house!getPersonNumByKeyword.action**" filters="none" />
+		<s:intercept-url pattern="/pmas/house!getPersonListByHouseCode.action**" filters="none" />
+		<s:intercept-url pattern="/pmas/house!getPersonNumByHouseCode.action**" filters="none" />
 		<s:intercept-url pattern="/main/code.action" filters="none" />
 		<s:intercept-url pattern="/main/login_dialog.action" filters="none" />
 		<s:intercept-url pattern="/**/*.action" access="isAuthenticated()" />
