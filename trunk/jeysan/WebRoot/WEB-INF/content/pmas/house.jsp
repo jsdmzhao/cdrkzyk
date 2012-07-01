@@ -107,6 +107,9 @@
 						房屋面积(M<sup>2</sup>)
 					</th>
 					<th width="80" align="center">
+						居住人员信息
+					</th>
+					<th width="80" align="center">
 						操作
 					</th>
 				</tr>
@@ -137,6 +140,13 @@
 						</td>
 						<td>
 							${a.area}
+						</td>
+						<td>
+							<div style="width: 25px;">
+								<a class="btnView"
+									href="${ctx}/pmas/person!list4house.action?filter_EQL_personBasic.houseId=${a.id}" target="navTab"
+									title="查看居住人员信息" rel="person4house-view"></a>
+							</div>
 						</td>
 						<td>
 							<div style="width: 75px;">

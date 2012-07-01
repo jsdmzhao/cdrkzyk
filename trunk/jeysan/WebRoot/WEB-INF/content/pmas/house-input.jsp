@@ -111,13 +111,13 @@
 					<label>计生责任书签订时间：</label>
 					<input name="bcsDate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})" class="Wdate " readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${bcsDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
-
+<!-- 
 <div class="divider"></div>
 																													<p>
 					<label>对应地图ID：</label>
 					<input name="gisId"    type="text" size="30" value="${gisId}" />
 					</p>
-																	</div>
+																	</div> -->
 			<div class="formBar">
 				<ul>
 					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>
