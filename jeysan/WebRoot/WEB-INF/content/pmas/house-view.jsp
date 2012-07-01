@@ -106,13 +106,13 @@
 					<label>计生责任书签订时间：</label>
 					<input name="bcsDate" readonly="readonly" type="text" size="30" value="<fmt:formatDate value="${bcsDate}" pattern="yyyy-MM-dd"/>"/>
 					</p>
-
+<!-- 
 <div class="divider"></div>
 																														<p>
 					<label>对应地图ID：</label>
 					<input name="gisId" readonly="readonly" type="text" size="30" value="${gisId}"/>
 					</p>
-																		</div>
+																		</div> -->
 			<div class="formBar">
 				<ul>
 					<li>
