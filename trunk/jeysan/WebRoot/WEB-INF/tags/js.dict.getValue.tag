@@ -1,7 +1,5 @@
 ﻿<%@ include file="/common/taglibs.jsp" %>
-<%@ tag import="org.springframework.context.ApplicationContext,
-                 org.springframework.web.context.WebApplicationContext,
-                 com.jeysan.cpf.security.service.DictSubManager,
+<%@ tag import="java.util.Map,
                  com.jeysan.cpf.security.entity.DictSub,
                  org.apache.commons.lang.StringUtils" %>
 <%@ attribute name="value"	type="java.lang.String"	required="true"	description="值" %>
@@ -11,9 +9,8 @@
 			String key = new StringBuilder().append("dict_").append(value).toString();
 			DictSub dictSub = (DictSub)request.getAttribute(key);
 			if(dictSub==null){
-				ApplicationContext  applicationContext=(ApplicationContext)application.getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-				DictSubManager dictSubManager = applicationContext.getBean("dictSubManager",DictSubManager.class);
-				dictSub = dictSubManager.getDictSub(Integer.parseInt(value));
+				Map<Integer,DictSub> dict_subs = (Map)application.getAttribute("_js_dict_sub");
+				dictSub = dict_subs.get(Integer.parseInt(value));
 				request.setAttribute(key,dictSub);
 			}
 			if(dictSub!=null){
