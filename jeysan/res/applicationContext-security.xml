@@ -18,6 +18,7 @@
 		<s:intercept-url pattern="/pmas/house!getPersonNumByKeyword.action**" filters="none" />
 		<s:intercept-url pattern="/pmas/house!getPersonListByHouseCode.action**" filters="none" />
 		<s:intercept-url pattern="/pmas/house!getPersonNumByHouseCode.action**" filters="none" />
+		<s:intercept-url pattern="/pmas/person!view4gis.action**" filters="none" />
 		<s:intercept-url pattern="/main/code.action" filters="none" />
 		<s:intercept-url pattern="/main/login_dialog.action" filters="none" />
 		<s:intercept-url pattern="/**/*.action" access="isAuthenticated()" />
