@@ -67,6 +67,11 @@ public class DictManager {
 		return dictDao.get(id);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<Dict> loadAllDicts(){
+		return dictDao.getAll();
+	}
+	
 	/**
 	 * 编码查找
 	 * @param dictCode

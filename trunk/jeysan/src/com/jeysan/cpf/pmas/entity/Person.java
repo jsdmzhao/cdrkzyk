@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -35,6 +36,7 @@ public class Person extends IdExtEntity {
 	 * 性别
 	 */
 	private Integer sex;
+	private String sexLabel;
 	/**
 	 * 年龄
 	 */
@@ -43,6 +45,7 @@ public class Person extends IdExtEntity {
 	 * 证件类型
 	 */
 	private Integer certType;
+	private String certTypeLabel;
 	/**
 	 * 证件号码
 	 */
@@ -51,6 +54,7 @@ public class Person extends IdExtEntity {
 	 * 人员类别
 	 */
 	private Integer kind;
+	private String kindLabel;
 	/**
 	 * 人员编号
 	 */
@@ -59,10 +63,12 @@ public class Person extends IdExtEntity {
 	 * 户口类别
 	 */
 	private Integer domicileType;
+	private String domicileTypeLabel;
 	/**
 	 * 注销类别
 	 */
 	private Integer cancelType;
+	private String cancelTypeLabel;
 	/**
 	 * 注销日期
 	 */
@@ -87,6 +93,7 @@ public class Person extends IdExtEntity {
 	 * 迁入(流入)类别
 	 */
 	private Integer settleInType;
+	private String settleInTypeLabel;
 	/**
 	 * 所属区域
 	 */
@@ -279,4 +286,55 @@ public class Person extends IdExtEntity {
 		// return ToStringBuilder.reflectionToString(this);
 		return null;
 	}
+	@Transient
+	public String getSexLabel() {
+		return sexLabel;
+	}
+
+	public void setSexLabel(String sexLabel) {
+		this.sexLabel = sexLabel;
+	}
+	@Transient
+	public String getCertTypeLabel() {
+		return certTypeLabel;
+	}
+
+	public void setCertTypeLabel(String certTypeLabel) {
+		this.certTypeLabel = certTypeLabel;
+	}
+	@Transient
+	public String getKindLabel() {
+		return kindLabel;
+	}
+
+	public void setKindLabel(String kindLabel) {
+		this.kindLabel = kindLabel;
+	}
+	@Transient
+	public String getDomicileTypeLabel() {
+		return domicileTypeLabel;
+	}
+
+	public void setDomicileTypeLabel(String domicileTypeLabel) {
+		this.domicileTypeLabel = domicileTypeLabel;
+	}
+	@Transient
+	public String getCancelTypeLabel() {
+		return cancelTypeLabel;
+	}
+
+	public void setCancelTypeLabel(String cancelTypeLabel) {
+		this.cancelTypeLabel = cancelTypeLabel;
+	}
+	@Transient
+	public String getSettleInTypeLabel() {
+		return settleInTypeLabel;
+	}
+
+	public void setSettleInTypeLabel(String settleInTypeLabel) {
+		this.settleInTypeLabel = settleInTypeLabel;
+	}
+	
+	
+	
 }

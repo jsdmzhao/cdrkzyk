@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -45,7 +46,8 @@ import com.jeysan.modules.utils.web.struts2.Struts2Utils;
 @Namespace("/pmas")
 @Results( { @Result(name = "person4lookup", location = "person4lookup.jsp", type = "dispatcher"), 
 	@Result(name = "person-cancel", location = "person-cancel.jsp", type = "dispatcher"), 
-	@Result(name = "historydestroy", location = "historydestroy.jsp", type = "dispatcher")})
+	@Result(name = "historydestroy", location = "historydestroy.jsp", type = "dispatcher"),
+	 @Result(name = "person4house", location = "person4house.jsp", type = "dispatcher")})
 public class PersonAction extends PrintActionSupport<Person> {
 	/**
 	 * 
@@ -121,9 +123,63 @@ public class PersonAction extends PrintActionSupport<Person> {
 		page = personManager.searchPerson(page, filters);
 		return SUCCESS;
 	}
+	public String view4gis() throws Exception {
+		entity = personManager.getPerson(id);
+		Map pv = new HashMap();
+		
+		pv.put("nameh", entity.getNameh());
+		pv.put("age",entity.getAge());
+		pv.put("area", entity.getAge());
+		pv.put("certType", getDictLabel(entity.getCertType()));
+		pv.put("code", entity.getCode());
+		pv.put("kind", getDictLabel(entity.getKind()));
+		pv.put("domicileType", getDictLabel(entity.getDomicileType()));
+		pv.put("personCode", entity.getPersonCode());
+		pv.put("sex", getDictLabel(entity.getSex()));
+		
+		pv.put("domicile", entity.getPersonBasic().getDomicile());
+		pv.put("domicileCode", entity.getPersonBasic().getDomicileCode());
+		pv.put("domicileHouseNo", entity.getPersonBasic().getDomicileHouseNo());
+		pv.put("domicileRoomNo", entity.getPersonBasic().getDomicileRoomNo());
+		pv.put("domicileZipCode", entity.getPersonBasic().getDomicileZipCode());
+		pv.put("address", entity.getPersonBasic().getAddress());
+		pv.put("addressType", getDictLabel(entity.getPersonBasic().getAddressType()));
+		pv.put("addressCode", entity.getPersonBasic().getAddressCode());
+		pv.put("houseNo", entity.getPersonBasic().getHouseNo());
+		pv.put("roomNo", entity.getPersonBasic().getRoomNo());
+		pv.put("zipCode", entity.getPersonBasic().getZipCode());
+		pv.put("native_", getDictLabel(entity.getPersonBasic().getNative()));
+		pv.put("birthday", DateUtil.convertDateToString(entity.getPersonBasic().getBirthday(),"yyyy-MM-dd"));
+		pv.put("edu", getDictLabel(entity.getPersonBasic().getEdu()));
+		pv.put("politicalStatus", getDictLabel(entity.getPersonBasic().getPoliticalStatus()));
+		pv.put("househodeKind", getDictLabel(entity.getPersonBasic().getHousehodeKind()));
+		pv.put("job", getDictLabel(entity.getPersonBasic().getJob()));
+		pv.put("isSingle", getDictLabel(entity.getPersonBasic().getIsSingle()));
+		pv.put("company", entity.getPersonBasic().getCompany());
+		pv.put("photo", entity.getPersonBasic().getPhoto());
+		pv.put("fingerprint", entity.getPersonBasic().getFingerprint());
+		pv.put("tel", entity.getPersonBasic().getTel());
+		pv.put("haveStatus", getDictLabel(entity.getPersonBasic().getHaveStatus()));
+		pv.put("ownerName", entity.getPersonBasic().getOwnerName());
+		pv.put("relation", getDictLabel(entity.getPersonBasic().getRelation()));
+		pv.put("marryStatus", getDictLabel(entity.getPersonBasic().getMarryStatus()));
+		pv.put("marryCryDate", DateUtil.convertDateToString(entity.getPersonBasic().getMarryCryDate(),"yyyy-MM-dd"));
+		pv.put("firstMarryDate", DateUtil.convertDateToString(entity.getPersonBasic().getFirstMarryDate(),"yyyy-MM-dd"));
+		pv.put("nationality", getDictLabel(entity.getPersonBasic().getNationality()));
+		
+		Struts2Utils.renderJson(pv);
+		return NONE;
+	}
 	public String list4lookup() throws Exception {
 		list();
 		return "person4lookup";
+	}
+	public String list4house() throws Exception {
+		list();
+		String page = "person4house";
+		if(checkPrint())
+			page = PRINT;
+		return page;
 	}
 	/**
 	 * 历史数据查询，用于数据销毁

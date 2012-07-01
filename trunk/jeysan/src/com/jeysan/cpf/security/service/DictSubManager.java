@@ -58,6 +58,10 @@ public class DictSubManager {
 	public void deleteDictSub(Integer id){
 		dictSubDao.delete(id);
 	}
+	@Transactional(readOnly = true)
+	public List<DictSub> loadAllDictSubs(){
+		return dictSubDao.find("select d from DictSub as d order by d.dict , d.subIndex ");
+	}
 	/**
 	 * 批量删除
 	 * @param ids
