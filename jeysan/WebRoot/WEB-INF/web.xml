@@ -96,6 +96,10 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
+	
+	<listener>
+		<listener-class>com.jeysan.modules.filter.DictFilter</listener-class>
+	</listener>
 
 	<!-- session超时定义,单位为分钟 -->
 	<session-config>
