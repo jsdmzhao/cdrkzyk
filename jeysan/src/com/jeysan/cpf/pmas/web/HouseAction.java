@@ -94,11 +94,17 @@ public class HouseAction extends PrintActionSupport<House> {
 			newP.setAge(p.getAge());
 			newP.setArea(p.getArea());
 			newP.setCertType(p.getCertType());
+			newP.setCertTypeLabel(getDictLabel(p.getCancelType()));
 			newP.setCode(p.getCode());
 			newP.setKind(p.getKind());
+			newP.setKindLabel(getDictLabel(p.getKind()));
 			newP.setDomicileType(p.getDomicileType());
+			newP.setDomicileTypeLabel(getDictLabel(p.getDomicileType()));
 			newP.setPersonCode(p.getPersonCode());
 			newP.setSex(p.getSex());
+			newP.setSexLabel(getDictLabel(p.getSex()));
+			//代ID
+			newP.setSettleInCause(p.getId()+"");
 			result.add(newP);
 		}
 		Struts2Utils.renderJson(result);
