@@ -38,10 +38,10 @@
 				<div class="error"> ${SPRING_SECURITY_LAST_EXCEPTION.message}</div>
 			</c:if>
 				<form action="${ctx}/j_spring_security_check" method="post">
-					<p>
+					<!-- <p>
 						<label>机构码：</label>
 						<input type="text" id="j_orgcode" name="j_orgcode" class="login_input"  <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_ORGCODE}"</c:if>/>
-					</p>
+					</p> -->
 					<p>
 						<label>用户名：</label>
 						<input type="text" id="j_username" name="j_username" size="20" class="login_input" <c:if test="${not empty(param.error)}">value="${SPRING_SECURITY_LAST_USERNAME}"</c:if>/>
@@ -60,7 +60,39 @@
 					</div>
 				</form>
 			</div>
-			<div class="login_banner"><img src="${ctx4doc}/dwz3/themes/default/images/login_banner.jpg" /></div>
+			<div class="login_banner">
+			<div style="float:left;width:631px;height:270px">
+			<object
+		        classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+		        codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0"
+		        id="login_swf"
+		        width="631" height="270"
+		      >
+		        <param name="movie" value="${ctx4doc}/dwz3/themes/default/images/login.swf">
+		        <param name="bgcolor" value="#FFFFFF">
+		        <param name="quality" value="high">
+		        <param name="seamlesstabbing" value="false">
+		        <param name="allowscriptaccess" value="samedomain">
+		        <embed
+		          type="application/x-shockwave-flash"
+		          pluginspage="http://www.adobe.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash"
+		          name="登录动画"
+		          width="631" height="270"
+		          src="${ctx4doc}/dwz3/themes/default/images/login.swf"
+		          bgcolor="#FFFFFF"
+		          quality="high"
+		          seamlesstabbing="false"
+		          allowscriptaccess="samedomain"
+		        >
+		          <noembed>
+		          </noembed>
+		        </embed>
+		      </object>
+			  </div>
+			  <div style="float:left;width:320px;height:270px">
+			<img src="${ctx4doc}/dwz3/themes/default/images/login_banner_right.png"/>
+			  </div>
+			</div>
 			<div class="login_main">
 				<ul class="helpList">
 					<li><a href="${ctx}/print/install_lodop.exe">下载无毒WEB打印插件</a></li>
