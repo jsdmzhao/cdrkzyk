@@ -85,7 +85,7 @@ $(function(){
 	<div id="layout">
 		<div id="header">
 			<div class="headerNav">
-				<a class="logo" href="javascript:void(0)" style="width:300px">标志</a>
+				<a class="logo" href="javascript:void(0)" style="width:400px">标志</a>
 				<ul class="nav">
 					<li><a href="${ctx}/security/changepwd.action" target="dialog">修改密码</a></li>
 					<li><a href="<%=Application.OTHER_BBS%>" target="_blank">论坛</a></li>
