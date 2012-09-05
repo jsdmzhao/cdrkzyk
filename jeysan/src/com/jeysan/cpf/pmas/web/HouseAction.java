@@ -139,6 +139,29 @@ public class HouseAction extends PrintActionSupport<House> {
 	public String view() throws Exception {
 		return VIEW;
 	}
+	public String getHouseListByDistrictCode() throws Exception {
+		list();
+		List<House> hList = page.getResult();
+		List<House> result = new ArrayList<House>();
+		House newH = null;
+		for(House p : hList){
+			newH = new House();
+			newH.setHouseCode(p.getHouseCode());
+			newH.setHouseAtt(p.getHouseAtt());
+			newH.setHouseType(p.getHouseType());
+			newH.setOwnerName(p.getOwnerName());
+			newH.setOwnerCert(p.getOwnerCert());
+			newH.setHouseAttLabel(getDictLabel(p.getHouseAtt()));
+			newH.setHouseTypeLabel(getDictLabel(p.getHouseType()));
+			newH.setArea(p.getArea());
+			//代id
+			newH.setOwnerCompany(p.getId()+"");
+			result.add(newH);
+		}
+		page.setResult(result);
+		Struts2Utils.renderJson(page);
+		return NONE;
+	}
 	@Override
 	public String list() throws Exception {
 		List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
