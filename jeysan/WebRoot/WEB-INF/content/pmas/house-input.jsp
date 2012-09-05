@@ -117,7 +117,7 @@
 					<label>对应地图ID：</label>
 					<input name="gisId"    type="text" size="30" value="${gisId}" />
 					</p>
-																	</div> -->
+																	 --></div>
 			<div class="formBar">
 				<ul>
 					<li><div class="buttonActive"><div class="buttonContent"><button type="submit">保存</button></div></div></li>

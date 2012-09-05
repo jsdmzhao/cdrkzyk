@@ -111,8 +111,8 @@
 																														<p>
 					<label>对应地图ID：</label>
 					<input name="gisId" readonly="readonly" type="text" size="30" value="${gisId}"/>
-					</p>
-																		</div> -->
+					</p>-->
+																		</div> 
 			<div class="formBar">
 				<ul>
 					<li>
