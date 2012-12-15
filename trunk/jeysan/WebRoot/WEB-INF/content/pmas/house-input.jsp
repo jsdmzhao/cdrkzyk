@@ -6,10 +6,17 @@
 			<input type="hidden" name="id" value="${id}"/><!-- 
 			<input type="hidden" name="result4Json.callbackType" value="closeCurrent"/> -->
 			<input type="hidden" name="result4Json.navTabId" value="nav_housemanage"/>
+			<input id="area2Label" name="area2Label" type="hidden" value="${area2Label}" />
+			<input id="area2" name="area2" type="hidden" value="${area2}" />
 			<div class="pageFormContent" layoutH="56">
 																												<p>
 					<label>房屋编号：</label>
 					<input name="houseCode" class="required number" minlength="8" maxlength="8" type="text" size="30" value="${houseCode}" />
+					</p>
+
+					<p>
+					<label>所属社区：</label>
+					<tags:js.area.selector readonly="true" size="30" id="area2_" name="area2_"  valueLabel="${area2Label}" onChange="setArea2Label"/>
 					</p>
 <div class="divider"></div>
 
@@ -129,3 +136,11 @@
 		</form>
 	</div>
 </div>
+<script>
+
+function setArea2Label(orgCode,address_){
+	$('#area2Label',navTab.getCurrentPanel()).val(address_);
+	$('#area2',navTab.getCurrentPanel()).val(orgCode.split('_')[1]);
+}
+
+</script>
