@@ -7,6 +7,10 @@
 					<label>房屋编号：</label>
 					<input name="houseCode" readonly="readonly" type="text" size="30" value="${houseCode}"/>
 					</p>
+<p>
+					<label>所属社区：</label>
+					<input name="houseCode" readonly="readonly" type="text" size="30" value="${area2Label}"/>
+					</p>
 <div class="divider"></div>
 																														<p>
 					<label>房屋类型：</label>

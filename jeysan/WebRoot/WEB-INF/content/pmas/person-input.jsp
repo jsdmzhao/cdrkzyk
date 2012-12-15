@@ -159,7 +159,7 @@ function ok(){
 					</p>
 					<p>
 					<label>房屋编码：</label>
-					<input readonly="readonly" name="master.dwz_houseLookup.houseCode" class="required" type="text" size="30" value="${house.houseCode}"/>
+					<input readonly="readonly" name="master.dwz_houseLookup.houseCode" class="" type="text" size="30" value="${house.houseCode}"/>
 					<a class="btnLook" href="${ctx}/pmas/house!list4lookup.action" lookupGroup="master" lookupName="houseLookup">查找房屋</a>
 					</p>
 					<p>

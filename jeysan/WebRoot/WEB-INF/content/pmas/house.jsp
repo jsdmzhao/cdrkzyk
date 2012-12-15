@@ -9,6 +9,8 @@
 		value="${param['filter_EQI_houseAtt']}" />
 	<input type="hidden" name="filter_LIKES_ownerName"
 		value="${param['filter_LIKES_ownerName']}" />
+	<input type="hidden" name="filter_EQS_area2"
+		value="${param['filter_EQS_area2']}" />
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -37,6 +39,11 @@
 							业主姓名：
 							<input type="text" name="filter_LIKES_ownerName"
 								value="${param['filter_LIKES_ownerName']}" />
+						</td>
+						<td>
+							区域：
+							<tags:js.area.selector name="filter_EQS_area2" readonly="true"
+								value="${param['filter_EQS_area2']}" size="20"></tags:js.area.selector>
 						</td>
 					</tr>
 				</table>
@@ -106,6 +113,9 @@
 					<th width="80" orderField="area" class="orderFlag" htype="area">
 						房屋面积(M<sup>2</sup>)
 					</th>
+					<th width="120" orderField="area2Label" class="orderFlag">
+						所属社区
+					</th>
 					<th width="80" align="center">
 						居住人员信息
 					</th>
@@ -140,6 +150,9 @@
 						</td>
 						<td>
 							${a.area}
+						</td>
+						<td>
+							${a.area2Label}
 						</td>
 						<td>
 							<div style="width: 25px;">
