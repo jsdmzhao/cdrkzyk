@@ -382,4 +382,14 @@ public class House extends IdExtEntity {
 		this.area2 = area2;
 	}
 	
+	private String area2Label;
+	@Column(name = "AREA2_LABEL")
+	public String getArea2Label() {
+		return area2Label;
+	}
+
+	public void setArea2Label(String area2Label) {
+		this.area2Label = area2Label;
+	}
+	
 }

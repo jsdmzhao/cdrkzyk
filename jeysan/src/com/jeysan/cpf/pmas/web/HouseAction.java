@@ -117,14 +117,15 @@ public class HouseAction extends PrintActionSupport<House> {
 			type = "ownerName";
 		List<PropertyFilter> filters = new ArrayList<PropertyFilter>();
 		filters.add(new PropertyFilter("LIKES_"+type,keyword));
-		page.setPageSize(-1);
+		//page.setPageSize(-1);
+		DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
 		//设置默认排序方式
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
 		page = houseManager.searchHouse(page, filters);
-		Struts2Utils.renderJson(page.getResult());
+		Struts2Utils.renderJson(page);
 		return NONE;
 	}
 	public String list4lookup() throws Exception {
@@ -154,6 +155,7 @@ public class HouseAction extends PrintActionSupport<House> {
 			newH.setHouseAttLabel(getDictLabel(p.getHouseAtt()));
 			newH.setHouseTypeLabel(getDictLabel(p.getHouseType()));
 			newH.setArea(p.getArea());
+			newH.setDetailAddress(p.getDetailAddress());
 			//代id
 			newH.setOwnerCompany(p.getId()+"");
 			result.add(newH);
