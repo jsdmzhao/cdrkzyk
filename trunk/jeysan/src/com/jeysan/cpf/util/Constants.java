@@ -117,6 +117,34 @@ public class Constants {
 		public static final Integer METHOD_210 = 210;// 输卵管结扎
 		public static final Integer METHOD_211 = 211;// 宫型含铜（IUD）
 		public static final Integer METHOD_212 = 212;// 其他避孕法
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "男扎")!=-1){
+				return METHOD_201;
+			}else if(StringUtils.indexOf(status, "女扎")!=-1){
+				return METHOD_202;
+			}else if(StringUtils.indexOf(status, "上环")!=-1){
+				return METHOD_203;
+			}else if(StringUtils.indexOf(status, "服注药")!=-1){
+				return METHOD_204;
+			}else if(StringUtils.indexOf(status, "避孕套")!=-1){
+				return METHOD_205;
+			}else if(StringUtils.indexOf(status, "外用药")!=-1){
+				return METHOD_206;
+			}else if(StringUtils.indexOf(status, "皮埋")!=-1){
+				return METHOD_207;
+			}else if(StringUtils.indexOf(status, "未避孕")!=-1){
+				return METHOD_208;
+			}else if(StringUtils.indexOf(status, "宫内节育器")!=-1){
+				return METHOD_209;
+			}else if(StringUtils.indexOf(status, "输卵管结扎")!=-1){
+				return METHOD_210;
+			}else if(StringUtils.indexOf(status, "宫型含铜")!=-1){
+				return METHOD_211;
+			}else if(StringUtils.indexOf(status, "其他")!=-1){
+				return METHOD_212;
+			}else
+				return null;
+		}
 	}
 	/**
 	 * 保险情况
@@ -139,6 +167,20 @@ public class Constants {
 		public static final Integer OLD_AGE = 153;//超龄注销
 		public static final Integer PERSON_OUT = 154;//迁出注销
 		public static final Integer DEATH = 155;//死亡注销
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "正常")!=-1){
+				return NORMAL;
+			}else if(StringUtils.indexOf(status, "恢复注销")!=-1){
+				return RENEW;
+			}else if(StringUtils.indexOf(status, "超龄注销")!=-1){
+				return OLD_AGE;
+			}else if(StringUtils.indexOf(status, "迁出注销")!=-1){
+				return PERSON_OUT;
+			}else if(StringUtils.indexOf(status, "死亡注销")!=-1){
+				return DEATH;
+			}else
+				return null;
+		}
 	}
 	/**
 	 * 妇女类别
@@ -148,6 +190,14 @@ public class Constants {
 	public static final class FW_KIND{
 		public static final Integer FW = 668;//育龄妇女
 		public static final Integer NOT_FW = 669;//非育龄妇女
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "育龄妇女")!=-1){
+				return FW;
+			}else if(StringUtils.indexOf(status, "非育龄妇女")!=-1){
+				return NOT_FW;
+			}else
+				return null;
+		}
 	}
 	/**
 	 * 户口类别
@@ -158,7 +208,7 @@ public class Constants {
 		public static final Integer FIX = 663;//固定人口
 		public static final Integer FLOW = 664;//流动人口
 		public static Integer getStatusByLabel(String status){
-			if(StringUtils.indexOf(status, "固定")!=-1){
+			if(StringUtils.indexOf(status, "固定")!=-1||StringUtils.indexOf(status, "户籍")!=-1){
 				return FIX;
 			}else if(StringUtils.indexOf(status, "流动")!=-1){
 				return FLOW;
@@ -166,6 +216,31 @@ public class Constants {
 				return null;
 		}
 	}
+	/**
+	 * 政治面貌
+	 * @author shally
+	 * 665	49		党员			1
+666	49		团员			2
+667	49		群众			3
+
+	 *
+	 */
+	public static final class PoliticalStatus{
+		public static final Integer DANG = 665;//党员
+		public static final Integer TUAN = 666;//团员
+		public static final Integer QUAN = 667;//群众
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "党员")!=-1){
+				return DANG;
+			}else if(StringUtils.indexOf(status, "团员")!=-1){
+				return TUAN;
+			}else if(StringUtils.indexOf(status, "群众")!=-1){
+				return QUAN;
+			}else
+				return null;
+		}
+	}
+	
 	/**
 	 * 证书注销情况
 	 * @author 黄静
@@ -188,8 +263,50 @@ public class Constants {
 	
 	
 	//329	43	001	身份证			1
+	/**
+	 * 329	43	001	身份证			1
+330	43	002	军官证			2
+334	43	003	护照			3
+335	43	004	户口簿			4
+336	43	005	台港澳身份证			5
+337	43	006	系统生成号码			6
+338	43	007	国外证件号码			7
+339	43	008	暂无证件号码			8
+340	43	009	其他			9
+
+	 */
 	public static final class CARD_TYPE{
 		public static final Integer CERT = 329;//身份证
+		public static final Integer CERT_1 = 330;//军官证
+		public static final Integer CERT_2 = 334;//护照
+		public static final Integer CERT_3 = 335;//户口簿
+		public static final Integer CERT_4 = 336;//台港澳身份证
+		public static final Integer CERT_5 = 337;//系统生成号码
+		public static final Integer CERT_6 = 338;//国外证件号码
+		public static final Integer CERT_7 = 339;//暂无证件号码
+		public static final Integer CERT_8 = 340;//其他
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.equals(status, "身份证")){
+				return CERT;
+			}else if(StringUtils.equals(status, "军官证")){
+				return CERT_1;
+			}else if(StringUtils.equals(status, "护照")){
+				return CERT_2;
+			}else if(StringUtils.equals(status, "户口簿")){
+				return CERT_3;
+			}else if(StringUtils.equals(status, "台港澳身份证")){
+				return CERT_4;
+			}else if(StringUtils.equals(status, "系统生成号码")){
+				return CERT_5;
+			}else if(StringUtils.equals(status, "国外证件号码")){
+				return CERT_6;
+			}else if(StringUtils.equals(status, "暂无证件号码")){
+				return CERT_7;
+			}else if(StringUtils.equals(status, "其他")){
+				return CERT_8;
+			}else
+				return null;
+		}
 	}
 	public static final class COMMON_PARAM{
 		public static final Integer CURRENT_TOWN_ID = 26879;//当前镇ID
@@ -223,7 +340,7 @@ public class Constants {
 		public static final Integer RE_11 = 327;//祖父母或外祖父母
 		public static final Integer RE_12 = 328;//兄弟姐妹
 		public static Integer getStatusByLabel(String status){
-			if(StringUtils.equals(status, "家庭户户主")){
+			if(StringUtils.equals(status, "家庭户户主")||StringUtils.equals(status, "户主")){
 				return RE_1;
 			}else if(StringUtils.equals(status, "集体户户主")){
 				return RE_2;
@@ -271,9 +388,9 @@ public class Constants {
 		public static final Integer HK_5 = 173;//农转非
 		public static final Integer HK_6 = 174;//状态不明
 		public static Integer getStatusByLabel(String status){
-			if(StringUtils.equals(status, "非农业")){
+			if(StringUtils.equals(status, "非农业")||StringUtils.equals(status, "非农业户口/城镇居民")){
 				return HK_1;
-			}else if(StringUtils.equals(status, "农业")){
+			}else if(StringUtils.equals(status, "农业")||StringUtils.equals(status, "农业户口/农村居民")){
 				return HK_2;
 			}else if(StringUtils.equals(status, "军人")){
 				return HK_3;
@@ -437,6 +554,29 @@ public class Constants {
 		public static final Integer FROM_PROVINCE_OUT = 659;//省外迁入
 		public static final Integer FROM_CITY_OUT = 660;//市外迁入
 		public static final Integer FROM_CITY_IN = 780;//市内迁入
+	}
+	/**
+	 * 流动原因
+	 * @author shally
+	 *321	42	001	务工、经商			1
+322	42	002	随同流动			2
+323	42	003	其他			3
+
+	 */
+	public static final class IN_CAUSE{
+		public static final Integer IN_CAUSE_1 = 321;//务工、经商
+		public static final Integer IN_CAUSE_2 = 322;//随同流动
+		public static final Integer IN_CAUSE_3 = 323;//其他
+		public static Integer getStatusByLabel(String status){
+			if(StringUtils.indexOf(status, "务工")!=-1||StringUtils.indexOf(status, "经商")!=-1){
+				return IN_CAUSE_1;
+			}else if(StringUtils.indexOf(status, "随同流动")!=-1){
+				return IN_CAUSE_2;
+			}else if(StringUtils.indexOf(status, "其他")!=-1){
+				return IN_CAUSE_3;
+			}else
+				return IN_CAUSE_3;
+		}
 	}
 	//怀孕结果
 	public static final class CONCEPT_RESULT{
