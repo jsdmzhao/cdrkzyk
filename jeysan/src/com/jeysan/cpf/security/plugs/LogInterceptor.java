@@ -67,7 +67,8 @@ public class LogInterceptor {
 		if(conn == null)
 			conn = dataSource.getConnection();
 		JdbcUtil jdbcUtil = new JdbcUtil(conn,false);
-		jdbcUtil.executePreparedStatementUpdate(SQL, new Object[]{new Date(),className,method,time.intValue(),ArrayUtils.toString(pjp.getArgs())});
+		String remark = ArrayUtils.toString(pjp.getArgs());
+		jdbcUtil.executePreparedStatementUpdate(SQL, new Object[]{new Date(),className,method,time.intValue(),(remark.length()>2000?remark.subSequence(0,2000):remark)});
 		record++;
 		if(record >= limit){
 			conn.commit();
