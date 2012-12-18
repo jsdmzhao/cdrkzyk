@@ -16,6 +16,7 @@ import com.jeysan.cpf.pmas.entity.House;
 import com.jeysan.cpf.pmas.entity.Person;
 import com.jeysan.cpf.pmas.service.HouseManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
+import com.jeysan.cpf.security.entity.User;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
 import com.jeysan.modules.orm.Page;
@@ -173,6 +174,13 @@ public class HouseAction extends PrintActionSupport<House> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		
+		Boolean _js_user_islimited = (Boolean)Struts2Utils.getRequest().getSession().getAttribute("_js_user_islimited");
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		if(_js_user_islimited.booleanValue()){
+			filters.add(new PropertyFilter("EQS_area2",user.getOrg().getOrgCode()));
+		}
+		
 		page = houseManager.searchHouse(page, filters);
 		String type = Struts2Utils.getParameter("type");
 		if(StringUtils.isNotEmpty(type)){

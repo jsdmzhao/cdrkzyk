@@ -122,7 +122,7 @@ public class Constants {
 				return METHOD_201;
 			}else if(StringUtils.indexOf(status, "女扎")!=-1){
 				return METHOD_202;
-			}else if(StringUtils.indexOf(status, "上环")!=-1){
+			}else if(StringUtils.indexOf(status, "上环")!=-1||StringUtils.indexOf(status, "放环")!=-1){
 				return METHOD_203;
 			}else if(StringUtils.indexOf(status, "服注药")!=-1){
 				return METHOD_204;
@@ -143,7 +143,7 @@ public class Constants {
 			}else if(StringUtils.indexOf(status, "其他")!=-1){
 				return METHOD_212;
 			}else
-				return null;
+				return METHOD_212;
 		}
 	}
 	/**
@@ -191,10 +191,10 @@ public class Constants {
 		public static final Integer FW = 668;//育龄妇女
 		public static final Integer NOT_FW = 669;//非育龄妇女
 		public static Integer getStatusByLabel(String status){
-			if(StringUtils.indexOf(status, "育龄妇女")!=-1){
-				return FW;
-			}else if(StringUtils.indexOf(status, "非育龄妇女")!=-1){
+			if(StringUtils.indexOf(status, "非育龄妇女")!=-1){
 				return NOT_FW;
+			}else if(StringUtils.indexOf(status, "育龄妇女")!=-1){
+				return FW;
 			}else
 				return null;
 		}
@@ -237,7 +237,7 @@ public class Constants {
 			}else if(StringUtils.indexOf(status, "群众")!=-1){
 				return QUAN;
 			}else
-				return null;
+				return QUAN;
 		}
 	}
 	
@@ -346,7 +346,7 @@ public class Constants {
 				return RE_2;
 			}else if(StringUtils.equals(status, "配偶")){
 				return RE_3;
-			}else if(StringUtils.equals(status, "子")){
+			}else if(StringUtils.equals(status, "子")||StringUtils.equals(status, "长子")){
 				return RE_4;
 			}else if(StringUtils.equals(status, "女")){
 				return RE_5;
@@ -358,7 +358,7 @@ public class Constants {
 				return RE_8;
 			}else if(StringUtils.equals(status, "非亲属")){
 				return RE_9;
-			}else if(StringUtils.equals(status, "孙子、孙女或外孙子、外孙女")){
+			}else if(StringUtils.equals(status, "孙子、孙女或外孙子、外孙女")||StringUtils.equals(status, "孙子")||StringUtils.equals(status, "孙女")||StringUtils.equals(status, "外孙子")||StringUtils.equals(status, "外孙女")){
 				return RE_10;
 			}else if(StringUtils.equals(status, "祖父母或外祖父母")){
 				return RE_11;

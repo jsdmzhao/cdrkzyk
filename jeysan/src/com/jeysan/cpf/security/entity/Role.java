@@ -46,6 +46,10 @@ public class Role extends IdEntity {
 	 */
 	private Integer roleEnable;
 	/**
+	 * 是否受限
+	 */
+	private Integer roleIslimited;
+	/**
 	 * 角色所拥有的资源
 	 */
 	private List<Resource> resourceList = Lists.newArrayList();
@@ -76,6 +80,15 @@ public class Role extends IdEntity {
 	public void setRoleEnable(Integer roleEnable) {
 		this.roleEnable = roleEnable;
 	}
+	@Column(name = "ROLE_ISLIMITED")
+	public Integer getRoleIslimited() {
+		return roleIslimited;
+	}
+
+	public void setRoleIslimited(Integer roleIslimited) {
+		this.roleIslimited = roleIslimited;
+	}
+
 	@ManyToMany
 	@JoinTable(name = "JS_AUTH_ROLE_RESOURCE", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = { @JoinColumn(name = "RESOURCE_ID") })
 	@Fetch(FetchMode.SUBSELECT)
