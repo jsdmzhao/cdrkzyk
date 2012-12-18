@@ -1,6 +1,7 @@
 ﻿package com.jeysan.cpf.pmas.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class PersonManager {
 	 * 增加Collection
 	 * @param entites
 	 */
-	public void savePersons(List<Person> entites){
+	public void savePersons(Collection<Person> entites){
 		for(Person entity : entites)
 			personDao.save(entity);
 	}
@@ -100,6 +101,14 @@ public class PersonManager {
 			return personDao.createQuery(hql.toString(),code).list().size() > 0;
 		else
 			return personDao.createQuery(hql.toString(),code,id).list().size() > 0;
+	}
+	@Transactional(readOnly = true)
+	public List<Person> getPersonByCertCodeOrPersonCode(String code , boolean isCert){
+		StringBuilder hql = new StringBuilder();
+		hql.append("select p from Person as p where p.")
+		.append(isCert?"code":"personCode")
+		.append(" = ? ");
+		return personDao.createQuery(hql.toString(),code).list();
 	}
 	/**
 	 * 分页查找

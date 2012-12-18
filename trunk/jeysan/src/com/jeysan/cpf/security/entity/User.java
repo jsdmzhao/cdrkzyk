@@ -168,6 +168,16 @@ public class User extends IdEntity {
 	public List<Integer> getPostIds() {
 		return ConvertUtils.convertElementPropertyToList(postList, "id");
 	}
+	//非持久化属性.
+	@Transient
+	@SuppressWarnings("unchecked")
+	public boolean getIslimited() {
+		for(Role role : roleList){
+			if(role.getRoleIslimited()!=null && role.getRoleIslimited()==1)
+				return true;
+		}
+		return false;
+	}
 	@Transient
 	@SuppressWarnings("unchecked")
 	public Org getOrg() {
