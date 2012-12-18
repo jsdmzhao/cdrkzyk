@@ -9,8 +9,10 @@
 		value="${param['filter_EQI_houseAtt']}" />
 	<input type="hidden" name="filter_LIKES_ownerName"
 		value="${param['filter_LIKES_ownerName']}" />
+<c:if test="${not _js_user_islimited}">
 	<input type="hidden" name="filter_EQS_area2"
 		value="${param['filter_EQS_area2']}" />
+</c:if>
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -40,11 +42,13 @@
 							<input type="text" name="filter_LIKES_ownerName"
 								value="${param['filter_LIKES_ownerName']}" />
 						</td>
+<c:if test="${not _js_user_islimited}">
 						<td>
 							区域：
 							<tags:js.area.selector name="filter_EQS_area2" readonly="true"
 								value="${param['filter_EQS_area2']}" size="20"></tags:js.area.selector>
 						</td>
+</c:if>
 					</tr>
 				</table>
 				<div class="subBar">

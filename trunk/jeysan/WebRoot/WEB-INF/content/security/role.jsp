@@ -77,6 +77,9 @@
 					<th width="80">
 						是否启用
 					</th>
+					<th width="80">
+						是否受限
+					</th>
 					<th width="80" align="center">
 						操作
 					</th>
@@ -102,6 +105,9 @@
 						</td>
 						<td>
 							<tags:js.yes.no.getValue value="${a.roleEnable}" />
+						</td>
+						<td>
+							<tags:js.yes.no.getValue value="${a.roleIslimited}" />
 						</td>
 						<td>
 							<div style="width: 75px;">
