@@ -143,6 +143,7 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "fertileWoman.area");
 		page = getIudManager.searchGetIud(page, filters);
 		return SUCCESS;
 	}
@@ -155,6 +156,7 @@ public class GetIudAction extends PrintActionSupport<GetIud> {
 			page2.setOrderBy("id");
 			page2.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "area");
 		page2 = fertileWomanViewManager.searchFertileWomanView(page2, filters);
 		Struts2Utils.getRequest().setAttribute("page", page2);
 		//用于打印

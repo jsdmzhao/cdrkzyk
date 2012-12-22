@@ -239,6 +239,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 					if(StringUtils.isNotEmpty(filter_EQI_seq)||StringUtils.isNotEmpty(filter_EQI_typeh)){
 						List<PropertyFilter> filters = PropertyFilter.buildFromHttpRequest(Struts2Utils.getRequest());
 						DataBeanUtil.copyProperty(page, Struts2Utils.getRequest());
+						setDataAuth(filters, "fertileWoman.area");
 						page = doubleCheckObjectManager.searchDoubleCheckObject(page, filters);
 					}
 				}
@@ -267,6 +268,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 				page.setOrderBy("id");
 				page.setOrder(Page.ASC);
 			}
+			setDataAuth(filters, "fertileWoman.area");
 			page = doubleCheckObjectManager.searchDoubleCheckObject(page, filters);
 		}
 		if(checkPrint())
@@ -297,6 +299,7 @@ public class DoubleCheckObjectAction extends PrintActionSupport<DoubleCheckObjec
 				page.setOrderBy("id");
 				page.setOrder(Page.ASC);
 			}
+			setDataAuth(filters, "fertileWoman.area");
 			page = doubleCheckObjectManager.searchDoubleCheckObject(page, filters);
 		}
 		if(checkPrint())

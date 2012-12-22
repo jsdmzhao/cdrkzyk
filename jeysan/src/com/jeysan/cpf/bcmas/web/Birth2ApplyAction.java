@@ -80,6 +80,7 @@ public class Birth2ApplyAction extends PrintActionSupport<Birth2Apply> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "fertileWoman.area");
 		page = birth2ApplyManager.searchBirth2Apply(page, filters);
 		return SUCCESS;
 	}

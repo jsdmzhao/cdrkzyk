@@ -81,6 +81,7 @@ public class DeathRegAction extends PrintActionSupport<DeathReg> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "person.area");
 		page = deathRegManager.searchDeathReg(page, filters);
 		return SUCCESS;
 	}

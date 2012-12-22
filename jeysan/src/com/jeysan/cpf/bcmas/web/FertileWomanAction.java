@@ -118,7 +118,8 @@ public class FertileWomanAction extends PrintActionSupport<FertileWoman> {
 		filters.add(pf);
 		
 		//String registerType = Struts2Utils.getParameter("registerType");
-		
+
+		setDataAuth(filters, "area");
 		page = fertileWomanManager.searchFertileWoman(page, filters);
 		return SUCCESS;
 	}

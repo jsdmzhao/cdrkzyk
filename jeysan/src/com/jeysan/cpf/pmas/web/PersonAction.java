@@ -28,6 +28,7 @@ import com.jeysan.cpf.pmas.service.PersonBasicManager;
 import com.jeysan.cpf.pmas.service.PersonManager;
 import com.jeysan.cpf.pmas.service.PersonOutManager;
 import com.jeysan.cpf.pmas.service.VillagerTeamManager;
+import com.jeysan.cpf.security.entity.User;
 import com.jeysan.cpf.util.Constants;
 import com.jeysan.modules.action.PrintActionSupport;
 import com.jeysan.modules.json.Result4Json;
@@ -120,6 +121,7 @@ public class PersonAction extends PrintActionSupport<Person> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "area");
 		page = personManager.searchPerson(page, filters);
 		return SUCCESS;
 	}
@@ -215,6 +217,11 @@ public class PersonAction extends PrintActionSupport<Person> {
 		if (!page.isOrderBySetted()) {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
+		}
+		Boolean _js_user_islimited = (Boolean)Struts2Utils.getRequest().getSession().getAttribute("_js_user_islimited");
+		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
+		if(_js_user_islimited.booleanValue()){
+			values.put("area", user.getOrg().getOrgCode());
 		}
 		page = personManager.searchPerson(page, values);
 		return "historydestroy";

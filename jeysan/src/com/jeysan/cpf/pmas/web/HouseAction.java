@@ -175,11 +175,7 @@ public class HouseAction extends PrintActionSupport<House> {
 			page.setOrder(Page.ASC);
 		}
 		
-		Boolean _js_user_islimited = (Boolean)Struts2Utils.getRequest().getSession().getAttribute("_js_user_islimited");
-		User user = (User)Struts2Utils.getRequest().getSession().getAttribute("_js_user");
-		if(_js_user_islimited.booleanValue()){
-			filters.add(new PropertyFilter("EQS_area2",user.getOrg().getOrgCode()));
-		}
+		setDataAuth(filters, "area2");
 		
 		page = houseManager.searchHouse(page, filters);
 		String type = Struts2Utils.getParameter("type");
