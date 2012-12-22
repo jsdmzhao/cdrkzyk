@@ -89,6 +89,7 @@ public class TocCertAction extends PrintActionSupport<TocCert> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "person.area");
 		page = tocCertManager.searchTocCert(page, filters);
 		return SUCCESS;
 	}

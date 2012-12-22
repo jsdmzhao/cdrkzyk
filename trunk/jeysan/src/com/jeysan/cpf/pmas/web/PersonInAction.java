@@ -81,6 +81,7 @@ public class PersonInAction extends PrintActionSupport<PersonIn> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "person.area");
 		page = personInManager.searchPersonIn(page, filters);
 		return SUCCESS;
 	}

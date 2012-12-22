@@ -90,6 +90,7 @@ public class BcsCertCheckAction extends PrintActionSupport<BcsCertCheck> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		//setDataAuth(filters, "bcs.fertileWoman.area");
 		page = bcsCertCheckManager.searchBcsCertCheck(page, filters);
 		return SUCCESS;
 	}

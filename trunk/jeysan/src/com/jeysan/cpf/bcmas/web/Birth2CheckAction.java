@@ -79,6 +79,7 @@ public class Birth2CheckAction extends PrintActionSupport<Birth2Apply> {
 			page.setOrder(Page.ASC);
 		}
 		//page = birth2CheckManager.searchBirth2Check(page, filters);
+		setDataAuth(filters, "fertileWoman.area");
 		page = birth2ApplyManager.searchBirth2Apply(page, filters);
 		return SUCCESS;
 	}

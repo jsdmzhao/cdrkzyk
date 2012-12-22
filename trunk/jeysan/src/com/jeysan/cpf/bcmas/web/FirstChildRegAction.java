@@ -82,6 +82,7 @@ public class FirstChildRegAction extends PrintActionSupport<FirstChildReg> {
 			page.setOrderBy("id");
 			page.setOrder(Page.ASC);
 		}
+		setDataAuth(filters, "fertileWoman.area");
 		page = firstChildRegManager.searchFirstChildReg(page, filters);
 		return SUCCESS;
 	}
