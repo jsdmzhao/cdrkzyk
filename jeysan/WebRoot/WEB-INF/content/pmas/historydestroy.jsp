@@ -10,7 +10,9 @@
 	<input type="hidden" name="sex" value="${param.sex}" />
 	<input type="hidden" name="kind" value="${param.kind}" />
 	<input type="hidden" name="cancelType" value="${param.cancelType}" />
+<c:if test="${not _js_user_islimited}">
 	<input type="hidden" name="area" value="${param.area}" />
+</c:if>
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -34,11 +36,13 @@
 							<tags:js.dict.selector noRender="true" name="kind"
 								value="${param.kind}" dictCode="JS1050" />
 						</td>
+<c:if test="${not _js_user_islimited}">
 						<td>
 							区域：
 							<tags:js.area.selector name="area" readonly="true"
 								value="${param.area}" size="20"></tags:js.area.selector>
 						</td>
+</c:if>
 					</tr>
 					<tr>
 						<td>

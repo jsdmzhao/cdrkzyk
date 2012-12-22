@@ -8,8 +8,10 @@
 		value="${param['filter_EQD_createDate']}" />
 	<input type="hidden" name="filter_EQS_code"
 		value="${param['filter_EQS_code']}" />
+<c:if test="${not _js_user_islimited}">
 	<input type="hidden" name="filter_EQS_area"
 		value="${param['filter_EQS_area']}" />
+</c:if>
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -34,10 +36,12 @@
 							<input type="text" name="filter_EQS_code"
 								value="${param['filter_EQS_code']}" />
 						</td>
+<c:if test="${not _js_user_islimited}">
 						<td>
 							区域：
 							<tags:js.area.selector readonly="true" size="20" name="filter_EQS_area" value="${param['filter_EQS_area']}"></tags:js.area.selector>
 						</td>
+</c:if>
 					</tr>
 				</table>
 				<div class="subBar">
