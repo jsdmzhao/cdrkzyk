@@ -1,7 +1,9 @@
 ﻿<%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/common/taglibs.jsp"%>
 <tags:js.pager action="${ctx}/bcmas/doublecheckobject!list3.action">
+<c:if test="${not _js_user_islimited}">
 	<input type="hidden" name="filter_EQS_fertileWoman.area" value="${param['filter_EQS_fertileWoman.area']}" />
+</c:if>
 	<input type="hidden" name="filter_EQI_year" value="${param['filter_EQI_year']}" />
 	<input type="hidden" name="filter_EQI_seq" value="${param['filter_EQI_seq']}" />
 	<input type="hidden" name="filter_EQI_typeh" value="${param['filter_EQI_typeh']}" />
@@ -49,11 +51,13 @@
 							终止年月：
 							<input type="input" id="end" name="end" readonly="readonly">
 						</td>
+<c:if test="${not _js_user_islimited}">
 						<td>
 							所属区域：
 							<tags:js.area.selector name="fertileWoman.area" readonly="true"
 								value="${param['fertileWoman.area']}" size="20"></tags:js.area.selector>
 						</td>
+</c:if>
 					</tr>
 				</table>
 				<div class="subBar">

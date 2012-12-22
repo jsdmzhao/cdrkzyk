@@ -9,8 +9,10 @@
 		value="${param['filter_EQI_inCause']}" />
 	<input type="hidden" name="filter_EQD_inDate"
 		value="${param['filter_EQD_inDate']}" />
+<c:if test="${not _js_user_islimited}">
 	<input type="hidden" name="filter_EQI_person.area"
 		value="${param['filter_EQI_person.area']}" />
+</c:if>
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -40,11 +42,13 @@
 							<input name="filter_EQD_inDate" type="text" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd'})"
 								readonly="true" value="${param['filter_EQD_inDate']}" />
 						</td>
+<c:if test="${not _js_user_islimited}">
 						<td>
 							区域：
 							<tags:js.area.selector name="filter_EQI_person.area" readonly="true" size="20"
 								value="${param['filter_EQI_person.area']}"></tags:js.area.selector>
 						</td>
+</c:if>
 					</tr>
 				</table>
 				<div class="subBar">

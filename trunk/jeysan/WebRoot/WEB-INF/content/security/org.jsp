@@ -5,7 +5,7 @@
 		value="${param['filter_EQS_orgCode']}" />
 	<input type="hidden" name="filter_LIKES_orgName_OR_simpleName"
 		value="${param['filter_LIKES_orgName_OR_simpleName']}">
-	<input type="hidden" name="filter_EQS_orgType"
+	<input type="hidden" name="filter_EQI_orgType"
 		value="${param['filter_EQI_orgType']}" />
 </tags:js.pager>
 <div class="page">

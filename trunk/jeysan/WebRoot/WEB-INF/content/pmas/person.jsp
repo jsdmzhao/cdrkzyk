@@ -19,8 +19,10 @@
 		value="${param['filter_EQI_cancelType']}" />
 	<input type="hidden" name="filter_GEI_age"
 		value="${param['filter_GEI_age']}" />
+<c:if test="${not _js_user_islimited}">
 	<input type="hidden" name="filter_EQS_area"
 		value="${param['filter_EQS_area']}" />
+</c:if>
 </tags:js.pager>
 <div class="page">
 	<div class="pageHeader">
@@ -50,11 +52,13 @@
 							<input type="text" name="filter_EQS_personCode"
 								value="${param['filter_EQS_personCode']}" />
 						</td>
+<c:if test="${not _js_user_islimited}">
 						<td>
 							区域：
 							<tags:js.area.selector name="filter_EQS_area" readonly="true"
 								value="${param['filter_EQS_area']}" size="20"></tags:js.area.selector>
 						</td>
+</c:if>
 					</tr>
 					<tr>
 						<td>
