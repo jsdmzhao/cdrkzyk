@@ -179,7 +179,7 @@ public class Constants {
 			}else if(StringUtils.indexOf(status, "死亡注销")!=-1){
 				return DEATH;
 			}else
-				return null;
+				return NORMAL;
 		}
 	}
 	/**
